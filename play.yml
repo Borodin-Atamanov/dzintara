@@ -1,0 +1,8 @@
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: Ensure API key is present in config file
+      ansible.builtin.lineinfile:
+        path: passwords.yml
+        line: "API_KEY={{ api_key }}"
+#ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass

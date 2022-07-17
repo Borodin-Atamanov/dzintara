@@ -4,4 +4,4 @@ all: # keys must be unique, i.e. only one 'hosts' per group
             ansible_port: 22
             ansible_host: 192.168.1.59
 
-
+#ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
