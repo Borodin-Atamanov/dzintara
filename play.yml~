@@ -5,7 +5,9 @@
       ansible.builtin.lineinfile:
         path: passwords.yml
         line: "API_KEY={{ api_key }}"
-		include_vars: passwords_uncrypted.yml
-		debug: msg="Hello, {{ secrets.Pushok64.root_password }}!"
+        include_vars: passwords_uncrypted.yml
+        debug: msg="Hello, {{ secrets.Pushok64.root_password }}!"
         
 #ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
+
+

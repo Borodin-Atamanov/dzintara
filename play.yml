@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: desktop64
   gather_facts: true
   tasks:
     - name: Ensure API key is present in config file
@@ -9,3 +9,5 @@
         debug: msg="Hello, {{ secrets.Pushok64.root_password }}!"
         
 #ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
+
+

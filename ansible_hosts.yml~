@@ -1,10 +1,13 @@
+---
 all: # keys must be unique, i.e. only one 'hosts' per group
- hosts:
-   
-   Pushok64:
-    ansible_port: 22
-    ansible_host: 192.168.1.59
-    include_vars: passwords_uncrypted.yml
-    debug: msg="Hello, {{ secrets.Pushok64.root_password }}!"
+	defaults:
+		host_key_checking: false
+	hosts:
+		Pushok64:
+			ansible_port: 30222
+			ansible_host: 192.168.43.60
+		Desktop64:
+			ansible_port: 30222
+			ansible_host: 127.0.0.1
 
 #ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
