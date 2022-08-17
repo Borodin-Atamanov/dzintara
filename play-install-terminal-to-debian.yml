@@ -1,7 +1,7 @@
-- hosts: localhost
+- hosts: pipyau
   gather_facts: true
-  remote_user: i
-  become: yes 
+  remote_user: root
+  become: no
   become_user: root
   become_method: sudo
   tasks:
@@ -11,12 +11,12 @@
 #  - name: "Ansible | List all known variables and facts"
 #    debug:
 #      msg: "Secret password is {{ansible_ssh_pass}}"
-  - name: upgrade dist!
+#  - name: upgrade dist!
+#    apt:
+#      upgrade: dist
+  - name: try to install
     apt:
-      upgrade: dist
-  - name: try to install inotify-tools
-    apt:
-      name: inotify-tools
+      name: xfce4
       state: latest
       update_cache: yes
       allow_unauthenticated: yes
@@ -37,6 +37,6 @@
 #      name: sshd
 #      state: started
       
-#ansible-playbook --inventory-file "ansible_hosts.yml" play-install-terminal.yml
+#ansible-playbook --inventory-file "ansible_hosts.yml" play-install-terminal-to-debian.yml
 
 

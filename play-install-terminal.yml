@@ -16,7 +16,7 @@
       upgrade: dist
   - name: try to install inotify-tools
     apt:
-      name: inotify-tools
+      name: watchman
       state: latest
       update_cache: yes
       allow_unauthenticated: yes

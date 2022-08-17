@@ -2,13 +2,16 @@ all:
   hosts:
     localhost:
       ansible_host: 127.0.0.1
-    localhost2:
-      ansible_host: 127.0.0.2
+      remote_user: i
+      become: true
+    pipyau:
+      ansible_host: 192.168.43.60
+      ansible_port: 22
+      remote_user: root
+      ansible_ssh_user: root
   vars:
       ansible_port: 30222
       host_key_checking: false
-      become: true
-      remote_user: i
       ignore_errors: True      
 #all passwords saved in "host_vars/<host_name>" files
 

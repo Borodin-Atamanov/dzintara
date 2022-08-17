@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: pipyau
   gather_facts: true
   tasks:
   - name: "Ansible | List all known variables and facts"
