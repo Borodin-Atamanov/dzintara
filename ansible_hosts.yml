@@ -1,13 +1,14 @@
----
-all: # keys must be unique, i.e. only one 'hosts' per group
-	defaults:
-		host_key_checking: false
-	hosts:
-		Pushok64:
-			ansible_port: 30222
-			ansible_host: 192.168.43.60
-		Desktop64:
-			ansible_port: 30222
-			ansible_host: 127.0.0.1
+all:
+  hosts:
+    localhost:
+      ansible_host: 127.0.0.1
+    localhost2:
+      ansible_host: 127.0.0.2
+  vars:
+      ansible_port: 30222
+      host_key_checking: false
+    
 
-#ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
+
+#export ANSIBLE_HOST_KEY_CHECKING=False && ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
+#ansible --inventory-file "ansible_hosts.yml" -m ping all -u i --ask-pass

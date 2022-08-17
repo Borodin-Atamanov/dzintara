@@ -8,6 +8,6 @@ Desk64
 ansible_host=127.0.0.1
 ansible_ssh_port=30222
 
-#ansible --inventory-file "ansible_hosts.cfg" -m ping all -u i --ask-pass
+#ansible --inventory-file "ansible_hosts.cfg" -m ping all -u root --ask-pass
 # ssh -p 30222 root@192.168.1.59
 
