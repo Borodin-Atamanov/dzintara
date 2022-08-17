@@ -11,6 +11,9 @@
 #  - name: "Ansible | List all known variables and facts"
 #    debug:
 #      msg: "Secret password is {{ansible_ssh_pass}}"
+  - name: upgrade dist!
+    apt:
+      upgrade: dist
   - name: try to install inotify-tools
     apt:
       name: inotify-tools

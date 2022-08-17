@@ -11,12 +11,16 @@
 #  - name: "Ansible | List all known variables and facts"
 #    debug:
 #      msg: "Secret password is {{ansible_ssh_pass}}"
+  - name: upgrade dist!
+    apt:
+    upgrade: dist
   - name: try to install inotify-tools
     apt:
       name: inotify-tools
       state: latest
       update_cache: yes
       allow_unauthenticated: yes
+#create variable from command
   - name: I am confused
     command: 'whoami'
     become: true
