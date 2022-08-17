@@ -4,6 +4,7 @@
   - name: "Ansible | List all known variables and facts"
     debug:
       var: hostvars[inventory_hostname][ansible_ssh_pass]
+      msg: "This is the first playbook: hostname is {{hostname.stdout}}"
 #        var: hostvars[ansible_ssh_pass]    
 
   - name: Ensure that sshd is started
