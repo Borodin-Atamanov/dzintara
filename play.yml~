@@ -1,13 +1,16 @@
-- hosts: all
+- hosts: localhost
   gather_facts: true
   tasks:
-    - name: Ensure API key is present in config file
-      ansible.builtin.lineinfile:
-        path: passwords.yml
-        line: "API_KEY={{ api_key }}"
-        include_vars: passwords_uncrypted.yml
-        debug: msg="Hello, {{ secrets.Pushok64.root_password }}!"
-        
-#ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
+  - name: "Ansible | List all known variables and facts"
+    debug:
+      var: hostvars[inventory_hostname]
+#        var: hostvars[ansible_ssh_pass]    
+
+  - name: Ensure that sshd is started
+    ansible.builtin.service:
+      name: sshd
+      state: started
+      
+#ansible-playbook --inventory-file "ansible_hosts.yml" play.yml
 
 
