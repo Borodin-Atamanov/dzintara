@@ -8,13 +8,7 @@ all:
       ansible_port: 30222
       host_key_checking: false
     
-#      localka:
-#            ansible_port: 30222
-#            ansible_host: 127.0.0.1
-#            
-
-
-
+#all passwords in "host_vars/<host_name>" files
 
 #export ANSIBLE_HOST_KEY_CHECKING=False && ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
 #ansible --inventory-file "ansible_hosts.yml" -m ping all -u i --ask-pass
