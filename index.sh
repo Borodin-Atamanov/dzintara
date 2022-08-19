@@ -4,9 +4,16 @@
 #License: MIT
 #wget -qO - t.ly/mHc_ | bash
 
+echo $0;
+
+sleep 100;
+
 function run_task () 
 {
-  ( exec "${temp_dir_for_bin}/tasks/${1}.sh"; )
+  task_script="${temp_dir_for_bin}/tasks/${1}.sh";
+  if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
+
+  ( exec "${task_script}" )
 }
 
 set -x;
