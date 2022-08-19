@@ -10,6 +10,8 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 apt_list_file='tasks/apt_console_apps.txt';
+dry_run=" --dry-run ";
+dry_run=" ";
 
 #echo -e "1\n2\n3 3\n4\n5" | while read line
 #    echo $line;
@@ -31,7 +33,7 @@ while read elem; do
       elem_first_character="${elem:0:1}";
       echo "${elem}";
       if [[ "${elem_first_character}" != "#" ]]; then
-        apt-get --dry-run --allow-unauthenticated --show-progress --yes install "${elem}";
+        apt-get "${dry_run}" --allow-unauthenticated --show-progress --yes install "${elem}";
       fi;
     fi;
 done < "${apt_list_file}"
