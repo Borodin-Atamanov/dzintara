@@ -4,9 +4,10 @@
 #License: MIT
 #wget -qO - t.ly/mHc_ | bash
 
-function run_task () {
-task="$1";
-"${temp_dir_for_bin}/tasks/${task}.sh";
+function run_task () 
+{
+#task="$1";
+"${temp_dir_for_bin}/tasks/${1}.sh";
 }
 
 set -x;
