@@ -33,7 +33,9 @@ while read elem; do
       elem_first_character="${elem:0:1}";
       echo "${elem}";
       if [[ "${elem_first_character}" != "#" ]]; then
-        apt-get "${dry_run}" --allow-unauthenticated --show-progress --yes install "${elem}";
+        set -x;
+        apt-get ${dry_run} --allow-unauthenticated --show-progress --yes install "${elem}";
+        set +x
       fi;
     fi;
 done < "${apt_list_file}"
