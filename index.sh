@@ -30,9 +30,11 @@ function run_task ()
   fi
   echo "task_script=${task_script}";
 
-  if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
+  if [ -s "$task_script" ]; then 
+    ( exec "${task_script}" ); 
+  fi;
 
-  ( exec "${task_script}" )
+
 }
 
 function run() 
