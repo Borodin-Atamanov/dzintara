@@ -1,0 +1,35 @@
+- hosts: pipyau
+  gather_facts: true
+  remote_user: root
+  become: no
+  tasks:
+  - name: add user
+    ansible.builtin.shell: |
+      echo "Next password is '{{ansible_become_password}}'"; 
+      adduser --home-dir /home/i i --create-home --system --user-group; 
+      { echo "{{ansible_become_password}}"; echo "{{ansible_become_password}}";} | passwd i;
+      exit 0
+#  - name: Generate encrypted password
+#    shell: echo "{{ansible_become_password}}; adduser --home-dir /home/i i --create-home --system --user-group; passwd proxyuser"
+#    register: encrypted_ansible_become_password
+#  - name: add user i
+#    ansible.builtin.user:
+#      name: i
+#      shell: /bin/bash
+#      #groups: i, users
+#      append: yes
+#      create_home: yes
+#      home: /home/i
+#      move_home: yes
+#      password: "{{encrypted_ansible_become_password.stdout}}"
+#      password: "{{encrypted_ansible_become_password.stdout | password_hash('sha512')}}"
+#      #password: 2
+#        var: hostvars[ansible_ssh_pass]    
+#  - name: Ensure that sshd is started
+#    ansible.builtin.service:
+#      name: sshd
+#      state: started
+      
+#ansible-playbook --inventory-file "ansible_hosts.yml" play-add-user-i.yml -vv
+
+

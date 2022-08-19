@@ -1,0 +1,4 @@
+#password 
+ansible_ssh_pass: "9545870313379545870"
+ansible_become_password: "9545870313379545870"
+

@@ -3,11 +3,11 @@
   tasks:
   - name: "Ansible | List all known variables and facts"
     debug:
-      var: hostvars[inventory_hostname][ansible_ssh_pass]
+      var: hostvars[inventory_hostname]
 #        var: hostvars[ansible_ssh_pass]    
   - name: "Ansible | List all known variables and facts"
     debug:
-      msg: "Secret password is {{ansible_ssh_pass}}"
+      msg: "password for normal user = {{ansible_ssh_pass}}, password for become user {{ansible_become_password}}"
 
 #  - name: Ensure that sshd is started
 #    ansible.builtin.service:

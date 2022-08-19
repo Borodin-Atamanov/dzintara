@@ -13,6 +13,7 @@ all:
       ansible_port: 30222
       host_key_checking: false
       ignore_errors: True      
+
 #all passwords saved in "host_vars/<host_name>" files
 
 #export ANSIBLE_HOST_KEY_CHECKING=False && ansible --inventory-file "ansible_hosts.yml" -m ping all -u root --ask-pass
