@@ -28,6 +28,8 @@ function run_task ()
   else
     task_script="${temp_dir_for_bin}/tasks/${1}.sh";
   fi
+
+  task_script="tasks/${1}.sh";
   echo "$0 [[${task_script}]]";
   ( exec "${task_script}" ); 
 }
