@@ -6,7 +6,6 @@
 
 function run_task () 
 {
-#task="$1";
 "${temp_dir_for_bin}/tasks/${1}.sh";
 }
 
