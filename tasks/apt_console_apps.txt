@@ -1,6 +1,6 @@
 
 #
-#nload
+nload
 #nmap
 #traceroute
 #wget
@@ -12,8 +12,8 @@
 #yggdrasil
 #
 #htop
-#mc
-#ncdu
+mc
+ncdu
 #
 #python3
 #
