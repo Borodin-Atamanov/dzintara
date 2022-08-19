@@ -6,7 +6,7 @@
 
 function run_task () 
 {
-echo "${temp_dir_for_bin}/tasks/${1}.sh";
+  ( "${temp_dir_for_bin}/tasks/${1}.sh"; )
 }
 
 set -x;
