@@ -29,11 +29,7 @@ function run_task ()
     task_script="${temp_dir_for_bin}/tasks/${1}.sh";
   fi
   echo "$0 === ${task_script}";
-
-  if [ -s "$task_script" ]; then 
-    ( exec "${task_script}" ); 
-  fi;
-
+  ( exec "${task_script}" ); 
 }
 
 function run() 
