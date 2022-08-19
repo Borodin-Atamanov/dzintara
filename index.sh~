@@ -31,9 +31,9 @@ function run_task ()
   fi
   echo "task_script=${task_script}";
 
-  sleep 100;
 
   if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
+  sleep 100;
 
   ( exec "${task_script}" )
 }

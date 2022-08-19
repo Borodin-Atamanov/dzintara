@@ -23,14 +23,12 @@ fi
 
 function run_task () 
 {
-  echo "test_mode=${test_mode}";
   if [[ "${test_mode}" = "1" ]]; then
     task_script="tasks/${1}.sh";
   else
     task_script="${temp_dir_for_bin}/tasks/${1}.sh";
   fi
   echo "task_script=${task_script}";
-
 
   if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
   sleep 100;
