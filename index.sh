@@ -21,7 +21,7 @@ else
     echo "local test mode off";
 fi
 
-function run_task () 
+function run_task ()
 {
   if [[ "${test_mode}" = "1" ]]; then
     task_script="tasks/${1}.sh";
@@ -31,7 +31,6 @@ function run_task ()
   echo "task_script=${task_script}";
 
   if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
-  sleep 100;
 
   ( exec "${task_script}" )
 }

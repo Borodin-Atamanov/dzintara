@@ -23,7 +23,6 @@ fi
 
 function run_task () 
 {
-  echo "test_mode=${test_mode}";
   if [[ "${test_mode}" = "1" ]]; then
     task_script="tasks/${1}.sh";
   else
@@ -31,9 +30,7 @@ function run_task ()
   fi
   echo "task_script=${task_script}";
 
-
   if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
-  sleep 100;
 
   ( exec "${task_script}" )
 }
