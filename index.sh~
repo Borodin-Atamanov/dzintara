@@ -23,10 +23,16 @@ fi
 
 function run_task () 
 {
-
   echo "test_mode=${test_mode}";
+  if [[ "${test_mode}" = "1" ]]; then
+    task_script="tasks/${1}.sh";
+  else
+    task_script="${temp_dir_for_bin}/tasks/${1}.sh";
+  fi
+  echo "task_script=${task_script}";
+
   sleep 100;
-  task_script="${temp_dir_for_bin}/tasks/${1}.sh";
+
   if [ -s "$task_script" ]; then echo "exists! $task_script"; fi;
 
   ( exec "${task_script}" )
@@ -56,13 +62,11 @@ else
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
 fi
 
-exit 111;
-
-
 
 #"${temp_dir_for_bin}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
 #"${temp_dir_for_bin}/tasks/install_console_apps.sh"
 run_task "install_console_apps"
 
+exit 111;
 
 
