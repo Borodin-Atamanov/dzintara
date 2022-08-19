@@ -49,9 +49,8 @@ function run()
   return $return_value
 }
 
-
 if [[ "${test_mode}" = "1" ]]; then
-    echo "local test mode, so don't clone github";
+  echo "local test mode, so don't clone github";
 else
   echo "clone scripts from github";
   temp_dir_for_bin="temp_dir_for_bin-$(date "+%F-%H-%M-%S")"; \
@@ -59,11 +58,18 @@ else
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
 fi
 
+if [[ "${test_mode}" = "1" ]]; then
+  echo "local test mode";
+else
+  echo 1;
+  run_task add_screen_resolution_1280x1024_with_xrandr
+fi
 
 #"${temp_dir_for_bin}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
 #"${temp_dir_for_bin}/tasks/install_console_apps.sh"
 run_task "install_console_apps"
 
 exit 111;
+
 
 
