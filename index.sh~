@@ -27,7 +27,6 @@ function run_task ()
     task_script="tasks/${1}.sh";
   else
     task_script="${temp_dir_for_bin}/tasks/${1}.sh";
-    cd "${temp_dir_for_bin}";
   fi
   echo "task_script=${task_script}";
 
@@ -57,6 +56,8 @@ else
   temp_dir_for_bin="temp_dir_for_bin-$(date "+%F-%H-%M-%S")"; \
   mkdir -pv "${temp_dir_for_bin}";
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
+  cd "${temp_dir_for_bin}";
+
 fi
 
 if [[ "${test_mode}" = "1" ]]; then
