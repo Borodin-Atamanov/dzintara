@@ -34,7 +34,6 @@ function run_task ()
     ( exec "${task_script}" ); 
   fi;
 
-
 }
 
 function run() 
@@ -65,7 +64,7 @@ if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
 else
   echo 1;
-  run_task add_screen_resolution_1280x1024_with_xrandr
+  run_task "add_screen_resolution_1280x1024_with_xrandr"
 fi
 
 #"${temp_dir_for_bin}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
