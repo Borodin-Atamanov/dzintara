@@ -27,6 +27,7 @@ function run_task ()
     task_script="tasks/${1}.sh";
   else
     task_script="${temp_dir_for_bin}/tasks/${1}.sh";
+    cd "${temp_dir_for_bin}";
   fi
   echo "task_script=${task_script}";
 
