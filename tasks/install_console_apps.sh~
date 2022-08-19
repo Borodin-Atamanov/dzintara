@@ -12,8 +12,11 @@ apt_list_file='tasks/apt_console_apps.txt';
 echo Start
 while read elem; do 
     if [[ ! -z "${elem}" ]]; then
+      elem_first_character="${elem:0:1}";
       echo "${elem}";
-      apt-get --dry-run --allow-unauthenticated --show-progress --yes install $elem;
+      if [[ "${elem_first_character}" != "#" ]]; then
+        apt-get --dry-run --allow-unauthenticated --show-progress --yes install "${elem}";
+      fi;
     fi;
 done < "${apt_list_file}"
 
