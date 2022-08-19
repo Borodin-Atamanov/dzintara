@@ -59,7 +59,6 @@ else
   mkdir -pv "${temp_dir_for_bin}";
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
   cd "${temp_dir_for_bin}";
-
 fi
 
 if [[ "${test_mode}" = "1" ]]; then
