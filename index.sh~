@@ -34,15 +34,12 @@ function run_task ()
   ( exec "${task_script}" ); 
 }
 
-function trim() 
+function err() 
 {
-    local var="$*"
-    # remove leading whitespace characters
-    var="${var#"${var%%[![:space:]]*}"}"
-    # remove trailing whitespace characters
-    var="${var%"${var##*[![:space:]]}"}"
-    printf '%s' "$var"
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
+
+
 
 function run() 
 {
