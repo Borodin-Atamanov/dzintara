@@ -28,20 +28,19 @@ function run_task ()
   else
     task_script="${temp_dir_for_bin}/tasks/${1}.sh";
   fi
-
   task_script="tasks/${1}.sh";
   echo "$0 [[${task_script}]]";
-  ( exec "${task_script}" ); 
+  ( exec "${task_script}" );
 }
 
-function err() 
+function err()
 {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
 
 
 
-function run() 
+function run()
 {
   cmd_output=$(eval $1)
   return_value=$?
@@ -75,6 +74,15 @@ fi
 #"${temp_dir_for_bin}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
 #"${temp_dir_for_bin}/tasks/install_console_apps.sh"
 run_task "install_console_apps"
+
+run_task new_root_setup
+run_task sshd_setup
+run_task
+run_task
+run_task
+run_task
+run_task
+run_task
 
 exit 111;
 
