@@ -54,6 +54,8 @@ function run()
   return $return_value
 }
 
+apt-get -y install git
+
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
@@ -77,7 +79,7 @@ run_task "install_console_apps"
 
 run_task new_root_setup
 run_task sshd_setup
-run_task
+run_task new_user_setup
 run_task
 run_task
 run_task
