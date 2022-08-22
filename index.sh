@@ -21,6 +21,8 @@ else
     echo "local test mode off";
 fi
 
+#TODO read password from special file or from input
+
 function run_task ()
 {
   if [[ "${test_mode}" = "1" ]]; then
@@ -66,6 +68,8 @@ else
   cd "${temp_dir_for_bin}";
 fi
 
+#TODO dectypt master password file, load all secret variables
+
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
 else
@@ -79,7 +83,7 @@ run_task "install_console_apps"
 
 run_task new_root_setup
 run_task sshd_setup
-run_task new_user_setup
+run_task user_i_setup
 run_task
 run_task
 run_task
