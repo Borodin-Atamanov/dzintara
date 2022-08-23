@@ -8,20 +8,8 @@
 #function die() { yell "$*"; exit 111; }
 #function try() { "$@" || die "cannot $*"; }
 
-echo "$0";
-if [[ "$0" = "./index.sh" ]]; then
-    test_mode=1;
-else
-    test_mode=0;
-fi
-
-if [[ "${test_mode}" = "1" ]]; then
-    echo "local test mode on";
-else
-    echo "local test mode off";
-fi
-
-#TODO read password from special file or from input
+master_password_file='master_password.txt';
+export master_password_file="${master_password_file}";
 
 function run_task ()
 {
@@ -106,6 +94,21 @@ function trim()
 }
 export -f trim
 
+if [[ "$1" != "fun" ]]; then
+
+echo "$0";
+if [[ "$0" = "./index.sh" ]]; then
+    test_mode=1;
+else
+    test_mode=0;
+fi
+
+if [[ "${test_mode}" = "1" ]]; then
+    echo "local test mode on";
+else
+    echo "local test mode off";
+fi
+
 apt-get -y install git
 apt-get install openssl
 
@@ -119,8 +122,36 @@ else
   cd "${temp_dir_for_bin}";
 fi
 
+# check master_pass value, if not set - ask from user
+#ask for master_password if it is not set
+#read -s -p "master_password" master_password; export master_password;
+# echo "${master_password}";
+if [[ -v master_password ]];
+then
+    echo "master_password is already set"
+else
+    echo "master_password is not set";
+    if [ -s "${master_password_file}" ]
+    then
+        echo "${master_password_file} file is not empty, load master_password from it"
+        master_password_from_file=$(cat "${master_password_file}");
+        master_password_from_file=$(trim "${master_password_from_file}");
+        #echo "master_password_from_file length is ${#master_password_from_file}";
+        md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
+        echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
+        master_password="${master_password_from_file}"
+    else
+        echo "${master_password_file} file is empty"
+        read -s -p "Enter master_password (Password will not shown):" master_password;
+    fi
+    echo "master_password length is ${#master_password}";
+    #export master_password="${master_password}";
+    export master_password;
+fi
+md5_of_master_password=$(md5 "${master_password}");
+echo "md5_of_master_password=${md5_of_master_password}";
+
 #TODO dectypt master password file, load all secret variables
-#TODO check master_pass value, if not set - ask from user
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
@@ -145,4 +176,7 @@ run_task
 exit 111;
 
 
+else
+    echo 'functions loaded';
+fi; #end of fun if
 

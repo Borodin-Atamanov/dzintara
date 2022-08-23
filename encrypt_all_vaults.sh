@@ -1,57 +1,7 @@
 #!/usr/bin/bash
-master_password_file='master_password.txt';
 
-function encrypt_aes ()
-{
-  passkey="${1}"
-  data="${2}"
-  #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
-  echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
-}
-export -f encrypt_aes
-
-function decrypt_aes ()
-{
-  decrypt_error=0;
-  passkey="${1}"
-  data="${2}"
-  echo -n "${data}" | openssl base64 -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
-  decrypt_aes_error=$?
-}
-export -f decrypt_aes
-
-function md5 ()
-{
-    echo   -n "${1}" | md5sum | awk '{print $1}'
-}
-export -f md5
-
-function random_str ()
-{
-    len="${1}";
-    vowels="euioa";
-    consonants="rtpsdfgklzxvbnm";
-    random_str=;
-    for y in `seq 1 ${len}`; do
-        for x in `seq 1 2`; do
-            random_str="${random_str}${consonants:$(( RANDOM % ${#consonants} )):1}${vowels:$(( RANDOM % ${#vowels} )):1}";
-        done;
-    done;
-    random_str="${random_str:$(($RANDOM % 2)):${len}}";
-    echo -n "${random_str}";
-}
-export -f random_str
-
-function trim()
-{
-    local var="$*"
-    # remove leading whitespace characters
-    var="${var#"${var%%[![:space:]]*}"}"
-    # remove trailing whitespace characters
-    var="${var%"${var##*[![:space:]]}"}"
-    printf '%s' "$var"
-}
-export -f trim
+source index.sh fun
+echo "master_password_file='${master_password_file}'";
 
 #ask for master_password if it is not set
 #read -s -p "master_password" master_password; export master_password;
@@ -85,7 +35,7 @@ echo "md5_of_master_password=${md5_of_master_password}";
 cd "vault";
 for f in *plain*; do
 (
-  echo $f;
+  echo -n "${f} ";
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
   #echo $crypted_file
@@ -95,6 +45,7 @@ for f in *plain*; do
   #encrypt data with master_password
   encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
   echo -n "${encrypted_data}" > "${crypted_file}";
+  if [ -s "${crypted_file}" ]; then echo "crypted to ${crypted_file}"; fi;
   #echo "$encrypted_data";
 )
 done;
