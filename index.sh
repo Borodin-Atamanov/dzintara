@@ -16,7 +16,7 @@ crypted_vault_file='vault/1.crypt';
 export computer_name='pipyau';
 #preffix for vault variables names
 export secrets='secrets';
-#TODO ask computer name on script start
+#TODO ask target computer name on script start
 
 function run_task ()
 {
@@ -122,6 +122,14 @@ function get_var ()
 }
 export -f get_var
 
+function show_var ()
+{
+  varname="${1}";
+  echo -n "$varname=";
+  echo '"'$( get_var "${varname}" )'"';
+}
+export -f show_var
+
 if [[ "$1" != "fun" ]]; then
 
 echo "$0";
@@ -138,7 +146,7 @@ else
 fi
 
 apt-get -y install git
-apt-get install openssl
+apt-get -y install openssl
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
@@ -185,6 +193,7 @@ encrypted_data=$(cat "${crypted_vault_file}");
 decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
 echo "decrypt_aes_error=${decrypt_aes_error}";
 #echo "$decrypted_data";
+#load all variables from decrypted vault
 eval "${decrypted_data}";
 #echo "secrets_pipyau_root_pass=${secrets_pipyau_root_pass}"
 echo "secrets_loaded=${secrets_loaded}"
