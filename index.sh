@@ -8,6 +8,8 @@
 #function die() { yell "$*"; exit 111; }
 #function try() { "$@" || die "cannot $*"; }
 
+set -x
+
 master_password_file='master_password.txt';
 export master_password_file="${master_password_file}";
 export function_loaded="1";
@@ -177,7 +179,7 @@ else
         echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
         master_password="${master_password_from_file}"
     else
-        echo "${master_password_file} file is empty"
+        echo "${master_password_file} file is empty";
         read -s -p "Enter master_password (Password will not shown):" master_password;
     fi
     echo "master_password length is ${#master_password}";
