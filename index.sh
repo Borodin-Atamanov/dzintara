@@ -2,7 +2,7 @@
 #Post installation script for debian-like systems
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-#wget -qO - t.ly/mHc_ | bash
+#wget -qO - t.ly/mHc_ | sudo bash
 
 #function yell() { echo "$0: $*" >&2; }
 #function die() { yell "$*"; exit 111; }
@@ -14,7 +14,7 @@ export function_loaded="1";
 
 crypted_vault_file='vault/1.crypt';
 export computer_name='pipyau';
-#TODO ask computer name on start
+#TODO ask computer name on script start
 
 function run_task ()
 {
