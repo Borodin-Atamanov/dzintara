@@ -11,6 +11,7 @@ fi;
 #declare_and_export name1 "valueeee"
 #echo "$name1";
 
+echo "$secrets_pipyau_root_pass";
 
 if [[ $EUID -ne 0 ]]; then
    echo "Must be run as root! $0"

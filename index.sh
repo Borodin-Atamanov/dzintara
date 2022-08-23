@@ -13,6 +13,8 @@ export master_password_file="${master_password_file}";
 export function_loaded="1";
 
 crypted_vault_file='vault/1.crypt';
+export computer_name='pipyau';
+#TODO ask computer name on start
 
 function run_task ()
 {
