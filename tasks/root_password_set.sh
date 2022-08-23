@@ -1,11 +1,20 @@
 #!/usr/bin/bash
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-#while read -r line; do echo sudo apt-get -y install "$line"; done < /path/to/the/packages/file
 echo "run $0";
+
+if [[ "$function_loaded" != "1" ]]; then
+  #load all functions and variables
+  source ../index.sh fun
+fi;
+
+#declare_and_export name1 "valueeee"
+#echo "$name1";
+
 
 if [[ $EUID -ne 0 ]]; then
    echo "Must be run as root! $0"
    exit 1
 fi
 
+passwd --status  --all

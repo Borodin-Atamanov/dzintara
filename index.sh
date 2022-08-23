@@ -10,6 +10,7 @@
 
 master_password_file='master_password.txt';
 export master_password_file="${master_password_file}";
+export function_loaded="1";
 
 crypted_vault_file='vault/1.crypt';
 
@@ -55,7 +56,7 @@ export -f encrypt_aes
 
 function decrypt_aes ()
 {
-  decrypt_error=0;
+  decrypt_aes_error=0;
   passkey="${1}"
   data="${2}"
   echo -n "${data}" | openssl base64 -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
@@ -95,6 +96,17 @@ function trim()
     printf '%s' "$var"
 }
 export -f trim
+
+function declare_and_export ()
+{
+  varname="${1}"
+  value="${2}"
+  declare -g "$varname=$value";
+  export "$varname=$value";
+  #echo "$varname=$value";
+  echo "declare [$varname]";
+}
+export -f declare_and_export
 
 
 if [[ "$1" != "fun" ]]; then
@@ -165,8 +177,6 @@ eval "${decrypted_data}";
 echo "secrets_loaded=${secrets_loaded}"
 #echo "Original data:"
 #md5 "${data}";
-
-exit;
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
