@@ -1,5 +1,0 @@
-#password for user
-ansible_ssh_pass: "1"
-#password for user if become==yes
-ansible_become_password: "1"
-
