@@ -180,7 +180,7 @@ else
         master_password="${master_password_from_file}"
     else
         echo "${master_password_file} file is empty";
-        read -s -p "Enter master_password (Password will not shown):" master_password;
+        read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
     fi
     echo "master_password length is ${#master_password}";
     #export master_password="${master_password}";
