@@ -179,7 +179,7 @@ fi
 #"${temp_dir_for_bin}/tasks/install_console_apps.sh"
 run_task "install_console_apps"
 
-run_task new_root_setup
+run_task root_password_set
 run_task sshd_setup
 run_task user_i_setup
 run_task
