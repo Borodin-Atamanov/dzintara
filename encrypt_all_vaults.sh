@@ -1,6 +1,9 @@
 #!/usr/bin/bash
+#script encode all "vault/*plain*" files with AES, save with save names, and '*.crypt' extension
 
+#load all functions and variables
 source index.sh fun
+
 echo "master_password_file='${master_password_file}'";
 
 #ask for master_password if it is not set
@@ -69,7 +72,5 @@ echo "encrypted_data:"
 md5 "${encrypted_data}";
 echo "decrypted_data:"
 md5 "${decrypted_data}";
-
-
 
 exit 111;

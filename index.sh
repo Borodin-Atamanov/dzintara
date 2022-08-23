@@ -11,6 +11,8 @@
 master_password_file='master_password.txt';
 export master_password_file="${master_password_file}";
 
+crypted_vault_file='vault/1.crypt';
+
 function run_task ()
 {
   if [[ "${test_mode}" = "1" ]]; then
@@ -152,7 +154,19 @@ fi
 md5_of_master_password=$(md5 "${master_password}");
 echo "md5_of_master_password=${md5_of_master_password}";
 
-#TODO dectypt master password file, load all secret variables
+#dectypt vault file with master password, load all secret variables
+encrypted_data=$(cat "${crypted_vault_file}");
+#encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
+decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
+echo "decrypt_aes_error=${decrypt_aes_error}";
+#echo "$decrypted_data";
+eval "${decrypted_data}";
+#echo "secrets_pipyau_root_pass=${secrets_pipyau_root_pass}"
+echo "secrets_loaded=${secrets_loaded}"
+#echo "Original data:"
+#md5 "${data}";
+
+exit;
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
