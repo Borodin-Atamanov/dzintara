@@ -94,6 +94,7 @@ function trim()
 }
 export -f trim
 
+
 if [[ "$1" != "fun" ]]; then
 
 echo "$0";
