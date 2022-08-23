@@ -1,2 +1,4 @@
 push2git.sh
 /host_vars
+/vault/*plain*
+master_password.txt
