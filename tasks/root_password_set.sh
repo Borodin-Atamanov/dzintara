@@ -12,8 +12,6 @@ var_name="${secrets}_${computer_name}_root_pass";
 show_var "$var_name"
 
 
-
-
 if [[ $EUID -ne 0 ]]; then
    echo "Must be run as root! $0"
    exit 1
