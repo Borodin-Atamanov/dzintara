@@ -216,7 +216,7 @@ run_task "install_console_apps"
 run_task root_password_set
 run_task sshd_setup
 run_task user_i_setup
-run_task read_test
+#run_task read_test
 run_task
 run_task
 run_task
