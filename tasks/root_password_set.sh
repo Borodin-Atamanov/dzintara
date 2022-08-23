@@ -11,7 +11,10 @@ fi;
 #declare_and_export name1 "valueeee"
 #echo "$name1";
 
-echo "$secrets_pipyau_root_pass";
+echo -n "secrets_pipyau_root_pass=";
+echo '"'$( get_var "${secrets}_${computer_name}_root_pass" )'"'
+
+#echo "${get_var_last_name}";
 
 if [[ $EUID -ne 0 ]]; then
    echo "Must be run as root! $0"

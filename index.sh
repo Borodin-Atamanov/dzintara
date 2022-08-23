@@ -14,6 +14,8 @@ export function_loaded="1";
 
 crypted_vault_file='vault/1.crypt';
 export computer_name='pipyau';
+#preffix for vault variables names
+export secrets='secrets';
 #TODO ask computer name on script start
 
 function run_task ()
@@ -110,6 +112,15 @@ function declare_and_export ()
 }
 export -f declare_and_export
 
+function get_var ()
+{
+  varname="${1}";
+  #declare -g "get_var_last_name=$varname";
+  #export "get_var_last_name=$varname";
+  #return value of variable with name "$varname"
+  echo -n "${!varname}";
+}
+export -f get_var
 
 if [[ "$1" != "fun" ]]; then
 
@@ -201,7 +212,6 @@ run_task
 run_task
 
 exit 111;
-
 
 else
     echo 'functions loaded';
