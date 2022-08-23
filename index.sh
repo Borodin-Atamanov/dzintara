@@ -40,8 +40,6 @@ function err()
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
 
-
-
 function run()
 {
   cmd_output=$(eval $1)
@@ -56,7 +54,20 @@ function run()
   return $return_value
 }
 
+function encrypt_aes ()
+{
+  passkey="${1}"
+  openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
+}
+
+function decrypt_aes ()
+{
+  passkey="${1}"
+  openssl enc -in EncryptedDataFile -out DecryptedDataFile -d -aes256 -pass "${passkey}" -pbkdf2
+}
+
 apt-get -y install git
+apt-get install openssl
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
@@ -68,7 +79,25 @@ else
   cd "${temp_dir_for_bin}";
 fi
 
+function encrypt_aes ()
+{
+  passkey="${1}"
+  data="${2}"
+  #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
+  echo -n "${data}" | openssl enc -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e
+}
+export -f encrypt_aes
+
+function decrypt_aes ()
+{
+  passkey="${1}"
+  data="${2}"
+  echo -n "${data}" | openssl base64 -d | openssl enc -d -aes256 -pbkdf2  -pass "pass:${passkey}"
+}
+export -f decrypt_aes
+
 #TODO dectypt master password file, load all secret variables
+
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
