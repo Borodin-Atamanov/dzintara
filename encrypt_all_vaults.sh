@@ -82,6 +82,7 @@ md5_of_master_password=$(md5 "${master_password}");
 echo "md5_of_master_password=${md5_of_master_password}";
 
 #encrypt all files with plain data
+cd "vault";
 for f in *plain*; do
 (
   echo $f;
@@ -97,6 +98,7 @@ for f in *plain*; do
   #echo "$encrypted_data";
 )
 done;
+cd "..";
 
 exit 111;
 
