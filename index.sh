@@ -106,7 +106,6 @@ function trim()
 }
 export -f trim
 
-
 apt-get -y install git
 apt-get install openssl
 
@@ -119,7 +118,6 @@ else
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
   cd "${temp_dir_for_bin}";
 fi
-
 
 #TODO dectypt master password file, load all secret variables
 #TODO check master_pass value, if not set - ask from user

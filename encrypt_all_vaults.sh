@@ -66,15 +66,14 @@ else
         echo "${master_password_file} file is not empty, load master_password from it"
         master_password_from_file=$(cat "${master_password_file}");
         master_password_from_file=$(trim "${master_password_from_file}");
-        echo "${master_password_from_file}";
+        #echo "master_password_from_file length is ${#master_password_from_file}";
         md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
         echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
+        master_password="${master_password_from_file}"
     else
-        echo ""${master_password_file}" file is empty"
+        echo "${master_password_file} file is empty"
+        read -s -p "Enter master_password (Password will not shown):" master_password;
     fi
-
-    exit  111;
-    read -s -p "Enter master_password (Password will not shown):" master_password;
     echo "master_password length is ${#master_password}";
     #export master_password="${master_password}";
     export master_password;
