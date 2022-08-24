@@ -7,7 +7,7 @@ set /files/etc/ssh/ssh_config/Host[*]/AddressFamily[last()] any
 set /files/etc/ssh/ssh_config/Host[*]/ChallengeResponseAuthentication[last()] yes
 set /files/etc/ssh/ssh_config/Host[*]/CheckHostIP[last()] no
 set /files/etc/ssh/ssh_config/Host[*]/Compression[last()] yes
-set /files/etc/ssh/ssh_config/Host[*]/CompressionLevel[last()] 9
+#set /files/etc/ssh/ssh_config/Host[*]/CompressionLevel[last()] 9
 set /files/etc/ssh/ssh_config/Host[*]/ConnectionAttempts[last()] 17
 set /files/etc/ssh/ssh_config/Host[*]/ConnectTimeout[last()] 31
 set /files/etc/ssh/ssh_config/Host[*]/NumberOfPasswordPrompts[last()] 5
@@ -17,6 +17,7 @@ set /files/etc/ssh/ssh_config/Host[*]/ServerAliveInterval[last()] 67
 set /files/etc/ssh/ssh_config/Host[*]/ServerAliveCountMax[last()] 17
 set /files/etc/ssh/ssh_config/Host[*]/StrictHostKeyChecking[last()] no
 set /files/etc/ssh/ssh_config/Host[*]/VerifyHostKeyDNS[last()]  no
+
 save
 
 print /files/etc/ssh/ssh_config

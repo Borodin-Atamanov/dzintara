@@ -27,5 +27,9 @@ augtool ${are_you_serious} --timing --echo --backup   --file "${augeas_file}";
 #test configuration
 sshd -t
 
+service sshd stop
+service sshd start
+service sshd status
+
 exit 0;
 
