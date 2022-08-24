@@ -17,11 +17,13 @@ show_var "augeas_file"
 
 #https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
 
-dry_run=" --new  ";
-dry_run=" ";
+are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #dry run mode
+are_you_serious=' --root="/" '; #real business
 
-augtool ${dry_run} --timing --echo --backup  --root="/dev/shm/augeas-sandbox" --file "${augeas_file}";
+augtool ${are_you_serious} --timing --echo --backup   --file "${augeas_file}";
 
+#test configuration
+sshd -t
 
-exit 111;
+exit 0;
 
