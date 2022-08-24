@@ -25,7 +25,7 @@ function run_task ()
   if [[ "${test_mode}" = "1" ]]; then
     task_script="tasks/${1}.sh";
   else
-    task_script="${temp_dir_for_bin}/tasks/${1}.sh";
+    task_script="${work_dir}/tasks/${1}.sh";
   fi
   task_script="tasks/${1}.sh";
   if [ -s "${task_script}" ]
@@ -159,12 +159,13 @@ if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
   echo "clone scripts from github";
-  temp_dir_for_bin="temp_dir_for_bin-$(date "+%F-%H-%M-%S")";
-  mkdir -pv "${temp_dir_for_bin}";
-  git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
-  #copy ${master_password_file} from current directory to temp_dir_for_bin
-  cp -v "${master_password_file}" "${temp_dir_for_bin}/"
-  cd "${temp_dir_for_bin}";
+  work_dir="work_dir-$(date "+%F-%H-%M-%S")";
+  export work_dir="${work_dir}";
+  mkdir -pv "${work_dir}";
+  git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${work_dir}";
+  #copy ${master_password_file} from current directory to work_dir
+  cp -v "${master_password_file}" "${work_dir}/"
+  cd "${work_dir}";
 fi
 
 # check master_pass value, if not set - ask from user
@@ -216,17 +217,15 @@ else
   run_task "add_screen_resolution_1280x1024_with_xrandr"
 fi
 
-#"${temp_dir_for_bin}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
-#"${temp_dir_for_bin}/tasks/install_console_apps.sh"
+#"${work_dir}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
+#"${work_dir}/tasks/install_console_apps.sh"
 run_task "install_console_apps"
 
-run_task root_password_set
-run_task sshd_setup
-run_task user_i_setup
+#run_task root_password_set
+#run_task sshd_setup
+run_task sshd_config
+#run_task user_i_setup
 #run_task read_test
-run_task
-run_task
-run_task
 run_task
 
 exit 111;

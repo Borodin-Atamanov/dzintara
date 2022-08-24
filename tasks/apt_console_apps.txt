@@ -7,7 +7,8 @@ traceroute
 wget
 curl
 git
-#sshpass
+ssh
+sshpass
 #tor
 #privoxy
 #yggdrasil
