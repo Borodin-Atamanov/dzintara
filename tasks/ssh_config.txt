@@ -3,33 +3,20 @@
 #https://www.opennet.ru/man.shtml?topic=ssh_config&category=5&russian=0
 #man ssh_config
 
-set /files/etc/ssh/ssh_config/AddressFamily[last()] any
-save
-set /files/etc/ssh/ssh_config/ChallengeResponseAuthentication[last()] yes
-save
-set /files/etc/ssh/ssh_config/CheckHostIP[last()] no
-save
-set /files/etc/ssh/ssh_config/Compression[last()] yes
-save
-set /files/etc/ssh/ssh_config/CompressionLevel[last()] 9
-save
-set /files/etc/ssh/ssh_config/ConnectionAttempts[last()] 17
-save
-set /files/etc/ssh/ssh_config/ConnectTimeout[last()] 31
-save
-set /files/etc/ssh/ssh_config/NumberOfPasswordPrompts[last()] 5
-save
-set /files/etc/ssh/ssh_config/PasswordAuthentication[last()] yes
-save
-set /files/etc/ssh/ssh_config/TCPKeepAlive[last()] yes
-save
-set /files/etc/ssh/ssh_config/ServerAliveInterval[last()] 67
-save
-set /files/etc/ssh/ssh_config/ServerAliveCountMax[last()] 17
-save
-set /files/etc/ssh/ssh_config/StrictHostKeyChecking[last()] no
-save
-set /files/etc/ssh/ssh_config/VerifyHostKeyDNS[last()]  no
+set /files/etc/ssh/ssh_config/Host/AddressFamily[last()] any
+set /files/etc/ssh/ssh_config/Host/ChallengeResponseAuthentication[last()] yes
+set /files/etc/ssh/ssh_config/Host/CheckHostIP[last()] no
+set /files/etc/ssh/ssh_config/Host/Compression[last()] yes
+set /files/etc/ssh/ssh_config/Host/CompressionLevel[last()] 9
+set /files/etc/ssh/ssh_config/Host/ConnectionAttempts[last()] 17
+set /files/etc/ssh/ssh_config/Host/ConnectTimeout[last()] 31
+set /files/etc/ssh/ssh_config/Host/NumberOfPasswordPrompts[last()] 5
+set /files/etc/ssh/ssh_config/Host/PasswordAuthentication[last()] yes
+set /files/etc/ssh/ssh_config/Host/TCPKeepAlive[last()] yes
+set /files/etc/ssh/ssh_config/Host/ServerAliveInterval[last()] 67
+set /files/etc/ssh/ssh_config/Host/ServerAliveCountMax[last()] 17
+set /files/etc/ssh/ssh_config/Host/StrictHostKeyChecking[last()] no
+set /files/etc/ssh/ssh_config/Host/VerifyHostKeyDNS[last()]  no
 save
 
 print /files/etc/ssh/ssh_config
