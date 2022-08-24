@@ -16,7 +16,6 @@ set /files/etc/ssh/ssh_config/TCPKeepAlive[last()] yes
 set /files/etc/ssh/ssh_config/ServerAliveInterval[last()] 67
 set /files/etc/ssh/ssh_config/ServerAliveCountMax[last()] 17
 set /files/etc/ssh/ssh_config/StrictHostKeyChecking[last()] no
-set /files/etc/ssh/ssh_config/[last()]User i
 set /files/etc/ssh/ssh_config/VerifyHostKeyDNS[last()]  no
 
 save
