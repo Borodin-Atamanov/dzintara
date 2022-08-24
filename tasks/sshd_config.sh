@@ -10,9 +10,6 @@ source ."${work_dir}/tasks/1.sh"
 #    exit 1
 # fi
 
-script_base_name=$(basename "${0}");
-script_base_name="${script_base_name%.*}";
-echo $script_base_name;
 augeas_file="tasks/${script_base_name}.txt";
 show_var "augeas_file"
 cat $augeas_file;
