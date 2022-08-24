@@ -14,6 +14,8 @@ set -x
 master_password_file='master_password.txt';
 export master_password_file="${master_password_file}";
 export function_loaded="1";
+cur_date_time="$(date "+%F-%H-%M-%S")"
+export cur_date_time;
 
 crypted_vault_file='vault/1.crypt';
 export computer_name='pipyau';
@@ -160,7 +162,7 @@ if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
   echo "clone scripts from github";
-  work_dir="work_dir-$(date "+%F-%H%M%S")";
+  work_dir="work_dir-$(date "+%F-%H-%M-%S")";
   mkdir -pv "${work_dir}";
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${work_dir}";
   # try to copy ${master_password_file} from current directory to work_dir

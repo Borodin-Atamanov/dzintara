@@ -18,9 +18,15 @@ show_var "augeas_file"
 are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
 are_you_serious=' --root=/ '; #real business
 
-augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
+#augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
+
+sudoers_backup_file="/etc/sudoers.bak-${cur_date_time}";
+cp -v "/etc/sudoers" "${sudoers_backup_file}";
+echo "Defaults rootpw" >>/etc/sudoers
 
 visudo --check
+
+#TODO if check is not ok - recover file from backup
 
 exit 0;
 
