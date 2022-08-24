@@ -1,17 +1,18 @@
 
 #
+augeas-tools
 nload
-#nmap
-#traceroute
-#wget
-#curl
-#git
+nmap
+traceroute
+wget
+curl
+git
 #sshpass
 #tor
 #privoxy
 #yggdrasil
 #
-#htop
+htop
 mc
 ncdu
 #
