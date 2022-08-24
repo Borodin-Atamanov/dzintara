@@ -227,9 +227,9 @@ fi
 #run_task sshd_setup
 #run_task user_i_setup
 #run_task read_test
+run_task install_console_apps
 run_task sshd_config
 run_task ssh_config
-#run_task install_console_apps
 
 exit 111;
 

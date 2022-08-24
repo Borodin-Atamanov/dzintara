@@ -28,8 +28,13 @@ augtool ${are_you_serious} --timing --echo --backup   --file "${augeas_file}";
 sshd -t
 
 service sshd stop
+systemctl stop sshd
+
 service sshd start
+systemctl start sshd
+
 service sshd status
+systemctl status sshd
 
 exit 0;
 
