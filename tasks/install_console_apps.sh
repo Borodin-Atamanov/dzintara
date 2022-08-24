@@ -8,8 +8,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+#apt_list_file='tasks/apt_console_apps.txt';
 apt_list_file="${work_dir}/tasks/${script_base_name}.txt";
-apt_list_file='tasks/apt_console_apps.txt';
 dry_run=" --dry-run ";
 dry_run=" ";
 
