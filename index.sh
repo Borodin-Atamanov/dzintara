@@ -2,7 +2,8 @@
 #Post installation script for debian-like systems
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-#wget -qO - t.ly/mHc_ | sudo bash
+#wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzible/main/index.sh | sudo bash
+#wget -qO - clck.ru/uRPBG | sudo bash
 
 #function yell() { echo "$0: $*" >&2; }
 #function die() { yell "$*"; exit 111; }
@@ -160,13 +161,14 @@ if [[ "${test_mode}" = "1" ]]; then
 else
   echo "clone scripts from github";
   work_dir="work_dir-$(date "+%F-%H-%M-%S")";
-  export work_dir="${work_dir}";
   mkdir -pv "${work_dir}";
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${work_dir}";
   #copy ${master_password_file} from current directory to work_dir
-  cp -v "${master_password_file}" "${work_dir}/"
+  cp --verbose --update "${master_password_file}" "${work_dir}/"
   cd "${work_dir}";
 fi
+work_dir="$(realpath "$(pwd)")";
+export work_dir="${work_dir}";
 
 # check master_pass value, if not set - ask from user
 #ask for master_password if it is not set
