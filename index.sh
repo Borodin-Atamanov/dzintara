@@ -159,9 +159,11 @@ if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
   echo "clone scripts from github";
-  temp_dir_for_bin="temp_dir_for_bin-$(date "+%F-%H-%M-%S")"; \
+  temp_dir_for_bin="temp_dir_for_bin-$(date "+%F-%H-%M-%S")";
   mkdir -pv "${temp_dir_for_bin}";
   git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${temp_dir_for_bin}";
+  #copy ${master_password_file} from current directory to temp_dir_for_bin
+  cp -v "${master_password_file}" "${temp_dir_for_bin}/"
   cd "${temp_dir_for_bin}";
 fi
 
