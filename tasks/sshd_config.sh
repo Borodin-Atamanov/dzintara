@@ -12,8 +12,13 @@ source "${work_dir}/tasks/1.sh"
 #    exit 1
 # fi
 
+show_var script_base_name
 augeas_file="${work_dir}/tasks/sshd_config.txt";
 show_var "augeas_file"
+show_var script_base_name
+show_var script_base_name
+show_var script_base_name
+show_var script_base_name
 
 #https://augeas.net/docs/references/1.4.0/lenses/files/sshd-aug.html
 
