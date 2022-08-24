@@ -4,20 +4,32 @@
 #man ssh_config
 
 set /files/etc/ssh/ssh_config/AddressFamily[last()] any
+save
 set /files/etc/ssh/ssh_config/ChallengeResponseAuthentication[last()] yes
+save
 set /files/etc/ssh/ssh_config/CheckHostIP[last()] no
+save
 set /files/etc/ssh/ssh_config/Compression[last()] yes
+save
 set /files/etc/ssh/ssh_config/CompressionLevel[last()] 9
+save
 set /files/etc/ssh/ssh_config/ConnectionAttempts[last()] 17
+save
 set /files/etc/ssh/ssh_config/ConnectTimeout[last()] 31
+save
 set /files/etc/ssh/ssh_config/NumberOfPasswordPrompts[last()] 5
+save
 set /files/etc/ssh/ssh_config/PasswordAuthentication[last()] yes
+save
 set /files/etc/ssh/ssh_config/TCPKeepAlive[last()] yes
+save
 set /files/etc/ssh/ssh_config/ServerAliveInterval[last()] 67
+save
 set /files/etc/ssh/ssh_config/ServerAliveCountMax[last()] 17
+save
 set /files/etc/ssh/ssh_config/StrictHostKeyChecking[last()] no
+save
 set /files/etc/ssh/ssh_config/VerifyHostKeyDNS[last()]  no
-
 save
 
 print /files/etc/ssh/ssh_config
