@@ -1,0 +1,26 @@
+
+#
+#https://www.opennet.ru/man.shtml?topic=ssh_config&category=5&russian=0
+#man ssh_config
+
+set /files/etc/ssh/ssh_config/AddressFamily[last()] any
+set /files/etc/ssh/ssh_config/ChallengeResponseAuthentication[last()] yes
+set /files/etc/ssh/ssh_config/CheckHostIP[last()] no
+set /files/etc/ssh/ssh_config/Compression[last()] yes
+set /files/etc/ssh/ssh_config/CompressionLevel[last()] 9
+set /files/etc/ssh/ssh_config/ConnectionAttempts[last()] 17
+set /files/etc/ssh/ssh_config/ConnectTimeout[last()] 31
+set /files/etc/ssh/ssh_config/NumberOfPasswordPrompts[last()] 5
+set /files/etc/ssh/ssh_config/PasswordAuthentication[last()] yes
+set /files/etc/ssh/ssh_config/TCPKeepAlive[last()] yes
+set /files/etc/ssh/ssh_config/ServerAliveInterval[last()] 67
+set /files/etc/ssh/ssh_config/ServerAliveCountMax[last()] 17
+set /files/etc/ssh/ssh_config/StrictHostKeyChecking[last()] no
+set /files/etc/ssh/ssh_config/[last()]User i
+set /files/etc/ssh/ssh_config/VerifyHostKeyDNS[last()]  no
+
+save
+
+print /files/etc/ssh/ssh_config
+
+errors

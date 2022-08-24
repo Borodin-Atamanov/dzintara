@@ -3,8 +3,6 @@
 #https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
 #man sshd_config
 
-print /files/etc/ssh/sshd_config
-
 #PrintMotd no
 #set /files/etc/ssh/sshd_config/AcceptEnv[last()] LANG LC_*
 #MaxAuthTries 6
@@ -30,5 +28,7 @@ set /files/etc/ssh/sshd_config/UsePAM[last()] yes
 set /files/etc/ssh/sshd_config/X11Forwarding[last()] yes
 
 save
+
+print /files/etc/ssh/sshd_config
 
 errors
