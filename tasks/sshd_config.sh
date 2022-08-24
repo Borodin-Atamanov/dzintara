@@ -12,7 +12,6 @@ source ."${work_dir}/tasks/1.sh"
 
 augeas_file="tasks/${script_base_name}.txt";
 show_var "augeas_file"
-cat $augeas_file;
 
 exit 111;
 
