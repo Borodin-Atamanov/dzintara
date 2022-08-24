@@ -6,7 +6,7 @@
 script_base_name=$(basename "${0}");
 script_base_name="${script_base_name%.*}";
 echo $script_base_name;
-echo "task ▓${script_base_name}▓";
+echo "▓ task ${script_base_name} ▓";
 
 if [[ "$function_loaded" != "1" ]]; then
   #load all functions and variables

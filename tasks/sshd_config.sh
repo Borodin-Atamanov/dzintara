@@ -13,11 +13,15 @@ source ."${work_dir}/tasks/1.sh"
 augeas_file="tasks/${script_base_name}.txt";
 show_var "augeas_file"
 
-exit 111;
+#https://augeas.net/docs/references/1.4.0/lenses/files/sshd-aug.html
 
-dry_run=" ";
+#https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
+
 dry_run=" --new  ";
+dry_run=" ";
 
 augtool ${dry_run} --timing --echo --backup  --root="/dev/shm/augeas-sandbox" --file "${augeas_file}";
 
+
+exit 111;
 
