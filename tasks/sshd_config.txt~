@@ -1,7 +1,6 @@
 
 #
 #https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
-#man sshd_config
 
 print /files/etc/ssh/sshd_config
 

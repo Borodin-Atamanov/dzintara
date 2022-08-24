@@ -219,13 +219,13 @@ fi
 
 #"${work_dir}/tasks/add_screen_resolution_1280x1024_with_xrandr.sh"
 #"${work_dir}/tasks/install_console_apps.sh"
-run_task "install_console_apps"
+#run_task "install_console_apps"
 
 #run_task root_password_set
 #run_task sshd_setup
-run_task sshd_config
 #run_task user_i_setup
 #run_task read_test
+run_task sshd_config
 run_task
 
 exit 111;
