@@ -19,7 +19,7 @@ show_var "augeas_file"
 
 #https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
 
-are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #dry run mode
+are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
 are_you_serious=' --root=/ '; #real business
 
 augtool ${are_you_serious} --timing --echo --backup   --file "${augeas_file}";
