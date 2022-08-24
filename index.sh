@@ -193,8 +193,8 @@ else
         read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
     fi
     echo "master_password length is ${#master_password}";
-    #export master_password="${master_password}";
-    export master_password;
+    export master_password="${master_password}";
+    #export master_password;
 fi
 md5_of_master_password=$(md5 "${master_password}");
 echo "md5_of_master_password=${md5_of_master_password}";
