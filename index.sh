@@ -226,11 +226,11 @@ fi
 #run_task root_password_set
 #run_task sshd_setup
 #run_task user_i_setup
-#run_task read_test
-run_task install_console_apps
-run_task sshd_config
-run_task ssh_config
-run_task root_password_for_sudo_users
+
+#run_task install_console_apps
+#run_task sshd_config
+#run_task ssh_config
+run_task root_password_for_sudoers
 
 exit 111;
 
