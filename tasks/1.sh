@@ -11,8 +11,9 @@ echo "▓ task ${script_base_name} ${0} ▓";
 
 if [[ "$function_loaded" != "1" ]]; then
   #load all functions and variables
-  source ../index.sh fun
+  source "${work_dir}/index.sh" fun
 fi;
+cd "${work_dir}";
 
 # if [[ $EUID -ne 0 ]]; then
 #    echo "Must be run as root! $0"
