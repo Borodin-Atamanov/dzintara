@@ -163,15 +163,15 @@ function awkcalc ()
 }
 export -f awkcalc
 
-
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export function_loaded "1"
 declare_and_export cur_date_time "$(date "+%F-%H-%M-%S")"
-declare_and_export install_dir "/home/i/bin/dzible/autorun";
+declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export crypted_vault_file 'vault/1.crypt'
-declare_and_export computer_name 'pipyau';
+declare_and_export computer_name 'pipyau'
+
 #preffix for vault variables names
-declare_and_export secrets 'secrets';
+declare_and_export secrets 'secrets'
 #TODO ask target computer name on script start
 
 set -x

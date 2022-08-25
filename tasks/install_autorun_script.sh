@@ -11,8 +11,12 @@ source "${work_dir}tasks/1.sh"
 # fi
 
 #TODO create directory for install scripts
+mkdir -pv "${install_dir}";
 
 #TODO copy scripts to install directory
+#cp --dereference --update --verbose --recursive --strip-trailing-slashes "${work_dir}" --target-directory="${install_dir}";
+rsync --verbose --recursive --update --mkpath --copy-links --executability --dry-run --sparse --whole-file --delete-after --ignore-errors --exclude=.git --stats --human-readable  --info=progress2 --progress --itemize-changes "${work_dir}/" "${install_dir}/";
+
 #TODO add script to crontab or systemd for user i
 #TODO add script to crontab or systemd for root
 #TODO run script in graphical environment on target computer
