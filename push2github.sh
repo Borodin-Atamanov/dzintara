@@ -1,12 +1,15 @@
 #!/usr/bin/bash
+sleep_time='3';
 set -x;
 ./encrypt_all_vaults.sh
-sleep 3;
+sleep $sleep_time;
 time ( \
+git diff
+sleep $sleep_time;
 echo git pull --verbose;
 git whatchanged | head --lines=42
-sleep 3;
+sleep $sleep_time;
 git add --verbose --all;
-sleep 3;
+sleep $sleep_time;
 git commit --allow-empty-message --message=$(date "+%F_%H-%M-%S") --verbose; git push --verbose;
 )
