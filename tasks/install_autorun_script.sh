@@ -12,7 +12,7 @@ source "${work_dir}tasks/1.sh"
 
 #TODO create directory for install scripts
 
-#TODO copy scripts to target directory
+#TODO copy scripts to install directory
 #TODO add script to crontab or systemd for user i
 #TODO add script to crontab or systemd for root
 #TODO run script in graphical environment on target computer

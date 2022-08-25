@@ -6,11 +6,10 @@
 #Script contains 3 parts
 #1. function definition
 #2. initialisation: set variables, etc
-#3 run tasks
+#3. run tasks
 
 #wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzible/main/index.sh | sudo bash
 #wget -qO - clck.ru/uRPBG | sudo bash
-
 
 function run_task ()
 {
