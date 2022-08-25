@@ -13,6 +13,7 @@
 
 function run_task ()
 {
+  export task_name="${1}";
   if [[ "${test_mode}" = "1" ]]; then
     task_script="tasks/${1}.sh";
   else
@@ -24,7 +25,14 @@ function run_task ()
     echo "$0 [[${task_script}]]";
     #TODO add arguments to task
     #TODO add preloaded source to task
-    ( exec "${task_script}" );
+    #( exec "${task_script}" );
+    #exec -a "${work_dir}${task_script}" ( source "${work_dir}tasks/1.sh"; "${task_script}"; )
+    (
+      #run 1.sh before every task. Send full task path as $1 to 1.sh
+      source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
+      #run task script
+      "${work_dir}${task_script}";
+    );
   else
     echo "$0 no task_script file ${task_script}! 🤷‍";
   fi

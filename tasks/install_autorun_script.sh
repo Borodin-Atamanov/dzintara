@@ -3,7 +3,7 @@
 #License: MIT
 #install script to user autorun
 
-source "${work_dir}tasks/1.sh"
+#source "${work_dir}tasks/1.sh"
 
 # if [[ $EUID -ne 0 ]]; then
 #    echo "Must be run as root! $0"
