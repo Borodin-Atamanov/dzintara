@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-sleep_time='3';
+sleep_time='0.22';
 set -x;
 ./encrypt_all_vaults.sh
 sleep $sleep_time;
