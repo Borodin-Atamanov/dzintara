@@ -23,6 +23,7 @@ function run_task ()
   then
     echo "$0 [[${task_script}]]";
     #TODO add arguments to task
+    #TODO add preloaded source to task
     ( exec "${task_script}" );
   else
     echo "$0 no task_script file ${task_script}! 🤷‍";
@@ -72,6 +73,36 @@ function md5 ()
     echo   -n "${1}" | md5sum | awk '{print $1}'
 }
 export -f md5
+
+function base64_encode ()
+{
+  data="${1}"
+  echo -n "${data}" | openssl base64 -e -A | tr -d \\n;
+}
+export -f base64_encode
+
+function base64_decode ()
+{
+  data="${1}"
+  echo -n "${data}" | openssl base64 -d
+  decrypt_error=$?;
+}
+export -f base64_decode
+
+function save_var_in_base64 ()
+{
+  varname="${1}"
+  value="${2}"
+  value=$(base64_encode "${value}");
+  echo -n 'declare -g -x ';
+  echo -n "${varname}";
+  echo -n '=$(echo';
+  echo -n " '${value}' ";
+  echo -n ' | openssl base64 -d );  ';
+  #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
+  echo "";
+}
+export -f save_var_in_base64
 
 function random_str ()
 {
