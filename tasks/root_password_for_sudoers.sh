@@ -19,7 +19,7 @@ are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mod
 are_you_serious=' --root=/ '; #real business
 
 #TODO Maybe add patch to augeas lenses? augeas don't understand /etc/sudoers file in raspberry os.
-#augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
+#augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_file}";
 
 sudoers_backup_file="/etc/sudoers.bak-${cur_date_time}";
 cp -v "/etc/sudoers" "${sudoers_backup_file}";
