@@ -1,12 +1,7 @@
 #!/usr/bin/bash
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-echo "run $0";
-
-if [[ "$function_loaded" != "1" ]]; then
-  #load all functions and variables
-  source ../index.sh fun
-fi;
+source "${work_dir}/tasks/1.sh"
 
 var_name="${secrets}_${computer_name}_root_pass";
 show_var "$var_name"

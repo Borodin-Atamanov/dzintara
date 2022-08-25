@@ -14,6 +14,7 @@ if [[ "$function_loaded" != "1" ]]; then
   #load all functions and variables
   source "${work_dir}/index.sh" fun
 fi;
+
 cd "${work_dir}";
 
 # if [[ $EUID -ne 0 ]]; then
