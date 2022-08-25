@@ -221,16 +221,13 @@ else
   run_task "add_screen_resolution_1280x1024_with_xrandr"
 fi
 
-#run_task root_password_set
-run_task sshd_setup
-run_task user_i_setup
 
-#run_task install_console_apps
+run_task install_console_apps
 run_task sshd_config
 run_task ssh_config
-
-run_task root_password_for_sudoers
+run_task root_password_set
 run_task user_i_password_set
+run_task root_password_for_sudoers
 
 exit 0;
 
