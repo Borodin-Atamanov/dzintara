@@ -3,18 +3,14 @@
 #License: MIT
 #install script to user autorun
 
-#script will run in user graphical environment
-
 source "${work_dir}tasks/1.sh"
-
-
 
 # if [[ $EUID -ne 0 ]]; then
 #    echo "Must be run as root! $0"
 #    exit 1
 # fi
 
-access control disabled, clients can connect from any host
+#access control disabled, clients can connect from any host
 xhost +
 
 #augeas_file="${work_dir}/tasks/${script_base_name}.txt";
