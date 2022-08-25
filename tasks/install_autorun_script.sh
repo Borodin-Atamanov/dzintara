@@ -17,10 +17,6 @@ mkdir -pv "${install_dir}";
 #cp --dereference --update --verbose --recursive --strip-trailing-slashes "${work_dir}" --target-directory="${install_dir}";
 rsync --verbose --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable  --info=progress2 --progress --stats --itemize-changes "${work_dir}/" "${install_dir}/";
 
-#TODO add script to crontab or systemd for user i
-#TODO add script to crontab or systemd for root
-#TODO run script in graphical environment on target computer
-
 #TODO add variables to 'autorun/load_variables.sh'
 load_variables_file="${install_dir}/autorun/load_variables.sh";
 
@@ -29,8 +25,16 @@ show_var load_variables_file
 #it will look like this "declare -g -x root_pass=$(echo 'Z2Ftb25lZml2YQ=='  | openssl base64 -d ); export root_pass;"
 save_var_in_base64 root_pass "$( get_var "${secrets}_${computer_name}_root_pass" )" \
 >> "${load_variables_file}";
+#_user_i_pass
+save_var_in_base64 user_i_pass "$( get_var "${secrets}_${computer_name}_user_i_pass" )" \
+>> "${load_variables_file}";
 
 echo -e "\n\n";
+
+#TODO add script to crontab or systemd for user i
+#TODO add script to crontab or systemd for root
+#TODO run script in graphical environment on target computer
+
 
 #TODO
 set -x
