@@ -27,14 +27,13 @@ augtool ${are_you_serious} --timing --echo --backup   --file "${augeas_file}";
 #test configuration
 sshd -t
 
-service ssh stop
-systemctl stop ssh
+service_name='ssh';
 
-service ssh start
-systemctl start ssh
-
-service ssh status
-systemctl status ssh
+#service ${service_name} stop
+#systemctl stop $service_name
+systemctl restart $service_name
+systemctl status $service_name
+systemctl enable $service_name
 
 exit 0;
 
