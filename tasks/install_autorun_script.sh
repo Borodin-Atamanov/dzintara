@@ -23,6 +23,7 @@ load_variables_file="${install_dir}/autorun/load_variables.sh";
 show_var load_variables_file
 
 #it will look like this "declare -g -x root_pass=$(echo 'Z2Ftb25lZml2YQ=='  | openssl base64 -d ); export root_pass;"
+#root_pass
 save_var_in_base64 root_pass "$( get_var "${secrets}_${computer_name}_root_pass" )" \
 >> "${load_variables_file}";
 #_user_i_pass
