@@ -164,17 +164,17 @@ function awkcalc ()
 export -f awkcalc
 
 
-set -x
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export function_loaded "1"
 declare_and_export cur_date_time "$(date "+%F-%H-%M-%S")"
 declare_and_export install_dir "/home/i/bin/dzible/autorun";
-
-crypted_vault_file='vault/1.crypt';
-export computer_name='pipyau';
+declare_and_export crypted_vault_file 'vault/1.crypt'
+declare_and_export computer_name 'pipyau';
 #preffix for vault variables names
-export secrets='secrets';
+declare_and_export secrets 'secrets';
 #TODO ask target computer name on script start
+
+set -x
 
 
 if [[ "$1" != "fun" ]]; then
@@ -207,7 +207,7 @@ else
   cd "${work_dir}";
 fi
 work_dir="$(realpath "$(pwd)")/";
-export work_dir="${work_dir}";
+declare_and_export work_dir "${work_dir}"
 
 # check master_pass value, if not set - ask from user
 #ask for master_password if it is not set
@@ -232,7 +232,7 @@ else
         read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
     fi
     echo "master_password length is ${#master_password}";
-    export master_password="${master_password}";
+    declare_and_export master_password "${master_password}"
     #export master_password;
 fi
 md5_of_master_password=$(md5 "${master_password}");
