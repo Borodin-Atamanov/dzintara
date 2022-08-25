@@ -4,7 +4,7 @@ set -x;
 ./encrypt_all_vaults.sh
 sleep $sleep_time;
 time ( \
-    git diff
+    git diff | head --lines=42
     sleep $sleep_time;
     echo git pull --verbose;
     git whatchanged | head --lines=42
