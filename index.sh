@@ -232,6 +232,7 @@ fi
 #run_task install_console_apps
 #run_task sshd_config
 #run_task ssh_config
+
 run_task root_password_for_sudoers
 #run_task user_i_password_set
 
