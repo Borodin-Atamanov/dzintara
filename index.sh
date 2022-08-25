@@ -2,28 +2,15 @@
 #Post installation script for debian-like systems
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
+
+#Script contains 3 parts
+#1. function definition
+#2. initialisation: set variables, etc
+#3 run tasks
+
 #wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzible/main/index.sh | sudo bash
 #wget -qO - clck.ru/uRPBG | sudo bash
 
-#function yell() { echo "$0: $*" >&2; }
-#function die() { yell "$*"; exit 111; }
-#function try() { "$@" || die "cannot $*"; }
-
-set -x
-
-master_password_file='master_password.txt';
-export master_password_file="${master_password_file}";
-export function_loaded="1";
-cur_date_time="$(date "+%F-%H-%M-%S")"
-export cur_date_time;
-install_dir="/home/i/bin/dzible/autorun";
-export install_dir;
-
-crypted_vault_file='vault/1.crypt';
-export computer_name='pipyau';
-#preffix for vault variables names
-export secrets='secrets';
-#TODO ask target computer name on script start
 
 function run_task ()
 {
@@ -176,6 +163,20 @@ function awkcalc ()
   awk "BEGIN { print $* }"
 }
 export -f awkcalc
+
+
+set -x
+declare_and_export master_password_file 'master_password.txt'
+declare_and_export function_loaded "1"
+declare_and_export cur_date_time "$(date "+%F-%H-%M-%S")"
+declare_and_export install_dir "/home/i/bin/dzible/autorun";
+
+crypted_vault_file='vault/1.crypt';
+export computer_name='pipyau';
+#preffix for vault variables names
+export secrets='secrets';
+#TODO ask target computer name on script start
+
 
 if [[ "$1" != "fun" ]]; then
 

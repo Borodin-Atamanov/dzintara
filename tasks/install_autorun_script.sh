@@ -10,6 +10,15 @@ source "${work_dir}tasks/1.sh"
 #    exit 1
 # fi
 
+#TODO create directory for install scripts
+
+#TODO copy scripts to target directory
+#TODO add script to crontab or systemd for user i
+#TODO add script to crontab or systemd for root
+#TODO run script in graphical environment on target computer
+#TODO
+#TODO
+
 #access control disabled, clients can connect from any host
 xhost +
 
