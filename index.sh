@@ -16,6 +16,8 @@ export master_password_file="${master_password_file}";
 export function_loaded="1";
 cur_date_time="$(date "+%F-%H-%M-%S")"
 export cur_date_time;
+install_dir="/home/i/bin/dzible/autorun";
+export install_dir;
 
 crypted_vault_file='vault/1.crypt';
 export computer_name='pipyau';
@@ -34,6 +36,7 @@ function run_task ()
   if [ -s "${task_script}" ]
   then
     echo "$0 [[${task_script}]]";
+    #TODO add arguments to task
     ( exec "${task_script}" );
   else
     echo "$0 no task_script file ${task_script}! 🤷‍";
@@ -140,6 +143,40 @@ function show_var ()
 }
 export -f show_var
 
+function cvt_xrandr ()
+{
+  #function add new screen resolution to xrandr  with cvt
+  width="${1}";  width=$((width / 8 * 8));
+  height="${2}";
+  fps="${3}";
+
+  #acitve connected_display (HDMI-1, AVI-1, etc)
+  connected_display=$(xrandr | grep " connected " | awk '{ print$1 }')
+  mode_line="$(cvt ${width} ${height} ${fps} | grep odeline )"
+  #line with target screen mode
+  echo "${mode_line}"
+  #array with target screen mode
+  declare -a mode_arr=(${mode_line})
+  echo "${mode_arr[1]}";
+  mode_name="${mode_arr[1]}";
+  #remove quotes from mode_name with echo and eval
+  #mode_name="echo ${mode_name}";
+  #mode_name=$(eval ${mode_name})
+  #${resolution[@]/Modeline/xrandr --newmode}
+  xrandr --newmode $mode_name ${mode_arr[2]} ${mode_arr[3]} ${mode_arr[4]} ${mode_arr[5]} ${mode_arr[6]} ${mode_arr[7]} ${mode_arr[8]} ${mode_arr[9]} ${mode_arr[10]} ${mode_arr[11]} ${mode_arr[12]} ${mode_arr[13]} ${mode_arr[14]}
+  xrandr --addmode $connected_display $mode_name
+  xrandr --output $connected_display --mode $mode_name
+  #fallback to previous mode if new mode is not ok
+  xrandr --output $connected_display --auto
+}
+export -f cvt_xrandr
+
+function awkcalc ()
+{
+  awk "BEGIN { print $* }"
+}
+export -f awkcalc
+
 if [[ "$1" != "fun" ]]; then
 
 echo "$0";
@@ -169,7 +206,7 @@ else
   cp --verbose --update "${master_password_file}" "${work_dir}/"
   cd "${work_dir}";
 fi
-work_dir="$(realpath "$(pwd)")";
+work_dir="$(realpath "$(pwd)")/";
 export work_dir="${work_dir}";
 
 # check master_pass value, if not set - ask from user
@@ -221,12 +258,13 @@ else
   run_task "add_screen_resolution_1280x1024_with_xrandr"
 fi
 
-run_task install_console_apps
-run_task sshd_config
-run_task ssh_config
-run_task root_password_set
-run_task user_i_password_set
-run_task root_password_for_sudoers
+# run_task install_console_apps
+# run_task sshd_config
+# run_task ssh_config
+# run_task root_password_set
+# run_task user_i_password_set
+# run_task root_password_for_sudoers
+run_task install_autorun_script
 
 exit 0;
 

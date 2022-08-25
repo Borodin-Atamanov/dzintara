@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-source "${work_dir}/tasks/1.sh"
+source "${work_dir}tasks/1.sh"
 
 var_name="${secrets}_${computer_name}_user_i_pass";
 show_var "$var_name"
