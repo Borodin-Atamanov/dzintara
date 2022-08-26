@@ -10,7 +10,7 @@ export work_dir
 #work_dir="/home/i/bin/dzible/autorun";
 
 #access control disabled, clients can connect from any host
-xhost +
+# xhost +
 
 
 echo "$work_dir";
