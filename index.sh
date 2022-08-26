@@ -27,7 +27,7 @@ function run_task ()
     #shift arguments with shift --help
 
     (
-    exec -a "${work_dir}${task_script}"
+      exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
       #run task script
@@ -360,4 +360,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='ripad-8268e04-2022-08-26-21-24-47'; echo "${script_subversion}=script_subversion"; 
+script_subversion='zatol-24c728c-2022-08-26-21-50-41'; echo "${script_subversion}=script_subversion"; 
