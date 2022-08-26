@@ -39,8 +39,9 @@ if [[ "${DISPLAY}" = "" ]]; then
   declare_and_export DISPLAY ":0"
 fi
 
-save_var_in_base64 DISPLAY "$DISPLAY" \
->> "${load_variables_file}";
+save_var_in_base64 DISPLAY "$DISPLAY" >> "${load_variables_file}";
+
+echo "cd '${install_dir}';" >> "${load_variables_file}";
 
 echo -e "\n\n";
 
