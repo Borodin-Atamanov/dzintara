@@ -272,16 +272,7 @@ source "${work_dir}tasks/1.sh"
 # cvt_xrandr 8192 4320 60
 # cvt_xrandr 8192 4320 60
 
-cvt_xrandr 800 600 30
-cvt_xrandr 1360 768 30
-cvt_xrandr 1366 768 30
-cvt_xrandr 1920 1080 60
-cvt_xrandr 1920 1080 30
 cvt_xrandr 1280 1024 60
-cvt_xrandr 1024 600 60
-cvt_xrandr 1200 800 60
-cvt_xrandr 2560 1440 60
-cvt_xrandr 3840 2160 60
 
 #cvt_xrandr 1280 1024 30
 #cvt_xrandr 2560 1440 60
