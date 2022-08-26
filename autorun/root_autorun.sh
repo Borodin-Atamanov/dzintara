@@ -17,8 +17,10 @@ source "${work_dir}autorun/load_variables.sh"
 
 for ((i=12;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
-#TODO wait untill x server start (or if waiting time is over)
-su i --preserve-environment --pty --command "export DISPLAY=:0; time chromium-browser; ";
+#wait untill x server starts (or if waiting time is over)
+wait_for 133 'is_process_running Xorg'
+
+su i --preserve-environment --pty --command "source ${work_dir}autorun/load_variables.sh; time chromium-browser; ";
 
 echo "$work_dir" | tee -a "${work_dir}autorun/logs.root";
 
