@@ -277,6 +277,7 @@ fi
 
 apt-get -y install git
 apt-get -y install openssl
+apt-get -y install xterm
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
@@ -357,4 +358,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='parib-fa507f7-2022-08-26-20-40-54'; echo "${script_subversion}=script_subversion"; 
+script_subversion='vonor-68f49cb-2022-08-26-21-01-40'; echo "${script_subversion}=script_subversion"; 

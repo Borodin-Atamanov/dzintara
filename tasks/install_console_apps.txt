@@ -7,6 +7,7 @@ traceroute
 wget
 curl
 git
+x11-utils
 ssh
 openssh-client
 sshpass
