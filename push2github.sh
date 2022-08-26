@@ -25,4 +25,5 @@ time ( \
     git add --verbose --all;
     sleep $sleep_time;
     git commit --allow-empty-message --message=$(date "+%F_%H-%M-%S") --verbose; git push --verbose;
+    echo  "●●● ${script_subversion}";
 )
