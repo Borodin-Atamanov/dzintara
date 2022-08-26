@@ -12,7 +12,7 @@ time ( \
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";
     echo  "${script_subversion}";
     echo -n "script_subversion='${script_subversion}'; " >> "index.sh"
-    echo -n 'echo "script_subversion=${script_subversion}"; ' >> "index.sh"
+    echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index.sh"
     echo '"'; >> "index.sh"
     #
     sleep $sleep_time;

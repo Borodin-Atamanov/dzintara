@@ -355,4 +355,4 @@ else
     echo 'functions loaded';
 fi; #end of fun if
 
-script_subversion='ageru-b7033ba-2022-08-26-15-58-55'; echo "script_subversion=${script_subversion}"; 
+script_subversion='ageru-b7033ba-2022-08-26-15-58-55'; echo "script_subversion=${script_subversion}"; script_subversion='ipufa-2dfd1b5-2022-08-26-15-59-45'; echo "${script_subversion}=script_subversion"; 
