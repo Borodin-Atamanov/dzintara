@@ -11,8 +11,8 @@
 # fi
 
 root_autorun_service_file='/etc/systemd/system/dzible_autorun.service';
-load_variables_file="${install_dir}/autorun/load_variables.sh";
-root_autorun_file="${install_dir}/autorun/root_autorun.sh";
+load_variables_file="${install_dir}autorun/load_variables.sh";
+root_autorun_file="${install_dir}autorun/root_autorun.sh";
 
 #create directory for install scripts
 mkdir -pv "${install_dir}";
