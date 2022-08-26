@@ -40,7 +40,11 @@ su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/auto
 su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e '/home/i/bin/dzible/autorun/user_autorun.sh; read; read; read;' ";
 
 #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
-su --login i  --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
+su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
+
+#Работает:
+#su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser; ";
+
 
 echo "X is here!" >> "${work_dir}autorun/logs.root";
 date >> "${work_dir}autorun/logs.root";
