@@ -278,8 +278,9 @@ apt-get -y install autorandr
 
 autorandr --debug --save "itworks"
 autorandr --debug --default "itworks"
-sudo --user=i --shell "autorandr --debug --save itworks"
-sudo --user=i --shell "autorandr --debug --default itworks"
+#su --login i --pty --shell="/bin/bash" --command="autorandr --debug --save itworks"
+su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --save itworks "
+su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --default itworks "
 
 #cvt_xrandr 1280 1024 30
 #cvt_xrandr 2560 1440 60
