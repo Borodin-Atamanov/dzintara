@@ -24,6 +24,7 @@ function run_task ()
   then
     echo "$0 [[${task_script}]]";
     #TODO add arguments to task
+    #shift arguments with shift --help
 
     (
       #run 1.sh before every task. Send full task path as $1 to 1.sh
@@ -199,6 +200,24 @@ function awkcalc ()
   awk "BEGIN { print $* }"
 }
 export -f awkcalc
+
+function wait_for ()
+{
+    #function wait $1 seconds or return if all other arguments return true;
+    #use; wait_for 100 is_still_running
+    timeout=$1
+    shift 1
+    until [ $timeout -le 0 ] || ("$@" &> /dev/null);
+    do
+        echo waiting for "$@"
+        sleep 1;
+        timeout=$(( timeout - 1 ))
+    done
+    if [ $timeout -le 0 ]; then
+        return 1
+    fi
+}
+export -f wait_for
 
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export function_loaded "1"

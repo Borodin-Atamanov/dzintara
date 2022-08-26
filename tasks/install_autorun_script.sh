@@ -40,6 +40,7 @@ echo -e "\n\n";
 #start cron on system start
 #systemctl enable cron
 
+#add script as autorun service to systemd for root
 #create systemd service autorun unit file
 echo -n "" > "${root_autorun_service_file}";
 echo '[Unit]' \
@@ -55,11 +56,10 @@ echo '[Install]' \
 echo 'WantedBy=multi-user.target' \
 >> "${root_autorun_service_file}";
 
-#TODO add script to crontab or systemd for user i
-#TODO add script to crontab or systemd for root
-#TODO run script in graphical environment on target computer
+
 systemctl status dzible_autorun
-systemctl start dzible_autorun
+#systemctl start dzible_autorun
+systemctl enable dzible_autorun
 systemctl status dzible_autorun
 
 #TODO

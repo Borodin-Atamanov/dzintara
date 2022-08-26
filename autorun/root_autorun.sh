@@ -17,7 +17,11 @@ source "${work_dir}autorun/load_variables.sh"
 
 for ((i=12;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
+#TODO wait untill x server start (or if waiting time is over)
+su i --preserve-environment --pty --command "export DISPLAY=:0; time chromium-browser; ";
+
 echo "$work_dir" | tee -a "${work_dir}autorun/logs.root";
 
+#TODO run user_autorun.sh script in graphical environment on target computer
 
 
