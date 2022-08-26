@@ -15,6 +15,7 @@ source "${work_dir}autorun/load_variables.sh"
 #access control disabled, clients can connect from any host
 #xhost +
 
+for ((i=12;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
 echo "$work_dir" | tee -a "${work_dir}autorun/logs.root";
 
