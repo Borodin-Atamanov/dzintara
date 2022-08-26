@@ -250,6 +250,9 @@ export -f is_process_running
 
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
+declare_and_export master_password_file 'master_password.txt'
+declare_and_export cur_date_time "$(date "+%F-%H-%M-%S")"
+declare_and_export crypted_vault_file 'vault/1.crypt'
 
 #TODO ask target computer name on script start
 
@@ -258,9 +261,6 @@ set +x
 if [[ "$1" != "fun" ]]; then
 set -x
 
-declare_and_export master_password_file 'master_password.txt'
-declare_and_export cur_date_time "$(date "+%F-%H-%M-%S")"
-declare_and_export crypted_vault_file 'vault/1.crypt'
 declare_and_export computer_name 'pipyau'
 declare_and_export secrets 'secrets' #preffix for vault variables names
 
@@ -360,4 +360,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='zatol-24c728c-2022-08-26-21-50-41'; echo "${script_subversion}=script_subversion"; 
+script_subversion='utesa-798190c-2022-08-26-22-46-40'; echo "${script_subversion}=script_subversion"; 

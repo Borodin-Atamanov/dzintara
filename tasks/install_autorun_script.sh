@@ -49,6 +49,8 @@ chown --verbose --changes --recursive  root:root "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 
+apt-get install -y stterm
+
 #start cron on system start
 #systemctl enable cron
 
