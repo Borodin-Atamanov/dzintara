@@ -15,7 +15,7 @@ source "${work_dir}autorun/load_variables.sh"
 #access control disabled, clients can connect from any host
 #xhost +
 
-#for ((i=12;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
+#for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
 #wait untill x server starts (or if waiting time is over)
 echo "wait for X" >> "${work_dir}autorun/logs.root";
