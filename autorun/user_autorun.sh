@@ -13,4 +13,6 @@ echo "$work_dir";
 
 for ((i=142;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 0.42; done;
 
+cvt_xrandr 1280 1024 60
+
 sleep 35;
