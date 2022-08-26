@@ -36,7 +36,10 @@ sleep 3;
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; time stterm -T 'Borodin-Atamanov system update' -e command '/bin/bash -c \'for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;\'' ";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; stterm -e /bin/bash -c source /home/i/bin/dzible/autorun/load_variables.sh; sleep 35; ";
 #su --login i --pty --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'ls; read; sleep 35;' ";
-su --login i --pty --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e '/home/i/bin/dzible/autorun/user_autorun.sh' ";
+su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e '/home/i/bin/dzible/autorun/user_autorun.sh; read; read; read;' ";
+
+#su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
+su --login i  --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 
 echo "X is here!" >> "${work_dir}autorun/logs.root";
 date >> "${work_dir}autorun/logs.root";
