@@ -18,13 +18,13 @@ source "${work_dir}autorun/load_variables.sh"
 #for ((i=12;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
 #wait untill x server starts (or if waiting time is over)
-echo "wait for X" tee -a "${work_dir}autorun/logs.root";
+echo "wait for X" | tee -a "${work_dir}autorun/logs.root";
 date | tee -a "${work_dir}autorun/logs.root";
 wait_for 133 'is_process_running Xorg'
 
 su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; time chromium-browser; ";
 
-echo "X is here!" tee -a "${work_dir}autorun/logs.root";
+echo "X is here!" | tee -a "${work_dir}autorun/logs.root";
 date | tee -a "${work_dir}autorun/logs.root";
 
 #TODO run user_autorun.sh script in graphical environment on target computer
