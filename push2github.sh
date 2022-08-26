@@ -11,7 +11,7 @@ time ( \
     git whatchanged | head --lines=42
 
     #delete script_subversion from index.sh
-    cat index.sh | grep -v '^[script_subversion]' > index_wo_script_subversion.sh
+    cat index.sh | grep -v '^script_subversion' > index_wo_script_subversion.sh
     cat index.sh > index_wo_script_subversion.sh
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";
     echo  "${script_subversion}";

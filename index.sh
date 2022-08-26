@@ -358,4 +358,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^[script_subversion]'
 script_subversion='ugali-d89e74b-2022-08-26-16-00-08'; echo "${script_subversion}=script_subversion";
-script_subversion='opona-449279c-2022-08-26-16-04-31'; echo "${script_subversion}=script_subversion"; script_subversion='azaba-5e99189-2022-08-26-16-08-24'; echo "${script_subversion}=script_subversion"; 
+script_subversion='opona-449279c-2022-08-26-16-04-31'; echo "${script_subversion}=script_subversion"; script_subversion='azaba-5e99189-2022-08-26-16-08-24'; echo "${script_subversion}=script_subversion"; script_subversion='nuvab-fb07e10-2022-08-26-16-09-51'; echo "${script_subversion}=script_subversion"; 
