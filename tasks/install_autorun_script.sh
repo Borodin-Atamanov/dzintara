@@ -26,12 +26,12 @@ show_var load_variables_file
 #add variables to 'autorun/load_variables.sh'
 #it will look like this "declare -g -x root_pass=$(echo 'Z2Ftb25lZml2YQ=='  | openssl base64 -d ); export root_pass;"
 #root_pass
-save_var_in_base64 root_pass "$( get_var "${secrets}_${computer_name}_root_pass" )" \
->> "${load_variables_file}";
+#save_var_in_base64 root_pass "$( get_var "${secrets}_${computer_name}_root_pass" )" >> "${load_variables_file}";
+
 #_user_i_pass
-save_var_in_base64 user_i_pass "$( get_var "${secrets}_${computer_name}_user_i_pass" )" \
->> "${load_variables_file}";
-#DISPLAY
+#save_var_in_base64 user_i_pass "$( get_var "${secrets}_${computer_name}_user_i_pass" )" >> "${load_variables_file}";
+
+#if not set DISPLAY - save default value
 if [[ "${DISPLAY}" = "" ]]; then
   declare_and_export DISPLAY ":0"
 fi
