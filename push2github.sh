@@ -14,7 +14,7 @@ time ( \
     cat index.sh | grep -v '^script_subversion' > index_w_script_subversion.sh
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";
     #add script_subversion to index.sh
-    echo  "${script_subversion}";
+    echo  "●●● ${script_subversion}";
     echo -n "script_subversion='${script_subversion}'; " >> "index_w_script_subversion.sh"
     echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index_w_script_subversion.sh"
     echo '"'; >> "index_w_script_subversion.sh"
