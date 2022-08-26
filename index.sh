@@ -205,11 +205,16 @@ function wait_for ()
 {
     #function wait $1 seconds or return if all other arguments return true;
     #use; wait_for 100 is_still_running
+    #wait_for 100 "ps -e | grep -c Xorg"
+    #if ("$@" &> /dev/null); then echo 1; else echo 0; fi;
+    #if [ "$(ps -e | grep -c Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
     timeout=$1
     shift 1
-    until [ $timeout -le 0 ] || ("$@" &> /dev/null);
+    #until [ $timeout -le 0 ] || ("$@" &> /dev/null);
+    until [ $timeout -le 0 ] || [ "${returned_value}" ];
     do
-        echo waiting for "$@"
+        returned_value=$( $@ );
+        show_var returned_value;
         sleep 1;
         timeout=$(( timeout - 1 ))
     done
@@ -218,6 +223,22 @@ function wait_for ()
     fi
 }
 export -f wait_for
+
+function is_process_running
+{
+  #use: if [ "$(is_process_running Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
+  app="${1}";
+  echo "is_process_running $app";
+  if [ "$(ps -e | grep -c "${app}")" -ge 1 ];
+  then
+    echo -n 1;
+    return 1;
+  else
+    echo -n 0;
+    return 0;
+  fi;
+}
+export -f is_process_running
 
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export function_loaded "1"
