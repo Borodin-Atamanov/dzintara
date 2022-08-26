@@ -63,7 +63,6 @@ function encrypt_aes ()
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
 }
-export -f encrypt_aes
 
 function decrypt_aes ()
 {
@@ -73,20 +72,17 @@ function decrypt_aes ()
   echo -n "${data}" | openssl base64 -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
   decrypt_aes_error=$?
 }
-export -f decrypt_aes
 
 function md5 ()
 {
     echo   -n "${1}" | md5sum | awk '{print $1}'
 }
-export -f md5
 
 function base64_encode ()
 {
   data="${1}"
   echo -n "${data}" | openssl base64 -e -A | tr -d \\n;
 }
-export -f base64_encode
 
 function base64_decode ()
 {
@@ -94,7 +90,6 @@ function base64_decode ()
   echo -n "${data}" | openssl base64 -d
   decrypt_error=$?;
 }
-export -f base64_decode
 
 function save_var_in_base64 ()
 {
@@ -109,7 +104,6 @@ function save_var_in_base64 ()
   #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
   echo "";
 }
-export -f save_var_in_base64
 
 function random_str ()
 {
@@ -125,7 +119,6 @@ function random_str ()
     random_str="${random_str:$(($RANDOM % 2)):${len}}";
     echo -n "${random_str}";
 }
-export -f random_str
 
 function trim()
 {
@@ -136,7 +129,6 @@ function trim()
     var="${var%"${var##*[![:space:]]}"}"
     printf '%s' "$var"
 }
-export -f trim
 
 function declare_and_export ()
 {
@@ -147,7 +139,6 @@ function declare_and_export ()
   #echo "$varname=$value";
   echo "declare [$varname]";
 }
-export -f declare_and_export
 
 function get_var ()
 {
@@ -157,7 +148,6 @@ function get_var ()
   #return value of variable with name "$varname"
   echo -n "${!varname}";
 }
-export -f get_var
 
 function show_var ()
 {
@@ -165,7 +155,6 @@ function show_var ()
   echo -n "$varname=";
   echo '"'$( get_var "${varname}" )'"';
 }
-export -f show_var
 
 function cvt_xrandr ()
 {
@@ -193,13 +182,11 @@ function cvt_xrandr ()
   #fallback to previous mode if new mode is not ok
   xrandr --output $connected_display --auto
 }
-export -f cvt_xrandr
 
 function awkcalc ()
 {
   awk "BEGIN { print $* }"
 }
-export -f awkcalc
 
 function wait_for ()
 {
@@ -229,7 +216,6 @@ function wait_for ()
       timeout=$(( timeout - 1 ))
     done
 }
-export -f wait_for
 
 function is_process_running
 {
@@ -244,7 +230,6 @@ function is_process_running
     return 0;
   fi;
 }
-export -f is_process_running
 
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export function_loaded "1"
@@ -257,30 +242,20 @@ declare_and_export computer_name 'pipyau'
 declare_and_export secrets 'secrets'
 #TODO ask target computer name on script start
 
-set +x
 
-if [[ "$1" != "fun" ]]; then
-set -x
 
-echo "$0";
-if [[ "$0" = "./index.sh" ]]; then
     test_mode=1;
-else
     test_mode=0;
 fi
 
-if [[ "${test_mode}" = "1" ]]; then
     echo "local test mode on";
-else
     echo "local test mode off";
 fi
 
 apt-get -y install git
 apt-get -y install openssl
 
-if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
-else
   echo "clone scripts from github";
   work_dir="work_dir-$(date "+%F-%H-%M-%S")";
   mkdir -pv "${work_dir}";
@@ -296,10 +271,7 @@ declare_and_export work_dir "${work_dir}"
 #ask for master_password if it is not set
 #read -s -p "master_password" master_password; export master_password;
 # echo "${master_password}";
-if [[ -v master_password ]];
-then
     echo "master_password is already set"
-else
     echo "master_password is not set";
     if [ -s "${master_password_file}" ]
     then
@@ -319,24 +291,17 @@ else
     #export master_password;
 fi
 md5_of_master_password=$(md5 "${master_password}");
-echo "md5_of_master_password=${md5_of_master_password}";
 
 #dectypt vault file with master password, load all secret variables
-encrypted_data=$(cat "${crypted_vault_file}");
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
 decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
-echo "decrypt_aes_error=${decrypt_aes_error}";
 #echo "$decrypted_data";
 #load all variables from decrypted vault
-eval "${decrypted_data}";
 #echo "secrets_pipyau_root_pass=${secrets_pipyau_root_pass}"
-echo "secrets_loaded=${secrets_loaded}"
 #echo "Original data:"
 #md5 "${data}";
 
-if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
-else
   echo 1;
   run_task add_screen_resolution_1280x1024_with_xrandr
 fi
@@ -347,15 +312,10 @@ fi
 # run_task root_password_set
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
-run_task install_autorun_script
 
-exit 0;
 
-else
     echo 'functions loaded';
 fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^[script_subversion]'
-script_subversion='ugali-d89e74b-2022-08-26-16-00-08'; echo "${script_subversion}=script_subversion";
-script_subversion='opona-449279c-2022-08-26-16-04-31'; echo "${script_subversion}=script_subversion"; 

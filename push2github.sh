@@ -9,6 +9,9 @@ time ( \
     sleep $sleep_time;
     echo git pull --verbose;
     git whatchanged | head --lines=42
+
+    #delete script_subversion from index.sh
+    cat index.sh | grep -v '^[script_subversion]' > index_wo_script_subversion.sh
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";
     echo  "${script_subversion}";
     echo -n "script_subversion='${script_subversion}'; " >> "index.sh"
