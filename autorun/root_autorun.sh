@@ -22,11 +22,13 @@ date >> "${work_dir}autorun/logs.root";
 
 wait_for 133 'is_process_running Xorg'
 
-sleep 3;
+#sleep 3;
 
-su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
+#su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
+sudo --user=i --shell  "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 
-su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; time chromium-browser; ";
+#su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; time chromium-browser; ";
+sudo --user=i --shell "source /home/i/bin/dzible/autorun/load_variables.sh; time chromium-browser; ";
 
 echo "X is here!" >> "${work_dir}autorun/logs.root";
 date >> "${work_dir}autorun/logs.root";
