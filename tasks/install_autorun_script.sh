@@ -75,7 +75,6 @@ systemctl enable dzible_autorun
 systemctl status dzible_autorun
 
 #TODO
-set -x
 
 #augeas_file="${work_dir}/tasks/${script_base_name}.txt";
 #show_var "augeas_file"
@@ -88,6 +87,3 @@ set -x
 #are_you_serious=' --root=/ '; #real business
 
 #augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_file}";
-
-exit 0;
-
