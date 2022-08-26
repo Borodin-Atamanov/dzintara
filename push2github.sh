@@ -11,13 +11,15 @@ time ( \
     git whatchanged | head --lines=42
 
     #delete script_subversion from index.sh
-    cat index.sh | grep -v '^script_subversion' > index_wo_script_subversion.sh
-    cat index.sh > index_wo_script_subversion.sh
+    cat index.sh | grep -v '^script_subversion' > index_w_script_subversion.sh
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";
+    #add script_subversion to index.sh
     echo  "${script_subversion}";
-    echo -n "script_subversion='${script_subversion}'; " >> "index.sh"
-    echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index.sh"
-    echo '"'; >> "index.sh"
+    echo -n "script_subversion='${script_subversion}'; " >> "index_w_script_subversion.sh"
+    echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index_w_script_subversion.sh"
+    echo '"'; >> "index_w_script_subversion.sh"
+    cp --update --verbose "index_w_script_subversion.sh" "index.sh";
+    #rm -v "index_w_script_subversion.sh"
     #
     sleep $sleep_time;
     git add --verbose --all;
