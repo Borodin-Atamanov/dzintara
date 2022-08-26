@@ -211,10 +211,10 @@ declare_and_export computer_name 'pipyau'
 declare_and_export secrets 'secrets'
 #TODO ask target computer name on script start
 
-set -x
-
+set +x
 
 if [[ "$1" != "fun" ]]; then
+set -x
 
 echo "$0";
 if [[ "$0" = "./index.sh" ]]; then

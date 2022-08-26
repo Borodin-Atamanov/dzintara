@@ -58,7 +58,9 @@ echo 'WantedBy=multi-user.target' \
 #TODO add script to crontab or systemd for user i
 #TODO add script to crontab or systemd for root
 #TODO run script in graphical environment on target computer
-
+systemctl status dzible_autorun
+systemctl start dzible_autorun
+systemctl status dzible_autorun
 
 #TODO
 set -x
