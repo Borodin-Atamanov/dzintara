@@ -277,6 +277,7 @@ cvt_xrandr 1280 1024 60
 apt-get -y install autorandr
 
 autorandr --debug --save "1280x1024_60"
+autorandr --debug --default "1280x1024_60"
 
 #cvt_xrandr 1280 1024 30
 #cvt_xrandr 2560 1440 60
