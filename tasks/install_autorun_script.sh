@@ -70,11 +70,11 @@ echo '[Install]' \
 echo 'WantedBy=multi-user.target' \
 >> "${root_autorun_service_file}";
 
-systemctl daemon-reload
-systemctl status dzible_autorun
+systemctl daemon-reload | tac
+systemctl status dzible_autorun | tac
 # systemctl start dzible_autorun
-systemctl enable dzible_autorun
-systemctl status dzible_autorun
+systemctl enable dzible_autorun | tac
+systemctl status dzible_autorun | tac
 
 #TODO
 
