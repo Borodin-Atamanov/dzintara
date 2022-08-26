@@ -20,7 +20,7 @@ source "${work_dir}autorun/load_variables.sh"
 #wait untill x server starts (or if waiting time is over)
 wait_for 133 'is_process_running Xorg'
 
-su i --preserve-environment --pty --command "source ${work_dir}autorun/load_variables.sh; time chromium-browser; ";
+su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; time chromium-browser; ";
 
 echo "$work_dir" | tee -a "${work_dir}autorun/logs.root";
 

@@ -32,6 +32,10 @@ save_var_in_base64 root_pass "$( get_var "${secrets}_${computer_name}_root_pass"
 save_var_in_base64 user_i_pass "$( get_var "${secrets}_${computer_name}_user_i_pass" )" \
 >> "${load_variables_file}";
 #DISPLAY
+if [[ "${DISPLAY}" = "" ]]; then
+  declare_and_export DISPLAY ":0"
+fi
+
 save_var_in_base64 DISPLAY "$DISPLAY" \
 >> "${load_variables_file}";
 
