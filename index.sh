@@ -204,23 +204,30 @@ export -f awkcalc
 function wait_for ()
 {
     #function wait $1 seconds or return if all other arguments return true;
-    #use; wait_for 100 is_still_running
+    #any non-empty and none-zero returned value sting is true
+    #use:
+    #wait_for 12 'echo $((RANDOM % 2));'
     #wait_for 100 "ps -e | grep -c Xorg"
     #if ("$@" &> /dev/null); then echo 1; else echo 0; fi;
     #if [ "$(ps -e | grep -c Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
     timeout=$1
     shift 1
     #until [ $timeout -le 0 ] || ("$@" &> /dev/null);
-    until [ $timeout -le 0 ] || [ "${returned_value}" ];
+    #until [ $timeout -le 0 ] || [ "${returned_value}" ];
+
+    while [ $timeout -ge 0 ]
     do
-        returned_value=$( $@ );
-        show_var returned_value;
-        sleep 1;
-        timeout=$(( timeout - 1 ))
+      #echo "$@";
+      #ret_val=$("$@"); #get text value from command
+      command="$@";
+      ret_val=$(eval "${command}" );
+      ret_val=$(trim "$ret_val");
+      #returned_value=$?
+      #show_var ret_val;
+      if [[ "${ret_val}" != "" ]] && [[ "${ret_val}" != 0 ]]  ; then return 1; fi;
+      sleep 1;
+      timeout=$(( timeout - 1 ))
     done
-    if [ $timeout -le 0 ]; then
-        return 1
-    fi
 }
 export -f wait_for
 
@@ -228,13 +235,12 @@ function is_process_running
 {
   #use: if [ "$(is_process_running Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
   app="${1}";
-  echo "is_process_running $app";
-  if [ "$(ps -e | grep -c "${app}")" -ge 1 ];
+  if [ "$(ps -e | grep --ignore-case --count "${app}")" -ge 1 ];
   then
     echo -n 1;
     return 1;
   else
-    echo -n 0;
+    echo -n "";
     return 0;
   fi;
 }
