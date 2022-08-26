@@ -19,7 +19,7 @@ time ( \
     echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index_w_script_subversion.sh"
     echo '"'; >> "index_w_script_subversion.sh"
     cp --update --verbose "index_w_script_subversion.sh" "index.sh";
-    #rm -v "index_w_script_subversion.sh"
+    rm -v "index_w_script_subversion.sh"
     #
     sleep $sleep_time;
     git add --verbose --all;
