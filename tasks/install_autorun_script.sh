@@ -10,18 +10,20 @@
 #    exit 1
 # fi
 
-#TODO create directory for install scripts
+root_autorun_service_file='/etc/systemd/system/dzible_autorun.service';
+load_variables_file="${install_dir}/autorun/load_variables.sh";
+root_autorun_file="${install_dir}/autorun/root_autorun.sh";
+
+#create directory for install scripts
 mkdir -pv "${install_dir}";
 
 #TODO copy scripts to install directory
 #cp --dereference --update --verbose --recursive --strip-trailing-slashes "${work_dir}" --target-directory="${install_dir}";
 rsync --verbose --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable  --info=progress2 --progress --stats --itemize-changes "${work_dir}/" "${install_dir}/";
 
-#TODO add variables to 'autorun/load_variables.sh'
-load_variables_file="${install_dir}/autorun/load_variables.sh";
-
 show_var load_variables_file
 
+#add variables to 'autorun/load_variables.sh'
 #it will look like this "declare -g -x root_pass=$(echo 'Z2Ftb25lZml2YQ=='  | openssl base64 -d ); export root_pass;"
 #root_pass
 save_var_in_base64 root_pass "$( get_var "${secrets}_${computer_name}_root_pass" )" \
@@ -34,6 +36,24 @@ save_var_in_base64 DISPLAY "$DISPLAY" \
 >> "${load_variables_file}";
 
 echo -e "\n\n";
+
+#start cron on system start
+#systemctl enable cron
+
+#create systemd service autorun unit file
+echo -n "" > "${root_autorun_service_file}";
+echo '[Unit]' \
+>> "${root_autorun_service_file}";
+echo 'Description=dzible autorun service' \
+>> "${root_autorun_service_file}";
+echo '[Service]' \
+>> "${root_autorun_service_file}";
+echo "ExecStart=${root_autorun_file}" \
+>> "${root_autorun_service_file}";
+echo '[Install]' \
+>> "${root_autorun_service_file}";
+echo 'WantedBy=multi-user.target' \
+>> "${root_autorun_service_file}";
 
 #TODO add script to crontab or systemd for user i
 #TODO add script to crontab or systemd for root

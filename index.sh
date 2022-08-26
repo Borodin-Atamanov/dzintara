@@ -292,7 +292,7 @@ if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
 else
   echo 1;
-  run_task "add_screen_resolution_1280x1024_with_xrandr"
+  run_task add_screen_resolution_1280x1024_with_xrandr
 fi
 
 # run_task install_console_apps
