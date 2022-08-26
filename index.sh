@@ -355,3 +355,4 @@ else
     echo 'functions loaded';
 fi; #end of fun if
 
+script_subversion=zudap-5078055-2022-08-26-15-57-12; echo script_subversion=${script_subversion}; 

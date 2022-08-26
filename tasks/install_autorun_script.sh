@@ -62,7 +62,7 @@ echo 'WantedBy=multi-user.target' \
 
 systemctl daemon-reload
 systemctl status dzible_autorun
-#systemctl start dzible_autorun
+# systemctl start dzible_autorun
 systemctl enable dzible_autorun
 systemctl status dzible_autorun
 
