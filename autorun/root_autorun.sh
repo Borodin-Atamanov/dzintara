@@ -4,6 +4,11 @@
 #License: MIT
 #script autorun on target system in root mode
 
+#This script also calls 3 another script:
+#1. root script after gui started
+#2. user i script before gui
+#3. user i script after gui started
+
 #load variables
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzible/"
@@ -16,14 +21,23 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 
 #for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
+#TODO start root script
+{ymdhms; echo " start root console script";} | tee --append "${work_dir}autorun/logs.root";
+#TODO start user i script
+{ymdhms; echo " start user i console script";} | tee --append "${work_dir}autorun/logs.root";
+
 #wait untill x server starts (or if waiting time is over)
-echo "wait for X" | tee --append "${work_dir}autorun/logs.root";
-date | tee --append "${work_dir}autorun/logs.root";
+{ymdhms; echo " wait for Xorg...";} | tee --append "${work_dir}autorun/logs.root";
 
 wait_for 133 'is_process_running Xorg'
+#TODO check for Xorg with xprop -root
 
-echo "X is here!" | tee --append "${work_dir}autorun/logs.root";
-date | tee --append "${work_dir}autorun/logs.root";
+#{ymdhms; echo " Xorg is here!";} | tee --append "${work_dir}autorun/logs.root";
+
+#TODO start root GUI script
+{ymdhms; echo " start root GUI script";} | tee --append "${work_dir}autorun/logs.root";
+#TODO start user i GUI script
+{ymdhms; echo " start user i GUI script";} | tee --append "${work_dir}autorun/logs.root";
 
 #TODO create lock file?
 #В цикле вызываем скрипт от пользователя. До тех пор, пока lock-файл не исчезнет.
@@ -31,11 +45,11 @@ date | tee --append "${work_dir}autorun/logs.root";
 # Запустили скрипт.
 #
 #
+#
 
 sleep 11;
 
-echo "waiting completed" | tee --append "${work_dir}autorun/logs.root";
-date | tee --append "${work_dir}autorun/logs.root";
+{ymdhms; echo " Xorg waiting completed";} | tee --append "${work_dir}autorun/logs.root";
 
 #TODO wait for lock file, generated after success execution if the script
 #TODO delete lock file if it is too old
@@ -53,7 +67,7 @@ date | tee --append "${work_dir}autorun/logs.root";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; time stterm -T 'Borodin-Atamanov system update' -e command '/bin/bash -c \'for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;\'' ";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; stterm -e /bin/bash -c source /home/i/bin/dzible/autorun/load_variables.sh; sleep 35; ";
 #su --login i --pty --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'ls; read; sleep 35;' ";
-su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun.sh;' ";
+su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' ";
 
 #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";

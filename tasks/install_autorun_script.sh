@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-#install script to user autorun
+#install 4 scripts to autorun on target system
 
 #source "${work_dir}tasks/1.sh"
 
@@ -17,7 +17,7 @@ root_autorun_file="${install_dir}autorun/root_autorun.sh";
 #create directory for install scripts
 mkdir -pv "${install_dir}";
 
-#TODO copy scripts to install directory
+#copy scripts to install directory
 #cp --dereference --update --verbose --recursive --strip-trailing-slashes "${work_dir}" --target-directory="${install_dir}";
 rsync --verbose --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable  --info=progress2 --progress --stats --itemize-changes "${work_dir}/" "${install_dir}/";
 
@@ -38,7 +38,7 @@ show_var load_variables_file
 #export all ENV variables, expect some secrets
 export | grep  -v 'password' | grep  -v 'secrets' | sort >> "${load_variables_file}";
 
-echo -e "\n\n";
+#TODO disable any resctriction of local connect to X11 with Xorg config files on target system
 
 #if not set DISPLAY - save default value
 if [[ "${DISPLAY}" = "" ]]; then
@@ -57,6 +57,7 @@ save_var_in_base64 DISPLAY "$DISPLAY" >> "${load_variables_file}";
 #export DISPLAY={Display number stored in the Xauthority file}
 declare_and_export XAUTHORITY '/home/i/.Xauthority';
 save_var_in_base64 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
+
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 
