@@ -310,6 +310,11 @@ fi
 work_dir="$(realpath "$(pwd)")/";
 declare_and_export work_dir "${work_dir}"
 
+temp_script_subversion=$( cat "${work_dir}index.sh" | grep '^script_subversion' );
+echo "$temp_script_subversion";
+temp_script_subversion=$( eval "${temp_script_subversion}" );
+echo "$temp_script_subversion";
+
 # check master_pass value, if not set - ask from user
 #ask for master_password if it is not set
 #read -s -p "master_password" master_password; export master_password;
@@ -379,4 +384,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='uzave-968edaa-2022-08-27-12-45-47'; echo "${script_subversion}=script_subversion"; 
+script_subversion='iladi-c299530-2022-08-27-13-03-31'; echo "${script_subversion}=script_subversion"; 
