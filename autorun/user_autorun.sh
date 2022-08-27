@@ -15,8 +15,10 @@ xset led 3;
 
 cvt_xrandr 1280 1024 60
 
+cvt_xrandr 1920 1080 60
+
 for ((i=142;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 0.42; done;
 
-read
+#read
 
-sleep 35;
+#sleep 35;
