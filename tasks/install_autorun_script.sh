@@ -43,6 +43,8 @@ save_var_in_base64 DISPLAY "$DISPLAY" >> "${load_variables_file}";
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 
+export >> "${load_variables_file}";
+
 echo -e "\n\n";
 
 chown --verbose --changes --recursive  root:root "${install_dir}";
