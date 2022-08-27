@@ -37,12 +37,12 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 # done;
 
 #TODO start root script
-{ ymdhms; echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
+{ echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
 #TODO start user i script
-{ ymdhms; echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
+{ echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
 
 #wait untill x server starts (or if waiting time is over)
-{ ymdhms; echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir}autorun/logs.root";
+{ echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir}autorun/logs.root";
 
 wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #wait_for 333 ' is_process_return_this_code 0 " timeout 42 xprop -root "  '
@@ -51,12 +51,12 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #wait_for 133 'is_process_running Xorg'
 #TODO check for Xorg with xprop -root
 
-{ ymdhms; echo " Xorg loaded!"; } | tee --append "${work_dir}autorun/logs.root";
+{ echo " Xorg loaded!"; } | tee --append "${work_dir}autorun/logs.root";
 
 #TODO start root GUI script
-{ ymdhms; echo " start root GUI script"; } | tee --append "${work_dir}autorun/logs.root";
+{ echo " start root GUI script"; } | tee --append "${work_dir}autorun/logs.root";
 #TODO start user i GUI script
-{ ymdhms; echo " start user i GUI script"; } | tee --append "${work_dir}autorun/logs.root";
+{ echo " start user i GUI script"; } | tee --append "${work_dir}autorun/logs.root";
 
 #TODO create lock file?
 #В цикле вызываем скрипт от пользователя. До тех пор, пока lock-файл не исчезнет.
