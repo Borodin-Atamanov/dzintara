@@ -314,6 +314,7 @@ temp_script_subversion=$( cat "${work_dir}index.sh" | grep '^script_subversion' 
 echo "$temp_script_subversion";
 temp_script_subversion=$( eval "${temp_script_subversion}" );
 echo "$temp_script_subversion";
+sleep 2.42;
 
 # check master_pass value, if not set - ask from user
 #ask for master_password if it is not set
@@ -384,4 +385,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='iladi-c299530-2022-08-27-13-03-31'; echo "${script_subversion}=script_subversion"; 
+script_subversion='dozim-25816f7-2022-08-27-13-04-41'; echo "${script_subversion}=script_subversion"; 
