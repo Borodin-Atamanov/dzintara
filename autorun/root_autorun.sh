@@ -25,7 +25,10 @@ wait_for 133 'is_process_running Xorg'
 echo "X is here!" >> "${work_dir}autorun/logs.root";
 date >> "${work_dir}autorun/logs.root";
 
-sleep 3;
+sleep 5;
+
+echo "waiting completed" >> "${work_dir}autorun/logs.root";
+date >> "${work_dir}autorun/logs.root";
 
 #su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #sudo --user=i --shell  "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
