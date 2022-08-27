@@ -27,10 +27,13 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 
 for ((i=133;i>=0;i--));
 do
-echo -ne "\b\b\b\b\b\b\b\b $i  ";
-xprop_data=$( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root );
-echo "xprop length is ${#xprop_data}";
-sleep 0.5;
+    #echo -ne "\b\b\b\b\b\b\b\b $i  ";
+    xprop_data=$( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root );
+    #
+    export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority';
+    xprop_data=$( xprop -root );
+    echo "$i [$?] xprop length is ${#xprop_data}";
+    sleep 0.5;
 done;
 
 #TODO start root script
