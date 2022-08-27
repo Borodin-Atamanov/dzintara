@@ -43,7 +43,9 @@ save_var_in_base64 DISPLAY "$DISPLAY" >> "${load_variables_file}";
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 
-export >> "${load_variables_file}";
+#export >> "${load_variables_file}";
+#export all ENV variables, expect some secrets
+export | grep  -v 'password' >> "${load_variables_file}";
 
 echo -e "\n\n";
 
