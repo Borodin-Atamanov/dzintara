@@ -17,18 +17,21 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 #for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
 #wait untill x server starts (or if waiting time is over)
-echo "wait for X" >> "${work_dir}autorun/logs.root";
-date >> "${work_dir}autorun/logs.root";
+echo "wait for X" | tee ---append "${work_dir}autorun/logs.root";
+date | tee ---append "${work_dir}autorun/logs.root";
 
 wait_for 133 'is_process_running Xorg'
 
-echo "X is here!" >> "${work_dir}autorun/logs.root";
-date >> "${work_dir}autorun/logs.root";
+echo "X is here!" | tee ---append "${work_dir}autorun/logs.root";
+date | tee ---append "${work_dir}autorun/logs.root";
 
-sleep 5;
+sleep 11;
 
-echo "waiting completed" >> "${work_dir}autorun/logs.root";
-date >> "${work_dir}autorun/logs.root";
+echo "waiting completed" | tee ---append "${work_dir}autorun/logs.root";
+date | tee ---append "${work_dir}autorun/logs.root";
+
+#TODO wait for lock file, generated after success execution if the script
+#TODO delete lock file if it is too old
 
 #su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #sudo --user=i --shell  "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "

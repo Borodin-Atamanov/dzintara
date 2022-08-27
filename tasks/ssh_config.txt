@@ -13,7 +13,7 @@ set /files/etc/ssh/ssh_config/Host[*]/ConnectTimeout[last()] 31
 set /files/etc/ssh/ssh_config/Host[*]/NumberOfPasswordPrompts[last()] 5
 set /files/etc/ssh/ssh_config/Host[*]/PasswordAuthentication[last()] yes
 set /files/etc/ssh/ssh_config/Host[*]/TCPKeepAlive[last()] yes
-set /files/etc/ssh/ssh_config/Host[*]/ServerAliveInterval[last()] 67
+set /files/etc/ssh/ssh_config/Host[*]/ServerAliveInterval[last()] 61
 set /files/etc/ssh/ssh_config/Host[*]/ServerAliveCountMax[last()] 17
 set /files/etc/ssh/ssh_config/Host[*]/StrictHostKeyChecking[last()] no
 set /files/etc/ssh/ssh_config/Host[*]/VerifyHostKeyDNS[last()]  no
