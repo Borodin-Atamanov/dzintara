@@ -157,7 +157,7 @@ function get_command_fullpath ()
   command=$(trim "$command");
   fullpath_maybe=$(type -p "$command");
   fullpath_maybe=$(trim "$fullpath_maybe");
-  if [[ "${fullpath_maybe}" != "" ]] ; then
+  if [[ "${fullpath_maybe}" = "" ]] ; then
     fullpath_maybe="$command";
   fi;
   echo -n "${fullpath_maybe}";
@@ -378,4 +378,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='uxupa-dde0b27-2022-08-27-11-33-17'; echo "${script_subversion}=script_subversion"; 
+script_subversion='veviv-2aadfca-2022-08-27-11-42-43'; echo "${script_subversion}=script_subversion"; 
