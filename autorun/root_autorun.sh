@@ -57,7 +57,6 @@ sleep 11;
 
 #TODO wait for lock file, generated after success execution if the script
 #TODO delete lock file if it is too old
-{{{{ } sd)dsa 9e0923 1234 P{P{{P{{{ [aPP""""
 #su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #sudo --user=i --shell  "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60;"

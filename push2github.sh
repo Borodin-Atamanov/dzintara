@@ -5,8 +5,6 @@ set -x;
 source index.sh fun
 sleep $sleep_time;
 time ( \
-    #check all syntax before run
-    find . -name '*.sh' -print0 | xargs -0 -P"$(nproc)"  -I {} bash -n "{}"
     git diff | head --lines=42
     sleep $sleep_time;
     echo git pull --verbose;
@@ -30,4 +28,6 @@ time ( \
     git commit --allow-empty-message --message="$script_subversion" --verbose;
     git push --verbose;
     echo  "●●● ${script_subversion}";
+    #check all syntax without running
+    find . -name '*.sh' -print0 | xargs -0 -P"$(nproc)"  -I {} bash -n "{}"
 )
