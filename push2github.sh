@@ -10,12 +10,12 @@ time ( \
     echo git pull --verbose;
     git whatchanged | head --lines=42
 
-    #delete script_subversion from index.sh
-    cat index.sh | grep -v '^script_subversion' > index_w_script_subversion.sh
+    #find and delete old script_subversion set from index.sh
+    cat index.sh | grep -v '^script_subversion' | grep -v '^export script_subversion'  | cat > index_w_script_subversion.sh
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";
     #add script_subversion to index.sh
     echo  "●●● ${script_subversion}";
-    echo -n "script_subversion='${script_subversion}'; " >> "index_w_script_subversion.sh"
+    echo -n "export script_subversion='${script_subversion}'; " >> "index_w_script_subversion.sh"
     echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index_w_script_subversion.sh"
     # echo '"'; >> "index_w_script_subversion.sh"
     echo -e "\n"; >> "index_w_script_subversion.sh"
