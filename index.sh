@@ -14,27 +14,29 @@
 function run_task ()
 {
   export task_name="${1}";
+  shift 1
+  #function will send other arguments to executed task as parameters
+  #add arguments to task
+  arguments="$@";
+
   if [[ "${test_mode}" = "1" ]]; then
     task_script="tasks/${1}.sh";
   else
     task_script="${work_dir}/tasks/${1}.sh";
   fi
   task_script="tasks/${1}.sh";
-  if [ -s "${task_script}" ]
-  then
-    echo "$0 [[${task_script}]]";
-    #TODO add arguments to task
-    #shift arguments with shift --help
+  if [ -s "${task_script}" ];  then
+    echo "[[${task_script} ${arguments}]]";
 
     (
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
       #run task script
-      "${work_dir}${task_script}";
+      #add timeout to subshell
+      timeout --kill-after=77 "${task_max_timeout}" "${work_dir}${task_script}" ${arguments};
     );
-    echo -e "----------------------------------------------------------------------- task ${task_name} ended \n\n\n";
-
+    echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
     echo "$0 no task_script file ${task_script}! 🤷‍";
   fi
@@ -200,7 +202,7 @@ function cvt_xrandr ()
   declare -a mode_arr=(${mode_line})
   echo "${mode_arr[1]}";
   mode_name="${mode_arr[1]}";
-  #remove quotes from mode_name with echo and eval
+  #One can remove triple quotes from mode_name with echo and eval
   #mode_name="echo ${mode_name}";
   #mode_name=$(eval ${mode_name})
   #${resolution[@]/Modeline/xrandr --newmode}
@@ -327,6 +329,7 @@ declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt'
+declare_and_export task_max_timeout 777
 
 #TODO ask target computer name on script start
 
@@ -430,10 +433,11 @@ fi
 # run_task root_password_set
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
+
 run_task timezone_set
-run_task add_screen_resolution_with_cvt_xrandr
-run_task install_autorun_script
-run_task install_gui_apps
+# run_task add_screen_resolution_with_cvt_xrandr
+# run_task install_autorun_script
+# run_task install_gui_apps
 run_task show_script_subversion
 
 else
@@ -446,4 +450,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='nomav-f0f9d9b-2022-08-27-23-05-20'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='doxum-324128b-2022-08-27-23-46-18'; echo "${script_subversion}=script_subversion"; 
