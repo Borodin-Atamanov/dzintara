@@ -2,7 +2,7 @@
 #Post installation script for debian-like systems
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-#script autorun on target system in root mode
+#script autorun on target system in root mode after GUI starts. If no GUI in computer - this script will never run
 
 #load variables
 source "/home/i/bin/dzible/autorun/load_variables.sh"

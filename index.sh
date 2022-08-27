@@ -263,10 +263,16 @@ function is_process_running
 }
 export -f is_process_running
 
+function ymdhms ()
+{
+  echo "$(date "+%F-%H-%M-%S-%N")"
+}
+export -f ymdhms
+
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export master_password_file 'master_password.txt'
-declare_and_export cur_date_time "$(date "+%F-%H-%M-%S")"
+declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt'
 
 #TODO ask target computer name on script start
@@ -388,4 +394,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-export script_subversion='fubus-7681683-2022-08-27-18-17-10'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nirel-eb19c8d-2022-08-27-18-45-18'; echo "${script_subversion}=script_subversion"; 

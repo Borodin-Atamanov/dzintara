@@ -94,7 +94,8 @@ systemctl status dzible | tac
 systemctl enable dzible | tac
 systemctl status dzible | tac
 
-#TODO
+#get logs:
+#journalctl -b -u dzible
 
 #augeas_file="${work_dir}/tasks/${script_base_name}.txt";
 #show_var "augeas_file"
