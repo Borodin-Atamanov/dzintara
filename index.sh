@@ -103,11 +103,11 @@ function save_var_in_base64 ()
   varname="${1}"
   value="${2}"
   value=$(base64_encode "${value}");
+  openssl_fullpath="$( get_command_fullpath openssl )";
   echo -n 'declare -g -x ';
   echo -n "${varname}";
   echo -n '=$(echo';
-  echo -n " '${value}' ";
-  echo -n ' | openssl base64 -d );  ';
+  echo -n " '${value}' | ${openssl_fullpath} base64 -d ); ";
   #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
   echo "";
 }
@@ -150,6 +150,20 @@ function declare_and_export ()
   echo "declare [$varname]";
 }
 export -f declare_and_export
+
+function get_command_fullpath ()
+{
+  command="${1}";
+  command=$(trim "$command");
+  fullpath_maybe=$(type -p "$command");
+  fullpath_maybe=$(trim "$fullpath_maybe");
+  if [[ "${fullpath_maybe}" != "" ]] ; then
+    fullpath_maybe="$command";
+  fi;
+  echo -n "${fullpath_maybe}";
+}
+export -f get_command_fullpath
+
 
 function get_var ()
 {
@@ -360,4 +374,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='efaxa-51c789c-2022-08-27-10-47-23'; echo "${script_subversion}=script_subversion"; 
+script_subversion='xisir-1efea00-2022-08-27-11-04-36'; echo "${script_subversion}=script_subversion"; 
