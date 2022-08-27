@@ -371,10 +371,10 @@ fi
 # run_task root_password_set
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
-run_task timezone_set
 run_task add_screen_resolution_with_cvt_xrandr
 run_task install_autorun_script
 run_task show_script_subversion
+run_task timezone_set
 
 else
     echo 'functions loaded';
@@ -387,4 +387,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-export script_subversion='orore-dbc661d-2022-08-27-14-43-22'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ivozo-a65d413-2022-08-27-14-47-17'; echo "${script_subversion}=script_subversion"; 
