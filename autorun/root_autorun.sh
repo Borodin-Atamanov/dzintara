@@ -24,17 +24,17 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 #read some logs:
 #journalctl -b -u dzible
 
-
-for ((i=133;i>=0;i--));
-do
-    #echo -ne "\b\b\b\b\b\b\b\b $i  ";
-    xprop_data=$( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root );
-    #
-    export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority';
-    xprop_data=$( xprop -root );
-    echo "$i [$?] xprop length is ${#xprop_data}";
-    sleep 0.5;
-done;
+# for ((i=133;i>=0;i--));
+# do
+#     #echo -ne "\b\b\b\b\b\b\b\b $i  ";
+#     xprop_data=$( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root );
+#     #
+#     export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority';
+#     xprop_data=$( xprop -root );
+#     #when 'xprop -root' returns 0 - Xorg works
+#     echo "$i [$?] xprop length is ${#xprop_data}";
+#     sleep 0.5;
+# done;
 
 #TODO start root script
 { ymdhms; echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
@@ -42,12 +42,16 @@ done;
 { ymdhms; echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
 
 #wait untill x server starts (or if waiting time is over)
-{ ymdhms; echo " wait for Xorg..."; } | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir}autorun/logs.root";
 
-wait_for 133 'is_process_running Xorg'
+wait_for_exit_code 0 777 "timeout 42 xprop -root ";
+#wait_for 333 ' is_process_return_this_code 0 " timeout 42 xprop -root "  '
+#if is_process_return_this_code 0 'xprop -root ' ; then echo "Xorg running"; else echo "Xorg NOT running"; fi;
+
+#wait_for 133 'is_process_running Xorg'
 #TODO check for Xorg with xprop -root
 
-#{ymdhms; echo " Xorg is here!";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " Xorg loaded!"; } | tee --append "${work_dir}autorun/logs.root";
 
 #TODO start root GUI script
 { ymdhms; echo " start root GUI script"; } | tee --append "${work_dir}autorun/logs.root";
@@ -62,9 +66,6 @@ wait_for 133 'is_process_running Xorg'
 #
 #
 
-sleep 11;
-
-{ ymdhms; echo " Xorg waiting completed"; } | tee --append "${work_dir}autorun/logs.root";
 
 #TODO wait for lock file, generated after success execution if the script
 #TODO delete lock file if it is too old
@@ -85,6 +86,8 @@ su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/l
 
 #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
+#export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "Hello X!"
+
 
 #Работает:
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser www.youtube.com; ";

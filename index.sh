@@ -248,17 +248,70 @@ function wait_for ()
 }
 export -f wait_for
 
+function wait_for_exit_code ()
+{
+    #function wait $2 seconds or return if all other arguments return exit code $1;
+    #examples:
+    #wait_for_exit_code 42 31337 ' exit 1 ' - wait for exit code=42 for 31337 seconds.
+    #wait_for_exit_code 5 31337 ' exit 5 ' - wait for exit code=5 for 31337 seconds. (but it exits immediately, because exit code equal)
+    timeout=$2
+    exit_code_to_check=$1
+    shift 2
+    #all other aruments become to executed command
+    command="$@";
+
+    while [ $timeout -ge 0 ]
+    do
+      ( $command ) 1> /dev/null 2> /dev/null
+      exit_code="$?";
+      #if [[ "${exit_code}" = "${exit_code_to_check}" ]] ;
+      if [ $exit_code -eq $exit_code_to_check ] ;
+      then
+        return 0; #none zero exit code means error in the bash, and here I don't want to break the rules ) So, zero means YES in bash
+      fi;
+      #       ret_val=$(eval "${command}" );
+      #       ret_val=$(trim "$ret_val");
+      #       #returned_value=$?
+      #       #show_var ret_val;
+      #       if [[ "${ret_val}" != "" ]] && [[ "${ret_val}" != 0 ]]  ; then return 1; fi;
+      sleep 1;
+      timeout=$(( timeout - 1 ))
+    done
+    return 1; #exit code = One means error in bash
+}
+export -f wait_for
+
+function is_process_return_this_code
+{
+  # if given command returns exit code equals to $1 - this function will return 1 as exit code, otherwise - return exit code 0
+  #use: if is_process_return_this_code 0 'xprop -root' ; then echo 111; else echo 000; fi;
+  #if is_process_return_this_code 15 'exit 15' ; then echo "equal"; else echo "NOT equal"; fi;
+  exit_code_to_check="${1}";
+  shift 1
+  command="$@";
+  #returned_text="$( ( $command ) >/dev/null )"
+  #returned_text="$( $command )"
+  ( $command ) 1> /dev/null 2> /dev/null
+  exit_code="$?";
+  #if [[ "${exit_code}" = "${exit_code_to_check}" ]] ;
+  if [ $exit_code -eq $exit_code_to_check ] ;
+  then
+    return 0; #none zero exit code means error in the bash, and here I don't want to break the rules ) So, zero means YES in bash
+  else
+    return 1; #One means NO in bash
+  fi;
+}
+export -f is_process_return_this_code
+
 function is_process_running
 {
   #use: if [ "$(is_process_running Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
   app="${1}";
   if [ "$(ps -e | grep --ignore-case --count "${app}")" -ge 1 ];
   then
-    echo -n 1;
-    return 1;
+    return 0; #none zero exit code means error in the bash, and here I don't want to break the rules )
   else
-    echo -n "";
-    return 0;
+    return 1;
   fi;
 }
 export -f is_process_running
@@ -393,4 +446,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='venan-1d139fd-2022-08-27-20-16-47'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vokev-02a0727-2022-08-27-23-04-19'; echo "${script_subversion}=script_subversion"; 
