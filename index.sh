@@ -362,7 +362,7 @@ if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
 else
   echo 1;
-  run_task add_screen_resolution_1280x1024_with_xrandr
+  #run_task add_screen_resolution_1280x1024_with_xrandr
 fi
 
 # run_task install_console_apps
@@ -372,7 +372,7 @@ fi
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
 run_task install_autorun_script
-run_task delete_workdir
+run_task show_script_subversion
 
 else
     echo 'functions loaded';
@@ -385,4 +385,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='sugox-bb88f15-2022-08-27-13-15-16'; echo "${script_subversion}=script_subversion"; 
+script_subversion='zezag-f829615-2022-08-27-13-19-37'; echo "${script_subversion}=script_subversion"; 
