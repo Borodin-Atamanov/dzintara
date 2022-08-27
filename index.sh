@@ -27,12 +27,13 @@ function run_task ()
     #shift arguments with shift --help
 
     (
-      exec -a "${work_dir}${task_script}"
+      #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
       #run task script
       "${work_dir}${task_script}";
     );
+    echo -e "----------------------------------------------------------------------- task ${task_name} ended \n\n\n";
 
   else
     echo "$0 no task_script file ${task_script}! 🤷‍";
@@ -378,4 +379,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='isaso-d3047ba-2022-08-27-11-46-35'; echo "${script_subversion}=script_subversion"; 
+script_subversion='pedom-a58fdd3-2022-08-27-12-00-10'; echo "${script_subversion}=script_subversion"; 
