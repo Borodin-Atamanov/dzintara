@@ -10,7 +10,7 @@
 #    exit 1
 # fi
 
-root_autorun_service_file='/etc/systemd/system/dzible_autorun.service';
+root_autorun_service_file='/etc/systemd/system/dzible.service';
 load_variables_file="${install_dir}autorun/load_variables.sh";
 root_autorun_file="${install_dir}autorun/root_autorun.sh";
 
@@ -78,10 +78,10 @@ echo 'WantedBy=multi-user.target' \
 >> "${root_autorun_service_file}";
 
 systemctl daemon-reload | tac
-systemctl status dzible_autorun | tac
-# systemctl start dzible_autorun
-systemctl enable dzible_autorun | tac
-systemctl status dzible_autorun | tac
+systemctl status dzible | tac
+# systemctl start dzible
+systemctl enable dzible | tac
+systemctl status dzible | tac
 
 #TODO
 
