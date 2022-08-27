@@ -21,13 +21,17 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 
 #for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
 
+#read some logs:
+#journalctl -b -u dzible
+
+
 #TODO start root script
-{ymdhms; echo " start root console script";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
 #TODO start user i script
-{ymdhms; echo " start user i console script";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
 
 #wait untill x server starts (or if waiting time is over)
-{ymdhms; echo " wait for Xorg...";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " wait for Xorg..."; } | tee --append "${work_dir}autorun/logs.root";
 
 wait_for 133 'is_process_running Xorg'
 #TODO check for Xorg with xprop -root
@@ -35,9 +39,9 @@ wait_for 133 'is_process_running Xorg'
 #{ymdhms; echo " Xorg is here!";} | tee --append "${work_dir}autorun/logs.root";
 
 #TODO start root GUI script
-{ymdhms; echo " start root GUI script";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " start root GUI script"; } | tee --append "${work_dir}autorun/logs.root";
 #TODO start user i GUI script
-{ymdhms; echo " start user i GUI script";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " start user i GUI script"; } | tee --append "${work_dir}autorun/logs.root";
 
 #TODO create lock file?
 #В цикле вызываем скрипт от пользователя. До тех пор, пока lock-файл не исчезнет.
@@ -49,7 +53,7 @@ wait_for 133 'is_process_running Xorg'
 
 sleep 11;
 
-{ymdhms; echo " Xorg waiting completed";} | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " Xorg waiting completed"; } | tee --append "${work_dir}autorun/logs.root";
 
 #TODO wait for lock file, generated after success execution if the script
 #TODO delete lock file if it is too old
@@ -73,7 +77,10 @@ su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/l
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 
 #Работает:
-#su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser; ";
+#su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser www.youtube.com; ";
+#export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root
+#export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; chromium-browser --no-sandbox www.youtube.com;
+
 
 #TODO run user_autorun.sh script in graphical environment on target computer
 
