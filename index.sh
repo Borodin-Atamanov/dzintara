@@ -346,7 +346,7 @@ echo "decrypt_aes_error=${decrypt_aes_error}";
 #echo "$decrypted_data";
 #load all variables from decrypted vault
 eval "${decrypted_data}";
-#echo "secrets_pipyau_root_pass=${secrets_pipyau_root_pass}"
+#echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
 echo "secrets_loaded=${secrets_loaded}"
 #echo "Original data:"
 #md5 "${data}";
@@ -371,7 +371,11 @@ else
     echo 'functions loaded';
 fi; #end of fun if
 
+#find . -type f -name '*.*' -print0 | xargs -0 sed --debug -i 's/_root_password/_root_passwordword/g'
+#find . -type f -name '*.*' -print0 | xargs -0 sed  -i 's/_root_password/_root_passwordword/g'
+
+
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='agano-d1915b5-2022-08-27-11-08-32'; echo "${script_subversion}=script_subversion"; 
+script_subversion='gonen-2ddf4e1-2022-08-27-11-23-10'; echo "${script_subversion}=script_subversion"; 
