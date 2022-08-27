@@ -31,8 +31,8 @@ show_var load_variables_file
 #_user_i_password
 #save_var_in_base64 user_i_password "$( get_var "${secrets}_${computer_name}_user_i_password" )" >> "${load_variables_file}";
 
-save_var_in_base64 script_subversion "$( get_var "script_subversion" )" >> "${load_variables_file}";
-echo 'echo "$script_subversion"; ' >> "${load_variables_file}";
+#save_var_in_base64 script_subversion "$( get_var "script_subversion" )" >> "${load_variables_file}";
+#echo 'echo "$script_subversion"; ' >> "${load_variables_file}";
 
 #if not set DISPLAY - save default value
 if [[ "${DISPLAY}" = "" ]]; then
