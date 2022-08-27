@@ -77,6 +77,7 @@ su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/l
 
 #Работает:
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser www.youtube.com; ";
+#export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; time xterm -e 'wget -qO - clck.ru/uRPBG | bash';
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; chromium-browser --no-sandbox www.youtube.com;
 
