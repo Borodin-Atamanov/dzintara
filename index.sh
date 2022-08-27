@@ -365,7 +365,7 @@ fi
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
 run_task install_autorun_script
-
+run_task delete_workdir
 
 else
     echo 'functions loaded';
@@ -374,4 +374,4 @@ fi; #end of fun if
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
 export \
-script_subversion='xisir-1efea00-2022-08-27-11-04-36'; echo "${script_subversion}=script_subversion"; 
+script_subversion='agano-d1915b5-2022-08-27-11-08-32'; echo "${script_subversion}=script_subversion"; 
