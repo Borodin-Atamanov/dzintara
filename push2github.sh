@@ -17,8 +17,8 @@ time ( \
     echo  "●●● ${script_subversion}";
     echo -n "script_subversion='${script_subversion}'; " >> "index_w_script_subversion.sh"
     echo -n 'echo "${script_subversion}=script_subversion"; ' >> "index_w_script_subversion.sh"
-    echo '"'; >> "index_w_script_subversion.sh"
-    echo '"'; >> "index_w_script_subversion.sh"
+    # echo '"'; >> "index_w_script_subversion.sh"
+    echo -e "\n"; >> "index_w_script_subversion.sh"
     cp --update --verbose "index_w_script_subversion.sh" "index.sh";
     rm -v "index_w_script_subversion.sh"
     #
