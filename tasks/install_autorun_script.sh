@@ -45,7 +45,7 @@ echo "cd '${install_dir}';" >> "${load_variables_file}";
 
 #export >> "${load_variables_file}";
 #export all ENV variables, expect some secrets
-export | grep  -v 'password' >> "${load_variables_file}";
+export | grep  -v 'password' | grep  -v 'secrets' | sort >> "${load_variables_file}";
 
 echo -e "\n\n";
 
