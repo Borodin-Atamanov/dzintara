@@ -279,16 +279,13 @@ cvt_xrandr 1360 768 60
 apt-get -y install autorandr
 
 autorandr --debug  --force --save "itworks"
-autorandr --debug --default "itworks"
-#su --login i --pty --shell="/bin/bash" --command="autorandr --debug --save itworks"
-su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --force --save itworks "
-su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --force --default itworks "
-#su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --load itworks "
+autorandr --debug --force --default "itworks"
 
-#cvt_xrandr 1280 1024 30
-#cvt_xrandr 2560 1440 60
+if [[ $EUID -eq 0 ]]; then
+    #run only from root
+    su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --force --save itworks "
+    su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --force --default itworks "
+fi
 
 xrandr
-
-exit 1;
 
