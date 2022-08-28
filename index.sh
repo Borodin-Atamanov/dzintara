@@ -28,11 +28,12 @@ function run_task ()
   echo "████ task ${task_name} ${arguments}████";
   slog "<6>run_task ${task_name} ${arguments}":
   if [ -s "${task_script}" ];  then
+    #create countdown process, it show count down before task end by timeout
+    countdown_command="timeout --kill-after=2 "${task_max_timeout}" ${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
+    eval $countdown_command;
+    countdown_pid=$!
+    slog "<7>countdown_pid=${countdown_pid}";
     (
-      #create countdown process, it show count down before task end by timeout
-      countdown_command="timeout --kill-after=2 "${task_max_timeout}" ${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
-      eval $countdown_command;
-
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
@@ -40,7 +41,9 @@ function run_task ()
       #add timeout to subshell
       timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
     );
-    killall --verbose "countdown.sh"; #kill counter process
+    #kill counter process
+    kill -9 "{$countdown_pid}";
+    #killall --verbose "countdown.sh";
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
     echo "XXXXXXXXX $0 no task_script file ${task_script}! 🤷‍";
@@ -161,7 +164,7 @@ function declare_and_export ()
 {
   varname="${1}"
   value="${2}"
-  declare -g "$varname=$value";
+  declare -g -x "$varname=$value";
   export "$varname=$value";
   #echo "$varname=$value";
   echo "declare [$varname]";
@@ -323,10 +326,11 @@ function install_system ()
   app="${1}";
   if [[ "${install_system_updated}" != "" ]] && [[ "${install_system_updated}" != 0 ]]  ; then
     apt-get --allow-unauthenticated --show-progress --yes update;
+    slog "<6>apt-get update"
     declare -g install_system_updated=1;
   fi;
-
   apt-get ${dry_run} --allow-unauthenticated --yes install "${app}";
+  slog "<7>apt-get install ${app}"
 }
 export -f install_system
 
@@ -488,15 +492,15 @@ fi
 
 run_task show_script_subversion
 run_task timezone_set
-run_task install_autorun_script
-run_task install_console_apps
-run_task install_gui_apps
-run_task add_screen_resolution_with_cvt_xrandr
-run_task root_password_set
-run_task user_i_password_set
-run_task root_password_for_sudoers
-run_task sshd_config
-run_task ssh_config
+# run_task install_autorun_script
+# run_task install_console_apps
+# run_task install_gui_apps
+# run_task add_screen_resolution_with_cvt_xrandr
+# run_task root_password_set
+# run_task user_i_password_set
+# run_task root_password_for_sudoers
+# run_task sshd_config
+# run_task ssh_config
 run_task sleep 11
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -510,4 +514,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ikaca-b25a939-2022-08-28-22-59-13'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='alega-d133966-2022-08-28-23-30-01'; echo "${script_subversion}=script_subversion"; 
