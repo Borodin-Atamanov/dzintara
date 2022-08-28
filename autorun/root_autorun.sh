@@ -9,14 +9,19 @@
 #2. user i script before gui
 #3. user i script after gui started
 
+declare -g -x work_dir="/home/i/bin/dzible/";
+declare -g -x work_dir_autorun="/home/i/bin/dzible/autorun/";
+#declare_and_export work_dir "/home/i/bin/dzible/"
+
 #load variables
-source "/home/i/bin/dzible/autorun/load_variables.sh"
-declare_and_export work_dir "/home/i/bin/dzible/"
+#source "/home/i/bin/dzible/autorun/load_variables.sh"
+source_load_variables='source "{work_dir_autorun}load_variables.sh"';
+$source_load_variables;
 
 #path to scripts, what we will start
-root_autorun_gui="${work_dir}autorun/root_autorun_gui.sh"
-user_autorun="${work_dir}autorun/user_autorun.sh"
-user_autorun_gui="${work_dir}autorun/user_autorun_gui.sh"
+root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"
+user_autorun="${work_dir_autorun}user_autorun.sh"
+user_autorun_gui="${work_dir_autorun}user_autorun_gui.sh"
 
 #declare_and_export work_dir
 #work_dir="/home/i/bin/dzible/autorun";
@@ -42,45 +47,31 @@ user_autorun_gui="${work_dir}autorun/user_autorun_gui.sh"
 # done;
 
 #start root script (we are in this script already, and it is successfully running now)
-{ echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " start root console script"; } | tee --append "${work_dir_autorun}logs.root";
 
 #start user i script
-{ echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
-( source "/home/i/bin/dzible/autorun/load_variables.sh"; ${user_autorun} ) &
+{ ymdhms; echo " start user i console script"; } | tee --append "${work_dir_autorun}logs.root";
+( $source_load_variables; ${user_autorun} ) &
 
 #wait untill x server starts (or if waiting time is over)
-{ echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir_autorun}logs.root";
 
 wait_for_exit_code 0 777 "timeout 42 xprop -root ";
-#wait_for 333 ' is_process_return_this_code 0 " timeout 42 xprop -root "  '
-#if is_process_return_this_code 0 'xprop -root ' ; then echo "Xorg running"; else echo "Xorg NOT running"; fi;
-
-#wait_for 133 'is_process_running Xorg'
-#TODO check for Xorg with xprop -root
-
-{ echo " Xorg loaded!"; } | tee --append "${work_dir}autorun/logs.root";
+{ ymdhms; echo " Xorg loaded!"; } | tee --append "${work_dir_autorun}logs.root";
 
 #TODO start root GUI script
-{ echo " start root GUI script"; } | tee --append "${work_dir}autorun/logs.root";
-( source "/home/i/bin/dzible/autorun/load_variables.sh"; ${root_autorun_gui} ) &
+{ ymdhms; echo " start root GUI script"; } | tee --append "${work_dir_autorun}logs.root";
+su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' ";
+( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${root_autorun_gui}' " ) &
 
-run_task sleep 1
+sleep 1.5
 
 #TODO start user i GUI script
-{ echo " start user i GUI script"; } | tee --append "${work_dir}autorun/logs.root";
-( source "/home/i/bin/dzible/autorun/load_variables.sh"; ${user_autorun_gui} ) &
-
-#TODO create lock file?
-#В цикле вызываем скрипт от пользователя. До тех пор, пока lock-файл не исчезнет.
-#
-# Запустили скрипт.
-#
-#
-#
+{ ymdhms; echo " start user i GUI script"; } | tee --append "${work_dir_autorun}logs.root";
+( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
+#( $source_load_variables; ${user_autorun_gui} ) &
 
 
-#TODO wait for lock file, generated after success execution if the script
-#TODO delete lock file if it is too old
 #su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #sudo --user=i --shell  "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60;"
@@ -101,7 +92,7 @@ run_task sleep 1
 
 
 #Работает:
-#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' " | tee --append "${work_dir}autorun/logs.root";
+#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' " | tee --append "${work_dir_autorun}logs.root";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser www.youtube.com; ";
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; time xterm -maximized -e 'wget -qO - clck.ru/uRPBG | bash';
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root
