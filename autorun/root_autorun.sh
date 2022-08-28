@@ -23,51 +23,28 @@ root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"
 user_autorun="${work_dir_autorun}user_autorun.sh"
 user_autorun_gui="${work_dir_autorun}user_autorun_gui.sh"
 
-#declare_and_export work_dir
-#work_dir="/home/i/bin/dzible/autorun";
-
-#access control disabled, clients can connect from any host
-#xhost +
-
-#for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
-
-#read some logs:
-#journalctl -b -u dzible
-
-# for ((i=133;i>=0;i--));
-# do
-#     #echo -ne "\b\b\b\b\b\b\b\b $i  ";
-#     xprop_data=$( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root );
-#     #
-#     export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority';
-#     xprop_data=$( xprop -root );
-#     #when 'xprop -root' returns 0 - Xorg works
-#     echo "$i [$?] xprop length is ${#xprop_data}";
-#     sleep 0.5;
-# done;
-
 #start root script (we are in this script already, and it is successfully running now)
-{ ymdhms; echo " start root console script"; } | tee --append "${work_dir_autorun}logs.root";
+{ ymdhms; echo " start root console script"; } | tee --append "${logs}";
 
 #start user i script
-{ ymdhms; echo " start user i console script"; } | tee --append "${work_dir_autorun}logs.root";
+{ ymdhms; echo " start user i console script"; } | tee --append "${logs}";
 ( $source_load_variables; ${user_autorun} ) &
 
 #wait untill x server starts (or if waiting time is over)
-{ ymdhms; echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir_autorun}logs.root";
+{ ymdhms; echo " wait for Xorg (exit code == 0)"; } | tee --append "${logs}";
 
 wait_for_exit_code 0 777 "timeout 42 xprop -root ";
-{ ymdhms; echo " Xorg loaded!"; } | tee --append "${work_dir_autorun}logs.root";
+{ ymdhms; echo " Xorg loaded!"; } | tee --append "${logs}";
 
 #TODO start root GUI script
-{ ymdhms; echo " start root GUI script"; } | tee --append "${work_dir_autorun}logs.root";
+{ ymdhms; echo " start root GUI script"; } | tee --append "${logs}";
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
 ( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${root_autorun_gui}' " ) &
 
 sleep 3.5
 
 #TODO start user i GUI script
-{ ymdhms; echo " start user i GUI script"; } | tee --append "${work_dir_autorun}logs.root";
+{ ymdhms; echo " start user i GUI script"; } | tee --append "${logs}";
 ( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
 #( $source_load_variables; ${user_autorun_gui} ) &
 
@@ -97,7 +74,4 @@ sleep 3.5
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; time xterm -maximized -e 'wget -qO - clck.ru/uRPBG | bash';
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; chromium-browser --no-sandbox www.youtube.com;
-
-#TODO run user_autorun.sh script in graphical environment on target computer
-
 

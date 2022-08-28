@@ -53,6 +53,7 @@ save_var_in_base64 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 save_var_in_base64 work_dir "${install_dir}" >> "${load_variables_file}";
 save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
+save_var_in_text logs "${install_dir}/autorun/logs.log" >> "${load_variables_file}";
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 

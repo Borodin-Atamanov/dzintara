@@ -13,9 +13,11 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 #if you need sudo su as root, you can do the following
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
-echo $0 | tee --append "${work_dir}autorun/logs.root";
+echo "run $0" | tee --append "${logs}";
 
-
+#export
+countdown 250 0.1
+echo "end $0" | tee --append "${logs}";
 
 #read
 
