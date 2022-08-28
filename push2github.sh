@@ -8,8 +8,7 @@ time ( \
     git diff | head --lines=42
     sleep $sleep_time;
     echo git pull --verbose;
-    git whatchanged | head --lines=42
-
+    git whatchanged | head --lines=13
     #find and delete old script_subversion set from index.sh
     cat index.sh | grep -v '^script_subversion' | grep -v '^export script_subversion'  | cat > index_w_script_subversion.sh
     script_subversion="$(random_str 5)-$(git describe  --always --tags)-$(date "+%F-%H-%M-%S")";

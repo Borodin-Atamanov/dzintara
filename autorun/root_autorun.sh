@@ -19,8 +19,8 @@ source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
 #path to scripts, what we will start
-root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"
 user_autorun="${work_dir_autorun}user_autorun.sh"
+root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"
 user_autorun_gui="${work_dir_autorun}user_autorun_gui.sh"
 
 #start root script (we are in this script already, and it is successfully running now)
@@ -39,7 +39,7 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #TODO start root GUI script
 { ymdhms; echo " start root GUI script"; } | tee --append "${logs}";
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
-( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${root_autorun_gui}' " ) &
+( $source_load_variables; su --login root --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${root_autorun_gui}' " ) &
 
 sleep 3.5
 

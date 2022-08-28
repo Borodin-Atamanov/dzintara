@@ -57,7 +57,7 @@ save_var_in_text logs "${install_dir}/autorun/logs.log" >> "${load_variables_fil
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 
-chown --verbose --changes --recursive  root:root "${install_dir}";
+chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 #for dev

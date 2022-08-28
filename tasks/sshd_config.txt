@@ -29,8 +29,13 @@ set /files/etc/ssh/sshd_config/X11Forwarding[last()] yes
 
 save
 
-#print /files/etc/ssh/sshd_config
+print /files/etc/ssh/sshd_config
 
-#errors
+errors
 
-#quit
+quit
+quit
+quit
+quit
+quit
+

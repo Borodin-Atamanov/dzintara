@@ -8,12 +8,12 @@
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzible/"
 
-echo "run $0" | tee --append "${logs}";
+{ ymdhms; echo "run $0" } | tee --append "${logs}";
 echo whoami
 whoami;
 #export
 countdown 250 0.1
-echo "end $0" | tee --append "${logs}";
+{ ymdhms; echo "end $0" } | tee --append "${logs}";
 
 #
 # #( xmessage -buttons ok,no,wow -default wow -timeout 4 -print -nearmouse "hello" ); echo $?
