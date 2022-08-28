@@ -26,10 +26,10 @@ root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"
 user_autorun_gui="${work_dir_autorun}user_autorun_gui.sh"
 
 #start root script (we are in this script already, and it is successfully running now)
-{ ymdhms; echo " start root console script"; } | tee --append "${logs}";
-
-whoami="$(eval get_command_fullpath whoami)"
-show_var whoami | tee --append "${logs}";
+slog "<7>start root console script"
+slog "<7>$(show_var EUID)":
+whoami="$(whoami)"
+slog "<7>$(show_var whoami)":
 
 #start user i script
 { ymdhms; echo " start user i console script"; } | tee --append "${logs}";

@@ -14,12 +14,11 @@ declare -x -g service_name='dzible.user_autorun';   #for slog systemd logs
 #if you need sudo su as root, you can do the following
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
-{ ymdhms; echo "run $0"; } | tee --append "${logs}";
-show_var EUID
-whoami="$(eval get_command_fullpath whoami)"
-show_var whoami
-countdown 250 0.1
-{ ymdhms; echo "end $0"; } | tee --append "${logs}";
+slog "<7>start"
+slog "<7>$(show_var EUID)":
+whoami="$(whoami)"
+slog "<7>$(show_var whoami)":
+slog "<7>end"
 
 
 #read

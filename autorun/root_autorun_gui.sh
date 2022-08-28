@@ -10,12 +10,12 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 
 declare -x -g service_name='dzible.root_autorun_gui';   #for slog systemd logs
 
-{ ymdhms; echo "run $0"; } | tee --append "${logs}";
-show_var EUID
-whoami="$(eval get_command_fullpath whoami)"
-show_var whoami
+slog "<7>start"
+slog "<7>$(show_var EUID)":
+whoami="$(whoami)"
+slog "<7>$(show_var whoami)":
 countdown 250 0.1
-{ ymdhms; echo "end $0"; } | tee --append "${logs}";
+slog "<7>end"
 
 #
 # #( xmessage -buttons ok,no,wow -default wow -timeout 4 -print -nearmouse "hello" ); echo $?
