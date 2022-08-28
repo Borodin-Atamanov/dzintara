@@ -15,7 +15,7 @@ declare -g -x work_dir_autorun="/home/i/bin/dzible/autorun/";
 
 #load variables
 #source "/home/i/bin/dzible/autorun/load_variables.sh"
-source_load_variables='source "{work_dir_autorun}load_variables.sh"';
+source_load_variables='source "${work_dir_autorun}load_variables.sh"';
 $source_load_variables;
 
 #path to scripts, what we will start
