@@ -3,7 +3,6 @@
 #License: MIT
 source "${work_dir}tasks/1.sh"
 
-
 cvt_xrandr 1280 1024 60
 #cvt_xrandr 1920 1080 60
 cvt_xrandr 1360 768 60

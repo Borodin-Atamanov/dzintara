@@ -20,12 +20,12 @@ function run_task ()
   arguments="$@";
 
   if [[ "${test_mode}" = "1" ]]; then
-    task_script="tasks/${1}.sh";
+    task_script="tasks/${task_name}.sh";
   else
-    task_script="${work_dir}/tasks/${1}.sh";
+    task_script="${work_dir}/tasks/${task_name}.sh";
   fi
-  task_script="tasks/${1}.sh";
-  echo "████ task ${task_name}${arguments} ████";
+  show_var task_script
+  echo "████ task ${task_name} ${arguments}████";
   if [ -s "${task_script}" ];  then
     (
       #exec -a "${work_dir}${task_script}"
@@ -37,7 +37,7 @@ function run_task ()
     );
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
-    echo "$0 no task_script file ${task_script}! 🤷‍";
+    echo "XXXXXXXXX $0 no task_script file ${task_script}! 🤷‍";
   fi
 }
 
@@ -474,4 +474,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='edifo-2bee8f3-2022-08-28-11-11-11'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='imufi-42aeb6b-2022-08-28-11-34-14'; echo "${script_subversion}=script_subversion"; 
