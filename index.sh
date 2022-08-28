@@ -335,7 +335,7 @@ declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt'
-declare_and_export task_max_timeout 777
+declare_and_export task_max_timeout 17
 
 #TODO ask target computer name on script start
 
@@ -455,4 +455,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='foluk-f37f992-2022-08-28-11-58-10'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kuril-090dae1-2022-08-28-12-04-08'; echo "${script_subversion}=script_subversion"; 

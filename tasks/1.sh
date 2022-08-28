@@ -11,8 +11,3 @@ source "${work_dir}/index.sh" fun
 
 cd "${work_dir}";
 
-# if [[ $EUID -ne 0 ]]; then
-#    echo "Must be run as root! $0"
-#    exit 1
-# fi
-
