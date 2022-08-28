@@ -1,6 +1,7 @@
-
 #
 
 x11-utils
-
 x11-apps
+xterm
+
+

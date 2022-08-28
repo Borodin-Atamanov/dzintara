@@ -3,15 +3,13 @@
 #License: MIT
 source "${work_dir}tasks/1.sh"
 
-if [[ $EUID -ne 0 ]]; then
+if [ ! is_root ]; then
    echo "Must be run as root! $0"
    exit 1
 fi
 
 #apt_list_file='tasks/apt_console_apps.txt';
 apt_list_file="${work_dir}/tasks/${task_name}.txt";
-dry_run=" --dry-run ";
-dry_run=" ";
 
 echo Start
 while read elem; do
@@ -21,7 +19,8 @@ while read elem; do
       echo "${elem}";
       if [[ "${elem_first_character}" != "#" ]]; then
         set -x;
-        apt-get ${dry_run} --allow-unauthenticated --show-progress --yes install "${elem}";
+        #apt-get ${dry_run} --allow-unauthenticated --show-progress --yes install "${elem}";
+        install_system "${elem}"
         set +x
       fi;
     fi;

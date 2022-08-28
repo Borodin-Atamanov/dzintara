@@ -314,6 +314,18 @@ function is_root ()
 }
 export -f is_root
 
+function install_system ()
+{
+  app="${1}";
+  if [[ "${install_system_updated}" != "" ]] && [[ "${install_system_updated}" != 0 ]]  ; then
+    apt-get --allow-unauthenticated --show-progress --yes update;
+    declare -g install_system_updated=1;
+  fi;
+
+  apt-get ${dry_run} --allow-unauthenticated --yes install "${app}";
+}
+export -f install_system
+
 # function run_if_root ()
 # {
 #   #run command only if current user is superuser
@@ -378,9 +390,8 @@ else
     echo "local test mode off";
 fi
 
-apt-get -y install git
-apt-get -y install openssl
-apt-get -y install xterm
+install_system git
+install_system openssl
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
@@ -474,4 +485,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='utisu-f45a53b-2022-08-28-11-44-34'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='egolu-787c815-2022-08-28-11-55-10'; echo "${script_subversion}=script_subversion"; 
