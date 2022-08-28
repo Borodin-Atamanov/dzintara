@@ -20,7 +20,7 @@ for ((i=42;i>=0;i--)); do
     echo -ne "\b\b\b\b\b\b\b\b $i  ";
     slog "<7>$(show_var i)":
     countdown 77 0.1
-    #sleep 7.42;
+    sleep 2.42;
 done;
 slog "<7>end"
 

@@ -344,12 +344,13 @@ function countdown ()
     interval=0.1;
   fi;
   if [[ "${count}" = "" ]] || [[ "${count}" = 0 ]]  ; then
-    count=10;
+    count=42;
   fi;
 
   backspaces="\b\b\b\b\b\b\b\b";
   for ((i=$count;i>=0;i--)); do
-    echo -ne "${backspaces}${i}  "; sleep "${interval}";
+    echo -ne "${backspaces}${i}  ";
+    sleep "${interval}";
   done;
   echo -ne "${backspaces}";
 }
@@ -514,4 +515,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cocog-164b208-2022-08-29-00-17-01'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ipuxo-192f5d9-2022-08-29-00-28-27'; echo "${script_subversion}=script_subversion"; 

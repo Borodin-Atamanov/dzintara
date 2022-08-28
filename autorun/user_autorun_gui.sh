@@ -19,9 +19,6 @@ slog "<7>$(show_var EUID)":
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)":
 xset led 3;
-countdown 55555 0.1
-slog "<7>end1"
-
 
 #export
 
@@ -29,7 +26,7 @@ for ((i=42;i>=0;i--)); do
     echo -ne "\b\b\b\b\b\b\b\b $i  ";
     slog "<7>$(show_var i)":
     countdown 77 0.111
-    #sleep 7.42;
+    sleep 1.42;
 done;
 
 countdown 250 0.1
