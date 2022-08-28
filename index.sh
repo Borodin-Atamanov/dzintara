@@ -361,6 +361,7 @@ function slog ()
   fi;
   echo -n "${message}" | systemd-cat --identifier="${service_name}";
   return_code=$?
+  declare -x -g slog_mes="${message}";
   echo "${message}";
   return $return_code;
 }
@@ -495,4 +496,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kilev-62373a6-2022-08-28-21-46-51'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='isulu-bbb0218-2022-08-28-21-59-47'; echo "${script_subversion}=script_subversion"; 
