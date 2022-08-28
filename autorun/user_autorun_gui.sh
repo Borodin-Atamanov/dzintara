@@ -25,6 +25,12 @@ slog "<7>end1"
 
 #export
 
+for ((i=42;i>=0;i--)); do
+    echo -ne "\b\b\b\b\b\b\b\b $i  ";
+    slog "<7>$(show_var i)":
+    countdown 77 0.111
+    #sleep 7.42;
+done;
 
 countdown 250 0.1
 

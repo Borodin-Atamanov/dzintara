@@ -14,8 +14,14 @@ slog "<7>start"
 slog "<7>$(show_var EUID)":
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)":
-countdown 31337 0.1
-sleep 37
+#countdown 31337 0.1
+#sleep 37
+for ((i=42;i>=0;i--)); do
+    echo -ne "\b\b\b\b\b\b\b\b $i  ";
+    slog "<7>$(show_var i)":
+    countdown 77 0.1
+    #sleep 7.42;
+done;
 slog "<7>end"
 
 #
