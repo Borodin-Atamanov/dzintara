@@ -23,3 +23,5 @@ save
 print /files/etc/ssh/ssh_config
 
 errors
+
+quit

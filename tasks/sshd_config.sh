@@ -12,6 +12,11 @@ source "${work_dir}tasks/1.sh"
 #    exit 1
 # fi
 
+service_name='ssh';
+
+#autostart ssh daemon
+systemctl enable $service_name
+
 augeas_file="${work_dir}/tasks/${task_name}.txt";
 show_var "augeas_file"
 
@@ -27,13 +32,10 @@ augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_
 #test configuration
 sshd -t
 
-service_name='ssh';
-
 #service ${service_name} stop
 #systemctl stop $service_name
 systemctl restart $service_name
 systemctl status $service_name
-systemctl enable $service_name
 
 exit 0;
 

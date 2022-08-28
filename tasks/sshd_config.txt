@@ -32,3 +32,5 @@ save
 print /files/etc/ssh/sshd_config
 
 errors
+
+quit
