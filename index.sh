@@ -42,25 +42,6 @@ function run_task ()
   fi
 }
 
-function err()
-{
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
-}
-
-function run()
-{
-  cmd_output=$(eval $1)
-  return_value=$?
-  if [ "$return_value" != 0 ]; then
-    echo "Command $1 failed"
-    exit -1
-  else
-    echo "output: $cmd_output"
-    echo "Command succeeded."
-  fi
-  return $return_value
-}
-
 function encrypt_aes ()
 {
   passkey="${1}"
@@ -324,6 +305,50 @@ function ymdhms ()
 }
 export -f ymdhms
 
+function is_root ()
+{
+  #return 0 if current user is root. return 1 if not root
+  if [ $EUID -eq 0 ] || [[ "$(get_command_fullpath whoami)" = 'root' ]]; then
+    return 0; #root!
+  fi
+  return 1; #not root
+}
+export -f is_root
+
+function run_if_root ()
+{
+  #run command only if current user is superuser
+  command="$@";
+  if [ is_root ]; then
+      #run only from ordinary user
+      returned_value="$( $command )";
+      exit_code="$?";
+      echo -n "$returned_value";
+      return $exit_code;
+  fi
+  return 1;
+}
+export -f run_if_root
+
+function run_if_not_root ()
+{
+  #run command only if current user is not superuser
+  command="${@}"; #bash ate quotes in arguments!
+  #command=$( printf ' %q' "$@" )
+  #show_var command
+  #echo "${@}";
+  #for i; do echo "$i ${i@Q}"; done;
+  if [ ! is_root ]; then
+      #run only from ordinary user
+      returned_value="$( $command )";
+      exit_code="$?";
+      echo -n "$returned_value";
+      return $exit_code;
+  fi
+  return 1;
+}
+export -f run_if_not_root
+
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export master_password_file 'master_password.txt'
@@ -450,4 +475,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rimop-bddaccd-2022-08-28-10-02-19'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vopix-0cbe6ca-2022-08-28-11-01-14'; echo "${script_subversion}=script_subversion"; 
