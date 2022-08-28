@@ -62,7 +62,7 @@ run_task sleep 17
 
 #start user i GUI script
 slog "<7>start user GUI script":
-eval_this="( ${source_load_variables}; su --login i --shell=/bin/bash  --command=\'${source_load_variables}; xterm -e '${user_autorun_gui}' \' ) & ";
+eval_this="( ${source_load_variables}; su --login i --shell=/bin/bash  --command='${source_load_variables}; xterm -e \'${user_autorun_gui}\' ' ) & ";
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 #( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &

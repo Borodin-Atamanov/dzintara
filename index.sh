@@ -42,7 +42,7 @@ function run_task ()
       timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
     );
     #kill counter process
-    kill -9 "{$countdown_pid}";
+    kill -9 $countdown_pid;
     #killall --verbose "countdown.sh";
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
@@ -514,4 +514,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ebubu-710d7fa-2022-08-28-23-31-09'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='utixu-3177e5b-2022-08-28-23-38-48'; echo "${script_subversion}=script_subversion"; 
