@@ -98,7 +98,6 @@ systemctl status dzible | tac
 #read logs:
 #journalctl -b -u dzible
 
-#augeas_file="${work_dir}/tasks/${script_base_name}.txt";
 #show_var "augeas_file"
 
 #https://augeas.net/docs/references/1.4.0/lenses/files/sshd-aug.html

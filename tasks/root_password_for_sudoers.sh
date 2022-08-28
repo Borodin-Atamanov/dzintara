@@ -12,7 +12,7 @@ source "${work_dir}tasks/1.sh"
 #    exit 1
 # fi
 
-augeas_file="${work_dir}/tasks/${script_base_name}.txt";
+augeas_file="${work_dir}/tasks/${task_name}.txt";
 show_var "augeas_file"
 
 are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
