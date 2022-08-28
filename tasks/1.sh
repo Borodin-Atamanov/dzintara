@@ -7,7 +7,6 @@ if [[ "$function_loaded" != "1" ]]; then
   #load all functions and variables
   source "${work_dir}/index.sh" fun
 fi;
-source "${work_dir}/index.sh" fun
 
 cd "${work_dir}";
 
