@@ -33,7 +33,7 @@ function run_task ()
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
       #run task script
       #add timeout to subshell
-      timeout --kill-after=77 "${task_max_timeout}" "${work_dir}${task_script}" ${arguments};
+      timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
     );
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
@@ -474,4 +474,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='imufi-42aeb6b-2022-08-28-11-34-14'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gofex-0035c25-2022-08-28-11-36-58'; echo "${script_subversion}=script_subversion"; 
