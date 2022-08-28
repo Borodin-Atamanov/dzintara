@@ -10,7 +10,7 @@
 #3. user i script after gui started
 
 declare -g -x work_dir="/home/i/bin/dzible/";
-declare -g -x work_dir_autorun="/home/i/bin/dzible/autorun/";
+declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzible/"
 
 #load variables
@@ -62,13 +62,13 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #TODO start root GUI script
 { ymdhms; echo " start root GUI script"; } | tee --append "${work_dir_autorun}logs.root";
 su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' ";
-( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${root_autorun_gui}' " ) &
+nohup ( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${root_autorun_gui}' " ) &
 
-sleep 1.5
+sleep 3.5
 
 #TODO start user i GUI script
 { ymdhms; echo " start user i GUI script"; } | tee --append "${work_dir_autorun}logs.root";
-( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
+nohup ( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
 #( $source_load_variables; ${user_autorun_gui} ) &
 
 
