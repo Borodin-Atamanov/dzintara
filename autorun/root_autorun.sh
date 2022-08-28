@@ -5,9 +5,9 @@
 #script autorun on target system in root mode
 
 #This script also calls 3 another script:
-#1. root script after gui started
-#2. user i script before gui
-#3. user i script after gui started
+# 1. root script after gui started
+# 2. user i script before gui
+# 3. user i script after gui started
 
 declare -g -x work_dir="/home/i/bin/dzible/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
@@ -46,16 +46,22 @@ slog "<7>Xorg loaded":
 
 #start root GUI script
 slog "<7>start root GUI script":
-( $source_load_variables; xterm -e ${root_autorun_gui} ) &
+#( $source_load_variables; xterm -e ${root_autorun_gui} ) &
+eval_this="( ${source_load_variables}; xterm -e '${root_autorun_gui}' ) & ";
+slog "<7>eval this '${eval_this}'"
+eval "${eval_this}";
+
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
 
 sleep 5
 
 #start user i GUI script
 slog "<7>start user GUI script":
-( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
+eval_this="( ${source_load_variables}; su --login i --shell=/bin/bash  --command=${source_load_variables}; xterm -e '${user_autorun_gui}' ) & ";
+slog "<7>eval this  '${eval_this}'"
+eval "${eval_this}";
+#( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
 #( $source_load_variables; ${user_autorun_gui} ) &
-
 
 #su i --preserve-environment --pty --command "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
 #sudo --user=i --shell  "source /home/i/bin/dzible/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "

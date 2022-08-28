@@ -14,7 +14,7 @@ slog "<7>start"
 slog "<7>$(show_var EUID)":
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)":
-countdown 250 0.1
+countdown 31337 0.1
 slog "<7>end"
 
 #

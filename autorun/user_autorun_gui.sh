@@ -19,8 +19,8 @@ slog "<7>$(show_var EUID)":
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)":
 xset led 3;
+countdown 55555 0.1
 slog "<7>end1"
-
 
 
 #export
