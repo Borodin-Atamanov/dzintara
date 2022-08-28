@@ -28,6 +28,10 @@ function run_task ()
   echo "████ task ${task_name} ${arguments}████";
   if [ -s "${task_script}" ];  then
     (
+      #create countdown process, it show count down before task end by timeout
+      countdown_command="${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
+      eval $countdown_command;
+
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
@@ -35,6 +39,7 @@ function run_task ()
       #add timeout to subshell
       timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
     );
+    killall --verbose "countdown.sh"; #kill counter process
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
     echo "XXXXXXXXX $0 no task_script file ${task_script}! 🤷‍";
@@ -303,10 +308,10 @@ function countdown ()
   interval="$2";
   interval=${interval#-} #must not negative
   if [[ "${interval}" = "" ]] || [[ "${interval}" = 0 ]]  ; then
-    interval=1;
+    interval=0.1;
   fi;
   if [[ "${count}" = "" ]] || [[ "${count}" = 0 ]]  ; then
-    count=1;
+    count=10;
   fi;
 
   backspaces="\b\b\b\b\b\b\b\b";
@@ -419,18 +424,18 @@ else
   #run_task add_screen_resolution_with_cvt_xrandr
 fi
 
+run_task timezone_set
 run_task install_console_apps
 run_task sshd_config
 run_task ssh_config
 run_task root_password_set
 run_task user_i_password_set
 run_task root_password_for_sudoers
-
-run_task timezone_set
 run_task add_screen_resolution_with_cvt_xrandr
 run_task install_autorun_script
 run_task install_gui_apps
 run_task show_script_subversion
+run_task sleep 11
 
 else
     echo 'functions loaded';
@@ -442,4 +447,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kamav-34ec2de-2022-08-28-12-28-42'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='dosip-0f32683-2022-08-28-12-49-21'; echo "${script_subversion}=script_subversion"; 
