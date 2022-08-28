@@ -14,7 +14,7 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 
 { ymdhms; echo "run $0"; } | tee --append "${logs}";
 show_var EUID
-whoami="$(get_command_fullpath whoami)"
+whoami="$(eval get_command_fullpath whoami)"
 show_var whoami
 xset led 3;
 countdown 250 0.1
