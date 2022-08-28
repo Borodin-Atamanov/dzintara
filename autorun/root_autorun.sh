@@ -13,6 +13,11 @@
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzible/"
 
+#path to scripts, what we will start
+root_autorun_gui="${work_dir}autorun/root_autorun_gui.sh"
+user_autorun="${work_dir}autorun/user_autorun.sh"
+user_autorun_gui="${work_dir}autorun/user_autorun_gui.sh"
+
 #declare_and_export work_dir
 #work_dir="/home/i/bin/dzible/autorun";
 
@@ -36,10 +41,12 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 #     sleep 0.5;
 # done;
 
-#TODO start root script
+#start root script (we are in this script already, and it is successfully running now)
 { echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
+
 #TODO start user i script
 { echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
+#( echo 123; sleep 3; echo end ) &
 
 #wait untill x server starts (or if waiting time is over)
 { echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir}autorun/logs.root";
@@ -82,7 +89,8 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; time stterm -T 'Borodin-Atamanov system update' -e command '/bin/bash -c \'for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;\'' ";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; stterm -e /bin/bash -c source /home/i/bin/dzible/autorun/load_variables.sh; sleep 35; ";
 #su --login i --pty --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'ls; read; sleep 35;' ";
-su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' " | tee --append "${work_dir}autorun/logs.root";
+
+
 
 #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
@@ -90,6 +98,7 @@ su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/l
 
 
 #Работает:
+#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' " | tee --append "${work_dir}autorun/logs.root";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser www.youtube.com; ";
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; time xterm -maximized -e 'wget -qO - clck.ru/uRPBG | bash';
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root

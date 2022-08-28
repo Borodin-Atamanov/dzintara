@@ -36,7 +36,7 @@ show_var load_variables_file
 
 #export >> "${load_variables_file}";
 #export all ENV variables, expect some secrets
-export | grep  -v 'password' | grep  -v 'secrets' | sort >> "${load_variables_file}";
+export | grep  -v 'password' | grep  -v 'secrets'  | grep  -v 'work_dir' | sort >> "${load_variables_file}";
 
 #TODO disable any resctriction of local connect to X11 with Xorg config files on target system
 
@@ -47,17 +47,12 @@ fi
 
 save_var_in_base64 DISPLAY "$DISPLAY" >> "${load_variables_file}";
 
-#get something like this:
-#0100 0009 692d6465736b746f70 0001 30 0012 4d49542d4d414749432d434f4f4b49452d31 0010 f5c41915d1cf1b92c8cf0f8fd8167b0f
-# xauth_nextract=$( xauth nextract - $DISPLAY );
-# save_var_in_base64 xauth_nextract "$xauth_nextract" >> "${load_variables_file}";
-# echo 'echo "${xauth_nextract}" | xauth nmerge - ' >> "${load_variables_file}";
-# echo 'echo "${xauth_nextract}" | sudo -u i xauth nmerge - ' >> "${load_variables_file}";
-# echo 'echo "${xauth_nextract}" | sudo -u root xauth nmerge - ' >> "${load_variables_file}";
-#export DISPLAY={Display number stored in the Xauthority file}
 declare_and_export XAUTHORITY '/home/i/.Xauthority';
-save_var_in_base64 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 
+save_var_in_base64 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
+save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
+save_var_in_base64 work_dir "${install_dir}" >> "${load_variables_file}";
+save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 
@@ -68,7 +63,7 @@ find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 
-apt-get install -y stterm
+install_system stterm
 
 #start cron on system start
 #systemctl enable cron

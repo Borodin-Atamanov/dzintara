@@ -24,7 +24,8 @@ run_task show_script_subversion
 #cvt_xrandr 1920 1080 60
 cvt_xrandr 1360 768 60
 
-for ((i=142;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 0.42; done;
+run_task countdown 555 0.1
+run_task sleep 15
 
 #read
 
