@@ -105,7 +105,6 @@ function save_var_in_text ()
 {
   varname="${1}"
   value="${2}"
-  value=$(base64_encode "${value}");
   openssl_fullpath="$( get_command_fullpath openssl )";
   echo -n 'declare -g -x ';
   echo -n "${varname}";
@@ -462,4 +461,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ivufi-66a7d5e-2022-08-28-13-20-19'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='rerif-3c7d5d8-2022-08-28-13-25-36'; echo "${script_subversion}=script_subversion"; 
