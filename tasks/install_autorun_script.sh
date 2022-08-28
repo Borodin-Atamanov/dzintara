@@ -36,7 +36,7 @@ show_var load_variables_file
 
 #export >> "${load_variables_file}";
 #export all ENV variables, expect some secrets
-export | grep  -v 'password' | grep  -v 'secrets'  | grep  -v 'work_dir' | sort >> "${load_variables_file}";
+#export | grep  -v 'password' | grep  -v 'secrets'  | grep  -v 'work_dir' | sort >> "${load_variables_file}";
 
 #TODO disable any resctriction of local connect to X11 with Xorg config files on target system
 
@@ -44,16 +44,14 @@ export | grep  -v 'password' | grep  -v 'secrets'  | grep  -v 'work_dir' | sort 
 if [[ "${DISPLAY}" = "" ]]; then
   declare_and_export DISPLAY ':0'
 fi
-
-save_var_in_base64 DISPLAY "$DISPLAY" >> "${load_variables_file}";
-
 declare_and_export XAUTHORITY '/home/i/.Xauthority';
 
-save_var_in_base64 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
-save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
-save_var_in_base64 work_dir "${install_dir}" >> "${load_variables_file}";
-save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
-save_var_in_text logs "${install_dir}/autorun/logs.log" >> "${load_variables_file}";
+save_var_in_base32 DISPLAY "$DISPLAY" >> "${load_variables_file}";
+save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
+#save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
+#save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
+#save_var_in_text logs "${install_dir}/autorun/logs.log" >> "${load_variables_file}";
+save_var_in_base32 work_dir "${install_dir}" >> "${load_variables_file}";
 
 echo "cd '${install_dir}';" >> "${load_variables_file}";
 

@@ -102,6 +102,21 @@ function save_var_in_base64 ()
 }
 export -f save_var_in_base64
 
+
+function save_var_in_base32 ()
+{
+  varname="${1}"
+  value="${2}"
+  value=$(echo -n "${value}" | base32 --wrap=0);
+  echo -n 'declare -g -x ';
+  echo -n "${varname}";
+  echo -n '=$(echo';
+  echo -n " '${value}' | base32  -d -i ); ";
+  #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
+  echo "";
+}
+export -f save_var_in_base32
+
 function save_var_in_text ()
 {
   varname="${1}"
@@ -345,7 +360,7 @@ function slog ()
   #slog "<7>debug message from dzible"
   #slog "<4>warning message from dzible"
   #view logs with:
-  #journalctl -b -t 'dzible' --all --priority=7 --no-pager --full -t dzible -t dzible.root_autorun -t dzible.user_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
+  #journalctl -b -t 'dzible' --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.user_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
   #
   # <0>emerg: the system is unusable.
   # <1>alert: action must be taken immediately.
@@ -472,17 +487,17 @@ else
   #run_task add_screen_resolution_with_cvt_xrandr
 fi
 
+run_task show_script_subversion
 run_task timezone_set
+run_task install_autorun_script
 run_task install_console_apps
-run_task sshd_config
-run_task ssh_config
+run_task install_gui_apps
+run_task add_screen_resolution_with_cvt_xrandr
 run_task root_password_set
 run_task user_i_password_set
 run_task root_password_for_sudoers
-run_task add_screen_resolution_with_cvt_xrandr
-run_task install_autorun_script
-run_task install_gui_apps
-run_task show_script_subversion
+run_task sshd_config
+run_task ssh_config
 run_task sleep 11
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -496,4 +511,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kuvon-96dbb1a-2022-08-28-22-02-06'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='inele-65a019b-2022-08-28-22-36-00'; echo "${script_subversion}=script_subversion"; 
