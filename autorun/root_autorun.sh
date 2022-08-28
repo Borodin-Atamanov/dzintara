@@ -18,6 +18,8 @@ declare -g -x work_dir_autorun="${work_dir}autorun/";
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
+declare -x -g service_name='dzible.root_autorun';   #for slog systemd logs
+
 #path to scripts, what we will start
 user_autorun="${work_dir_autorun}user_autorun.sh"
 root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"

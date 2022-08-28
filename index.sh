@@ -336,6 +336,35 @@ function countdown ()
 }
 export -f countdown
 
+
+function slog ()
+{
+  #add message to systemd log
+  #examples:
+  #slog "<7>debug message from dzible"
+  #slog "<4>warning message from dzible"
+  #view logs with:
+  #journalctl -t 'dzible' -t 'dzible.autorun' --all --priority=7 --no-pager --full
+  #
+  # <0>emerg: the system is unusable.
+  # <1>alert: action must be taken immediately.
+  # <2>crit: critical conditions.
+  # <3>err: error conditions.
+  # <4>warning: warning conditions.
+  # <5>notice: normal, but significant condition.
+  # <6>info: informational message.
+  # <7>debug: messages that are useful for debugging.
+  message="$1";
+  if [[ "${service_name}" = "" ]]  ; then
+    declare -x -g service_name='dzible';
+  fi;
+  echo -n "${message}" | systemd-cat --identifier="${service_name}";
+  return_code=$?
+  echo "${message}";
+  return $return_code;
+}
+export -f slog
+
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export master_password_file 'master_password.txt'
@@ -451,6 +480,8 @@ run_task install_gui_apps
 run_task show_script_subversion
 run_task sleep 11
 
+#IDEA: generate new passwords, and show it to user after script end his work
+
 else
     echo 'functions loaded';
 fi; #end of fun if
@@ -458,7 +489,6 @@ fi; #end of fun if
 #find . -type f -name '*.*' -print0 | xargs -0 sed --debug -i 's/_root_password/_root_passwordword/g'
 #find . -type f -name '*.*' -print0 | xargs -0 sed  -i 's/_root_password/_root_passwordword/g'
 
-
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gufad-9f165e8-2022-08-28-17-14-37'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='dipat-88c1cbf-2022-08-28-20-54-20'; echo "${script_subversion}=script_subversion"; 

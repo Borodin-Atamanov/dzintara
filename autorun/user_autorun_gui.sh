@@ -5,6 +5,7 @@
 #script autorun on target system in user mode after GUI starts. It will never starts in pure console computers, f.e. servers
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzible/"
+declare -x -g service_name='dzible.user_autorun_gui';   #for slog systemd logs
 
 #access control disabled, clients can connect from any host
 # xhost +
