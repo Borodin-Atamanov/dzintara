@@ -344,7 +344,7 @@ function slog ()
   #slog "<7>debug message from dzible"
   #slog "<4>warning message from dzible"
   #view logs with:
-  #journalctl -t 'dzible' -t 'dzible.autorun' --all --priority=7 --no-pager --full
+  #journalctl -b -t 'dzible' -t dzible.root_autorun -t dzible.root_autorun -t dzible.user_autorun_gui -t dzible.user_autorun --all --priority=7 --no-pager --full
   #
   # <0>emerg: the system is unusable.
   # <1>alert: action must be taken immediately.
@@ -371,6 +371,9 @@ declare_and_export master_password_file 'master_password.txt'
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt'
 declare_and_export task_max_timeout 67
+declare_and_export service_name 'dzible';   #for slog systemd logs
+
+   #for slog systemd logs
 
 #TODO ask target computer name on script start
 
@@ -491,4 +494,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='dipat-88c1cbf-2022-08-28-20-54-20'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='oraba-af3bda0-2022-08-28-20-58-18'; echo "${script_subversion}=script_subversion"; 
