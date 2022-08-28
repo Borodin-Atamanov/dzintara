@@ -330,7 +330,7 @@ function countdown ()
 
   backspaces="\b\b\b\b\b\b\b\b";
   for ((i=$count;i>=0;i--)); do
-    echo -ne "${backspaces}${i} "; sleep "${interval}";
+    echo -ne "${backspaces}${i}  "; sleep "${interval}";
   done;
   echo -ne "${backspaces}";
 }
@@ -341,7 +341,7 @@ declare_and_export install_dir "/home/i/bin/dzible/"
 declare_and_export master_password_file 'master_password.txt'
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt'
-declare_and_export task_max_timeout 17
+declare_and_export task_max_timeout 67
 
 #TODO ask target computer name on script start
 
@@ -461,4 +461,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rerif-3c7d5d8-2022-08-28-13-25-36'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='dabet-5fade41-2022-08-28-13-28-55'; echo "${script_subversion}=script_subversion"; 
