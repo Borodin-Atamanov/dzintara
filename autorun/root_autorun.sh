@@ -44,9 +44,9 @@ user_autorun_gui="${work_dir}autorun/user_autorun_gui.sh"
 #start root script (we are in this script already, and it is successfully running now)
 { echo " start root console script"; } | tee --append "${work_dir}autorun/logs.root";
 
-#TODO start user i script
+#start user i script
 { echo " start user i console script"; } | tee --append "${work_dir}autorun/logs.root";
-#( echo 123; sleep 3; echo end ) &
+( source "/home/i/bin/dzible/autorun/load_variables.sh"; ${user_autorun} ) &
 
 #wait untill x server starts (or if waiting time is over)
 { echo " wait for Xorg (exit code == 0)"; } | tee --append "${work_dir}autorun/logs.root";
@@ -62,8 +62,13 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 
 #TODO start root GUI script
 { echo " start root GUI script"; } | tee --append "${work_dir}autorun/logs.root";
+( source "/home/i/bin/dzible/autorun/load_variables.sh"; ${root_autorun_gui} ) &
+
+run_task sleep 1
+
 #TODO start user i GUI script
 { echo " start user i GUI script"; } | tee --append "${work_dir}autorun/logs.root";
+( source "/home/i/bin/dzible/autorun/load_variables.sh"; ${user_autorun_gui} ) &
 
 #TODO create lock file?
 #В цикле вызываем скрипт от пользователя. До тех пор, пока lock-файл не исчезнет.
@@ -89,8 +94,6 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; time stterm -T 'Borodin-Atamanov system update' -e command '/bin/bash -c \'for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;\'' ";
 #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzible/autorun/load_variables.sh; stterm -e /bin/bash -c source /home/i/bin/dzible/autorun/load_variables.sh; sleep 35; ";
 #su --login i --pty --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'ls; read; sleep 35;' ";
-
-
 
 #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";

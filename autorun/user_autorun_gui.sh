@@ -12,7 +12,7 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 #if you need sudo su as root, you can do the following
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
-echo "$work_dir";
+echo $0 | tee --append "${work_dir}autorun/logs.root";
 
 #xset led 3;
 
