@@ -25,9 +25,8 @@ function run_task ()
     task_script="${work_dir}/tasks/${1}.sh";
   fi
   task_script="tasks/${1}.sh";
+  echo "████ task ${task_name}${arguments} ████";
   if [ -s "${task_script}" ];  then
-    echo "[[${task_script} ${arguments}]]";
-
     (
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
@@ -475,4 +474,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gered-4c03bbe-2022-08-28-11-05-59'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='amofe-99f9d30-2022-08-28-11-08-16'; echo "${script_subversion}=script_subversion"; 
