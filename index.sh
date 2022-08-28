@@ -200,36 +200,6 @@ function awkcalc ()
 }
 export -f awkcalc
 
-function wait_for ()
-{
-    #function wait $1 seconds or return if all other arguments return true;
-    #any non-empty and none-zero returned value sting is true
-    #use:
-    #wait_for 12 'echo $((RANDOM % 2));'
-    #wait_for 100 "ps -e | grep -c Xorg"
-    #if ("$@" &> /dev/null); then echo 1; else echo 0; fi;
-    #if [ "$(ps -e | grep -c Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
-    timeout=$1
-    shift 1
-    #until [ $timeout -le 0 ] || ("$@" &> /dev/null);
-    #until [ $timeout -le 0 ] || [ "${returned_value}" ];
-
-    while [ $timeout -ge 0 ]
-    do
-      #echo "$@";
-      #ret_val=$("$@"); #get text value from command
-      command="$@";
-      ret_val=$(eval "${command}" );
-      ret_val=$(trim "$ret_val");
-      #returned_value=$?
-      #show_var ret_val;
-      if [[ "${ret_val}" != "" ]] && [[ "${ret_val}" != 0 ]]  ; then return 1; fi;
-      sleep 1;
-      timeout=$(( timeout - 1 ))
-    done
-}
-export -f wait_for
-
 function wait_for_exit_code ()
 {
     #function wait $2 seconds or return if all other arguments return exit code $1;
@@ -261,7 +231,7 @@ function wait_for_exit_code ()
     done
     return 1; #exit code = One means error in bash
 }
-export -f wait_for
+export -f wait_for_exit_code
 
 function is_process_return_this_code
 {
@@ -485,4 +455,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='egolu-787c815-2022-08-28-11-55-10'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='foluk-f37f992-2022-08-28-11-58-10'; echo "${script_subversion}=script_subversion"; 
