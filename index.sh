@@ -26,6 +26,7 @@ function run_task ()
   fi
   show_var task_script
   echo "████ task ${task_name} ${arguments}████";
+  slog "<6>run_task ${task_name} ${arguments}":
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
@@ -494,4 +495,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='zetov-ff81a90-2022-08-28-21-38-06'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kilev-62373a6-2022-08-28-21-46-51'; echo "${script_subversion}=script_subversion"; 
