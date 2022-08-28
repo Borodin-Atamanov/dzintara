@@ -43,7 +43,6 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 slog "<7>Xorg loaded":
 
 slog "<7>sleep some":
-( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 1 $(ymdhms)"; ) &
 run_task sleep 17
 
 #start root GUI script
@@ -56,13 +55,13 @@ eval "${eval_this}";
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
 slog "<7>$(export)":
 
-slog "<7>sleep some":
-( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
-run_task sleep 17
+#slog "<7>sleep some":
+#( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
+#run_task sleep 17
 
 #start user i GUI script
 slog "<7>start user GUI script":
-eval_this="( ${source_load_variables}; su --login i --shell=/bin/bash  --command=${source_load_variables}; xterm -e ${user_autorun_gui} ) & ";
+eval_this="su --login i --shell=\"/bin/bash\"  --command=\"source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' \" & "
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 #( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
@@ -85,8 +84,12 @@ eval "${eval_this}";
 #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzible/autorun/user_autorun.sh; read; read; read; ' ";
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "Hello X!"
+#export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; /home/i/bin/dzible/autorun/user_autorun_gui.sh
+#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' ";
 
 #Работает:
+#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' " &
+#( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 1 $(ymdhms)"; ) &
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' " | tee --append "${work_dir_autorun}logs.root";
 #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser www.youtube.com; ";
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; time xterm -maximized -e 'wget -qO - clck.ru/uRPBG | bash';
