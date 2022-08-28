@@ -41,9 +41,10 @@ slog "<7>wait for Xorg (exit code == 0, wait untill x server starts (or if waiti
 wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 
 slog "<7>Xorg loaded":
-slog "<7>sleep 37":
+
+slog "<7>sleep some":
 ( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 1 $(ymdhms)"; ) &
-run_task sleep 37
+run_task sleep 17
 
 #start root GUI script
 slog "<7>start root GUI script":
@@ -55,9 +56,9 @@ eval "${eval_this}";
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
 slog "<7>$(export)":
 
+slog "<7>sleep some":
 ( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
-slog "<7>sleep 37":
-run_task sleep 37
+run_task sleep 17
 
 #start user i GUI script
 slog "<7>start user GUI script":
