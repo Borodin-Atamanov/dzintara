@@ -32,24 +32,27 @@ whoami="$(whoami)"
 slog "<7>$(show_var whoami)":
 
 #start user i script
-{ ymdhms; echo " start user i console script"; } | tee --append "${logs}";
+slog "<7>start user console script":
 ( $source_load_variables; ${user_autorun} ) &
 
 #wait untill x server starts (or if waiting time is over)
-{ ymdhms; echo " wait for Xorg (exit code == 0)"; } | tee --append "${logs}";
+slog "<7>wait for Xorg (exit code == 0, wait untill x server starts (or if waiting time is over))":
 
 wait_for_exit_code 0 777 "timeout 42 xprop -root ";
-{ ymdhms; echo " Xorg loaded!"; } | tee --append "${logs}";
 
-#TODO start root GUI script
-{ ymdhms; echo " start root GUI script"; } | tee --append "${logs}";
-#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
+sleep 5;
+
+slog "<7>Xorg loaded":
+
+#start root GUI script
+slog "<7>start root GUI script":
 ( $source_load_variables; xterm -e ${root_autorun_gui} ) &
+#su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
 
-sleep 3.5
+sleep 5
 
-#TODO start user i GUI script
-{ ymdhms; echo " start user i GUI script"; } | tee --append "${logs}";
+#start user i GUI script
+slog "<7>start user GUI script":
 ( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
 #( $source_load_variables; ${user_autorun_gui} ) &
 
@@ -80,3 +83,4 @@ sleep 3.5
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xprop -root
 #export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; chromium-browser --no-sandbox www.youtube.com;
 
+slog "<7>end":
