@@ -9,6 +9,10 @@ source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzible/"
 
 echo $0 | tee --append "${work_dir}autorun/logs.root";
+
+export
+countdown 250 0.1
+
 #
 # #( xmessage -buttons ok,no,wow -default wow -timeout 4 -print -nearmouse "hello" ); echo $?
 # #xconsole

@@ -30,7 +30,7 @@ are_you_serious=' --root=/ '; #real business
 augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_file}";
 
 #test configuration
-sshd -t
+timeout 15  sshd -t
 
 #service ${service_name} stop
 #systemctl stop $service_name

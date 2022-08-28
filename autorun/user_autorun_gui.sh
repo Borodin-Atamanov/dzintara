@@ -14,7 +14,10 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 
 echo $0 | tee --append "${work_dir}autorun/logs.root";
 
-#xset led 3;
+xset led 3;
+
+export
+countdown 250 0.1
 
 run_task show_script_subversion
 #run_task add_screen_resolution_with_cvt_xrandr
@@ -29,4 +32,4 @@ run_task sleep 15
 
 #read
 
-#sleep 35;
+sleep 35;
