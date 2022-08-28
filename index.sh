@@ -29,7 +29,7 @@ function run_task ()
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
-      countdown_command="${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
+      countdown_command="timeout --kill-after=2 "${task_max_timeout}" ${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
       eval $countdown_command;
 
       #exec -a "${work_dir}${task_script}"
@@ -447,4 +447,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kuded-8dbe675-2022-08-28-12-52-50'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='tifuk-9fc5a9c-2022-08-28-12-54-53'; echo "${script_subversion}=script_subversion"; 
