@@ -492,10 +492,10 @@ fi
 
 run_task show_script_subversion
 run_task timezone_set
-# run_task install_autorun_script
-# run_task install_console_apps
-# run_task install_gui_apps
-# run_task add_screen_resolution_with_cvt_xrandr
+run_task install_autorun_script
+run_task install_console_apps
+run_task install_gui_apps
+run_task add_screen_resolution_with_cvt_xrandr
 # run_task root_password_set
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
@@ -514,4 +514,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='alega-d133966-2022-08-28-23-30-01'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ebubu-710d7fa-2022-08-28-23-31-09'; echo "${script_subversion}=script_subversion"; 
