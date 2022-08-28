@@ -302,16 +302,18 @@ function countdown ()
   count=${count#-} #must not negative
   interval="$2";
   interval=${interval#-} #must not negative
-  if [[ "${interval}" != "" ]] && [[ "${interval}" != 0 ]]  ; then
+  if [[ "${interval}" = "" ]] || [[ "${interval}" = 0 ]]  ; then
     interval=1;
   fi;
-  if [[ "${count}" != "" ]] && [[ "${count}" != 0 ]]  ; then
-    interval=1;
+  if [[ "${count}" = "" ]] || [[ "${count}" = 0 ]]  ; then
+    count=1;
   fi;
 
+  backspaces="\b\b\b\b\b\b\b\b";
   for ((i=$count;i>=0;i--)); do
-    echo -ne "\b\b\b\b\b\b\b\b$i  "; sleep 1.42;
+    echo -ne "${backspaces}${i} "; sleep "${interval}";
   done;
+  echo -ne "${backspaces}";
 }
 export -f countdown
 
@@ -440,4 +442,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='vofot-35e8061-2022-08-28-12-22-58'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kamav-34ec2de-2022-08-28-12-28-42'; echo "${script_subversion}=script_subversion"; 
