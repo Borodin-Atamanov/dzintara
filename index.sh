@@ -95,7 +95,7 @@ function save_var_in_base64 ()
   openssl_fullpath="$( get_command_fullpath openssl )";
   echo -n 'declare -g -x ';
   echo -n "${varname}";
-  echo -n '=$(echo';
+  echo -n '=$(echo -n';
   echo -n " '${value}' | ${openssl_fullpath} base64 -d ); ";
   #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
   echo "";
@@ -110,9 +110,9 @@ function save_var_in_base32 ()
   value=$(echo -n "${value}" | base32 --wrap=0);
   echo -n 'declare -g -x ';
   echo -n "${varname}";
-  echo -n '=$(echo';
+  echo -n '=$(echo -n';
   echo -n " '${value}' | base32  -d -i ); ";
-  #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
+  #result will be like this "var=$(echo -n 'F5UG63LFF5US6LSYMF2XI2DPOJUXI6I='  | base32 -id);"
   echo "";
 }
 export -f save_var_in_base32
@@ -121,12 +121,11 @@ function save_var_in_text ()
 {
   varname="${1}"
   value="${2}"
-  openssl_fullpath="$( get_command_fullpath openssl )";
   echo -n 'declare -g -x ';
   echo -n "${varname}";
   echo -n '=';
   echo -n "\"${value}\"; ";
-  #result will be like this 'var="value";'
+  #result will be like this 'declare -g -x var="value";'
   echo "";
 }
 export -f save_var_in_text
@@ -135,7 +134,7 @@ function random_str ()
 {
     len="${1}";
     vowels="euioa";
-    consonants="rtpsdfgklzxvbnm";
+    consonants="rtpsdfgklzxcvbnm";
     random_str=;
     for y in `seq 1 ${len}`; do
         for x in `seq 1 2`; do
@@ -511,4 +510,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='inele-65a019b-2022-08-28-22-36-00'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ikaca-b25a939-2022-08-28-22-59-13'; echo "${script_subversion}=script_subversion"; 
