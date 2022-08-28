@@ -296,39 +296,24 @@ function install_system ()
 }
 export -f install_system
 
-# function run_if_root ()
-# {
-#   #run command only if current user is superuser
-#   command="$@";
-#   if [ is_root ]; then
-#       #run only from ordinary user
-#       returned_value="$( $command )";
-#       exit_code="$?";
-#       echo -n "$returned_value";
-#       return $exit_code;
-#   fi
-#   return 1;
-# }
-# export -f run_if_root
-#
-# function run_if_not_root ()
-# {
-#   #run command only if current user is not superuser
-#   command="${@}"; #bash ate quotes in arguments!
-#   #command=$( printf ' %q' "$@" )
-#   #show_var command
-#   #echo "${@}";
-#   #for i; do echo "$i ${i@Q}"; done;
-#   if [ ! is_root ]; then
-#       #run only from ordinary user
-#       returned_value="$( $command )";
-#       exit_code="$?";
-#       echo -n "$returned_value";
-#       return $exit_code;
-#   fi
-#   return 1;
-# }
-# export -f run_if_not_root
+function countdown ()
+{
+  count="$1";
+  count=${count#-} #must not negative
+  interval="$2";
+  interval=${interval#-} #must not negative
+  if [[ "${interval}" != "" ]] && [[ "${interval}" != 0 ]]  ; then
+    interval=1;
+  fi;
+  if [[ "${count}" != "" ]] && [[ "${count}" != 0 ]]  ; then
+    interval=1;
+  fi;
+
+  for ((i=$count;i>=0;i--)); do
+    echo -ne "\b\b\b\b\b\b\b\b$i  "; sleep 1.42;
+  done;
+}
+export -f countdown
 
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
@@ -455,4 +440,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rasav-8692603-2022-08-28-12-11-21'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vofot-35e8061-2022-08-28-12-22-58'; echo "${script_subversion}=script_subversion"; 
