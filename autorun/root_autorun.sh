@@ -42,7 +42,7 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 #TODO start root GUI script
 { ymdhms; echo " start root GUI script"; } | tee --append "${logs}";
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
-( $source_load_variables; xterm -e '${root_autorun_gui}' " ) &
+( $source_load_variables; xterm -e ${root_autorun_gui} ) &
 
 sleep 3.5
 
