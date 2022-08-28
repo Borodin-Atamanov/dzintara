@@ -13,12 +13,13 @@ declare_and_export work_dir "/home/i/bin/dzible/"
 #if you need sudo su as root, you can do the following
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
-{ ymdhms; echo "run $0" } | tee --append "${logs}";
-echo whoami
-whoami;
-#export
-countdown 250 0.42
-{ ymdhms; echo "end $0" } | tee --append "${logs}";
+{ ymdhms; echo "run $0"; } | tee --append "${logs}";
+show_var EUID
+whoami="$(get_command_fullpath whoami)"
+show_var whoami
+countdown 250 0.1
+{ ymdhms; echo "end $0"; } | tee --append "${logs}";
+
 
 #read
 
