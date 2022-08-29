@@ -37,7 +37,7 @@ function run_task ()
       slog "<7>countdown_pid=${countdown_pid}";
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
-      source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
+      source "${work_dir}tasks/1.sh" "${task_script}";
       #run task script
       #add timeout to subshell
       timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
@@ -525,4 +525,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gulod-f52f1dd-2022-08-29-15-59-21'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nunix-fef4678-2022-08-29-16-31-43'; echo "${script_subversion}=script_subversion"; 
