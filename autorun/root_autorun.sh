@@ -44,7 +44,7 @@ slog "<7>$(show_var whoami)"
 
 #start user i script
 slog "<7>start user console script  ${user_autorun}";
-eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables}; ${fullpath_nohup} ${user_autorun} & ' ";
+eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables}; ${fullpath_nohup} ${user_autorun} > ${user_autorun}.log & ' ";
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
@@ -61,7 +61,7 @@ run_task sleep 17
 #start root GUI script
 slog "<7>start root GUI script ${root_autorun_gui}";
 #( $source_load_variables; xterm -e ${root_autorun_gui} ) &
-eval_this="${fullpath_nohup} ${fullpath_bash} --login -c '( ${source_load_variables}; ${fullpath_terminal_gui_app} -e ${root_autorun_gui} ) &'  ";
+eval_this="${fullpath_nohup} ${fullpath_bash} --login -c '( ${source_load_variables}; ${fullpath_terminal_gui_app} -e ${root_autorun_gui} > ${root_autorun_gui}.log ) &'  ";
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
@@ -71,13 +71,13 @@ eval "${eval_this}";
 #slog "<7>sleep some";
 #( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
 #run_task sleep 17
-slog "<7>sleep 17";
-sleep 17
+slog "<7>sleep 2";
+sleep 2
 
 #start user i GUI script
 slog "<7>start user GUI script ${user_autorun_gui}";
 #eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzible/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzible/autorun/user_autorun_gui.sh & " ';
-eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${user_autorun_gui} & ' ";
+eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${user_autorun_gui}  > ${user_autorun_gui}.log & ' ";
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 #( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
