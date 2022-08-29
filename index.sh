@@ -329,10 +329,10 @@ export -f is_root
 function install_system ()
 {
   app="${1}";
-  if [[ "${install_system_updated}" != "" ]] && [[ "${install_system_updated}" != 0 ]]  ; then
+  if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
     apt-get --allow-unauthenticated --show-progress --yes update;
     slog "<6>apt-get update"
-    declare -g install_system_updated=1;
+    declare -g -x install_system_updated=1;
   fi;
   apt-get ${dry_run} --allow-unauthenticated --yes install "${app}";
   slog "<7>apt-get install ${app}"
@@ -525,4 +525,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ocuce-daae60c-2022-08-29-15-29-52'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gulod-f52f1dd-2022-08-29-15-59-21'; echo "${script_subversion}=script_subversion"; 
