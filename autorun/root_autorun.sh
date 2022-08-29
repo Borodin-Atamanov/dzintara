@@ -71,7 +71,7 @@ run_task sleep 13
 #start root GUI script
 slog "<7>start root GUI script ${root_autorun_gui}";
 #( $source_load_variables; xterm -e ${root_autorun_gui} ) &
-eval_this="${fullpath_nohup} ${fullpath_bash} --login -c '( ${source_load_variables}; ${fullpath_terminal_gui_app} -e ${root_autorun_gui} ) & '  ";
+eval_this="${fullpath_bash} --login -c '( ${source_load_variables}; ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${root_autorun_gui} ) & '  ";
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
