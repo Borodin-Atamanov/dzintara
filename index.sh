@@ -394,6 +394,7 @@ declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt'
 declare_and_export task_max_timeout 67
 declare_and_export service_name 'dzible';   #for slog systemd logs
+declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
 
    #for slog systemd logs
 
@@ -426,16 +427,20 @@ install_system openssl
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
-  echo "clone scripts from github";
-  work_dir="work_dir-$(date "+%F-%H-%M-%S")";
+  work_dir="${TMPDIR:-/tmp}/dzible_work_dir-$(date "+%F-%H-%M-%S")";
+  slog "<7>$(show_var work_dir)";
   mkdir -pv "${work_dir}";
-  git clone --verbose --progress --depth 1 https://github.com/Borodin-Atamanov/dzible.git "${work_dir}";
+  echo "clone scripts from github";
+  slog "<7>$(show_var work_dir)";
+  slog "<7>$(show_var dzible_github_url)";
+  git clone --verbose --progress --depth 1 "${dzible_github_url}" "${work_dir}";
   # try to copy ${master_password_file} from current directory to work_dir
   cp --verbose --update "${master_password_file}" "${work_dir}/"
   cd "${work_dir}";
 fi
 work_dir="$(realpath "$(pwd)")/";
 declare_and_export work_dir "${work_dir}"
+slog "<7>$(show_var work_dir)";
 
 # temp_script_subversion=$( cat "${work_dir}index.sh" | grep '^script_subversion' );
 # echo "$temp_script_subversion";
@@ -516,4 +521,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cidam-58f0050-2022-08-29-13-17-05'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='saxix-2bde1af-2022-08-29-13-27-49'; echo "${script_subversion}=script_subversion"; 
