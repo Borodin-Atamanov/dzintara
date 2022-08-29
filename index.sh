@@ -24,26 +24,27 @@ function run_task ()
   else
     task_script="${work_dir}/tasks/${task_name}.sh";
   fi
-  show_var task_script
+
   echo "████ task ${task_name} ${arguments}████";
-  slog "<6>run_task ${task_name} ${arguments}":
+  slog "<6>run_task ${task_name} ${arguments}";
+  slog "<7>$(show_var task_script) $(show_var task_name) $(show_var arguments)";
   if [ -s "${task_script}" ];  then
-    #create countdown process, it show count down before task end by timeout
-    countdown_command="timeout --kill-after=2 "${task_max_timeout}" ${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
-    eval $countdown_command;
-    countdown_pid=$!
-    slog "<7>countdown_pid=${countdown_pid}";
     (
+      #create countdown process, it show count down before task end by timeout
+      countdown_command="timeout --kill-after=2 "${task_max_timeout}" ${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
+      eval $countdown_command;
+      countdown_pid=$!
+      slog "<7>countdown_pid=${countdown_pid}";
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${work_dir}${task_script}";
       #run task script
       #add timeout to subshell
       timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
+      kill -- -$countdown_pid;
     );
     #kill counter process
     #kill -9 $countdown_pid;
-    kill -- -$countdown_pid;
     #killall --verbose "countdown.sh";
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
@@ -94,6 +95,7 @@ export -f base64_decode
 function save_var_in_base64 ()
 {
   varname="${1}"
+  varname=$(trim "${varname}");
   value="${2}"
   value=$(base64_encode "${value}");
   openssl_fullpath="$( get_command_fullpath openssl )";
@@ -110,6 +112,7 @@ export -f save_var_in_base64
 function save_var_in_base32 ()
 {
   varname="${1}"
+  varname=$(trim "${varname}");
   value="${2}"
   value=$(echo -n "${value}" | base32 --wrap=0);
   echo -n 'declare -g -x ';
@@ -124,6 +127,7 @@ export -f save_var_in_base32
 function save_var_in_text ()
 {
   varname="${1}"
+  varname=$(trim "${varname}");
   value="${2}"
   echo -n 'declare -g -x ';
   echo -n "${varname}";
@@ -521,4 +525,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='perux-7e518a2-2022-08-29-15-18-09'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ocuce-daae60c-2022-08-29-15-29-52'; echo "${script_subversion}=script_subversion"; 
