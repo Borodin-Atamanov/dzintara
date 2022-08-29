@@ -15,6 +15,7 @@ load_variables_file="${install_dir}autorun/load_variables.sh";
 root_autorun_file="${install_dir}autorun/root_autorun.sh";
 
 #create directory for install scripts
+rm -rvf "${install_dir}";
 mkdir -pv "${install_dir}";
 
 #copy scripts to install directory

@@ -46,7 +46,7 @@ function run_task ()
     #killall --verbose "countdown.sh";
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
-    echo "XXXXXXXXX $0 no task_script file ${task_script}! 🤷‍";
+    slog "<4>no task_script file ${task_script}! 🤷‍":
   fi
 }
 
@@ -515,4 +515,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ipuxo-192f5d9-2022-08-29-00-28-27'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ofibi-9a04567-2022-08-29-12-35-57'; echo "${script_subversion}=script_subversion"; 
