@@ -33,7 +33,7 @@ slog "<7>$(show_var whoami)":
 
 #start user i script
 slog "<7>start user console script":
-( $source_load_variables; ${user_autorun} ) &
+eval_this="su --login i --shell='/bin/bash' --command='${source_load_variables}; ${user_autorun} & ' ";
 
 #wait untill x server starts (or if waiting time is over)
 slog "<7>wait for Xorg (exit code == 0, wait untill x server starts (or if waiting time is over))":
@@ -53,7 +53,7 @@ slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
 #su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzible/autorun/load_variables.sh; xterm -e '/home/i/bin/dzible/autorun/user_autorun_gui.sh;' "; &
-slog "<7>$(export)":
+#slog "<7>$(export)":
 
 #slog "<7>sleep some":
 #( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
