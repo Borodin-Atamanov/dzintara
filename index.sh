@@ -537,4 +537,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gukef-38812d5-2022-08-29-19-34-20'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='dunel-0c0e0e5-2022-08-29-19-39-38'; echo "${script_subversion}=script_subversion"; 
