@@ -15,16 +15,16 @@ declare -x -g service_name='dzible.user_autorun_gui';   #for slog systemd logs
 set -x
 
 slog "<7>start $0"
-slog "<7>$(show_var EUID)":
+slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
-slog "<7>$(show_var whoami)":
+slog "<7>$(show_var whoami)"
 xset led 3;
 
 run_task show_script_subversion
 
 for ((x=42;x>=0;x--)); do
     #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-    slog "<7>$(show_var x) $whoami $EUID":
+    slog "<7>$(show_var x) $whoami $EUID"
     countdown 7 1
     sleep 11.42;
 done;

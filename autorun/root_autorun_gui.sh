@@ -10,14 +10,14 @@ declare -x -g service_name='dzible.root_autorun_gui';   #for slog systemd logs
 
 set -x
 slog "<7>start"
-slog "<7>$(show_var EUID)":
+slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
-slog "<7>$(show_var whoami)":
+slog "<7>$(show_var whoami)"
 #countdown 31337 0.1
 #sleep 37
 for ((x=42;x>=0;x--)); do
     #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-    slog "<7>$(show_var x) $whoami $EUID":
+    slog "<7>$(show_var x) $whoami $EUID"
     countdown 7 1
     sleep 12.42;
 done;

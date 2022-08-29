@@ -37,9 +37,9 @@ declare_and_export fullpath_terminal_gui_app "$( get_command_fullpath rxvt )";
 
 #start root script (we are in this script already, and it is successfully running now)
 slog "<7>start root console script"
-slog "<7>$(show_var EUID)";
+slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
-slog "<7>$(show_var whoami)";
+slog "<7>$(show_var whoami)"
 
 #start user i script
 slog "<7>start user console script  ${user_autorun}";

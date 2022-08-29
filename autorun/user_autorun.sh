@@ -15,9 +15,9 @@ declare -x -g service_name='dzible.user_autorun';   #for slog systemd logs
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
 slog "<7>start"
-slog "<7>$(show_var EUID)":
+slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
-slog "<7>$(show_var whoami)":
+slog "<7>$(show_var whoami)"
 slog "<7>end"
 
 
