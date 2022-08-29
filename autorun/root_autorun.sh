@@ -64,7 +64,7 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 
 slog "<7>Xorg loaded";
 
-slog "<7>sleep some";
+#slog "<7>sleep some";
 #run_task sleep 17
 
 #start root GUI script
@@ -80,8 +80,8 @@ eval "${eval_this}";
 #slog "<7>sleep some";
 #( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
 #run_task sleep 17
-slog "<7>sleep 2";
-sleep 2
+#slog "<7>sleep 2";
+#sleep 2
 
 #start user i GUI script
 slog "<7>start user GUI script ${user_autorun_gui}";
@@ -89,8 +89,6 @@ slog "<7>start user GUI script ${user_autorun_gui}";
 eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${user_autorun_gui} & ' ";
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
-
-random_wait
 
 slog "<5>finish $0"
 

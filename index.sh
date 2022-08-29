@@ -362,6 +362,17 @@ function countdown ()
 }
 export -f countdown
 
+function random_wait ()
+{
+  local x
+  for ((x=42;x>=0;x--)); do
+      #echo -ne "\b\b\b\b\b\b\b\b $x  ";
+      slog "<7>$(show_var x) $whoami $EUID"
+      sleep "$(( RANDOM % 4 + 1)).$(( RANDOM % 99 + 11))";
+  done;
+}
+export -f random_wait
+
 function slog ()
 {
   #add message to systemd log
@@ -391,15 +402,6 @@ function slog ()
 }
 export -f slog
 
-function random_wait ()
-{
-  for ((x=42;x>=0;x--)); do
-      #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-      slog "<7>$(show_var x) $whoami $EUID"
-      sleep "$(( RANDOM % 4 + 1)).$(( RANDOM % 99 + 11))";
-  done;
-}
-export -f random_wait
 
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
@@ -535,4 +537,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='acave-5556704-2022-08-29-18-54-31'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='opuko-b9c02eb-2022-08-29-19-02-29'; echo "${script_subversion}=script_subversion"; 

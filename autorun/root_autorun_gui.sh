@@ -8,7 +8,6 @@
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare -x -g service_name='dzible.root_autorun_gui';   #for slog systemd logs
 
-set -x
 slog "<7>start"
 slog "<7>$(show_var EUID)"
 whoami="$(whoami)"

@@ -12,8 +12,6 @@ declare -x -g service_name='dzible.user_autorun_gui';   #for slog systemd logs
 #if you need sudo su as root, you can do the following
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
-set -x
-
 slog "<7>start $0"
 slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
@@ -22,12 +20,6 @@ xset led 3;
 
 run_task show_script_subversion
 
-countdown 10 1
-countdown 10 1
-countdown 10 1
-countdown 10 1
-countdown 10 1
-
 random_wait
 
 #run_task add_screen_resolution_with_cvt_xrandr
@@ -35,10 +27,7 @@ random_wait
 #cvt_xrandr 1280 1024 60
 
 #cvt_xrandr 1920 1080 60
-cvt_xrandr 1360 768 60
-
-run_task countdown 555 0.1
-run_task sleep 15
+#cvt_xrandr 1360 768 60
 
 #read
 
