@@ -7,5 +7,6 @@ xterm
 #zutty
 rxvt-unicode
 
+telegram-desktop
 
 
