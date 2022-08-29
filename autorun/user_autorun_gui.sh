@@ -22,6 +22,12 @@ xset led 3;
 
 run_task show_script_subversion
 
+countdown 10 1
+countdown 10 1
+countdown 10 1
+countdown 10 1
+countdown 10 1
+
 random_wait
 
 #run_task add_screen_resolution_with_cvt_xrandr
