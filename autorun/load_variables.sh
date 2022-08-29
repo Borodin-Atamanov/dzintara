@@ -7,4 +7,6 @@
 #source "/home/i/bin/dzible/index.sh" fun
 
 #One can find generated variables below
+#this script will load all dzible functions, variables, etc
+
 

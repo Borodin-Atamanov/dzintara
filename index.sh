@@ -366,7 +366,7 @@ function slog ()
   #slog "<4>warning message from dzible"
   #view logs with:
   # journalctl -b -t 'dzible' --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
-  #
+  # journalctl -b -t 'dzible' --all --reverse --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
   # <0>emerg: the system is unusable.
   # <1>alert: action must be taken immediately.
   # <2>crit: critical conditions.
@@ -521,4 +521,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='akixo-44485e2-2022-08-29-14-25-12'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='atufi-3d791f4-2022-08-29-14-43-34'; echo "${script_subversion}=script_subversion"; 

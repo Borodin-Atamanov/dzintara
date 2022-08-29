@@ -6,7 +6,6 @@
 
 #load variables
 source "/home/i/bin/dzible/autorun/load_variables.sh"
-declare_and_export work_dir "/home/i/bin/dzible/"
 
 set -x
 
