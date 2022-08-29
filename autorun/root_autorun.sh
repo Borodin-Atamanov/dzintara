@@ -46,8 +46,8 @@ slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
 
-slog "<7>start root console script plus ${root_autorun_plus}";
-eval_this="${fullpath_nohup} ${fullpath_bash} --login -c '( ${source_load_variables}; ${fullpath_nohup} ${root_autorun_plus} ) & '  ";
+slog "<7>start root console script plus  ${root_autorun_plus}";
+eval_this="su --login root --shell='${fullpath_bash}' --command='${source_load_variables}; ${fullpath_nohup} ${root_autorun_plus} & ' ";
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
