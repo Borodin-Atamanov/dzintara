@@ -364,6 +364,7 @@ export -f countdown
 
 function random_wait ()
 {
+  return 0;
   local x
   for ((x=42;x>=0;x--)); do
       #echo -ne "\b\b\b\b\b\b\b\b $x  ";
@@ -537,4 +538,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='edexa-7544d90-2022-08-29-19-48-11'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='omuru-34e277b-2022-08-29-19-56-30'; echo "${script_subversion}=script_subversion"; 
