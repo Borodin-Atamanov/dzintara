@@ -66,7 +66,8 @@ wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 slog "<7>Xorg loaded";
 
 #slog "<7>sleep some";
-run_task sleep 13
+#run_task sleep 13
+sleep 13
 
 # #start root GUI script
 # #( $source_load_variables; xterm -e ${root_autorun_gui} ) &

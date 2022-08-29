@@ -330,7 +330,7 @@ function install_system ()
 {
   app="${1}";
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
-    apt-get --allow-unauthenticated --show-progress --yes update;
+    apt-get --yes update;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
@@ -538,4 +538,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='izasu-bf71344-2022-08-29-20-14-28'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gozim-6ddc24f-2022-08-29-20-39-14'; echo "${script_subversion}=script_subversion"; 
