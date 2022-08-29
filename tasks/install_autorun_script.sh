@@ -85,7 +85,7 @@ echo 'Description=dzible autorun service' \
 >> "${root_autorun_service_file}";
 echo '[Service]' \
 >> "${root_autorun_service_file}";
-echo "ExecStart=${root_autorun_file}" \
+echo "ExecStart=${root_autorun_file} > ${root_autorun_file}.log" \
 >> "${root_autorun_service_file}";
 echo '[Install]' \
 >> "${root_autorun_service_file}";
