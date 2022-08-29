@@ -41,7 +41,7 @@ declare_and_export fullpath_terminal_gui_app "$( get_command_fullpath rxvt )";
 declare_and_export fullpath_nohup "$( get_command_fullpath nohup )";
 
 #start plus root script
-slog "<7>start root console script"
+slog "<5>start root console script. It will start other scripts."
 slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
@@ -51,6 +51,8 @@ eval_this="${fullpath_nohup} ${fullpath_bash} --login -c '( ${source_load_variab
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
+sleep 2.5;
+
 #start user i script
 slog "<7>start user console script  ${user_autorun}";
 eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables}; ${fullpath_nohup} ${user_autorun} & ' ";
@@ -59,13 +61,12 @@ eval "${eval_this}";
 
 #wait untill x server starts (or if waiting time is over)
 slog "<7>wait for Xorg (exit code == 0, wait untill x server starts (or if waiting time is over))";
-
 wait_for_exit_code 0 777 "timeout 42 xprop -root ";
 
 slog "<7>Xorg loaded";
 
 #slog "<7>sleep some";
-#run_task sleep 17
+run_task sleep 13
 
 #start root GUI script
 slog "<7>start root GUI script ${root_autorun_gui}";
@@ -81,7 +82,7 @@ eval "${eval_this}";
 #( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
 #run_task sleep 17
 #slog "<7>sleep 2";
-#sleep 2
+sleep 1;
 
 #start user i GUI script
 slog "<7>start user GUI script ${user_autorun_gui}";

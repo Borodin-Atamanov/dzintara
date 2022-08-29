@@ -8,23 +8,16 @@
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare -x -g service_name='dzible.root_autorun_gui';   #for slog systemd logs
 
-slog "<7>start"
+slog "<5>start"
 slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
 #countdown 31337 0.1
 #sleep 37
 
-countdown 10 1
-countdown 10 1
-countdown 10 1
-countdown 10 1
-countdown 10 1
-
 random_wait
 
 slog "<5>finish $0"
-
 
 #
 # #( xmessage -buttons ok,no,wow -default wow -timeout 4 -print -nearmouse "hello" ); echo $?
