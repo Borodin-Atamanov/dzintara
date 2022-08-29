@@ -6,7 +6,7 @@
 
 #source "/home/i/bin/dzible/autorun/load_variables.sh"
 #declare_and_export work_dir "/home/i/bin/dzible/"
-declare -x -g service_name='dzible.root_autorun_final';   #for slog systemd logs
+declare -x -g service_name='dzible.root_autorun_plus';   #for slog systemd logs
 
 #access control disabled, clients can connect from any host
 # xhost +

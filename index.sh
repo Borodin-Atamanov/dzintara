@@ -369,8 +369,8 @@ function slog ()
   #slog "<7>debug message from dzible"
   #slog "<4>warning message from dzible"
   #view logs with:
-  # journalctl --all --reverse --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_final -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
-  # journalctl --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_final -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
+  # journalctl --all --reverse --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_plus -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
+  # journalctl --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_plus -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
   # <0>emerg: the system is unusable.
   # <1>alert: action must be taken immediately.
   # <2>crit: critical conditions.
@@ -391,16 +391,15 @@ function slog ()
 }
 export -f slog
 
-function random_wait ()
-{
-  for ((x=42;x>=0;x--)); do
-      #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-      slog "<7>$(show_var x) $whoami $EUID"
-      sleep "$(( RANDOM % 4 + 1)).$(( RANDOM % 99 + 11))";
-  done;
-}
-export -f random_wait
-
+# function random_wait ()
+# {
+#   for ((x=42;x>=0;x--)); do
+#       #echo -ne "\b\b\b\b\b\b\b\b $x  ";
+#       slog "<7>$(show_var x) $whoami $EUID"
+#       sleep "$(( RANDOM % 4 + 1)).$(( RANDOM % 99 + 11))";
+#   done;
+# }
+# export -f random_wait
 
 declare_and_export function_loaded "1"
 declare_and_export install_dir "/home/i/bin/dzible/"
@@ -536,4 +535,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='asegi-9341871-2022-08-29-17-56-28'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='alupe-1a8012b-2022-08-29-18-25-29'; echo "${script_subversion}=script_subversion"; 

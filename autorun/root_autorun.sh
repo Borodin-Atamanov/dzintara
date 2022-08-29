@@ -4,8 +4,10 @@
 #License: MIT
 #script autorun on target system in root mode
 
-#This script also calls 3 another script;
+#This script also calls another scripts:
+
 # 0. load_variables.sh - sourced to all scripts, it includes important variables, what is needed to X11 applications
+# root_autorun_final.sh
 # 1. root script after gui started
 # 2. user i script before gui
 # 3. user i script after gui started
