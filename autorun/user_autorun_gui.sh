@@ -36,4 +36,5 @@ run_task sleep 15
 
 #read
 
-slog "<5>end2"
+slog "<5>finish $0"
+

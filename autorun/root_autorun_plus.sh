@@ -22,7 +22,4 @@ slog "<7>end"
 
 random_wait
 
-slog "<7>end $0"
-#read
-
-#sleep 35;
+slog "<5>finish $0"

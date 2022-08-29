@@ -17,7 +17,8 @@ slog "<7>$(show_var whoami)"
 #sleep 37
 random_wait
 
-slog "<7>end"
+slog "<5>finish $0"
+
 
 #
 # #( xmessage -buttons ok,no,wow -default wow -timeout 4 -print -nearmouse "hello" ); echo $?

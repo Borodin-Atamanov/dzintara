@@ -120,4 +120,4 @@ random_wait
 
 #source /home/i/bin/dzible/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzible/autorun/user_autorun_gui.sh;
 
-slog "<7>end";
+slog "<5>finish $0"
