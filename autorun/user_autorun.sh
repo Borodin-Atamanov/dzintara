@@ -20,7 +20,14 @@ whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
 slog "<7>end"
 
+for ((x=42;x>=0;x--)); do
+    #echo -ne "\b\b\b\b\b\b\b\b $x  ";
+    slog "<7>$(show_var x) $whoami $EUID $0"
+    #countdown 7 1
+    sleep 10.42;
+done;
 
+slog "<7>end $0"
 #read
 
 #sleep 35;

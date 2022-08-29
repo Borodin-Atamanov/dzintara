@@ -25,7 +25,6 @@ run_task show_script_subversion
 for ((x=42;x>=0;x--)); do
     #echo -ne "\b\b\b\b\b\b\b\b $x  ";
     slog "<7>$(show_var x) $whoami $EUID"
-    countdown 7 1
     sleep 11.42;
 done;
 
