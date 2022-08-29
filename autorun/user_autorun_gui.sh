@@ -21,6 +21,8 @@ xset led 3;
 
 run_task show_script_subversion
 
+nohup telegram-desktop &
+
 random_wait
 
 #run_task add_screen_resolution_with_cvt_xrandr

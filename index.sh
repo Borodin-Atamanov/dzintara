@@ -515,6 +515,7 @@ else
 fi
 
 run_task show_script_subversion
+run_task sleep 4
 run_task timezone_set
 run_task install_autorun_script
 run_task install_console_apps
@@ -538,4 +539,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ozoti-12673a1-2022-08-29-20-43-08'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='asedi-8bd52ab-2022-08-29-20-48-01'; echo "${script_subversion}=script_subversion"; 
