@@ -47,6 +47,15 @@ if [[ "${DISPLAY}" = "" ]]; then
 fi
 declare_and_export XAUTHORITY '/home/i/.Xauthority';
 
+save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
+save_var_in_base32 work_dir "${install_dir}" >> "${load_variables_file}";
+
+echo 'cd "${work_dir}";' >> "${load_variables_file}";
+#echo "cd '${install_dir}';" >> "${load_variables_file}";
+
+echo 'source "${work_dir}/index.sh" fun' >> "${load_variables_file}";
+#source "/home/i/bin/dzible/index.sh" fun
+
 save_var_in_text DISPLAY "$DISPLAY" >> "${load_variables_file}";
 save_var_in_base32 DISPLAY "$DISPLAY" >> "${load_variables_file}";
 
@@ -54,15 +63,6 @@ save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
-
-save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
-save_var_in_base32 work_dir "${install_dir}" >> "${load_variables_file}";
-
-#source "/home/i/bin/dzible/index.sh" fun
-
-echo 'cd "${work_dir}";' >> "${load_variables_file}";
-echo 'source "${work_dir}/index.sh" fun' >> "${load_variables_file}";
-#echo "cd '${install_dir}';" >> "${load_variables_file}";
 
 chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;

@@ -27,11 +27,9 @@ sleep 11.42;
 for ((i=42;i>=0;i--)); do
     echo -ne "\b\b\b\b\b\b\b\b $i  ";
     slog "<7>$(show_var i)":
-    countdown 77 0.111
+    countdown 5 2
     sleep 11.42;
 done;
-
-countdown 250 0.1
 
 run_task show_script_subversion
 #run_task add_screen_resolution_with_cvt_xrandr
@@ -45,7 +43,5 @@ run_task countdown 555 0.1
 run_task sleep 15
 
 #read
-
-sleep 35;
 
 slog "<5>end2"
