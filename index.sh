@@ -42,7 +42,8 @@ function run_task ()
       timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
     );
     #kill counter process
-    kill -9 $countdown_pid;
+    #kill -9 $countdown_pid;
+    kill -- -$countdown_pid;
     #killall --verbose "countdown.sh";
     echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended \n\n\n";
   else
@@ -364,7 +365,7 @@ function slog ()
   #slog "<7>debug message from dzible"
   #slog "<4>warning message from dzible"
   #view logs with:
-  #journalctl -b -t 'dzible' --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.user_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
+  # journalctl -b -t 'dzible' --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
   #
   # <0>emerg: the system is unusable.
   # <1>alert: action must be taken immediately.
@@ -515,4 +516,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ofibi-9a04567-2022-08-29-12-35-57'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ufagu-ef3d50c-2022-08-29-13-08-05'; echo "${script_subversion}=script_subversion"; 

@@ -8,6 +8,8 @@
 source "/home/i/bin/dzible/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzible/"
 
+set -x
+
 declare -x -g service_name='dzible.root_autorun_gui';   #for slog systemd logs
 
 slog "<7>start"
@@ -19,8 +21,8 @@ slog "<7>$(show_var whoami)":
 for ((i=42;i>=0;i--)); do
     echo -ne "\b\b\b\b\b\b\b\b $i  ";
     slog "<7>$(show_var i)":
-    countdown 77 0.1
-    sleep 2.42;
+    #countdown 77 0.1
+    sleep 12.42;
 done;
 slog "<7>end"
 

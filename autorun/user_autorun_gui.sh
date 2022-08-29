@@ -13,6 +13,7 @@ declare -x -g service_name='dzible.user_autorun_gui';   #for slog systemd logs
 #if you need sudo su as root, you can do the following
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
+set -x
 
 slog "<7>start"
 slog "<7>$(show_var EUID)":
@@ -26,7 +27,7 @@ for ((i=42;i>=0;i--)); do
     echo -ne "\b\b\b\b\b\b\b\b $i  ";
     slog "<7>$(show_var i)":
     countdown 77 0.111
-    sleep 1.42;
+    sleep 11.42;
 done;
 
 countdown 250 0.1
