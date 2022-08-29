@@ -12,6 +12,7 @@
 
 # root_autorun.sh
 #    ├── load_variables.sh
+#    ├── root_autorun_final.sh
 #    ├── user_autorun.sh
 #    ├── root_autorun_gui.sh
 #    └── user_autorun_gui.sh
@@ -81,12 +82,7 @@ eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_vari
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 
-for ((x=42;x>=0;x--)); do
-    #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-    slog "<7>$(show_var x) $whoami $EUID $0"
-    #countdown 7 1
-    sleep 13.42;
-done;
+random_wait
 
 #( $source_load_variables; su --login i --shell="/bin/bash"  --command="$source_load_variables; xterm -e '${user_autorun_gui}' " ) &
 #( $source_load_variables; ${user_autorun_gui} ) &

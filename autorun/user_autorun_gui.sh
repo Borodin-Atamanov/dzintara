@@ -22,11 +22,7 @@ xset led 3;
 
 run_task show_script_subversion
 
-for ((x=42;x>=0;x--)); do
-    #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-    slog "<7>$(show_var x) $whoami $EUID"
-    sleep 11.42;
-done;
+random_wait
 
 #run_task add_screen_resolution_with_cvt_xrandr
 

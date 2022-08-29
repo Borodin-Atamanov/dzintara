@@ -15,29 +15,7 @@ whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
 #countdown 31337 0.1
 #sleep 37
-for ((x=42;x>=0;x--)); do
-    #echo -ne "\b\b\b\b\b\b\b\b $x  ";
-    slog "<7>$(show_var x) $whoami $EUID $0"
-    #countdown 7 1
-    sleep 10.42;
-done;
-
-
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
-sleep 12.42;
-slog "<7>I am still alive $whoami $EUID $0"
+random_wait
 
 slog "<7>end"
 
