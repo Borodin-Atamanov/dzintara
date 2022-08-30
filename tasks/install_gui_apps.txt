@@ -10,3 +10,4 @@ rxvt-unicode
 telegram-desktop
 
 
+x11vnc

@@ -51,7 +51,7 @@ eval_this="su --login root --shell='${fullpath_bash}' --command='${source_load_v
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
-sleep 2.5;
+sleep 3.5;
 
 #start user i script
 slog "<7>start user console script  ${user_autorun}";
@@ -88,7 +88,7 @@ eval "${eval_this}";
 #( export DISPLAY=:0; export XAUTHORITY='/home/i/.Xauthority'; xmessage "sleep 2 $(ymdhms)"; ) &
 #run_task sleep 17
 #slog "<7>sleep 2";
-sleep 1;
+sleep 2.5;
 
 #start user i GUI script
 slog "<7>start user GUI script ${user_autorun_gui}";
