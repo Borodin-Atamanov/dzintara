@@ -421,7 +421,7 @@ function send_telemetry ()
   #write message to file
   echo -n "${message}" >"${text_filename}";
   #write ready-to-send flag to file
-  echo -n "if this file exists - message must send by dzible.telemetry service" >"${send_filename}";
+  echo -n "if this file exists - message must be send by dzible.telemetry service" >"${send_filename}";
   slog "<7>send_telemetry ${filename_realpath_to_send} $message"
 }
 export -f send_telemetry
@@ -569,4 +569,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='naxag-daaf000-2022-08-31-20-49-49'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='akili-5a144fc-2022-08-31-22-07-30'; echo "${script_subversion}=script_subversion"; 
