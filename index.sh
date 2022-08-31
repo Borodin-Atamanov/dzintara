@@ -524,7 +524,7 @@ fi
 run_task show_script_subversion
 #run_task sleep 4
 #run_task timezone_set
-#run_task install_autorun_script
+run_task install_autorun_script
 #run_task install_console_apps
 #run_task install_gui_apps
 #run_task add_screen_resolution_with_cvt_xrandr
@@ -533,7 +533,7 @@ run_task show_script_subversion
 # run_task root_password_for_sudoers
 # run_task sshd_config
 # run_task ssh_config
-run_task install_telemerty
+run_task install_telemetry
 run_task sleep 11
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -547,4 +547,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ugepa-daa542c-2022-08-31-16-34-00'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='axede-cab9702-2022-08-31-16-40-48'; echo "${script_subversion}=script_subversion"; 

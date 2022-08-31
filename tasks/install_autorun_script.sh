@@ -105,9 +105,9 @@ _ENDOFFILE
 show_var dzible_service_settings
 echo "$dzible_service_settings" > "${root_autorun_service_file}";
 
-systemctl start dzible_telemetry | cat
-systemctl enable dzible_telemetry | cat
-systemctl status dzible_telemetry | cat
+systemctl start dzible| cat
+systemctl enable dzible | cat
+systemctl status dzible | cat
 
 #read logs:
 #journalctl -b -u dzible_telemetry
