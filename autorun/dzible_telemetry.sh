@@ -18,7 +18,7 @@ $source_load_variables;
 source "${work_dir_autorun}load_variables.sh";
 
 declare -x -g service_name='dzible.telemetry';   #for slog systemd logs
-slog "<5>start dzible.telemetry. It will send some anonimous telemetry data."
+slog "<5>start dzible.telemetry. It will send some anonymous telemetry data."
 
 #load password to decrypt secrets
 #source "${root_vault_password_file}";
@@ -36,5 +36,12 @@ eval "${decrypted_data}";
 #echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
 
 #show_var telemetry_telegram_bot_token
+
+mkdir -pv "${telemetry_queue_dir}";
+chown --verbose --changes --recursive  root:root "${telemetry_queue_dir}";
+chmod --verbose 0777 "${telemetry_queue_dir}";
+
+#TODO create main loop where monitor new directories
+#
 
 sleep 3;

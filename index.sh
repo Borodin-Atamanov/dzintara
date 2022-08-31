@@ -403,6 +403,27 @@ function slog ()
 }
 export -f slog
 
+function send_telemetry ()
+{
+  #function save data in {$telemetry_queue_dir}
+  #required dzible.telemetry systemd service
+  local file="$1"; #file
+  local message="$2"; #message
+  random_dir_name="${telemetry_queue_dir}$( ymdhms )-$( random_str 5; )-$RANDOM";
+  mkdir -pv "${random_dir_name}";
+  text_filename="${random_dir_name}/text.txt";
+  file_filename="${random_dir_name}/file.txt";
+  send_filename="${random_dir_name}/send.txt";
+  filename_realpath_to_send="$(realpath "$file")"; #get full path to file
+  #write filename to file
+  echo -n "${filename_realpath_to_send}" >"${file_filename}";
+  #write message to file
+  echo -n "${message}" >"${text_filename}";
+  #write ready-to-send flag to file
+  echo -n "if this file exists - message must send by dzible.telemetry service" >"${send_filename}";
+  slog "<7>send_telemetry ${filename_realpath_to_send} $message"
+}
+export -f send_telemetry
 
 declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
@@ -416,7 +437,7 @@ declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible
 declare_and_export root_autorun_service_file '/etc/systemd/system/dzible.service'; #dzible autorun service, what run on system boot
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzible-script after system install
 declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
-declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue'  #directory, what used to save and send telemetry data
+declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
@@ -547,4 +568,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='unepe-9c2921f-2022-08-31-18-03-41'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='arodi-7b08ade-2022-08-31-18-57-01'; echo "${script_subversion}=script_subversion"; 
