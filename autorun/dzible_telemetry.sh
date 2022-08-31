@@ -62,10 +62,12 @@ function telemetry_get_next_message_dir ()
     #next_dir=$( find "${telemetry_queue_dir}" -maxdepth 2 -mindepth 2 -type f -name 'send.txt' -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | xargs -r realpath )
     next_dir=$( find "${telemetry_queue_dir}" -maxdepth 2 -mindepth 2 -type f -name 'send.txt' -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 1)
     next_dir=$( dirname "${next_dir}" );
+    next_dir=$([[ "$next_dir" = "." ]] && next_dir='' || echo -n "$next_dir")
     echo -n "${next_dir}";
     cd "${OLD_DIR}";
+    [[ "$next_dir" != "" ]] && return 0 || return -1
 }
-export function telemetry_get_next_message_dir
+export -f telemetry_get_next_message_dir
 
 function telemetry_send_telegram_dir ()
 {
@@ -77,12 +79,14 @@ function telemetry_send_telegram_dir ()
     #file.txt - filepath to send file
 
     OLD_DIR=$(pwd);
+    mkdir -pv "${telemetry_queue_dir}";
     cd "${telemetry_queue_dir}";
     target_dir=$( realpath "${target_dir}" );
     if [[ "${target_dir}" = "$( realpath "${telemetry_queue_dir}")" ]]; then
         slog "<7>Will not process root directory ${target_dir}"
         return 2;
     fi;
+    slog "<7>telemetry_send_telegram_dir ${target_dir}"
 
     touch "${target_dir}/send.txt"; #update time of file
     #curl --verbose -F chat_id=${telemetry_telegram_bot_chat_id} -F document=@$curdir/$1 https://api.telegram.org/bot${telemetry_telegram_bot_token}/sendDocument
@@ -110,7 +114,7 @@ function telemetry_send_telegram_dir ()
         send_text=$(cat "${target_dir}/text.txt");
     fi;
 
-    slog "<7>$(show_var send_file) $(show_var send_text)"
+    slog "<7>$(show_var send_file send_text)"
     if [[ "${send_file}" != "" ]]; then
         #send file and message
         #request="curl --verbose --form chat_id='${telemetry_telegram_bot_chat_id}' --form document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
@@ -128,11 +132,14 @@ function telemetry_send_telegram_dir ()
     #check result for "ok" substring
     if [[ "$result" == *'"ok"'* ]]; then
         slog '<7>result is "ok"';
-        #TODO delete target dir if message sent successfully
+        exit_code=0;
         declare -x -g telemetry_next_wait="0.$RANDOM";
+        #delete target dir if message sent successfully
         rm -rv "$target_dir";
+        mkdir -pv "${telemetry_queue_dir}";
     else
         slog '<5>result is not "ok"!';
+        exit_code=-1;
         #will increase waiting time if something is not ok
         declare -x -g telemetry_next_wait=$( awkcalc "1 + 2 * $telemetry_next_wait" )
     fi
@@ -143,32 +150,45 @@ function telemetry_send_telegram_dir ()
     #wait a sec after last message sended. Wait time depends of the result
     sleep $telemetry_next_wait;
 
-    # chatId='-698761873'
-    # botToken='5692208524:AAF6-zMUUVw_glwuxAKYd12FExupW-lWsP8'
-    # file="$1"
-    # file='augeas_commands.txt';
-    # curdir=$PWD
-    # echo "sending $file"
-    #
-    # #curl --verbose -F chat_id=$chatId -F document=@$curdir/$1 https://api.telegram.org/bot$botToken/sendDocument
-    # #curl --verbose -F chat_id=$chatId -F document=@"${file}" https://api.telegram.org/bot${botToken}/sendDocument
-    # # more about gist on my site — amorev.ru/telegram-terminal-file-send
+    return $exit_code;
 }
-export function telemetry_get_next_message_dir
+export -f telemetry_send_telegram_dir
 
+#/proc/sys/fs/inotify/max_user_instances
+orig_max_user_instances=$(cat '/proc/sys/fs/inotify/max_user_instances');
+max_user_instances=$(max $orig_max_user_instances 1048571)
+echo -n "$max_user_instances" > '/proc/sys/fs/inotify/max_user_instances';
+show_var orig_max_user_instances max_user_instances
+
+: "${telemetry_next_wait:=1}"; #set default value if variable is not set
 
 #TODO create cycle with inotify
-for ((i=1;i>=0;i--)); do
-    next_dir=$(telemetry_get_next_message_dir)
-    show_var next_dir
-    telemetry_send_telegram_dir "${next_dir}"
-    echo "$(show_var next_dir)";
-    sleep 0.1;
+# inotifywait  -e close_write --recursive '/var/spool/dzible_telemetry_queue/'
+#for ((i=5;i>=0;i--)); do
+while : ; do :
+    #process all existing directories here
+    while : ; do :
+        # process all existing directories here
+        next_dir="$( telemetry_get_next_message_dir )";
+        show_var next_dir inotifyresult
+        if [[ "$next_dir" = ""  ]]; then
+            slog '<7>Existing directories have run out. Lets wait with inotifywait';
+            break;
+        else
+            slog "<7>continue with next_dir=${next_dir}";
+            sleep $telemetry_next_wait;
+        fi;
+        telemetry_send_telegram_dir "$next_dir"
+    done;
+    #will wait for new directories
+    inotifyresult="$( timeout --kill-after=77 3777 inotifywait  -e create --recursive "${telemetry_queue_dir}" )";
+    sleep $telemetry_next_wait;
+    show_var inotifyresult
 done;
 
 #send_telemetry "/home/i/github/dzible/test/heredoc_test.sh" "sended file /proc/cpuinfo"
-file1="/home/i/github/dzible/LICENSE"
 file1="/proc/cpuinfo";
+file1="/home/i/github/dzible/LICENSE"
 send_telemetry "${file1}" "${file1} sended file "
 
 #exit 0;

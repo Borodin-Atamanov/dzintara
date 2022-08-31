@@ -202,9 +202,16 @@ export -f get_var
 
 function show_var ()
 {
-  varname="${1}";
-  echo -n "$varname=";
-  echo '"'$( get_var "${varname}" )'"';
+  #show variables and it values, not only one
+  for varname in "$@"
+  do
+      echo -n "$varname=";
+      echo -n '"'$( get_var "${varname}" )'" ';
+  done
+  echo "";
+  #   varname="${1}";
+  #   echo -n "$varname=";
+  #   echo '"'$( get_var "${varname}" )'"';
 }
 export -f show_var
 
@@ -426,6 +433,18 @@ function send_telemetry ()
 }
 export -f send_telemetry
 
+function max ()
+{
+  echo -n $(( $2  > $1 ? $2 : $1 ))
+}
+export -f max
+
+function min ()
+{
+  echo -n $(( $2 < $1 ? $2 : $1 ))
+}
+export -f min
+
 declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
@@ -569,4 +588,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='fizat-52e89fd-2022-08-31-22-55-44'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='oname-7036e8c-2022-09-01-00-22-41'; echo "${script_subversion}=script_subversion"; 
