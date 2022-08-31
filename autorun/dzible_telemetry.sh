@@ -23,7 +23,7 @@ slog "<5>start dzible.telemetry. It will send some anonimous telemetry data."
 #load password to decrypt secrets
 #source "${root_vault_password_file}";
 root_vault_password=$(cat "${root_vault_password_file}" | base32 -d -i);
-show_var root_vault_password
+#show_var root_vault_password
 
 #decrypt root vault
 encrypted_data=$(cat "${root_vault_file}");
@@ -34,5 +34,7 @@ show_var decrypt_aes_error
 #load all variables from decrypted vault
 eval "${decrypted_data}";
 #echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
+
+show_var telemetry_telegram_bot_token
 
 sleep 3;
