@@ -17,27 +17,39 @@ chown --verbose --changes --recursive  root:root "${telemetry_queue_dir}";
 chmod --verbose 0777 "${telemetry_queue_dir}";
 #find "${telemetry_queue_dir}" -type d -exec chmod --verbose 0777 {} \;
 
-#add variables to 'autorun/load_variables.sh'
-#it will look like this "declare -g -x root_password=$(echo 'Z2Ftb25lZml2YQ=='  | openssl base64 -d ); export root_pass;"
-#root_pass
-#save_var_in_base64 root_password "$( get_var "${secrets}_${computer_name}_root_password" )" >> "${load_variables_file}";
+#generate password to encrypt root.vault file
+root_vault_password="$( random_str 37;  )$( ymdhms )$RANDOM"
+show_var root_vault_password_file
+#save password to file
+save_var_in_base32 root_vault_password "$( get_var "root_vault_password" )" > "${root_vault_password_file}"
+cat "${root_vault_password_file}"
 
-#_user_i_password
-#save_var_in_base64 user_i_password "$( get_var "${secrets}_${computer_name}_user_i_password" )" >> "${load_variables_file}";
+#accumulate variables in string
+root_vault_plain='';
+root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_token "$( get_var "telemetry_telegram_bot_token" )" )";
+root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_chat_id "$( get_var "telemetry_telegram_bot_chat_id" )" )";
+root_vault_plain="${root_vault_plain} random_var='$( ymdhms )'; ";
+show_var root_vault_plain
 
-#save_var_in_base64 script_subversion "$( get_var "script_subversion" )" >> "${load_variables_file}";
-#echo 'echo "$script_subversion"; ' >> "${load_variables_file}";
+#encrypt data with password with AES
+encrypted_data=$( encrypt_aes "${root_vault_password}" "${root_vault_plain}"; )
+echo -n "${encrypted_data}" > "${root_vault_file}";
+show_var encrypted_data
 
-#export >> "${load_variables_file}";
-#export all ENV variables, expect some secrets
-#export | grep  -v 'password' | grep  -v 'secrets'  | grep  -v 'work_dir' | sort >> "${load_variables_file}";
+chmod --verbose 0600 "${root_vault_file}";
+chmod --verbose 0600 "${root_vault_password_file}"
+chown --verbose --changes --recursive  root:root "${root_vault_file}";
+chown --verbose --changes --recursive  root:root "${root_vault_password_file}"
 
-#start cron on system start
-#systemctl enable cron
+# decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
+# echo "decrypt_aes_error=${decrypt_aes_error}";
+# echo "$decrypted_data";
+# #load all variables from decrypted vault
+# eval "${decrypted_data}";
+#exit 0;
 
 #add script as autorun service to systemd for root
 #create systemd service unit file
-
 telemetry_service_settings=$(cat <<_ENDOFFILE
 [Unit]
 Description=dzible telemetry service
@@ -52,7 +64,8 @@ show_var telemetry_service_settings
 echo "$telemetry_service_settings" > "${telemetry_service_file}";
 #show_var telemetry_service_settings
 
-systemctl status dzible_telemetry | tac
+systemctl daemon-reload
+#systemctl status dzible_telemetry | tac
 systemctl restart dzible_telemetry
 systemctl enable dzible_telemetry | tac
 systemctl status dzible_telemetry | tac

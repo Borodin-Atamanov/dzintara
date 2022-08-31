@@ -69,26 +69,41 @@ find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 #TODO set different rights to files. Some files must be secret for regular user
 
-#install_system stterm
 
-#start cron on system start
-#systemctl enable cron
+
+#install_system stterm
 
 #add script as autorun service to systemd for root
 #create systemd service autorun unit file
-echo -n "" > "${root_autorun_service_file}";
-echo '[Unit]' \
->> "${root_autorun_service_file}";
-echo 'Description=dzible autorun service' \
->> "${root_autorun_service_file}";
-echo '[Service]' \
->> "${root_autorun_service_file}";
-echo "ExecStart=${root_autorun_file} > ${root_autorun_file}.log" \
->> "${root_autorun_service_file}";
-echo '[Install]' \
->> "${root_autorun_service_file}";
-echo 'WantedBy=multi-user.target' \
->> "${root_autorun_service_file}";
+# echo -n "" > "${root_autorun_service_file}";
+# echo '[Unit]' \
+# >> "${root_autorun_service_file}";
+# echo 'Description=dzible autorun service' \
+# >> "${root_autorun_service_file}";
+# echo '[Service]' \
+# >> "${root_autorun_service_file}";
+# echo "ExecStart=${root_autorun_file} > ${root_autorun_file}.log" \
+# >> "${root_autorun_service_file}";
+# echo '[Install]' \
+# >> "${root_autorun_service_file}";
+# echo 'WantedBy=multi-user.target' \
+# >> "${root_autorun_service_file}";
+
+
+#add script as autorun service to systemd for root
+#create systemd service unit file
+dzible_service_settings=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzible autorun service
+[Service]
+ExecStart=${root_autorun_file}
+[Install]
+WantedBy=multi-user.target
+_ENDOFFILE
+)
+
+show_var dzible_service_settings
+echo "$dzible_service_settings" > "${root_autorun_service_file}";
 
 systemctl start dzible_telemetry | cat
 systemctl enable dzible_telemetry | cat

@@ -54,7 +54,7 @@ for f in *plain*; do
 done;
 cd "..";
 
-exit 111;
+exit 0;
 
 random_pass=$(random_str 6000)
 #random_str 6

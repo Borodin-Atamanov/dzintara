@@ -404,7 +404,7 @@ function slog ()
 export -f slog
 
 
-declare_and_export function_loaded "1"  #flag. Means what dzible functions loaded
+declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
@@ -419,6 +419,8 @@ declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #w
 declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
+declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
+declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
 
 #TODO ask target computer name on script start
 
@@ -545,4 +547,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='enopi-43e09a2-2022-08-31-14-51-55'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ugepa-daa542c-2022-08-31-16-34-00'; echo "${script_subversion}=script_subversion"; 
