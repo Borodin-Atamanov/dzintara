@@ -5,6 +5,10 @@
 #script on target system in root mode, and sends some telemetry data
 #read data from telemetry_queue_dir
 
+#view logs:
+#journalctl --all --follow --priority=7 -t dzible_telemetry
+#tail -f /var/log/syslog | grep dzible;
+
 declare -g -x work_dir="/home/i/bin/dzible/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzible/"
@@ -42,6 +46,39 @@ chown --verbose --changes --recursive  root:root "${telemetry_queue_dir}";
 chmod --verbose 0777 "${telemetry_queue_dir}";
 
 #TODO create main loop where monitor new directories
+
+function telemetry_get_next_message_dir ()
+{
+    #get next directory with message
+    OLD_DIR=$(pwd);
+    cd "${telemetry_queue_dir}";
+    export TAB=$'\t';
+    #TAB=$'\t'; find . -type f -print0 | xargs -0 /bin/busybox stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 3 | xargs -r rm -v
+    #find "${telemetry_queue_dir}" -type d -print0 | xargs -0 /usr/bin/stat -c "%y${TAB}%n"
+    #find . -type d -print0 | xargs -0 /usr/bin/stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 1 | xargs -r echo $0
+    next_dir=$(find "${telemetry_queue_dir}" -maxdepth 1 -mindepth 1  -type d -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 1 );
+    next_dir=$( realpath "${next_dir}" );
+    echo -n "${next_dir}";
+    cd "${OLD_DIR}";
+}
+export function telemetry_get_next_message_dir
+
+next_dir="$(telemetry_get_next_message_dir)"
+show_var next_dir
+
+
+while 1 ; do
+    #countdown 15 0.1
+    countdown
+    echo 1;
+    sleep 1;
+done;
 #
+# time for dir in */ ;
+# do echo "$dir";
+#     cd "$dir";
+#     : ;
+#     cd "${BDIR}";
+# done;
 
 sleep 3;
