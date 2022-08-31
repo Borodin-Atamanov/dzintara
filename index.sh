@@ -422,9 +422,11 @@ function send_telemetry ()
   text_filename="${random_dir_name}/text.txt";
   file_filename="${random_dir_name}/file.txt";
   send_filename="${random_dir_name}/send.txt";
-  filename_realpath_to_send="$(realpath "$file")"; #get full path to file
+  filename_realpath_to_send="$(realpath --quiet "$file")"; #get full path to file
   #write filename to file
-  echo -n "${filename_realpath_to_send}" >"${file_filename}";
+  if [[ "$file" != "" ]]; then
+    echo -n "${filename_realpath_to_send}" >"${file_filename}";
+  fi;
   #write message to file
   echo -n "${message}" >"${text_filename}";
   #write ready-to-send flag to file
@@ -588,4 +590,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='oname-7036e8c-2022-09-01-00-22-41'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='zafic-cfc1348-2022-09-01-00-42-48'; echo "${script_subversion}=script_subversion"; 
