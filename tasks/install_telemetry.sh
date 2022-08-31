@@ -21,7 +21,9 @@ chmod --verbose 0777 "${telemetry_queue_dir}";
 root_vault_password="$( random_str 37;  )$( ymdhms )$RANDOM"
 show_var root_vault_password_file
 #save password to file
-save_var_in_base32 root_vault_password "$( get_var "root_vault_password" )" > "${root_vault_password_file}"
+#save_var_in_base32 root_vault_password "$( get_var "root_vault_password" )" > "${root_vault_password_file}"
+#root_vault_password
+echo -n "$root_vault_password" | base32 > "${root_vault_password_file}"
 cat "${root_vault_password_file}"
 
 #accumulate variables in string

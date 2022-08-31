@@ -14,7 +14,25 @@ declare -g -x work_dir_autorun="${work_dir}autorun/";
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-declare -x -g service_name='dzible.telemetry';   #for slog systemd logs
+#load secret variables
+source "${work_dir_autorun}load_variables.sh";
 
-#start plus root script
-slog "<5>start root console script. It will start other scripts."
+declare -x -g service_name='dzible.telemetry';   #for slog systemd logs
+slog "<5>start dzible.telemetry. It will send some anonimous telemetry data."
+
+#load password to decrypt secrets
+#source "${root_vault_password_file}";
+root_vault_password=$(cat "${root_vault_password_file}" | base32 -d -i);
+show_var root_vault_password
+
+#decrypt root vault
+encrypted_data=$(cat "${root_vault_file}");
+#encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
+decrypted_data=$(decrypt_aes "${root_vault_password}" "${encrypted_data}")
+show_var decrypt_aes_error
+#echo "$decrypted_data";
+#load all variables from decrypted vault
+eval "${decrypted_data}";
+#echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
+
+sleep 3;
