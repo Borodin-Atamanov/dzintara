@@ -35,6 +35,6 @@ show_var decrypt_aes_error
 eval "${decrypted_data}";
 #echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
 
-show_var telemetry_telegram_bot_token
+#show_var telemetry_telegram_bot_token
 
 sleep 3;
