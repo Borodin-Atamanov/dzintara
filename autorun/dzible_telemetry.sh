@@ -71,6 +71,11 @@ function telemetry_send_telegram_dir ()
 {
     #get directory with telemetry message, try to send it to telegram
     target_dir="${1}";
+    #in directory we will find:
+    #text.txt - text to send
+    #send.txt - mark, what means what directory ready for send data
+    #file.txt - filepath to send file
+
     OLD_DIR=$(pwd);
     cd "${telemetry_queue_dir}";
     target_dir=$( realpath "${target_dir}" );
@@ -110,33 +115,33 @@ function telemetry_send_telegram_dir ()
         #send file and message
         #request="curl --verbose --form chat_id='${telemetry_telegram_bot_chat_id}' --form document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
         #request="curl --verbose --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
-        request="curl --form  document=@'${send_file}' --form chat_id='${telemetry_telegram_bot_chat_id}' --form caption='${send_text}' '${request_url}sendDocument' ";
-        slog "<7>$(show_var request)";
-        result="$( request )";
-        #curl -s -X POST "${request_url}sendDocument" -d chat_id="${telemetry_telegram_bot_chat_id}" -d text="${send_text}"
-        slog "<7>$(show_var result)";
+        request="curl --no-progress-meter --form  document=@'${send_file}' --form chat_id='${telemetry_telegram_bot_chat_id}' --form caption='${send_text}' '${request_url}sendDocument' ";
     else
         #send only text message, without file
-        request="curl --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
-        slog "<7>$(show_var request)";
-        result="$( request )";
-        slog "<7>$(show_var result)";
+        request="curl --no-progress-meter --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
     fi;
-
+    slog "<7>$(show_var request)";
+    result="$( eval "$request" )";
+    #curl -s -X POST "${request_url}sendDocument" -d chat_id="${telemetry_telegram_bot_chat_id}" -d text="${send_text}"
+    slog "<7>$(show_var result)";
+    : "${telemetry_next_wait:=1}"; #set default value if variable is not set
+    #check result for "ok" substring
+    if [[ "$result" == *'"ok"'* ]]; then
+        slog '<7>result is "ok"';
+        #TODO delete target dir if message sent successfully
+        declare -x -g telemetry_next_wait="0.$RANDOM";
+        rm -rv "$target_dir";
+    else
+        slog '<5>result is not "ok"!';
+        #will increase waiting time if something is not ok
+        declare -x -g telemetry_next_wait=$( awkcalc "1 + 3 * $telemetry_next_wait" )
+    fi
+    slog "<7>$(show_var telemetry_next_wait)";
 
     cd "${OLD_DIR}";
-    # telemetry_telegram_bot_chat_id
-    # telemetry_telegram_bot_token
-    #in directory we will find:
-    #text.txt - text to send
-    #send.txt - mark, what means what directory ready for send data
-    #file.txt - filepath to send file
 
     #TODO wait a sec after last message sended
-    sleep 0.$RANDOM;
-
-    #TODO delete target dir if message sent successfully
-    rm -rv "$target_dir"
+    sleep $telemetry_next_wait;
 
     # chatId='-698761873'
     # botToken='5692208524:AAF6-zMUUVw_glwuxAKYd12FExupW-lWsP8'
@@ -155,20 +160,15 @@ for ((i=1;i>=0;i--)); do
     next_dir=$(telemetry_get_next_message_dir)
     show_var next_dir
     telemetry_send_telegram_dir "${next_dir}"
-    echo "${i} $(show_var next_dir)";
+    echo "$(show_var next_dir)";
     sleep 0.1;
 done;
 
-send_telemetry "/home/i/github/dzible/test/heredoc_test.sh" "sended file /proc/cpuinfo"
+#send_telemetry "/home/i/github/dzible/test/heredoc_test.sh" "sended file /proc/cpuinfo"
+file1="/home/i/github/dzible/LICENSE"
+send_telemetry "${file1}" "${file1} \n sended file "
 
-exit 42;
-
-while 1 ; do
-    #countdown 15 0.1
-    countdown
-    echo 1;
-    sleep 1;
-done;
+#exit 0;
 #
 # time for dir in */ ;
 # do echo "$dir";
