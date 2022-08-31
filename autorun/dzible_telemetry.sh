@@ -57,8 +57,10 @@ function telemetry_get_next_message_dir ()
     #find "${telemetry_queue_dir}" -type d -print0 | xargs -0 /usr/bin/stat -c "%y${TAB}%n"
     #find . -type d -print0 | xargs -0 /usr/bin/stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 1 | xargs -r echo $0
     #next_dir=$(find "${telemetry_queue_dir}" -maxdepth 1 -mindepth 1  -type d -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 1 );
+
     #find directory, what includes file 'send.txt', It means, that directory ready for send data
-    next_dir=$( find "${telemetry_queue_dir}" -maxdepth 2 -mindepth 2 -type f -name 'send.txt' -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | xargs -r realpath )
+    #next_dir=$( find "${telemetry_queue_dir}" -maxdepth 2 -mindepth 2 -type f -name 'send.txt' -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | xargs -r realpath )
+    next_dir=$( find "${telemetry_queue_dir}" -maxdepth 2 -mindepth 2 -type f -name 'send.txt' -print0 | xargs -0 stat -c "%y${TAB}%n" | sort -n | cut -f2- | head -n 1)
     next_dir=$( dirname "${next_dir}" );
     echo -n "${next_dir}";
     cd "${OLD_DIR}";
@@ -69,14 +71,17 @@ function telemetry_send_telegram_dir ()
 {
     #get directory with telemetry message, try to send it to telegram
     target_dir="${1}";
-    target_dir=$( realpath "${target_dir}" );
     OLD_DIR=$(pwd);
     cd "${telemetry_queue_dir}";
+    target_dir=$( realpath "${target_dir}" );
+    touch "${target_dir}/send.txt"; #update time of file
     cd "${OLD_DIR}";
+    #telemetry_telegram_bot_chat_id
+    #telemetry_telegram_bot_token
     #in directory we will find:
-    #text.txt
-    #send.txt
-    #file.txt
+    #text.txt - text to send
+    #send.txt - mark, what means what directory ready for send data
+    #file.txt - filepath to send file
 
     #TODO wait a sec after last message sended
 
@@ -93,10 +98,11 @@ function telemetry_send_telegram_dir ()
 }
 export function telemetry_get_next_message_dir
 
-for ((i=12;i>=0;i--)); do
+for ((i=1;i>=0;i--)); do
     next_dir=$(telemetry_get_next_message_dir)
-    #show_var next_dir
-    echo -n "${i} $(show_var next_dir)";
+    show_var next_dir
+    telemetry_send_telegram_dir "${next_dir}"
+    echo "${i} $(show_var next_dir)";
     sleep 0.1;
 done;
 
