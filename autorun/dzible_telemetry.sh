@@ -63,9 +63,42 @@ function telemetry_get_next_message_dir ()
 }
 export function telemetry_get_next_message_dir
 
-next_dir="$(telemetry_get_next_message_dir)"
-show_var next_dir
+function telemetry_send_telegram_dir ()
+{
+    #get directory with telemetry message, try to send it to telegram
+    target_dir="${1}";
+    target_dir=$( realpath "${target_dir}" );
+    OLD_DIR=$(pwd);
+    cd "${telemetry_queue_dir}";
+    cd "${OLD_DIR}";
+    #in directory we will find:
+    #text.txt
+    #send.txt
+    #file.txt
 
+    #TODO wait a sec after last message sended
+
+    # chatId='-698761873'
+    # botToken='5692208524:AAF6-zMUUVw_glwuxAKYd12FExupW-lWsP8'
+    # file="$1"
+    # file='augeas_commands.txt';
+    # curdir=$PWD
+    # echo "sending $file"
+    #
+    # #curl --verbose -F chat_id=$chatId -F document=@$curdir/$1 https://api.telegram.org/bot$botToken/sendDocument
+    # #curl --verbose -F chat_id=$chatId -F document=@"${file}" https://api.telegram.org/bot${botToken}/sendDocument
+    # # more about gist on my site — amorev.ru/telegram-terminal-file-send
+}
+export function telemetry_get_next_message_dir
+
+for ((i=12;i>=0;i--)); do
+    next_dir=$(telemetry_get_next_message_dir)
+    #show_var next_dir
+    echo -n "${i} $(show_var next_dir)";
+    sleep 0.1;
+done;
+
+exit 42;
 
 while 1 ; do
     #countdown 15 0.1
