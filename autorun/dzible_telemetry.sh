@@ -115,10 +115,10 @@ function telemetry_send_telegram_dir ()
         #send file and message
         #request="curl --verbose --form chat_id='${telemetry_telegram_bot_chat_id}' --form document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
         #request="curl --verbose --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
-        request="curl --no-progress-meter --form  document=@'${send_file}' --form chat_id='${telemetry_telegram_bot_chat_id}' --form caption='${send_text}' '${request_url}sendDocument' ";
+        request="timeout --kill-after=77 777 curl --no-progress-meter --form  document=@'${send_file}' --form chat_id='${telemetry_telegram_bot_chat_id}' --form caption='${send_text}' '${request_url}sendDocument' ";
     else
         #send only text message, without file
-        request="curl --no-progress-meter --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
+        request="timeout --kill-after=77 777 curl --no-progress-meter --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
     fi;
     slog "<7>$(show_var request)";
     result="$( eval "$request" )";
@@ -134,13 +134,13 @@ function telemetry_send_telegram_dir ()
     else
         slog '<5>result is not "ok"!';
         #will increase waiting time if something is not ok
-        declare -x -g telemetry_next_wait=$( awkcalc "1 + 3 * $telemetry_next_wait" )
+        declare -x -g telemetry_next_wait=$( awkcalc "1 + 2 * $telemetry_next_wait" )
     fi
     slog "<7>$(show_var telemetry_next_wait)";
 
     cd "${OLD_DIR}";
 
-    #TODO wait a sec after last message sended
+    #wait a sec after last message sended. Wait time depends of the result
     sleep $telemetry_next_wait;
 
     # chatId='-698761873'
@@ -156,6 +156,8 @@ function telemetry_send_telegram_dir ()
 }
 export function telemetry_get_next_message_dir
 
+
+#TODO create cycle with inotify
 for ((i=1;i>=0;i--)); do
     next_dir=$(telemetry_get_next_message_dir)
     show_var next_dir
@@ -166,7 +168,8 @@ done;
 
 #send_telemetry "/home/i/github/dzible/test/heredoc_test.sh" "sended file /proc/cpuinfo"
 file1="/home/i/github/dzible/LICENSE"
-send_telemetry "${file1}" "${file1} \n sended file "
+file1="/proc/cpuinfo";
+send_telemetry "${file1}" "${file1} sended file "
 
 #exit 0;
 #
