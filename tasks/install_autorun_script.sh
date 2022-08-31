@@ -10,9 +10,6 @@
 #    exit 1
 # fi
 
-root_autorun_service_file='/etc/systemd/system/dzible.service';
-load_variables_file="${install_dir}autorun/load_variables.sh";
-root_autorun_file="${install_dir}autorun/root_autorun.sh";
 
 #create directory for install scripts
 rm -rvf "${install_dir}";
@@ -70,6 +67,7 @@ find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 #for dev
 find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
+#TODO set different rights to files. Some files must be secret for regular user
 
 #install_system stterm
 
@@ -92,22 +90,10 @@ echo '[Install]' \
 echo 'WantedBy=multi-user.target' \
 >> "${root_autorun_service_file}";
 
-systemctl daemon-reload | tac
-systemctl status dzible | tac
-# systemctl start dzible
-systemctl enable dzible | tac
-systemctl status dzible | tac
+systemctl start dzible_telemetry | cat
+systemctl enable dzible_telemetry | cat
+systemctl status dzible_telemetry | cat
 
 #read logs:
-#journalctl -b -u dzible
+#journalctl -b -u dzible_telemetry
 
-#show_var "augeas_file"
-
-#https://augeas.net/docs/references/1.4.0/lenses/files/sshd-aug.html
-
-#https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
-
-#are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
-#are_you_serious=' --root=/ '; #real business
-
-#augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_file}";

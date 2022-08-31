@@ -58,16 +58,16 @@ function encrypt_aes ()
   data="${2}"
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
+  exit_code=$?
 }
 export -f encrypt_aes
 
 function decrypt_aes ()
 {
-  decrypt_aes_error=0;
   passkey="${1}"
   data="${2}"
   echo -n "${data}" | openssl base64 -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
-  decrypt_aes_error=$?
+  exit_code=$?
 }
 export -f decrypt_aes
 
@@ -404,16 +404,21 @@ function slog ()
 export -f slog
 
 
-declare_and_export function_loaded "1"
-declare_and_export install_dir "/home/i/bin/dzible/"
-declare_and_export master_password_file 'master_password.txt'
+declare_and_export function_loaded "1"  #flag. Means what dzible functions loaded
+declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
-declare_and_export crypted_vault_file 'vault/1.crypt'
-declare_and_export task_max_timeout 67
+declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
+declare_and_export master_password_file 'master_password.txt' #path to file with password to decrypt vault file
+declare_and_export task_max_timeout 67  #maximum life time for every task
 declare_and_export service_name 'dzible';   #for slog systemd logs
 declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
 
-   #for slog systemd logs
+declare_and_export root_autorun_service_file '/etc/systemd/system/dzible.service'; #dzible autorun service, what run on system boot
+declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzible-script after system install
+declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
+declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue'  #directory, what used to save and send telemetry data
+declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
+declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 
 #TODO ask target computer name on script start
 
@@ -515,17 +520,18 @@ else
 fi
 
 run_task show_script_subversion
-run_task sleep 4
-run_task timezone_set
-run_task install_autorun_script
-run_task install_console_apps
-run_task install_gui_apps
-run_task add_screen_resolution_with_cvt_xrandr
+#run_task sleep 4
+#run_task timezone_set
+#run_task install_autorun_script
+#run_task install_console_apps
+#run_task install_gui_apps
+#run_task add_screen_resolution_with_cvt_xrandr
 # run_task root_password_set
 # run_task user_i_password_set
 # run_task root_password_for_sudoers
 # run_task sshd_config
 # run_task ssh_config
+run_task install_telemerty
 run_task sleep 11
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -539,4 +545,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kiluf-997e7f2-2022-08-30-20-55-52'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='enopi-43e09a2-2022-08-31-14-51-55'; echo "${script_subversion}=script_subversion"; 
