@@ -411,7 +411,7 @@ function slog ()
 }
 export -f slog
 
-function send_telemetry ()
+function telemetry_send ()
 {
   #function save data in {$telemetry_queue_dir}
   #required dzible.telemetry systemd service
@@ -590,4 +590,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='onamu-60baca4-2022-09-01-19-37-04'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ecalo-29cb657-2022-09-01-21-55-46'; echo "${script_subversion}=script_subversion"; 
