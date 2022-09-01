@@ -336,12 +336,20 @@ export -f is_root
 function install_system ()
 {
   app="${1}";
+  shift 1
+  arguments="$@";
+  if [[ "${app}" = 'update' ]] ; then
+    timeout --kill-after=77 77777  apt-get --yes update;
+    slog "<6>apt-get update"
+    declare -g -x install_system_updated=1;
+    return 0;
+  fi
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
     timeout --kill-after=77 77777  apt-get --yes update;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
-  timeout --kill-after=77 77777 apt-get ${dry_run} --allow-unauthenticated --yes install "${app}";
+  timeout --kill-after=77 77777 apt-get ${dry_run} --allow-unauthenticated --yes install "${app}" $@;
   slog "<7>apt-get install ${app}"
 }
 export -f install_system
@@ -577,6 +585,7 @@ run_task install_autorun_script
 # run_task sshd_config
 # run_task ssh_config
 run_task install_telemetry
+run_task install_tor
 run_task sleep 11
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -590,4 +599,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ecalo-29cb657-2022-09-01-21-55-46'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nugev-a46813b-2022-09-01-22-23-18'; echo "${script_subversion}=script_subversion"; 
