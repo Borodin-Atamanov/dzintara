@@ -62,7 +62,7 @@ augtool --new --noautoload --transform="Properties.lns incl ${torsocks_conf_file
 
 augtool --new --noautoload --transform="Properties.lns incl ${torrc_conf_file}" --file "${augeas_file_torrc}"
 #/etc/tor/torrc
-#augtool --new --noautoload --transform="Properties.lns incl /etc/tor/torrc"
+#augtool --new --noautoload --transform="IniFile.lns incl /etc/tor/torrc"
 
 
 netstat --listen
