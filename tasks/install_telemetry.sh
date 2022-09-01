@@ -10,6 +10,8 @@
 #    exit 1
 # fi
 
+install_system inotify-tools
+
 #create directory for install scripts
 show_var telemetry_queue_dir
 mkdir -pv "${telemetry_queue_dir}";

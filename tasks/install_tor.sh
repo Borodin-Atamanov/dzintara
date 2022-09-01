@@ -44,4 +44,6 @@ install_system tor deb.torproject.org-keyring
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
 
+netstat --listen
+
 exit 0;
