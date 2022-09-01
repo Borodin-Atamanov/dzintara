@@ -44,6 +44,31 @@ install_system tor deb.torproject.org-keyring
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
 
+slog "<7>Update tor config files";
+
+augeas_file_torsocks="${work_dir}/tasks/${task_name}_torsocks.txt";
+torsocks_conf_file='/etc/tor/torsocks.conf';
+augeas_file_torrc="${work_dir}/tasks/${task_name}_torrc.txt";
+torrc_conf_file='/etc/tor/torrc';
+show_var augeas_file_torsocks augeas_file_torrc
+
+are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
+are_you_serious=' --root=/ '; #real business
+
+
+augtool --new --noautoload --transform="Properties.lns incl ${torsocks_conf_file}" --file "${augeas_file_torsocks}"
+#augtool --new --noautoload --transform="Properties.lns incl /etc/tor/torsocks.conf"
+#AllowInbound 1
+
+augtool --new --noautoload --transform="Properties.lns incl ${torrc_conf_file}" --file "${augeas_file_torrc}"
+#/etc/tor/torrc
+#augtool --new --noautoload --transform="Properties.lns incl /etc/tor/torrc"
+
+
 netstat --listen
+systemctl enable tor
+systemctl status tor
+systemctl status tor@default.service
+
 
 exit 0;

@@ -1,0 +1,10 @@
+
+set /files/etc/tor/torsocks.conf/AllowInbound 1
+
+save
+
+#print /files/etc/tor/torsocks.conf
+
+errors
+
+quit

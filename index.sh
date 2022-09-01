@@ -460,7 +460,7 @@ declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himse
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
 declare_and_export master_password_file 'master_password.txt' #path to file with password to decrypt vault file
-declare_and_export task_max_timeout 67  #maximum life time for every task
+declare_and_export task_max_timeout 777  #maximum life time for every task
 declare_and_export service_name 'dzible';   #for slog systemd logs
 declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
 
@@ -599,4 +599,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cuxal-25f0cd9-2022-09-01-22-45-06'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='obopi-67aeb14-2022-09-02-00-16-37'; echo "${script_subversion}=script_subversion"; 

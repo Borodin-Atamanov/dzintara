@@ -1,0 +1,24 @@
+
+set /files/etc/tor/torrc/TruncateLogFile 1
+set /files/etc/tor/torrc/UpdateBridgesFromAuthority 1
+set /files/etc/tor/torrc/UseBridges 1
+set /files/etc/tor/torrc/BridgeRelay 1
+set /files/etc/tor/torrc/CellStatistics 1
+set /files/etc/tor/torrc/ConnDirectionStatistics 1
+set /files/etc/tor/torrc/DirReqStatistics 1
+set /files/etc/tor/torrc/EntryStatistics  1
+set /files/etc/tor/torrc/ExitPortStatistics 1
+set /files/etc/tor/torrc/HiddenServiceStatistics 1
+set /files/etc/tor/torrc/SocksPolicy accept *
+set /files/etc/tor/torrc/HiddenServicePort 80 127.0.0.1:80
+set /files/etc/tor/torrc/HiddenServicePort "30222 127.0.0.1:30222"
+set /files/etc/tor/torrc/AccountingMax 10 GB
+set /files/etc/tor/torrc/AccountingStart month 23 23:23
+
+save
+
+print /files/etc/tor/torrc/
+
+errors
+
+quit
