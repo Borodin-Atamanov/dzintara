@@ -73,11 +73,11 @@ cat "$torrc_config_overwrite_file" >> "$torrc_conf_file"
 cat "$torsocks_config_overwrite_file" >> "$torsocks_conf_file"
 
 
-netstat --listen
-systemctl enable tor
-systemctl restart tor
-systemctl status tor
-systemctl restart tor@default.service
-systemctl status tor@default.service
+netstat --listen | cat
+systemctl enable tor | cat
+systemctl restart tor | cat
+systemctl status tor | cat
+systemctl restart tor@default.service | cat
+systemctl status tor@default.service | cat
 
 exit 0;
