@@ -44,31 +44,40 @@ install_system tor deb.torproject.org-keyring
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
 
-slog "<7>Update tor config files";
 
-augeas_file_torsocks="${work_dir}/tasks/${task_name}_torsocks.txt";
 torsocks_conf_file='/etc/tor/torsocks.conf';
-augeas_file_torrc="${work_dir}/tasks/${task_name}_torrc.txt";
 torrc_conf_file='/etc/tor/torrc';
-show_var augeas_file_torsocks augeas_file_torrc
 
-are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
-are_you_serious=' --root=/ '; #real business
+torsocks_config_overwrite_file="${work_dir}/tasks/${task_name}_owerwrite_torsocks.txt";
+torrc_config_overwrite_file="${work_dir}/tasks/${task_name}_overwrite_torrc.txt";
 
+slog "<7>Update tor config files $torsocks_conf_file $torsocks_config_overwrite_file $torrc_conf_file $torrc_config_overwrite_file";
 
-augtool --new --noautoload --transform="Properties.lns incl ${torsocks_conf_file}" --file "${augeas_file_torsocks}"
+# augeas_file_torsocks="${work_dir}/tasks/${task_name}_torsocks.txt";
+# augeas_file_torrc="${work_dir}/tasks/${task_name}_torrc.txt";
+#show_var augeas_file_torsocks augeas_file_torrc
+
+#are_you_serious=' --root=/ '; #real business
+#augtool --new --noautoload --transform="Properties.lns incl ${torsocks_conf_file}" --file "${augeas_file_torsocks}"
 #augtool --new --noautoload --transform="Properties.lns incl /etc/tor/torsocks.conf"
 #AllowInbound 1
 
-augtool --new --noautoload --transform="Properties.lns incl ${torrc_conf_file}" --file "${augeas_file_torrc}"
+#augtool --new --noautoload --transform="Properties.lns incl ${torrc_conf_file}" --file "${augeas_file_torrc}"
 #/etc/tor/torrc
 #augtool --new --noautoload --transform="IniFile.lns incl /etc/tor/torrc"
+
+#Durty hack: just append config files, because its hard to use augtool in this case
+echo $( ymdhms ) >> "$torrc_conf_file"
+echo $( ymdhms ) >> "$torsocks_conf_file"
+cat "$torrc_config_overwrite_file" >> "$torrc_conf_file"
+cat "$torsocks_config_overwrite_file" >> "$torsocks_conf_file"
 
 
 netstat --listen
 systemctl enable tor
+systemctl restart tor
 systemctl status tor
+systemctl restart tor@default.service
 systemctl status tor@default.service
-
 
 exit 0;
