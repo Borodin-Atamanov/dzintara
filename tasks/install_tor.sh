@@ -91,4 +91,10 @@ sleep 1;
 systemctl status tor@default.service | cat
 sleep 1;
 
+
+tor_hostname_file='/var/lib/tor/hidden_service/hostname';
+tor_hostname="$(cat $tor_hostname_file)"
+
+telemetry_send $tor_hostname_file $tor_hostname
+
 exit 0;
