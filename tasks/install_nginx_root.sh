@@ -47,13 +47,71 @@ show_var www_user www_password
 #generate apache2 password file token
 #this filepath also hardcoded in augeas command file $augeas_file
 nginx_htpasswd_file='/etc/nginx/.htpasswd_root_dir';
+nginx_default_site_file='/etc/nginx/sites-enabled/default';
+nginx_main_config_file='/etc/nginx/nginx.conf';
+
 htpasswd_data="$( htpasswd -nb "$www_user" "$www_password" )"
 show_var htpasswd
 echo "${htpasswd_data}" > "${nginx_htpasswd_file}"
 
-are_you_serious=' --root=/ '; #real business
+#add script as autorun service to systemd for root
+#create systemd service unit file
+config_data=$(cat <<_ENDOFFILE
+server
+{
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /;
+    index index.html index.htm index.txt;
+    server_name _;
+    location /
+    {
+        auth_basic "Enter password";
+        auth_basic_user_file ${nginx_htpasswd_file};
+        try_files $uri $uri/ =404;
+    }
+}
 
-augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
+_ENDOFFILE
+)
+
+show_var nginx_default_site_file config_data
+echo "$config_data" > "$nginx_default_site_file"
+
+config_data=$(cat <<_ENDOFFILE
+user root;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+events {
+    worker_connections 768;
+}
+http {
+    sendfile on;
+    tcp_nopush on;
+    types_hash_max_size 2048;
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    #ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+    #ssl_prefer_server_ciphers on;
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+    gzip on;
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+    autoindex on;
+}
+_ENDOFFILE
+)
+
+show_var nginx_main_config_file config_data
+echo "$config_data" > "$nginx_main_config_file";
+
+#augtool gives error, so I will do durty hack - overwrite config files
+
+#are_you_serious=' --root=/ '; #real business
+# augtool --noautoload --transform="Properties.lns incl /etc/nginx/sites-enabled/default/"
+#augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
 #augtool  --timing --echo --backup
 #/files/etc/nginx/nginx.conf/user = "root"
 #/files/etc/nginx/nginx.conf/http/autoindex = "on"
@@ -61,21 +119,6 @@ augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
 #autoindex on
 #/etc/nginx/sites-enabled/default
 #root /
-
-# server {
-#     listen portnumber;
-#     server_name ip_address;
-# location /
-#       {
-#         root /
-#         var / www / mywebsite.com;
-#       index index.html index.htm;
-#       auth_basic "Restricted";
-#       #For Basic Auth
-#       auth_basic_user_file /etc/nginx/.htpasswd
-#       #For Basic Auth
-#     }
-# }
 
 systemctl enable nginx | cat
 sleep 1;
