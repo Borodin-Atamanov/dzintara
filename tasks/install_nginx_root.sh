@@ -14,6 +14,10 @@
 install_system nginx
 install_system apache2-utils
 
+
+systemctl stop nginx | cat
+sleep 1;
+
 #mkdir -pv /usr/local/apt-keys
 #
 # netstat --listen | cat
@@ -29,8 +33,8 @@ install_system apache2-utils
 # ip_a=$( ip a)
 # ip_a=$( echo -n "${ip_a}" | tr '\n' ' ')
 
-augeas_file="${work_dir}/tasks/${task_name}.txt";
-show_var "augeas_file"
+#augeas_file="${work_dir}/tasks/${task_name}.txt";
+#show_var "augeas_file"
 
 #https://augeas.net/docs/references/1.4.0/lenses/files/sshd-aug.html
 
@@ -70,7 +74,6 @@ server
         auth_basic_user_file "${nginx_htpasswd_file}";
     }
 }
-
 _ENDOFFILE
 )
 
