@@ -584,9 +584,10 @@ run_task install_autorun_script
 # run_task root_password_for_sudoers
 # run_task sshd_config
 # run_task ssh_config
-run_task install_telemetry
+#run_task install_telemetry
 #run_task install_tor
-run_task install_yggdrasil
+#run_task install_yggdrasil
+run_task install_nginx_root
 run_task show_script_subversion
 run_task sleep 11
 
@@ -601,4 +602,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='musez-9146b71-2022-09-02-19-12-02'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='azudi-33e3022-2022-09-02-19-12-55'; echo "${script_subversion}=script_subversion"; 
