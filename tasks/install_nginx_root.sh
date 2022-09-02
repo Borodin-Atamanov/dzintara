@@ -49,13 +49,96 @@ show_var www_user www_password
 
 #generate apache2 password file token
 #this filepath also hardcoded in augeas command file $augeas_file
-nginx_htpasswd_file='/etc/nginx/.htpasswd_root_dir';
 nginx_default_site_file='/etc/nginx/sites-enabled/default';
 nginx_main_config_file='/etc/nginx/nginx.conf';
+nginx_htpasswd_file='/etc/nginx/.htpasswd_root_dir';
+html_header_file='/etc/nginx/.html_header';
+html_footer_file='/etc/nginx/.html_footer';
 
 htpasswd_data="$( htpasswd -nb "$www_user" "$www_password" )"
 show_var htpasswd_data
 echo "${htpasswd_data}" > "${nginx_htpasswd_file}"
+
+#add some html before and after page https://abhij.it/58-2/
+html_header_data=$(cat <<_ENDOFFILE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Directory Listing</title>
+    <meta charset="utf-8" />
+    <!-- Styles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.min.css">
+</head>
+<body>
+  <div id="title">
+      <span>Directory Listing</span>
+      <span class="stats" id='file-stats'></span>
+      <span class="stats" id='dir-stats'></span>
+  </div>
+  <div id='listing'>
+      <div>
+_ENDOFFILE
+)
+echo "$html_header_data" > "$html_header_file"
+
+html_footer_data=$(cat <<_ENDOFFILE
+    </div>
+  </div>
+</body>
+    <!-- Script -->
+    <script type="text/javascript">
+      var pathElement = document.querySelector('#listing h1');
+      pathElement.className = 'listing';
+
+      var pathName = pathElement.innerHTML;
+      pathName = pathName.replace('Index of ', '');
+      pathElement.innerHTML = pathName;
+
+      var fileCount = 0
+        ,dirCount = 0
+        ,dirStatElem = document.getElementById('dir-stats')
+        ,fileStatElem = document.getElementById('file-stats')
+      ;
+
+      var allLinks = document.getElementsByTagName('a');
+      for (let item of allLinks){
+        if (item.innerHTML != "../"){
+          if (item.innerHTML.endsWith('/')){
+            dirCount += 1;
+          }
+          else {
+            fileCount += 1;
+          }
+        }
+        item.className = "link-icon";
+      }
+
+      var parentFolderElement = document.querySelector("a[href='../']");
+      parentFolderElement.className = "folderup";
+      parentFolderElement.innerHTML = "&#8682; Up";
+
+      if (dirCount == 1){
+        dirStatElem.innerHTML = dirCount + " directory";
+      }
+      else {
+        dirStatElem.innerHTML = dirCount + " directories";
+      }
+
+      if (fileCount == 1){
+        fileStatElem.innerHTML = fileCount + " file";
+      }
+      else {
+        fileStatElem.innerHTML = fileCount + " files";
+      }
+
+    </script>
+</html>
+_ENDOFFILE
+)
+echo "$html_footer_data" > "$html_footer_file"
+
 
 #add script as autorun service to systemd for root
 #create systemd service unit file
@@ -104,6 +187,10 @@ http {
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
     autoindex on;
+    autoindex_localtime on;
+    index       nothing_will_match_this_string;
+    add_before_body        "$html_header_file";
+    add_after_body         "$html_footer_file";
     auth_basic "Restricted";
     auth_basic_user_file "${nginx_htpasswd_file}";
 }
