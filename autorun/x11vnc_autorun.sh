@@ -38,7 +38,7 @@ x11vnc_start_command="x11vnc -6 -reopen -scale 0.75 -shared -forever -loop7777 -
 #-usepw If  no  other password method was supplied on the command line, first look for ~/.vnc/passwd and if found use it with -rfbauth; next, look for ~/.vnc/passwdfile and use it with -passwdfile; otherwise, prompt the user for a password to create ~/.vnc/passwd and use it with the -rfbauth option.  If none of these succeed x11vnc exits immediately.
 #-viewpasswd string Supply a 2nd password for view-only logins.  The -passwd (full-access) password must also be supplied.
 #eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzible/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzible/autorun/user_autorun_gui.sh & " ';
-eval_this="su --login root --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${x11vnc_start_comman} & ' ";
+eval_this="su --login root --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${x11vnc_start_command} & ' ";
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 
