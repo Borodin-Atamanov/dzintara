@@ -2,7 +2,6 @@
 TruncateLogFile 1
 UpdateBridgesFromAuthority 1
 UseBridges 1
-BridgeRelay 1
 CellStatistics 1
 ConnDirectionStatistics 1
 DirReqStatistics 1
@@ -10,6 +9,9 @@ EntryStatistics  1
 ExitPortStatistics 1
 HiddenServiceStatistics 1
 SocksPolicy accept *
+
+BridgeRelay 1
+ORPort 9001
 HiddenServicePort 80 127.0.0.1:80
 HiddenServicePort 8080 127.0.0.1:8080
 HiddenServicePort 30222 127.0.0.1:30222
