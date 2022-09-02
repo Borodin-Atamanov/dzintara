@@ -45,6 +45,8 @@ _ENDOFFILE
 )
 echo -e "$list_file_content" > "${list_file}"
 
+install_system yggdrasil
+
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
 
@@ -80,9 +82,9 @@ systemctl status yggdrasil | cat
 sleep 1;
 
 # tor_hostname_file='/var/lib/tor/hidden_service/hostname';
-ip_a=($ ip a)
+ip_a=$( ip a)
 # tor_hostname="$(cat $tor_hostname_file)"
 # telemetry_send $tor_hostname_file $tor_hostname
-telemetry_send '' ${ip_a}
+telemetry_send '' $ip_a
 
 exit 0;
