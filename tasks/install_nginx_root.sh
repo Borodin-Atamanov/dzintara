@@ -54,7 +54,7 @@ nginx_default_site_file='/etc/nginx/sites-enabled/default';
 nginx_main_config_file='/etc/nginx/nginx.conf';
 
 htpasswd_data="$( htpasswd -nb "$www_user" "$www_password" )"
-show_var htpasswd
+show_var htpasswd_data
 echo "${htpasswd_data}" > "${nginx_htpasswd_file}"
 
 #add script as autorun service to systemd for root

@@ -12,8 +12,8 @@
 
 install_system x11vnc
 
-systemctl stop x11vnc | cat
-sleep 1;
+#systemctl stop x11vnc | cat
+#sleep 1;
 
 
 exit 0;
