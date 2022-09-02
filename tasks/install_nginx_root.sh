@@ -67,11 +67,13 @@ server
     root /;
     index index.html index.htm index.txt;
     server_name _;
+    auth_basic "Restricted";
+    auth_basic_user_file "${nginx_htpasswd_file}";
     location /
     {
-        try_files $uri $uri/ =404;
         auth_basic "Restricted";
         auth_basic_user_file "${nginx_htpasswd_file}";
+        try_files \$uri \$uri/ =404;
     }
 }
 _ENDOFFILE
@@ -102,6 +104,9 @@ http {
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
     autoindex on;
+    auth_basic "Restricted";
+    auth_basic_user_file "${nginx_htpasswd_file}";
+
 }
 _ENDOFFILE
 )
