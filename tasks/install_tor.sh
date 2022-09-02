@@ -67,18 +67,24 @@ slog "<7>Update tor config files $torsocks_conf_file $torsocks_config_overwrite_
 #augtool --new --noautoload --transform="IniFile.lns incl /etc/tor/torrc"
 
 #Durty hack: just append config files, because its hard to use augtool in this case
-echo $( ymdhms ) > "$torrc_conf_file"
-echo $( ymdhms ) > "$torsocks_conf_file"
+echo "# $( ymdhms )" > "$torrc_conf_file"
+echo "# $( ymdhms )" > "$torsocks_conf_file"
 cat "$torrc_config_overwrite_file" >> "$torrc_conf_file"
 cat "$torsocks_config_overwrite_file" >> "$torsocks_conf_file"
 
 #TODO check config before run, if config is wrong - recover old config version
 
 netstat --listen | cat
+sleep 1;
 systemctl enable tor | cat
+sleep 1;
 systemctl restart tor | cat
+sleep 1;
 systemctl status tor | cat
+sleep 1;
 systemctl restart tor@default.service | cat
+sleep 1;
 systemctl status tor@default.service | cat
+sleep 1;
 
 exit 0;
