@@ -74,6 +74,10 @@ cat "$torsocks_config_overwrite_file" >> "$torsocks_conf_file"
 
 #TODO check config before run, if config is wrong - recover old config version
 
+#chown  -v -R debian-tor:debian-tor /var/lib/tor/
+#chmod -v -R 700  /var/lib/tor/
+#systemctl restart tor; journalctl -f -t tor
+
 netstat --listen | cat
 sleep 1;
 systemctl enable tor | cat
