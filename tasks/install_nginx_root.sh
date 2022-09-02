@@ -106,7 +106,6 @@ http {
     autoindex on;
     auth_basic "Restricted";
     auth_basic_user_file "${nginx_htpasswd_file}";
-
 }
 _ENDOFFILE
 )
