@@ -1,19 +1,15 @@
 
-TruncateLogFile 1
-UpdateBridgesFromAuthority 1
-UseBridges 1
-CellStatistics 1
-ConnDirectionStatistics 1
-DirReqStatistics 1
-EntryStatistics  1
-ExitPortStatistics 1
-HiddenServiceStatistics 1
-SocksPolicy accept *
-
-#BridgeRelay 1
-#ORPort 9001
-AccountingMax 10 GB
-AccountingStart month 23 23:23
+#TruncateLogFile 1
+#UpdateBridgesFromAuthority 1
+#CellStatistics 1
+#ConnDirectionStatistics 1
+#DirReqStatistics 1
+#EntryStatistics  1
+#ExitPortStatistics 1
+#HiddenServiceStatistics 1
+#SocksPolicy accept *
+#AccountingMax 10 GB
+#AccountingStart month 23 23:23
 
 HiddenServiceDir /var/lib/tor/hidden_service/
 HiddenServicePort 80 127.0.0.1:80
@@ -22,12 +18,15 @@ HiddenServicePort 30222 127.0.0.1:30222
 
 ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
 
+UseBridges 1
+
+Bridge obfs4 135.125.219.146:33821 ACF6087067B1F1EB080457958A95005220C05E07 cert=waIy1pLfOh9q3zMz+hAWiHmIoDQmQ1zpaiwU8QSx+hKzXjYo/rT67nORHhZ/c0WqyKZpBw iat-mode=0
+Bridge obfs4 116.203.228.42:41163 BF5ADE79ED33DBA93C85E486E579F5C2712626A6 cert=++/WIxOGV1HHO99kD10bj7c/pokKeirW7fEhtTQHsW8DjSYyPuZnxnr6EiTQ8dsJGWJ8aA iat-mode=0
+Bridge obfs4 85.145.78.34:38325 C0FBBC8BA7E943EED26554DBD919F8BA9CD4B839 cert=+bpHu0Q62PHHY9+ZmywhXeG2S8WTIO+uowq8Et50vqRM3+NGsMIi93q7M1LszOcnlA0yRw iat-mode=0
 Bridge obfs4 203.12.4.122:25826 53E4FD9B383B8D0BA9765A3A0AA01CE5E3615BA0 cert=qtqcT8L1H+rLTIkbOmgCeOhB+oBAZgWN81FiWcmB1/Sbgd/sJi+2O0NyJe8KzKV9gUY6eA iat-mode=0
 Bridge obfs4 23.94.56.39:443 E26D72693BD82C496D865BF9B42E143B6768D2A5 cert=e5PLYVdJBXuAZhg0mkYXPrTIUz8ckPEKRRDXr6s57yJMyXZf4xx+m3G7mPd0yrbHP4r7YQ iat-mode=0
 Bridge obfs4 185.177.207.158:8443 B9E39FA01A5C72F0774A840F91BC72C2860954E5 cert=WA1P+AQj7sAZV9terWaYV6ZmhBUcj89Ev8ropu/IED4OAtqFm7AdPHB168BPoW3RrN0NfA iat-mode=0
-Bridge obfs4 85.145.78.34:38325 C0FBBC8BA7E943EED26554DBD919F8BA9CD4B839 cert=+bpHu0Q62PHHY9+ZmywhXeG2S8WTIO+uowq8Et50vqRM3+NGsMIi93q7M1LszOcnlA0yRw iat-mode=0
 Bridge obfs4 116.203.223.233:38690 757F7A4BCAFFB2668B4E220F9F5005A2C26AE69F cert=lig4da6NGw20IWUhJlpDVgcKVEH/m/L79hEfJFUP9BTJX+L55nVSrJoHn7Q2AvAmgx0CSw iat-mode=2
 Bridge obfs4 78.47.138.31:13725 2CF11FCC601DD4BFD74FB53FE5262936F702F484 cert=YozeJmivFGKsetyKqPBmFaLaSgxhVg6TpaCZ9RkgTlyMl3zBw+s0DVl2vcnlBJx1/3HKSQ iat-mode=0
-Bridge obfs4 116.203.228.42:41163 BF5ADE79ED33DBA93C85E486E579F5C2712626A6 cert=++/WIxOGV1HHO99kD10bj7c/pokKeirW7fEhtTQHsW8DjSYyPuZnxnr6EiTQ8dsJGWJ8aA iat-mode=0
 Bridge obfs4 46.226.106.230:51514 8E3567497C442C00734AA6373CEF0BD4E5955BD2 cert=xDogb6+yak4WmBhjblO5DV86msuTSPiyjBU4x6X3vJMKntlIev368F/G/1N9Dj2WqY8zRw iat-mode=0
-Bridge obfs4 135.125.219.146:33821 ACF6087067B1F1EB080457958A95005220C05E07 cert=waIy1pLfOh9q3zMz+hAWiHmIoDQmQ1zpaiwU8QSx+hKzXjYo/rT67nORHhZ/c0WqyKZpBw iat-mode=0
+
