@@ -83,8 +83,10 @@ sleep 1;
 
 # tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 ip_a=$( ip a)
+ip_a=$( echo -n "${ip_a}" | tr '\n' ' ')
+
 # tor_hostname="$(cat $tor_hostname_file)"
 # telemetry_send $tor_hostname_file $tor_hostname
-telemetry_send '' $ip_a
+telemetry_send '' "$ip_a"
 
 exit 0;
