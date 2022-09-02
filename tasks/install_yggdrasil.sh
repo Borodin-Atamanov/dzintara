@@ -78,7 +78,7 @@ systemctl restart yggdrasil | cat
 sleep 1;
 systemctl status yggdrasil | cat
 sleep 1;
-ip -a | cat
+ip a | cat
 sleep 1;
 
 # tor_hostname_file='/var/lib/tor/hidden_service/hostname';
