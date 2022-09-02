@@ -567,6 +567,7 @@ echo "secrets_loaded=${secrets_loaded}"
 
 #TODO generate random passwords and show it to user if secrets not loaded
 #TODO save passwords to local crypted vault
+#TODO if passwords already generated - don't change passwords
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
@@ -605,4 +606,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rebik-c5be001-2022-09-02-20-36-46'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xusoz-afd70b0-2022-09-02-22-21-27'; echo "${script_subversion}=script_subversion"; 

@@ -15,6 +15,8 @@ slog "<7>$(show_var whoami)"
 #countdown 31337 0.1
 #sleep 37
 
+( /home/i/bin/dzible/autorun/x11vnc_autorun.sh )
+
 random_wait
 
 slog "<5>finish $0"
