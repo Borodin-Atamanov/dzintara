@@ -29,7 +29,6 @@ install_system apache2-utils
 # ip_a=$( ip a)
 # ip_a=$( echo -n "${ip_a}" | tr '\n' ' ')
 
-
 augeas_file="${work_dir}/tasks/${task_name}.txt";
 show_var "augeas_file"
 
@@ -66,9 +65,9 @@ server
     server_name _;
     location /
     {
-        auth_basic "Enter password";
-        auth_basic_user_file ${nginx_htpasswd_file};
         try_files $uri $uri/ =404;
+        auth_basic "Restricted";
+        auth_basic_user_file "${nginx_htpasswd_file}";
     }
 }
 
