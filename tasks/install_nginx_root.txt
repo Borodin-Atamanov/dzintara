@@ -1,0 +1,15 @@
+
+set /files/etc/nginx/nginx.conf/user root
+set /files/etc/nginx/nginx.conf/http/autoindex on
+
+set /files/etc/nginx/sites-enabled/default/server/root "/"
+set /files/etc/nginx/sites-enabled/default/auth_basic "Enter password"
+set /files/etc/nginx/sites-enabled/default/auth_basic_user_file "/etc/nginx/.htpasswd_root_dir"
+
+save
+
+print /files/etc/nginx/nginx.conf
+
+errors
+
+quit

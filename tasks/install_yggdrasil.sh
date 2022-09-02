@@ -72,13 +72,13 @@ install_system yggdrasil
 #chmod -v -R 700  /var/lib/tor/
 #systemctl restart tor; journalctl -f -t tor
 
-netstat --listen | cat
-sleep 1;
 systemctl enable yggdrasil | cat
 sleep 1;
 systemctl restart yggdrasil | cat
 sleep 1;
 systemctl status yggdrasil | cat
+sleep 1;
+ip -a | cat
 sleep 1;
 
 # tor_hostname_file='/var/lib/tor/hidden_service/hostname';
