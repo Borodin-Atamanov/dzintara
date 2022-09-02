@@ -15,5 +15,9 @@ install_system x11vnc
 #systemctl stop x11vnc | cat
 #sleep 1;
 
+vnc_password=$( get_var "${secrets}_${computer_name}_vnc_password" )
+show_var vnc_password
+#x11vnc -storepasswd "$vnc_password" /root/.vnc/passwd
+x11vnc -storepasswd "$vnc_password" '/root/.vnc/passwd'
 
 exit 0;
