@@ -439,9 +439,9 @@ function telemetry_send ()
   echo -n "${message}" >"${text_filename}";
   #write ready-to-send flag to file
   echo -n "if this file exists - message must be send by dzible.telemetry service" >"${send_filename}";
-  slog "<7>send_telemetry ${filename_realpath_to_send} $message"
+  slog "<7>telemetry_send ${filename_realpath_to_send} $message"
 }
-export -f send_telemetry
+export -f telemetry_send
 
 function max ()
 {
@@ -599,4 +599,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='evimi-1abee88-2022-09-02-14-28-07'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gugik-9f05963-2022-09-02-14-31-52'; echo "${script_subversion}=script_subversion"; 
