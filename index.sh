@@ -586,6 +586,7 @@ run_task install_autorun_script
 # run_task ssh_config
 run_task install_telemetry
 run_task install_tor
+run_task show_script_subversion
 run_task sleep 11
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -599,4 +600,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gugik-9f05963-2022-09-02-14-31-52'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='takas-424d24d-2022-09-02-15-04-16'; echo "${script_subversion}=script_subversion"; 

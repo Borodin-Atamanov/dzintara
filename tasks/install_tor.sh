@@ -40,6 +40,7 @@ echo -e "$tor_list_file_content" > "${tor_list_file}"
 
 install_system update
 install_system tor deb.torproject.org-keyring
+install_system obfs4proxy
 
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
