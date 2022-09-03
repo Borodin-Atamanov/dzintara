@@ -595,6 +595,7 @@ run_task install_tor
 run_task install_yggdrasil
 run_task install_nginx_root
 run_task install_x11vnc
+run_task systemd_resolved_dns_config
 run_task show_script_subversion
 run_task sleep 1
 
@@ -609,4 +610,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='utoge-1a6ebba-2022-09-03-19-52-36'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ivobu-6aad8e4-2022-09-03-20-00-57'; echo "${script_subversion}=script_subversion"; 
