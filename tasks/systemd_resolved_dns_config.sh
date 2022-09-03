@@ -26,7 +26,7 @@ FallbackDNS=77.88.8.8 8.8.8.8 1.1.1.1
 DNSSEC=true
 DNSOverTLS=yes
 Cache=yes
-Domains=~.
+#Domains=~.
 
 #FallbackDNS=
 #Domains=~.
@@ -37,8 +37,11 @@ Domains=~.
 #DNSStubListener=yes
 _ENDOFFILE
 )
+#systemd-resolve --set-dnssec=yes --set-dns=1.1.1.1 --set-dnsovertls=yes --interface=wlan0
 echo "$config_data" > "$config_file"
 #rm -v "$config_file"
+mkdir -pv '/etc/systemd/resolved.conf.d'
+cp "$config_file" '/etc/systemd/resolved.conf.d/dzible.conf'
 
 #systemctl stop systemd-resolved | cat
 sleep 1.1;
@@ -47,6 +50,12 @@ com="systemctl restart systemd-resolved"
 show_var com
 $com | cat;
 sleep 1.1;
+
+com="systemctl enable systemd-resolved"
+show_var com
+$com | cat;
+
+
 
 com="systemctl status systemd-resolved"
 show_var com
@@ -59,7 +68,8 @@ com="resolvectl status"
 show_var com
 $com | cat;
 
-
+#systemctl disable --now avahi-daemon.service
+#systemctl disable --now avahi-daemon.socket
 exit 0;
 
 #script -q -c "sudo tcpdump -l port 53 2>/dev/null | grep --line-buffered ' A? ' | cut -d' ' -f8" | tee dns.log
