@@ -84,7 +84,7 @@ config_data=$(cat <<_ENDOFFILE
 DNS=127.0.0.1 ::1 8.8.8.8  1.1.1.1  9.9.9.11 8.26.56.26     208.67.222.222  8.8.4.4  8.20.247.20 149.112.112.112  9.9.9.9       1.0.0.1  208.67.220.220 77.88.8.8  77.88.8.1 2a02:6b8::feed:0ff  2606:4700:4700::1111  2a02:6b8:0:1::feed:0ff  2606:4700:4700::1001
 
 FallbackDNS=77.88.8.8 8.8.8.8 1.1.1.1
-DNSSEC=allow-downgrade
+#DNSSEC=allow-downgrade
 DNSSEC=true
 DNSOverTLS=yes
 Cache=yes
