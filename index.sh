@@ -340,6 +340,7 @@ function install_system ()
   arguments="$@";
   if [[ "${app}" = 'update' ]] ; then
     timeout --kill-after=77 77777  apt-get --yes update;
+    timeout --kill-after=77 77777  apt-get --assume-no autoremove;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
     return 0;
@@ -607,4 +608,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='vosex-b69b2d2-2022-09-02-23-22-27'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='toden-67e89e7-2022-09-03-14-58-56'; echo "${script_subversion}=script_subversion"; 
