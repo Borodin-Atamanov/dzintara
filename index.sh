@@ -339,18 +339,18 @@ function install_system ()
   shift 1
   arguments="$@";
   if [[ "${app}" = 'update' ]] ; then
-    timeout --kill-after=77 77777  apt-get --yes update;
-    timeout --kill-after=77 77777  apt-get --assume-no autoremove;
+    timeout --kill-after=77 $very_max_timeout apt-get --yes update | cat;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
     return 0;
   fi
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
-    timeout --kill-after=77 77777  apt-get --yes update;
+    timeout --kill-after=77 $very_max_timeout  apt-get --yes update | cat;
+    timeout --kill-after=77 $very_max_timeout apt-get --yes autoremove | cat;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
-  timeout --kill-after=77 77777 apt-get ${dry_run} --allow-unauthenticated --yes install "${app}" $@;
+  timeout --kill-after=77 $very_max_timeout apt-get ${dry_run} --allow-unauthenticated --yes install "${app}" $@ | cat;
   slog "<7>apt-get install ${app}"
 }
 export -f install_system
@@ -473,6 +473,7 @@ declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
+declare_and_export very_max_timeout 77 #absolute maximum timeout in seconds. It used for longest operation
 
 #TODO ask target computer name on script start
 
@@ -608,4 +609,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='toden-67e89e7-2022-09-03-14-58-56'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='oruse-e846bfc-2022-09-03-19-26-12'; echo "${script_subversion}=script_subversion"; 
