@@ -4,6 +4,7 @@ augeas-tools
 nload
 nmap
 traceroute
+whois
 bind-utils
 bind9-utils
 wget
