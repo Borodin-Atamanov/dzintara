@@ -14,7 +14,6 @@
 install_system nginx
 install_system apache2-utils
 
-
 systemctl stop nginx | cat
 sleep 1;
 
@@ -200,6 +199,7 @@ _ENDOFFILE
 
 show_var nginx_main_config_file config_data
 echo "$config_data" > "$nginx_main_config_file";
+
 
 #augtool gives error, so I will do durty hack - overwrite config files
 
