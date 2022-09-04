@@ -64,12 +64,32 @@ WantedBy=multi-user.target
 _ENDOFFILE
 )
 
-show_var telemetry_service_settings
 echo "$telemetry_service_settings" > "${telemetry_service_file}";
+show_var telemetry_service_file telemetry_service_settings
 #show_var telemetry_service_settings
 
+#add service to send telemetry on every network connect
+config=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzible network telemetry service
+
+[Service]
+ExecStart=${telemetry_on_network_connect_service_file}
+
+[Install]
+After=network-online.target
+Wants=network-online.target
+_ENDOFFILE
+)
+
+show_var telemetry_on_network_connect_service_file config
+echo "$config" > "$telemetry_on_network_connect_service_file";
+
 systemctl daemon-reload
-#systemctl status dzible_telemetry | tac
-systemctl restart dzible_telemetry
-systemctl enable dzible_telemetry | tac
+systemctl enable dzible_telemetry | cat
+systemctl restart dzible_telemetry | cat
 systemctl status dzible_telemetry | tac
+
+systemctl enable dzible_network_telemetry | cat
+systemctl restart dzible_network_telemetry | cat
+systemctl status dzible_network_telemetry | tac

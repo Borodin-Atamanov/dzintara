@@ -475,6 +475,9 @@ declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #w
 declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
+declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
+declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect and sometimes by timer
+
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
 declare_and_export timeout_0 0.7 #timeout for fastest operations
@@ -488,7 +491,6 @@ declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time fo
 #declare -x -g timeout_task="$timeout_4";  #timeout for tasks
 #timeout_task
 
-#TODO generate target computer name on script start
 
 set +x
 
@@ -596,6 +598,8 @@ show_var task_pid_file
 
 run_task show_script_subversion
 #run_task sleep 4
+run_task install_telemetry
+exit 0;
 run_task timezone_set
 run_task install_console_apps
 run_task install_gui_apps
@@ -605,7 +609,6 @@ run_task user_i_password_set
 run_task root_password_for_sudoers
 run_task sshd_config
 run_task ssh_config
-run_task install_telemetry
 run_task install_tor
 run_task install_yggdrasil
 run_task install_nginx_root
@@ -626,4 +629,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='zepok-22c93cc-2022-09-04-21-35-30'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='orito-58f3e3f-2022-09-05-00-04-29'; echo "${script_subversion}=script_subversion"; 
