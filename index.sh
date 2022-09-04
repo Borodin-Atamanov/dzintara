@@ -581,7 +581,7 @@ fi
 run_task show_script_subversion
 #run_task sleep 4
 run_task timezone_set
-run_task install_autorun_script
+#run_task install_autorun_script
 #run_task install_console_apps
 #run_task install_gui_apps
 #run_task add_screen_resolution_with_cvt_xrandr
@@ -590,11 +590,11 @@ run_task install_autorun_script
 # run_task root_password_for_sudoers
 # run_task sshd_config
 # run_task ssh_config
-run_task install_telemetry
-run_task install_tor
-run_task install_yggdrasil
-run_task install_nginx_root
-run_task install_x11vnc
+#run_task install_telemetry
+#run_task install_tor
+#run_task install_yggdrasil
+#run_task install_nginx_root
+#run_task install_x11vnc
 run_task systemd_resolved_dns_config
 run_task show_script_subversion
 run_task sleep 1
@@ -610,4 +610,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kemor-6b68efc-2022-09-03-21-31-52'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='cipid-59b1ea7-2022-09-04-08-56-56'; echo "${script_subversion}=script_subversion"; 

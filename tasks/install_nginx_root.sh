@@ -178,7 +178,8 @@ http {
     tcp_nopush on;
     types_hash_max_size 2048;
     include /etc/nginx/mime.types;
-    default_type application/octet-stream;
+    #default_type application/octet-stream;
+    default_type text/plain;
     #ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
     #ssl_prefer_server_ciphers on;
     access_log /var/log/nginx/access.log;
