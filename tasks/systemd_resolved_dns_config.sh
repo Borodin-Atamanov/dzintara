@@ -11,10 +11,8 @@
 #    exit 1
 # fi
 
-#system_install resolvconf
 #apt-get purge openresolv
-echo "nohook resolv.conf" >> '/etc/dhcpcd.conf'
-echo "nameserver 127.0.0.53" > '/etc/resolv.conf'
+#system_install resolvconf
 
 config_file='/etc/systemd/resolved.conf';
 config_data=$(cat <<_ENDOFFILE
@@ -40,6 +38,18 @@ echo "$config_data" > "$config_file"
 #rm -v "$config_file"
 mkdir -pv '/etc/systemd/resolved.conf.d'
 cp "$config_file" '/etc/systemd/resolved.conf.d/dzible.conf'
+
+echo "nohook resolv.conf" >> '/etc/dhcpcd.conf'
+
+config_file='/etc/resolv.conf';
+config_data=$(cat <<_ENDOFFILE
+nameserver 127.0.0.53
+nameserver 127.0.0.1:5353
+_ENDOFFILE
+)
+#systemd-resolve --set-dnssec=yes --set-dns=1.1.1.1 --set-dnsovertls=yes --interface=wlan0
+
+echo "$config_data" > "$config_file"
 
 #systemctl stop systemd-resolved | cat
 sleep 1.1;
@@ -76,8 +86,6 @@ exit 0;
 
 #script -q -c "sudo tcpdump -l port 53 2>/dev/null | grep --line-buffered ' A? ' | cut -d' ' -f8" | tee dns.log
 # tcpdump -l port 53 2>/dev/null | grep --line-buffered ' A? ' | cut -d' ' -f8
-
-
 
 # tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 ip_a=$( ip a)

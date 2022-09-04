@@ -581,20 +581,20 @@ fi
 run_task show_script_subversion
 #run_task sleep 4
 run_task timezone_set
-#run_task install_autorun_script
-#run_task install_console_apps
-#run_task install_gui_apps
-#run_task add_screen_resolution_with_cvt_xrandr
-# run_task root_password_set
-# run_task user_i_password_set
-# run_task root_password_for_sudoers
-# run_task sshd_config
-# run_task ssh_config
-#run_task install_telemetry
-#run_task install_tor
-#run_task install_yggdrasil
-#run_task install_nginx_root
-#run_task install_x11vnc
+run_task install_console_apps
+run_task install_gui_apps
+run_task add_screen_resolution_with_cvt_xrandr
+run_task root_password_set
+run_task user_i_password_set
+run_task root_password_for_sudoers
+run_task sshd_config
+run_task ssh_config
+run_task install_telemetry
+run_task install_tor
+run_task install_yggdrasil
+run_task install_nginx_root
+run_task install_x11vnc
+run_task install_autorun_script
 run_task systemd_resolved_dns_config
 run_task show_script_subversion
 run_task sleep 1
@@ -610,4 +610,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ilipu-110703a-2022-09-04-09-33-46'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='pocom-55fb23c-2022-09-04-12-32-45'; echo "${script_subversion}=script_subversion"; 
