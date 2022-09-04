@@ -13,7 +13,7 @@
 
 function run_task ()
 {
-  export task_name="${1}";
+  declare -g -x task_name="${1}";
   shift 1
   #function will send other arguments to executed task as parameters
   #add arguments to task
@@ -28,6 +28,8 @@ function run_task ()
   echo "████ task ${task_name} ${arguments}████";
   slog "<6>run_task ${task_name} ${arguments}";
   slog "<7>$(show_var task_script) $(show_var task_name) $(show_var arguments)";
+  #if user press CTRL+C - we will exit from task with exit code 87
+  trap dzible_task_terminator SIGINT
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
@@ -35,6 +37,11 @@ function run_task ()
       eval $countdown_command;
       countdown_pid=$!
       slog "<7>countdown_pid=${countdown_pid}";
+      #save current task PID to file
+      task_pid="$$";
+      slog "<7>task_pid ${task_pid}";
+      echo -n "$task_pid" > "${task_pid_file}"
+
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${task_script}";
@@ -50,7 +57,21 @@ function run_task ()
   else
     slog "<4>no task_script file ${task_script}! 🤷‍":
   fi
+  sleep 0.75;
 }
+
+function dzible_task_terminator ()
+{
+    echo -e "\n\n\n It's TRAP! dzible_task_terminator(${task_name}) \n\n\n";
+    task_pid="$(cat "${task_pid_file}")"
+    slog "<6>Kill task_pid ${task_pid}";
+    kill -15 ${task_pid}
+    sleep 0.4;
+    kill -9 ${task_pid}
+    rm -v "${task_pid_file}"
+    #sleep 1;
+}
+export -f dzible_task_terminator
 
 function encrypt_aes ()
 {
@@ -586,6 +607,9 @@ else
   #run_task add_screen_resolution_with_cvt_xrandr
 fi
 
+task_pid_file="${work_dir}/task.pid"; #last task pid
+show_var task_pid_file
+
 run_task show_script_subversion
 #run_task sleep 4
 run_task timezone_set
@@ -618,4 +642,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='zidul-ecbfdca-2022-09-04-14-48-51'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='curib-908d27f-2022-09-04-15-59-46'; echo "${script_subversion}=script_subversion"; 
