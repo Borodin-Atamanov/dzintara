@@ -347,6 +347,7 @@ function install_system ()
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
     timeout --kill-after=77 $timeout_task  apt-get --yes update | cat;
     timeout --kill-after=77 $timeout_task apt-get --yes autoremove | cat;
+    timeout --kill-after=77 $timeout_task dpkg --configure -pending | cat;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
@@ -617,4 +618,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='mogir-2039d47-2022-09-04-14-02-44'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ivufa-31ca01f-2022-09-04-14-12-05'; echo "${script_subversion}=script_subversion"; 
