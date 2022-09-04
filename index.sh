@@ -473,7 +473,7 @@ declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
-declare_and_export very_max_timeout 77 #absolute maximum timeout in seconds. It used for longest operation
+declare_and_export very_max_timeout 777 #absolute maximum timeout in seconds. It used for longest operation
 
 #TODO ask target computer name on script start
 
@@ -610,4 +610,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='pocom-55fb23c-2022-09-04-12-32-45'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ameko-68d64ef-2022-09-04-12-37-08'; echo "${script_subversion}=script_subversion"; 
