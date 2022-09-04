@@ -22,7 +22,7 @@ show_var "augeas_file"
 are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
 are_you_serious=' --root=/ '; #real business
 
-augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
+timeout --kill-after=2 $timeout_augtool augtool ${are_you_serious} --timing --echo --backup --file "${augeas_file}";
 
 exit 0;
 

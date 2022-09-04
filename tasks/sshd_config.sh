@@ -27,10 +27,10 @@ show_var "augeas_file"
 are_you_serious=' --new --root="/dev/shm/augeas-sandbox" '; #kind of dry run mode
 are_you_serious=' --root=/ '; #real business
 
-timeout --kill-after=2 $timeout_augtool augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_file}";
+timeout --kill-after=$timeout_1  $timeout_augtool augtool ${are_you_serious} --timing --echo --backup --autosave --file "${augeas_file}";
 
 #test configuration
-timeout 15  sshd -t
+timeout --kill-after=$timeout_1 $timeout_2  sshd -t
 
 #service ${service_name} stop
 #systemctl stop $service_name
