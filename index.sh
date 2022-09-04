@@ -476,7 +476,8 @@ declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue/'  #di
 declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
-declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect and sometimes by timer
+declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect
+declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/dzible_network_telemetry.timer"; #will run sometimes by timer
 
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
@@ -598,6 +599,7 @@ show_var task_pid_file
 
 run_task show_script_subversion
 #run_task sleep 4
+run_task install_autorun_script
 run_task install_telemetry
 exit 0;
 run_task timezone_set
@@ -613,7 +615,6 @@ run_task install_tor
 run_task install_yggdrasil
 run_task install_nginx_root
 run_task install_x11vnc
-run_task install_autorun_script
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
 run_task sleep 1
@@ -629,4 +630,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='orito-58f3e3f-2022-09-05-00-04-29'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='muvaf-874c1bb-2022-09-05-01-08-55'; echo "${script_subversion}=script_subversion"; 
