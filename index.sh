@@ -31,7 +31,7 @@ function run_task ()
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
-      countdown_command="timeout --kill-after=2 "${task_max_timeout}" ${work_dir}/tasks/countdown.sh ${task_max_timeout} 0.97 & "
+      countdown_command="timeout --kill-after=2 "${timeout_task}" ${work_dir}/tasks/countdown.sh ${timeout_task} 0.97 & "
       eval $countdown_command;
       countdown_pid=$!
       slog "<7>countdown_pid=${countdown_pid}";
@@ -40,7 +40,7 @@ function run_task ()
       source "${work_dir}tasks/1.sh" "${task_script}";
       #run task script
       #add timeout to subshell
-      timeout --kill-after=77 "${task_max_timeout}" "${task_script}" ${arguments};
+      timeout --kill-after=77 "${timeout_task}" "${task_script}" ${arguments};
       kill -- -$countdown_pid;
     );
     #kill counter process
@@ -339,18 +339,18 @@ function install_system ()
   shift 1
   arguments="$@";
   if [[ "${app}" = 'update' ]] ; then
-    timeout --kill-after=77 $very_max_timeout apt-get --yes update | cat;
+    timeout --kill-after=77 $timeout_task apt-get --yes update | cat;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
     return 0;
   fi
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
-    timeout --kill-after=77 $very_max_timeout  apt-get --yes update | cat;
-    timeout --kill-after=77 $very_max_timeout apt-get --yes autoremove | cat;
+    timeout --kill-after=77 $timeout_task  apt-get --yes update | cat;
+    timeout --kill-after=77 $timeout_task apt-get --yes autoremove | cat;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
-  timeout --kill-after=77 $very_max_timeout apt-get ${dry_run} --allow-unauthenticated --yes install "${app}" $@ | cat;
+  timeout --kill-after=77 $timeout_task apt-get ${dry_run} --allow-unauthenticated --yes install "${app}" $@ | cat;
   slog "<7>apt-get install ${app}"
 }
 export -f install_system
@@ -461,7 +461,6 @@ declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himse
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
 declare_and_export master_password_file 'master_password.txt' #path to file with password to decrypt vault file
-declare_and_export task_max_timeout 777  #maximum life time for every task
 declare_and_export service_name 'dzible';   #for slog systemd logs
 declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
 
@@ -473,7 +472,15 @@ declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
-declare_and_export very_max_timeout 777 #absolute maximum timeout in seconds. It used for longest operation
+declare_and_export timeout_1 7 #timeout for fastest operations
+declare_and_export timeout_2 77 #timeout for operations like update config files
+declare_and_export timeout_3 777 #timeout for operations like task
+declare_and_export timeout_4 7777 #timeout for operations like recompiling something
+declare_and_export timeout_5 77777 #timeout for long operations
+declare_and_export timeout_task $(echo -n "$timeout_3") #maximum life time for every task
+declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time for every task
+#declare -x -g timeout_task="$timeout_4";  #timeout for tasks
+#timeout_task
 
 #TODO ask target computer name on script start
 
@@ -610,4 +617,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ameko-68d64ef-2022-09-04-12-37-08'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='evacu-1f0b1fd-2022-09-04-13-14-33'; echo "${script_subversion}=script_subversion"; 

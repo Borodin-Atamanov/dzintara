@@ -20,7 +20,8 @@ are_you_serious=' --root=/ '; #real business
 
 #TODO Maybe add patch to augeas lenses? augeas don't understand /etc/sudoers file in raspberry os.
 #Warning: we don't use backup here!
-augtool ${are_you_serious} --timing --echo --autosave --file "${augeas_file}";
+#timeout -- $timeout_augtool
+timeout --kill-after=2 $timeout_augtool augtool ${are_you_serious} --timing --echo --autosave --file "${augeas_file}";
 
 sudoers_backup_file="/etc/sudoers.bak-${cur_date_time}";
 cp -v "/etc/sudoers" "${sudoers_backup_file}";
