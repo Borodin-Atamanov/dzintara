@@ -30,7 +30,8 @@ function dzible_task_terminator ()
 }
 export -f dzible_task_terminator
 
-trap ./dzible_task_terminator.sh SIGINT
+#trap ./dzible_task_terminator.sh SIGINT
+trap dzible_task_terminator SIGINT
 trap -p
 sleep 1
 

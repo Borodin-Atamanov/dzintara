@@ -29,7 +29,7 @@ function run_task ()
   slog "<6>run_task ${task_name} ${arguments}";
   slog "<7>$(show_var task_script) $(show_var task_name) $(show_var arguments)";
   #if user press CTRL+C - we will exit from task with exit code 87
-  trap dzible_task_terminator SIGINT
+  #trap dzible_task_terminator SIGINT
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
@@ -37,11 +37,7 @@ function run_task ()
       eval $countdown_command;
       countdown_pid=$!
       slog "<7>countdown_pid=${countdown_pid}";
-      #save current task PID to file
-      task_pid="$$";
-      slog "<7>task_pid ${task_pid}";
-      echo -n "$task_pid" > "${task_pid_file}"
-
+      #task_pid="$$"; slog "<7>task_pid ${task_pid}"; echo -n "$task_pid" > "${task_pid_file}" #save current task PID to file
       #exec -a "${work_dir}${task_script}"
       #run 1.sh before every task. Send full task path as $1 to 1.sh
       source "${work_dir}tasks/1.sh" "${task_script}";
@@ -59,19 +55,6 @@ function run_task ()
   fi
   sleep 0.75;
 }
-
-function dzible_task_terminator ()
-{
-    echo -e "\n\n\n It's TRAP! dzible_task_terminator(${task_name}) \n\n\n";
-    task_pid="$(cat "${task_pid_file}")"
-    slog "<6>Kill task_pid ${task_pid}";
-    kill -15 ${task_pid}
-    sleep 0.4;
-    kill -9 ${task_pid}
-    rm -v "${task_pid_file}"
-    #sleep 1;
-}
-export -f dzible_task_terminator
 
 function encrypt_aes ()
 {
@@ -494,7 +477,8 @@ declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
-declare_and_export timeout_1 7 #timeout for fastest operations
+declare_and_export timeout_0 0.7 #timeout for fastest operations
+declare_and_export timeout_1 7 #timeout for fast operations
 declare_and_export timeout_2 77 #timeout for operations like update config files
 declare_and_export timeout_3 777 #timeout for operations like task
 declare_and_export timeout_4 7777 #timeout for operations like recompiling something
@@ -504,7 +488,7 @@ declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time fo
 #declare -x -g timeout_task="$timeout_4";  #timeout for tasks
 #timeout_task
 
-#TODO ask target computer name on script start
+#TODO generate target computer name on script start
 
 set +x
 
@@ -642,4 +626,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='curib-908d27f-2022-09-04-15-59-46'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='omexi-d484509-2022-09-04-16-44-59'; echo "${script_subversion}=script_subversion"; 
