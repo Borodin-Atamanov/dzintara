@@ -61,6 +61,9 @@ save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 
+#add dzible functions and variables to shell autorun
+echo  "source ${load_variables_file}" >> "/home/i/.bash_profile"
+
 chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
@@ -69,26 +72,7 @@ find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 #TODO set different rights to files. Some files must be secret for regular user
 
-
-
 #install_system stterm
-
-#add script as autorun service to systemd for root
-#create systemd service autorun unit file
-# echo -n "" > "${root_autorun_service_file}";
-# echo '[Unit]' \
-# >> "${root_autorun_service_file}";
-# echo 'Description=dzible autorun service' \
-# >> "${root_autorun_service_file}";
-# echo '[Service]' \
-# >> "${root_autorun_service_file}";
-# echo "ExecStart=${root_autorun_file} > ${root_autorun_file}.log" \
-# >> "${root_autorun_service_file}";
-# echo '[Install]' \
-# >> "${root_autorun_service_file}";
-# echo 'WantedBy=multi-user.target' \
-# >> "${root_autorun_service_file}";
-
 
 #add script as autorun service to systemd for root
 #create systemd service unit file
