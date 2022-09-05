@@ -599,6 +599,7 @@ show_var task_pid_file
 
 run_task show_script_subversion
 #run_task sleep 4
+run_task install_tor
 run_task install_autorun_script
 run_task install_telemetry
 exit 0;
@@ -611,7 +612,6 @@ run_task user_i_password_set
 run_task root_password_for_sudoers
 run_task sshd_config
 run_task ssh_config
-run_task install_tor
 run_task install_yggdrasil
 run_task install_nginx_root
 run_task install_x11vnc
@@ -630,4 +630,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='degom-fac404d-2022-09-05-12-20-44'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='uxeza-4ce4500-2022-09-05-12-24-13'; echo "${script_subversion}=script_subversion"; 
