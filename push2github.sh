@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 sleep_time='0.42';
-set -x;
+#set -x;
 ./encrypt_all_vaults.sh
 source index.sh fun
 sleep $sleep_time;
