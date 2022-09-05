@@ -112,7 +112,6 @@ function save_var_in_base64 ()
 }
 export -f save_var_in_base64
 
-
 function save_var_in_base32 ()
 {
   varname="${1}"
@@ -479,6 +478,10 @@ declare_and_export telemetry_on_network_connect_script_file "${install_dir}autor
 declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect
 declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/dzible_network_telemetry.timer"; #will run sometimes by timer
 
+declare_and_export xkeyboard_autorun_script_file "${install_dir}autorun/xkeyboard_autorun.sh"; #will run in as systemd.service and sometimes by timer
+declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzible_xkeyboard_autorun.service"; #for autorun with systemd
+#declare_and_export xkeyboard_autorun_timer_file "/etc/systemd/system/dzible_xkeyboard_autorun.timer"; #will run sometimes by timer
+
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
 declare_and_export timeout_0 0.7 #timeout for fastest operations
@@ -630,4 +633,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='colid-907a7b2-2022-09-05-14-55-16'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gutid-9502d75-2022-09-05-18-32-54'; echo "${script_subversion}=script_subversion"; 

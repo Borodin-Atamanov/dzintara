@@ -98,7 +98,7 @@ systemctl enable dzible_network_telemetry | cat
 #systemctl restart dzible_network_telemetry | cat
 systemctl status dzible_network_telemetry | cat
 
-#add service to send telemetry on every period and after boot
+#add service to send network telemetry on every period
 config=$(cat <<_ENDOFFILE
 [Unit]
 Description=dzible network telemetry service run after boot and periodically

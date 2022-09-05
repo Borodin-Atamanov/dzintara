@@ -17,14 +17,16 @@ slog "<5>start $0"
 slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
+
 xset led 3;
-
-run_task show_script_subversion
-
+/usr/bin/numlockx on
+nohup setxkbmap -layout "us,ru" &
+nohup setxkbmap -option "grp:shift_caps_switch,grp_led:scroll" &
 nohup telegram-desktop &
 
 random_wait
 
+run_task show_script_subversion
 #run_task add_screen_resolution_with_cvt_xrandr
 
 #cvt_xrandr 1280 1024 60

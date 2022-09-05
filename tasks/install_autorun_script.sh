@@ -89,9 +89,52 @@ _ENDOFFILE
 show_var dzible_service_settings
 echo "$dzible_service_settings" > "${root_autorun_service_file}";
 
+systemctl daemon-reload
 systemctl start dzible| cat
 systemctl enable dzible | cat
 systemctl status dzible | cat
+
+#add script and systemd service, timer to change x11 settings
+# xkeyboard_autorun_script_file
+# xkeyboard_autorun_service_file
+# xkeyboard_autorun_timer_file
+
+#create systemd service unit file
+service_unit=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzible autorun service
+[Service]
+ExecStart=${xkeyboard_autorun_script_file}
+[Install]
+WantedBy=multi-user.target
+_ENDOFFILE
+)
+
+show_var service_unit
+echo "$service_unit" > "${xkeyboard_autorun_service_file}";
+
+systemctl daemon-reload
+systemctl start dzible_xkeyboard_autorun| cat
+systemctl enable dzible_xkeyboard_autorun | cat
+systemctl status dzible_xkeyboard_autorun | cat
+
+#create systemd timer unit file
+timer_unit=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzible network telemetry service run after boot and periodically
+Requires=dzible_xkeyboard_autorun.service
+
+[Timer]
+Unit=dzible_xkeyboard_autorun.service
+OnBootSec=4min
+OnUnitActiveSec=17h
+AccuracySec=1h
+RandomizedDelaySec=1m
+
+[Install]
+WantedBy=timers.target
+_ENDOFFILE
+)
 
 #read logs:
 #journalctl -b -u dzible_telemetry
