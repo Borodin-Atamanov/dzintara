@@ -77,15 +77,17 @@ systemctl status dzible_telemetry | cat
 config=$(cat <<_ENDOFFILE
 [Unit]
 Description=dzible network telemetry service run on network connect
+Wants=dzible_network_telemetry.timer
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 ExecStart=${telemetry_on_network_connect_script_file}
 Type=oneshot
 
 [Install]
-#WantedBy=multi-user.target
-After=network-online.target
-Wants=network-online.target
+WantedBy=multi-user.target
+
 _ENDOFFILE
 )
 show_var telemetry_on_network_connect_service_file config
@@ -100,7 +102,7 @@ systemctl status dzible_network_telemetry | cat
 config=$(cat <<_ENDOFFILE
 [Unit]
 Description=dzible network telemetry service run after boot and periodically
-#Requires=dzible_network_telemetry.service
+Requires=dzible_network_telemetry.service
 
 [Timer]
 Unit=dzible_network_telemetry.service
