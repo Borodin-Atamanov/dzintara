@@ -1,14 +1,14 @@
-#
-
+#X11 utils:
 x11-utils
 x11-apps
 xorg-x11-fonts
 numlockx
 xdotool
-
+xcalib
 xterm
-#zutty
 rxvt-unicode
+#zutty
+x11vnc
+
 telegram-desktop
 
-x11vnc
