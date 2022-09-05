@@ -605,9 +605,9 @@ run_task show_script_subversion
 run_task install_tor
 run_task install_autorun_script
 run_task install_telemetry
+run_task install_console_apps
 exit 0;
 run_task timezone_set
-run_task install_console_apps
 run_task install_gui_apps
 run_task add_screen_resolution_with_cvt_xrandr
 run_task root_password_set
@@ -633,4 +633,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='urevo-8bcdeb8-2022-09-05-18-37-44'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ivuda-d55a0bf-2022-09-05-18-37-59'; echo "${script_subversion}=script_subversion"; 
