@@ -31,8 +31,8 @@ while : ; do :
     timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap_fp -option "grp:shift_caps_switch,grp_led:scroll"
     #TODO turn off caps lock (if it accidentally turned on)
     sleep $timeout_2
-    timeout --kill-after=$timeout_1 $timeout_2 $xset_fp -led 3;
-    sleep "1.$RANDOM"
+    #timeout --kill-after=$timeout_1 $timeout_2 $xset_fp -led 3;
+    #sleep "1.$RANDOM"
     #sleep $timeout_1
 done;
 

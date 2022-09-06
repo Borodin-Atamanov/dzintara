@@ -1,4 +1,5 @@
 #X11 utils:
+autorandr
 x11-utils
 x11-apps
 xorg-x11-fonts
@@ -9,6 +10,7 @@ xterm
 rxvt-unicode
 #zutty
 x11vnc
+
 
 telegram-desktop
 

@@ -34,6 +34,11 @@ run_task show_script_subversion
 #cvt_xrandr 1920 1080 60
 #cvt_xrandr 1360 768 60
 
+autorandr --debug --change
+autorandr --debug --load itworks
+autorandr --debug horizontal
+
+
 #read
 
 slog "<5>finish $0"

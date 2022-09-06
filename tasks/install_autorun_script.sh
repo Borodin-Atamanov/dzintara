@@ -62,7 +62,10 @@ save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 
 #add dzible functions and variables to shell autorun
+#TODO check what string is not in file
 echo  "source ${load_variables_file}" >> "/home/i/.bash_profile"
+echo  "source ${load_variables_file}" >> "/home/i/.bashrc"
+echo  "source ${load_variables_file}" >> "/home/i/.profile"
 
 chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;

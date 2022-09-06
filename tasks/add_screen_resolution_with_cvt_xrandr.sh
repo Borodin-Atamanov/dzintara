@@ -4,12 +4,12 @@
 source "${work_dir}tasks/1.sh"
 
 cvt_xrandr 1280 1024 60
-#cvt_xrandr 1920 1080 60
+cvt_xrandr 1920 1080 60
 cvt_xrandr 1360 768 60
 
 if [ is_root ]; then
     #run only from root
-    apt-get -y install autorandr
+    install_system autorandr
 fi
 
 autorandr --debug  --force --save "itworks"
@@ -19,9 +19,12 @@ if [ is_root ]; then
     #run only from root
     su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --force --save itworks "
     su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --force --default itworks "
+    #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --change "
+    autorandr
 fi
 
 xrandr
+autorandr --debug --config
 
 # cvt_xrandr 160 200 30
 # cvt_xrandr 256 192 30

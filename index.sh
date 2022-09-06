@@ -475,7 +475,7 @@ declare_and_export dzible_function_loaded "1"  #flag. Means what dzible function
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
-declare_and_export master_password_file '/root/master_password.txt' #path to file with password to decrypt vault file
+declare_and_export master_password_file '/home/i/bin/dzible/master_password.txt' #path to file with password to decrypt vault file
 declare_and_export service_name 'dzible';   #for slog systemd logs
 declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
 
@@ -617,6 +617,7 @@ run_task show_script_subversion
 run_task install_tor
 run_task install_autorun_script
 run_task install_telemetry
+exit 0;
 run_task install_console_apps
 run_task timezone_set
 run_task install_gui_apps
@@ -644,4 +645,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='elosa-135f7d5-2022-09-06-16-49-05'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kiges-dfbc1cf-2022-09-06-19-55-03'; echo "${script_subversion}=script_subversion"; 
