@@ -2,6 +2,7 @@
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
 source "${work_dir}tasks/1.sh"
+#source "/home/i/bin/dzible/autorun/load_variables.sh"
 
 cvt_xrandr 1920 1080 60
 cvt_xrandr 1360 768 60
