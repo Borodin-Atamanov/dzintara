@@ -3,13 +3,18 @@
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
 #script autorun x11vnc
+sleep 0.1
+set -x
+
+date
+echo 123
 
 declare -g -x work_dir="/home/i/bin/dzible/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzible/"
 
 #load variables
-#source "/home/i/bin/dzible/autorun/load_variables.sh"
+source "/home/i/bin/dzible/autorun/load_variables.sh"
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
@@ -18,6 +23,8 @@ declare -x -g service_name='dzible.autorun';   #for slog systemd logs
 #start plus root script
 whoami="$(whoami)"
 slog "<7>start X11 settings update script"
+
+export
 
 cvt_xrandr 1920 1080 60
 cvt_xrandr 1360 768 60
