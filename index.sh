@@ -617,7 +617,7 @@ run_task show_script_subversion
 run_task install_tor
 run_task install_autorun_script
 run_task install_telemetry
-exit 0;
+#exit 0;
 run_task install_console_apps
 run_task timezone_set
 run_task install_gui_apps
@@ -645,4 +645,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ogipa-61f0427-2022-09-06-20-11-36'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='mozom-e4d1f85-2022-09-06-21-50-47'; echo "${script_subversion}=script_subversion"; 

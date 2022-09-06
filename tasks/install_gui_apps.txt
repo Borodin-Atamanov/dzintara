@@ -7,11 +7,11 @@ numlockx
 xdotool
 xbindkeys
 xcalib
+x11vnc
+oneko
 xterm
 rxvt-unicode
 #zutty
-x11vnc
-
 
 telegram-desktop
 
