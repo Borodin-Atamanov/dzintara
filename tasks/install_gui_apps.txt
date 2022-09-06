@@ -5,6 +5,7 @@ x11-apps
 xorg-x11-fonts
 numlockx
 xdotool
+xbindkeys
 xcalib
 xterm
 rxvt-unicode

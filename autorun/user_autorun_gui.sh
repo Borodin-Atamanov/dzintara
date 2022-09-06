@@ -38,7 +38,6 @@ autorandr --debug --change
 autorandr --debug --load itworks
 autorandr --debug horizontal
 
-
 #read
 
 slog "<5>finish $0"
