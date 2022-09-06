@@ -192,6 +192,17 @@ function get_command_fullpath ()
 }
 export -f get_command_fullpath
 
+function generate_and_save_root_vault ()
+{
+  :
+}
+export -f generate_and_save_root_vault
+
+function load_root_vault ()
+{
+  :
+}
+export -f load_root_vault
 
 function get_var ()
 {
@@ -464,7 +475,7 @@ declare_and_export dzible_function_loaded "1"  #flag. Means what dzible function
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
-declare_and_export master_password_file 'master_password.txt' #path to file with password to decrypt vault file
+declare_and_export master_password_file '/root/master_password.txt' #path to file with password to decrypt vault file
 declare_and_export service_name 'dzible';   #for slog systemd logs
 declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
 
@@ -565,6 +576,7 @@ else
     else
         echo "${master_password_file} file is empty";
         read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
+        echo -n "${master_password}" > "${master_password_file}";   #save to file
     fi
     echo "master_password length is ${#master_password}";
     declare_and_export master_password "${master_password}"
@@ -633,4 +645,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='acoge-dc89150-2022-09-05-22-31-04'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gipox-37af515-2022-09-06-12-25-36'; echo "${script_subversion}=script_subversion"; 

@@ -162,9 +162,7 @@ show_var orig_max_user_instances max_user_instances
 
 : "${telemetry_next_wait:=1}"; #set default value if variable is not set
 
-#TODO create cycle with inotify
-# inotifywait  -e close_write --recursive '/var/spool/dzible_telemetry_queue/'
-#for ((i=5;i>=0;i--)); do
+#create cycle with inotify
 while : ; do :
     #process all existing directories here
     while : ; do :
@@ -179,6 +177,7 @@ while : ; do :
             sleep $telemetry_next_wait;
         fi;
         telemetry_send_telegram_dir "$next_dir"
+        # $telemetry_next_wait can changed in telemetry_send_telegram_dir()
     done;
     #will wait for new directories
     inotifyresult="$( timeout --kill-after=77 3777 inotifywait  -e create --recursive "${telemetry_queue_dir}" )";
