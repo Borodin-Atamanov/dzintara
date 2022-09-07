@@ -17,20 +17,26 @@ declare -x -g service_name='dzible.pipes_autorun';   #for slog systemd logs
 
 #start plus root script
 user_id="$(id)"
-slog "<7>dzible read from pipe and execute ${user_id}"
+whoami="$(whoami)"
+slog "<7>dzible read from pipe and execute ${whoami} ${user_id}"
 
-if [ is_root ]; then
+if [[ "$1" = 'root' ]]; then
+    declare -x -g service_name='dzible_pipes_root_autorun';   #for slog systemd logs
     fifo_path="${run_command_from_root_pipe_file}"
+    user='root';
     slog "<7>ROOT fifo_path=${fifo_path}"
     rm -v "$fifo_path"
     mkfifo "$fifo_path"
     chown --verbose   root:root "${fifo_path}";
 else
+    sleep 2;
+    declare -x -g service_name='dzible_pipes_user_i_autorun';   #for slog systemd logs
     fifo_path="${run_command_from_user_i_pipe_file}"
+    user='i';
     slog "<7>USER fifo_path=${fifo_path}"
     rm -v "$fifo_path"
     mkfifo "$fifo_path"
-    chown --verbose i:i "${fifo_path}";
+    chown --verbose ${user}:${user} "${fifo_path}";
 fi;
 chmod --verbose 0666 "$fifo_path"
 
@@ -40,9 +46,17 @@ for ((i=0;i<32777;i++))
 {
     #read commands from fifo
     command="$(cat "$fifo_path")";
-    slog "<7>${i}-command=${command}"
     #execute command
-    nohup /bin/bash -c -- "${command}" &
+    if [[ "$user" = 'i' ]]; then
+        #run from user
+        slog "<7>${user}-${i}-command=${command}"
+        nohup su --login "$user" --pty --shell="/bin/bash" --command="${command}" &
+    else
+        #run from root
+        slog "<7>${user}-${i}-command=${command}"
+        nohup /bin/bash -c -- "${command}" &
+    fi;
+
     #sleep .02;
 }
 
