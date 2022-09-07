@@ -130,7 +130,7 @@ service_unit=$(cat <<_ENDOFFILE
 Description=dzible run commands from named fifo pipe as root
 
 [Service]
-ExecStart=${run_command_from_root_pipe_file}
+ExecStart=${run_command_from_pipes_script_file}
 Restart=always
 User=root
 Group=root
@@ -149,7 +149,7 @@ service_unit=$(cat <<_ENDOFFILE
 Description=dzible run commands from named fifo pipe as user i
 
 [Service]
-ExecStart=${run_command_from_user_i_pipe_file}
+ExecStart=${run_command_from_pipes_script_file}
 Restart=always
 User=i
 Group=i
