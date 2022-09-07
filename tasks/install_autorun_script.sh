@@ -67,14 +67,6 @@ echo  "source ${load_variables_file}" >> "/home/i/.bash_profile"
 echo  "source ${load_variables_file}" >> "/home/i/.bashrc"
 echo  "source ${load_variables_file}" >> "/home/i/.profile"
 
-chown --verbose --changes --recursive  i:i "${install_dir}";
-find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
-find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
-#for dev
-find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
-find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
-#TODO set different rights to files. Some files must be secret for regular user
-
 #install_system stterm
 
 #add script as autorun service to systemd for root
@@ -170,6 +162,15 @@ systemctl status dzible_pipes_user_i_autorun | cat
 systemctl restart dzible_pipes_root_autorun| cat
 systemctl enable dzible_pipes_root_autorun | cat
 systemctl status dzible_pipes_root_autorun | cat
+
+chown --verbose --changes --recursive  i:i "${install_dir}";
+find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
+find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
+#for dev
+find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
+find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
+#TODO set different rights to files. Some files must be secret for regular user
+
 
 #read logs:
 #journalctl -b -u dzible_telemetry

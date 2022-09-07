@@ -27,7 +27,8 @@ fi;
 slog "<7>fifo_path=${fifo_path}"
 
 rm -v "$fifo_path"
-mkfifo "$fifo_path"
+mkfifo --mode=0666 "$fifo_path"
+
 #stat "$fifo_path"
 
 for ((i=0;i<32777;i++))
