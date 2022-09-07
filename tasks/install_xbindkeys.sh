@@ -9,7 +9,6 @@
 #    exit 1
 # fi
 
-install_system xbindkeys
 
 xbindkeysrc_config_file="${work_dir}/tasks/${task_name}.txt";
 xbindkeysrc_config_file_path="/home/i/.xbindkeysrc";
@@ -18,3 +17,8 @@ cp -v "$xbindkeysrc_config_file" "$xbindkeysrc_config_file_path"
 
 chown --verbose --changes --recursive  i:i "${xbindkeysrc_config_file_path}";
 chmod --verbose 0666 "${xbindkeysrc_config_file_path}";
+
+install_system xbindkeys
+
+#for read keys codes:
+# xbindkeys --multikey
