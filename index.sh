@@ -488,10 +488,14 @@ declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry
 declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
 declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect
 declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/dzible_network_telemetry.timer"; #will run sometimes by timer
-
 declare_and_export xkeyboard_autorun_script_file "${install_dir}autorun/xkeyboard_autorun.sh"; #will run in as systemd.service and sometimes by timer
 declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzible_xkeyboard_autorun.service"; #for autorun with systemd
 #declare_and_export xkeyboard_autorun_timer_file "/etc/systemd/system/dzible_xkeyboard_autorun.timer"; #will run sometimes by timer
+declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
+declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzible_pipes_root_autorun.service"  #service will run command from the pipe as root
+declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzible_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
+declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/commands_pipe_root.fifo"  #service will run command from the pipe as root
+declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/commands_pipe_user_i.fifo"  #service will run command from the pipe as user i
 
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
@@ -614,10 +618,10 @@ show_var task_pid_file
 
 run_task show_script_subversion
 #run_task sleep 4
-run_task install_tor
 run_task install_autorun_script
 run_task install_telemetry
-#exit 0;
+exit 0;
+run_task install_tor
 run_task install_console_apps
 run_task timezone_set
 run_task install_gui_apps
@@ -645,4 +649,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ikexo-bcfa2fd-2022-09-07-02-08-54'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='etefo-d93b6ec-2022-09-07-14-57-16'; echo "${script_subversion}=script_subversion"; 

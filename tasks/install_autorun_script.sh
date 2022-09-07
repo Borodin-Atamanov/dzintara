@@ -108,6 +108,7 @@ service_unit=$(cat <<_ENDOFFILE
 Description=dzible autorun service
 [Service]
 ExecStart=${xkeyboard_autorun_script_file}
+Restart=always
 [Install]
 WantedBy=multi-user.target
 _ENDOFFILE
@@ -120,6 +121,46 @@ systemctl daemon-reload
 systemctl start dzible_xkeyboard_autorun| cat
 systemctl enable dzible_xkeyboard_autorun | cat
 systemctl status dzible_xkeyboard_autorun | cat
+
+
+#create systemd service unit file
+#this service will read from fifo pipe and run commands as root
+service_unit=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzible run commands from named fifo pipe as root
+
+[Service]
+ExecStart=${run_command_from_root_pipe_file}
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+_ENDOFFILE
+)
+show_var service_unit
+echo "$service_unit" > "${run_command_from_root_pipes_service_file}";
+
+#create systemd service unit file
+#this service will read from fifo pipe and run commands as user i
+service_unit=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzible run commands from named fifo pipe as user i
+
+[Service]
+ExecStart=${run_command_from_user_i_pipe_file}
+Restart=always
+User=i
+Group=i
+
+[Install]
+WantedBy=multi-user.target
+_ENDOFFILE
+)
+show_var service_unit
+echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
+
 
 #create systemd timer unit file
 timer_unit=$(cat <<_ENDOFFILE
