@@ -162,23 +162,14 @@ show_var service_unit
 echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
 
 
-#create systemd timer unit file
-timer_unit=$(cat <<_ENDOFFILE
-[Unit]
-Description=dzible network telemetry service run after boot and periodically
-Requires=dzible_xkeyboard_autorun.service
+systemctl daemon-reload
+systemctl start dzible_pipes_user_i_autorun| cat
+systemctl enable dzible_pipes_user_i_autorun | cat
+systemctl status dzible_pipes_user_i_autorun | cat
 
-[Timer]
-Unit=dzible_xkeyboard_autorun.service
-OnBootSec=4min
-OnUnitActiveSec=17h
-AccuracySec=1h
-RandomizedDelaySec=1m
-
-[Install]
-WantedBy=timers.target
-_ENDOFFILE
-)
+systemctl start dzible_pipes_root_autorun| cat
+systemctl enable dzible_pipes_root_autorun | cat
+systemctl status dzible_pipes_root_autorun | cat
 
 #read logs:
 #journalctl -b -u dzible_telemetry
