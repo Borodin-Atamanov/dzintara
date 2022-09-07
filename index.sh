@@ -617,9 +617,10 @@ task_pid_file="${work_dir}/task.pid"; #last task pid
 show_var task_pid_file
 
 run_task show_script_subversion
-#run_task sleep 4
+run_task sleep 4
 run_task install_autorun_script
 run_task install_telemetry
+run_task show_script_subversion
 exit 0;
 run_task install_tor
 run_task install_console_apps
@@ -649,4 +650,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gotop-c45985e-2022-09-07-16-13-17'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ogexa-4c11b26-2022-09-07-16-13-41'; echo "${script_subversion}=script_subversion"; 
