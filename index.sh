@@ -619,13 +619,14 @@ show_var task_pid_file
 run_task show_script_subversion
 run_task sleep 4
 run_task install_autorun_script
-run_task install_telemetry
+#run_task install_telemetry
+run_task install_gui_apps
+run_task install_xbindkeys
 run_task show_script_subversion
 exit 0;
 run_task install_tor
 run_task install_console_apps
 run_task timezone_set
-run_task install_gui_apps
 run_task add_screen_resolution_with_cvt_xrandr
 run_task root_password_set
 run_task user_i_password_set
@@ -650,4 +651,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='zirem-73a22a9-2022-09-07-17-41-24'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='etifi-fde5005-2022-09-07-18-59-07'; echo "${script_subversion}=script_subversion"; 

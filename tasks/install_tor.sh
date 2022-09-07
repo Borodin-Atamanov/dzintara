@@ -14,6 +14,10 @@
 install_system apt-transport-https
 install_system lsb-release
 
+install_system update
+install_system tor deb.torproject.org-keyring
+install_system obfs4proxy
+
 #get info about OS
 
 os_codename=$( trim $(lsb_release --short --codename ))
@@ -38,9 +42,6 @@ _ENDOFFILE
 )
 echo -e "$tor_list_file_content" > "${tor_list_file}"
 
-install_system update
-install_system tor deb.torproject.org-keyring
-install_system obfs4proxy
 
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
