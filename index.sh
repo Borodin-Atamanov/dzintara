@@ -494,8 +494,8 @@ declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzible_xk
 declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
 declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzible_pipes_root_autorun.service"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzible_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
-declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/commands_pipe_root.fifo"  #service will run command from the pipe as root
-declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/commands_pipe_user_i.fifo"  #service will run command from the pipe as user i
+declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
+declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
 
 declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
@@ -650,4 +650,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='simar-46d81c0-2022-09-07-17-34-43'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='zirem-73a22a9-2022-09-07-17-41-24'; echo "${script_subversion}=script_subversion"; 
