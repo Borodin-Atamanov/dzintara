@@ -21,13 +21,18 @@ slog "<7>dzible read from pipe and execute ${user_id}"
 
 if [ is_root ]; then
     fifo_path="${run_command_from_root_pipe_file}"
+    slog "<7>ROOT fifo_path=${fifo_path}"
+    rm -v "$fifo_path"
+    mkfifo "$fifo_path"
+    chown --verbose   root:root "${fifo_path}";
 else
     fifo_path="${run_command_from_user_i_pipe_file}"
+    slog "<7>USER fifo_path=${fifo_path}"
+    rm -v "$fifo_path"
+    mkfifo "$fifo_path"
+    chown --verbose   i:i "${fifo_path}";
 fi;
-slog "<7>fifo_path=${fifo_path}"
-
-rm -v "$fifo_path"
-mkfifo --mode=0666 "$fifo_path"
+chmod --verbose 0666 "$fifo_path"
 
 #stat "$fifo_path"
 

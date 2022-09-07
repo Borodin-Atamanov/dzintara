@@ -153,6 +153,8 @@ _ENDOFFILE
 show_var service_unit
 echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
 
+rm -v "$run_command_from_root_pipe_file"
+rm -v "$run_command_from_user_i_pipe_file"
 
 systemctl daemon-reload
 systemctl restart dzible_pipes_user_i_autorun| cat
