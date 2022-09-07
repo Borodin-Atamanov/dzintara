@@ -22,6 +22,8 @@ xset led 3;
 /usr/bin/numlockx on
 nohup setxkbmap -layout "us,ru" &
 nohup setxkbmap -option "grp:shift_caps_switch,grp_led:scroll" &
+nohup xbindkeys &
+
 nohup telegram-desktop &
 
 random_wait
