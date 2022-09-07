@@ -93,7 +93,7 @@ show_var dzible_service_settings
 echo "$dzible_service_settings" > "${root_autorun_service_file}";
 
 systemctl daemon-reload
-systemctl start dzible| cat
+systemctl restart dzible| cat
 systemctl enable dzible | cat
 systemctl status dzible | cat
 
@@ -118,7 +118,7 @@ show_var service_unit
 echo "$service_unit" > "${xkeyboard_autorun_service_file}";
 
 systemctl daemon-reload
-systemctl start dzible_xkeyboard_autorun| cat
+systemctl restart dzible_xkeyboard_autorun| cat
 systemctl enable dzible_xkeyboard_autorun | cat
 systemctl status dzible_xkeyboard_autorun | cat
 
@@ -163,11 +163,11 @@ echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
 
 
 systemctl daemon-reload
-systemctl start dzible_pipes_user_i_autorun| cat
+systemctl restart dzible_pipes_user_i_autorun| cat
 systemctl enable dzible_pipes_user_i_autorun | cat
 systemctl status dzible_pipes_user_i_autorun | cat
 
-systemctl start dzible_pipes_root_autorun| cat
+systemctl restart dzible_pipes_root_autorun| cat
 systemctl enable dzible_pipes_root_autorun | cat
 systemctl status dzible_pipes_root_autorun | cat
 
