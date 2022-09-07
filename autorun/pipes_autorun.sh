@@ -30,7 +30,7 @@ else
     slog "<7>USER fifo_path=${fifo_path}"
     rm -v "$fifo_path"
     mkfifo "$fifo_path"
-    chown --verbose   i:i "${fifo_path}";
+    chown --verbose i:i "${fifo_path}";
 fi;
 chmod --verbose 0666 "$fifo_path"
 
