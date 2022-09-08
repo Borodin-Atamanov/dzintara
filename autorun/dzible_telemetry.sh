@@ -119,10 +119,10 @@ function telemetry_send_telegram_dir ()
         #send file and message
         #request="curl --verbose --form chat_id='${telemetry_telegram_bot_chat_id}' --form document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
         #request="curl --verbose --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data document=@'${send_file}' --data text='${send_text}' '${request_url}sendDocument' ";
-        request="timeout --kill-after=77 777 curl --no-progress-meter --form  document=@'${send_file}' --form chat_id='${telemetry_telegram_bot_chat_id}' --form caption='${send_text}' '${request_url}sendDocument' ";
+        request="timeout --kill-after=$timeout_1 $timeout_2 curl --no-progress-meter --form  document=@'${send_file}' --form chat_id='${telemetry_telegram_bot_chat_id}' --form caption='${send_text}' '${request_url}sendDocument' ";
     else
         #send only text message, without file
-        request="timeout --kill-after=77 777 curl --no-progress-meter --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
+        request="timeout --kill-after=$timeout_1 $timeout_2 curl --no-progress-meter --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
     fi;
     slog "<7>$(show_var request)";
     result="$( eval "$request" )";
