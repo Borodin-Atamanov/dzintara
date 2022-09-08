@@ -22,13 +22,14 @@ slog "<7>start X11 input settings update service"
 numlockx_fp="$( get_command_fullpath numlockx )";
 xset_fp="$( get_command_fullpath xset )";
 setxkbmap_fp="$( get_command_fullpath setxkbmap )";
-numlockx_fp="$( get_command_fullpath numlockx )";
 
 while : ; do :
     timeout --kill-after=$timeout_1 $timeout_2 $numlockx_fp on
     timeout --kill-after=$timeout_1 $timeout_2 $xset_fp led 3;
-    timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap_fp -layout "us,ru"
-    timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap_fp -option "grp:shift_caps_switch,grp_led:scroll"
+    #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap_fp -layout "us,ru"
+    #https://gist.github.com/jatcwang/ae3b7019f219b8cdc6798329108c9aee
+    #lv3:enter_switch
+    timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap_fp -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps"
     #TODO turn off caps lock (if it accidentally turned on)
     sleep $timeout_2
     #timeout --kill-after=$timeout_1 $timeout_2 $xset_fp -led 3;

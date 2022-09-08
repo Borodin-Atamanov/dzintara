@@ -141,6 +141,7 @@ function telemetry_send_telegram_dir ()
         slog '<5>result is not "ok"!';
         exit_code=-1;
         #will increase waiting time if something is not ok
+         #"$target_dir";
         declare -x -g telemetry_next_wait=$( awkcalc "1 + 2 * $telemetry_next_wait" )
     fi
     slog "<7>$(show_var telemetry_next_wait)";
