@@ -1,13 +1,14 @@
 # xbindkeys configuration #
 #/home/i/.xbindkeysrc
 
-keystate_numlock = enable
-keystate_capslock = enable
-keystate_scrolllock= enable
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
 
 "echo 'cvt_xrandr 1280 1024 60' > /home/i/bin/dzible/autorun/commands_pipe_user_i.fifo &"
-  Control+Shift+Alt+Mod2 + minus
+  m:0xd + c:20
+  Control+Shift+Alt + minus
 
 "xcalib -invert -alter"
-  m:0x50 + c:31
+  m:0x50 + c:31a
   Mod2+Mod4 + i

@@ -47,7 +47,9 @@ declare_and_export XAUTHORITY '/home/i/.Xauthority';
 save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 save_var_in_base32 work_dir "${install_dir}" >> "${load_variables_file}";
 
+echo 'if [[ "$1" != "nocd" ]]; then ' >> "${load_variables_file}";
 echo 'cd "${work_dir}";' >> "${load_variables_file}";
+echo 'fi' >> "${load_variables_file}";
 #echo "cd '${install_dir}';" >> "${load_variables_file}";
 
 echo 'source "${work_dir}/index.sh" fun' >> "${load_variables_file}";
@@ -63,9 +65,9 @@ save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 
 #add dzible functions and variables to shell autorun
 #TODO check what string is not in file
-echo  "source ${load_variables_file}" >> "/home/i/.bash_profile"
-echo  "source ${load_variables_file}" >> "/home/i/.bashrc"
-echo  "source ${load_variables_file}" >> "/home/i/.profile"
+echo  "source ${load_variables_file}" nocd >> "/home/i/.bash_profile"
+echo  "source ${load_variables_file}" nocd >> "/home/i/.bashrc"
+echo  "source ${load_variables_file}" nocd >> "/home/i/.profile"
 
 #install_system stterm
 
@@ -85,9 +87,11 @@ show_var dzible_service_settings
 echo "$dzible_service_settings" > "${root_autorun_service_file}";
 
 systemctl daemon-reload
-systemctl restart dzible| cat
+#systemctl restart dzible| cat
 systemctl enable dzible | cat
 systemctl status dzible | cat
+
+sleep $timeout_0
 
 #add script and systemd service, timer to change x11 settings
 # xkeyboard_autorun_script_file
@@ -110,9 +114,10 @@ show_var service_unit
 echo "$service_unit" > "${xkeyboard_autorun_service_file}";
 
 systemctl daemon-reload
-systemctl restart dzible_xkeyboard_autorun| cat
+#systemctl restart dzible_xkeyboard_autorun| cat
 systemctl enable dzible_xkeyboard_autorun | cat
 systemctl status dzible_xkeyboard_autorun | cat
+sleep $timeout_0
 
 
 #create systemd service unit file
@@ -151,15 +156,20 @@ echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
 
 rm -v "$run_command_from_root_pipe_file"
 rm -v "$run_command_from_user_i_pipe_file"
+sleep $timeout_0
+
 
 systemctl daemon-reload
 systemctl restart dzible_pipes_user_i_autorun| cat
 systemctl enable dzible_pipes_user_i_autorun | cat
 systemctl status dzible_pipes_user_i_autorun | cat
+sleep $timeout_0
 
 systemctl restart dzible_pipes_root_autorun| cat
 systemctl enable dzible_pipes_root_autorun | cat
 systemctl status dzible_pipes_root_autorun | cat
+sleep $timeout_0
+
 
 chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
@@ -168,7 +178,6 @@ find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 #TODO set different rights to files. Some files must be secret for regular user
-
 
 #read logs:
 #journalctl -b -u dzible_telemetry
