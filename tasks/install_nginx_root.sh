@@ -10,7 +10,6 @@
 #    exit 1
 # fi
 
-
 install_system nginx
 install_system apache2-utils
 
