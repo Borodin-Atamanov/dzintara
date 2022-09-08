@@ -69,6 +69,10 @@ echo  "source ${load_variables_file}" nocd >> "/home/i/.bash_profile"
 echo  "source ${load_variables_file}" nocd >> "/home/i/.bashrc"
 echo  "source ${load_variables_file}" nocd >> "/home/i/.profile"
 
+echo  "source ${load_variables_file}" nocd >> "/root/.bash_profile"
+echo  "source ${load_variables_file}" nocd >> "/root/.bashrc"
+echo  "source ${load_variables_file}" nocd >> "/root/.profile"
+
 #install_system stterm
 
 #add script as autorun service to systemd for root
@@ -158,7 +162,6 @@ rm -v "$run_command_from_root_pipe_file"
 rm -v "$run_command_from_user_i_pipe_file"
 sleep $timeout_0
 
-
 systemctl daemon-reload
 systemctl restart dzible_pipes_user_i_autorun| cat
 systemctl enable dzible_pipes_user_i_autorun | cat
@@ -169,7 +172,6 @@ systemctl restart dzible_pipes_root_autorun| cat
 systemctl enable dzible_pipes_root_autorun | cat
 systemctl status dzible_pipes_root_autorun | cat
 sleep $timeout_0
-
 
 chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
