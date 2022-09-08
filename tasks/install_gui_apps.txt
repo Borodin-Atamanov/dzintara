@@ -11,7 +11,9 @@ x11vnc
 oneko
 xterm
 rxvt-unicode
-#zutty
+#keyboard layout indicator
+gxkb
+
 
 telegram-desktop
 

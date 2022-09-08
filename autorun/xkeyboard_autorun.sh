@@ -23,6 +23,10 @@ numlockx_fp="$( get_command_fullpath numlockx )";
 xset_fp="$( get_command_fullpath xset )";
 setxkbmap_fp="$( get_command_fullpath setxkbmap )";
 
+gxkb_fp="$( get_command_fullpath gxkb )";
+
+nohup gxkb_fp &
+
 #echo -e "remove Lock = Caps_Lock\nremove Control = Control_L\nkeysym Control_L = Caps_Lock\nkeysym Caps_Lock = Control_L\nadd Lock = Caps_Lock\nadd Control = Control_L\n" | xmodmap -v -
 
 while : ; do :
