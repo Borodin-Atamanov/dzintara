@@ -513,11 +513,26 @@ function replace_line_by_string ()
   #echo -n $(( $2 < $1 ? $2 : $1 ))
   local haystack="$1";  #multiline variable, where the function will search
   local needle="$2"; #search for this substring
-  local slide="$3"; #and replace sting to slide (if needle was found)
-  local stop_word="$4";
+  local slide="$3"; #and replace sting to slide (if needle found in the string)
+  local stop_word="$4"; #if stop word found in string - then this stings is untouchable
   if [[ "$haystack" = 'reset' ]]; then
+    #if line not in file - add it in the end
     :
+    return -1;
   fi;
+
+  new_haystack="${haystack}";
+  #find all strings with needle
+  new_haystack="$(  echo -n "${new_haystack}" | grep --fixed-strings --ignore-case "${needle}" )"
+
+  #remove all strings with stop_word
+  if [[ "${stop_word}" != "" ]]; then
+    new_haystack="$(  echo -n "${new_haystack}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
+  fi;
+
+
+
+  echo "$new_haystack"
 }
 export -f replace_line_by_string
 
@@ -702,4 +717,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cuvil-4f230e4-2022-09-09-17-17-28'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='lacis-fdb0da3-2022-09-09-17-39-36'; echo "${script_subversion}=script_subversion"; 
