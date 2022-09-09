@@ -21,3 +21,5 @@ fname="/home/i/github/dzible/test2delete/change_config_test2.txt"
 save_var_to_file "$fname" config
 
 #echo -n "$config" | xxd
+
+is_substr "" "1" && echo yes || echo no

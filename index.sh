@@ -471,6 +471,28 @@ function min ()
 }
 export -f min
 
+function is_substr ()
+{
+  #$1 - string
+  #$2 - substring
+  local haystack="$1"
+  local needle="$2"
+  #[ -z "$1" ] || { [ -z "${2##*$1*}" ] && [ -n "$2" ]; };
+  #[ -z "$1" ] || { [ -z "${2##*$1*}" ] && [ -n "$2" ];};
+  #[ -z "$haystack" ] || { [ -z "${needle##*$haystack*}" ] && [ -n "$needle" ];};
+  exit_code=1;
+  if [[ "$haystack" == *"${needle}"* ]]; then
+    exit_code=0;
+  fi
+  if [[ "$haystack" == '' ]] || [[ "${needle}" == '' ]] ; then
+    exit_code=1;  #empty string is not contains empty stings or something else
+  fi
+  #echo "${needle##*$haystack*}";
+  #show_var exit_code
+  return $exit_code
+  #return [[ -z "$1" ]] || { [[ -z "${2##*$1*}" ]] && [[ -n "$2" ]];};
+}
+export -f is_substr
 
 function load_file_to_var ()
 {
@@ -515,8 +537,8 @@ function replace_line_by_string ()
   local needle="$2"; #search for this substring
   local slide="$3"; #and replace sting to slide (if needle found in the string)
   local stop_word="$4"; #if stop word found in string - then this stings is untouchable
-  local xff=$(echo -n -e $'\xFF'); #delimeter with HEX code 0xFF
-  local xff='|'
+  #local xff=$(echo -n -e $'\xFF'); #delimeter with HEX code 0xFF
+  #local xff='|'
 
   if [[ "$haystack" = 'reset' ]]; then
     #if line not in file - add it in the end
@@ -527,20 +549,16 @@ function replace_line_by_string ()
   haystack2="${haystack}";
   haystack3="${haystack}";
 
-
   #find all strings with needle
-  haystack2="$(  echo -n "${haystack2}" | grep --fixed-strings --ignore-case "${needle}" )"
+  #haystack2="$(  echo -n "${haystack2}" | grep --fixed-strings --ignore-case "${needle}" )"
 
   #remove all strings with stop_word
   if [[ "${stop_word}" != "" ]]; then
-    haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
+    #haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
+    :
   fi;
 
-  #TODO find line numbers
 
-  #replace whole string on selected line numbers
-
-  echo "$haystack2"
 
   #search=()
   #replace=()
@@ -556,18 +574,30 @@ function replace_line_by_string ()
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
     #haystack3="${haystack3/$line/$slide}"
+    show_var line
+
+    #if [ is_substr "$line" "$needle" ] && [ ! is_substr "$line" "$stop_word" ]; then
+    if is_substr "$line" "$needle" && ! is_substr "$line" "$stop_word" ; then
+      echo -n "YES: ";
+      show_var line needle stop_word
+
+    else
+      echo -n "NO: ";
+      show_var line needle stop_word
+
+    fi
 
     #IFS="$old_IFS"
     #line=" "
     #slide="@"
     #echo "search=[${line}], replace=[${slide}]"
-    search+=("${line}")
-    replace+=("${slide}")
+    #search+=("${line}")
+    #replace+=("${slide}")
     #eval_this='haystack3="${haystack3//$line/$slide}"'
     #show_var eval_this
     #eval $eval_this
-    #haystack3="${haystack3//$line/$slide}" #doesnt work!
-    haystack3="${haystack3//$line/$slide}"
+    #haystack3="${haystack3//$line/$slide}" #doesnt work for me in some cases!
+    #haystack3="${haystack3//$line/$slide}"
 
     #haystack_eval="${haystack_eval}"
     #haystack3="${haystack3//${line}/${slide}}"
@@ -580,7 +610,8 @@ function replace_line_by_string ()
     #show_var line
     vari=123
   #done
-  done <<< "$haystack2"
+  done <<< "$haystack"
+  show_var vari
   #show_var search replace
 
   #loop over array with search and replace strings
@@ -592,7 +623,7 @@ function replace_line_by_string ()
   #done
 
   #haystack3="${haystack3//$v1/$v2}"
-  echo "$haystack3"
+  #echo "$haystack"
 }
 export -f replace_line_by_string
 
@@ -777,4 +808,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='uruta-bf0799d-2022-09-09-21-17-02'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='otidi-6fed6b9-2022-09-09-22-04-13'; echo "${script_subversion}=script_subversion"; 
