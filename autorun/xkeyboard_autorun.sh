@@ -24,9 +24,13 @@ xset="$( get_command_fullpath xset )";
 setxkbmap="$( get_command_fullpath setxkbmap )";
 gxkb="$( get_command_fullpath gxkb )";
 xneur="$( get_command_fullpath xneur )";
+bash="$( get_command_fullpath bash )";
 
 #echo -e "remove Lock = Caps_Lock\nremove Control = Control_L\nkeysym Control_L = Caps_Lock\nkeysym Caps_Lock = Control_L\nadd Lock = Caps_Lock\nadd Control = Control_L\n" | xmodmap -v -
 #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk"
+$bash -c "{ while : ; do timeout --kill-after=$timeout_2 $timeout_4 $gxkb; sleep $timeout_1; done; } &"
+sleep $timeout_0
+$bash -c "{ while : ; do timeout --kill-after=$timeout_2 $timeout_4 $xneur; sleep $timeout_1; done; } &"
 
 #while : ; do :
 for ((i=7;i>=0;i--)); do
@@ -34,7 +38,7 @@ for ((i=7;i>=0;i--)); do
     $numlockx on
     $xset led 3;
     nohup $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk" &
-    nohup gxkb &
+    #nohup gxkb &
     #timeout --kill-after=$timeout_1 $timeout_2 $xset led 3;
     #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap -layout "us,ru"
     # https://gist.github.com/jatcwang/ae3b7019f219b8cdc6798329108c9aee
