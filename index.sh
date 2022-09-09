@@ -539,6 +539,8 @@ function replace_line_by_string ()
   local stop_word="$4"; #if stop word found in string - then this stings is untouchable
   #local xff=$(echo -n -e $'\xFF'); #delimeter with HEX code 0xFF
   #local xff='|'
+  local x0a=$(echo -n -e $'\x0A'); #HEX code char
+  local x0a=$(echo -n -e "\n"); #HEX code char
 
   if [[ "$haystack" = 'reset' ]]; then
     #if line not in file - add it in the end
@@ -546,8 +548,6 @@ function replace_line_by_string ()
     return -1;
   fi;
 
-  haystack2="${haystack}";
-  haystack3="${haystack}";
 
   #find all strings with needle
   #haystack2="$(  echo -n "${haystack2}" | grep --fixed-strings --ignore-case "${needle}" )"
@@ -563,9 +563,10 @@ function replace_line_by_string ()
   #search=()
   #replace=()
   #Save old $IFS
-  #old_IFS="$IFS"
+  old_IFS="$IFS"
   #replace all strings to "$slide" with sed in loop over all lines
   #echo -n "$haystack2" | while IFS= read -r line ; do :
+  haystack2=""; #output var
   while IFS= read -r line; do
     #echo -n "$haystack2" |
     #echo -n "$haystack2" | sed --expression="s${xff}${line}${xff}new${xff}g"
@@ -574,18 +575,29 @@ function replace_line_by_string ()
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
     #haystack3="${haystack3/$line/$slide}"
-    show_var line
+    #show_var line
 
     #if [ is_substr "$line" "$needle" ] && [ ! is_substr "$line" "$stop_word" ]; then
     if is_substr "$line" "$needle" && ! is_substr "$line" "$stop_word" ; then
-      echo -n "YES: ";
-      show_var line needle stop_word
-
+      #echo -n "YES: ";
+      #show_var line needle stop_word
+      #change this line to slide
+      line="$slide";
     else
-      echo -n "NO: ";
-      show_var line needle stop_word
-
+      #echo -n "NO: ";
+      #show_var line needle stop_word
+      #Don't change this line to slide
+      :
     fi
+    #echo -n "$line" | xxd
+    #haystack2="${haystack2}${line}$'\n'";
+    #IFS="$old_IFS"
+    #echo -e "$line\n\n\n" | xxd
+    #haystack2="$(echo -e "${haystack2}${line}${x0a}\n\n\n"; )" ;
+    #haystack2+="${line}"
+    #haystack2+="${x0a}${x0a}${x0a}"
+    #echo -e "123\n\n\n" | xxd
+    #echo "${haystack2}${line}";
 
     #IFS="$old_IFS"
     #line=" "
@@ -608,10 +620,11 @@ function replace_line_by_string ()
 
     #echo -n "$haystack2" | sed --expression="s|${line}|new|g"
     #show_var line
-    vari=123
-  #done
+    #done
+    #vari=123123
+    echo "$line"
   done <<< "$haystack"
-  show_var vari
+  #show_var vari
   #show_var search replace
 
   #loop over array with search and replace strings
@@ -623,7 +636,7 @@ function replace_line_by_string ()
   #done
 
   #haystack3="${haystack3//$v1/$v2}"
-  #echo "$haystack"
+  #echo "$haystack2" | xxd
 }
 export -f replace_line_by_string
 
@@ -808,4 +821,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='otidi-6fed6b9-2022-09-09-22-04-13'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='tucin-50b1a58-2022-09-09-22-24-16'; echo "${script_subversion}=script_subversion"; 
