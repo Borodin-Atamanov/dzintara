@@ -506,12 +506,15 @@ export -f save_var_to_file
 
 function replace_line_by_string ()
 {
-  #function find strings in variable, contains substring $1. And replace the string with $2
-  #if original string contains $3 - then nothing will changed if file
+  #function search for strings contains substring $2 in variable, . And replace the string with $3
+  #if original string contains $4 - then this string will not change
   #function use global variables to define function's behavior
   #if $1 is 'reset' - then global variables will reset to default values
   #echo -n $(( $2 < $1 ? $2 : $1 ))
-  local haystack="$1";
+  local haystack="$1";  #multiline variable, where the function will search
+  local needle="$2"; #search for this substring
+  local slide="$3"; #and replace sting to slide (if needle was found)
+  local stop_word="$4";
   if [[ "$haystack" = 'reset' ]]; then
     :
   fi;
@@ -699,4 +702,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='xabor-9c1754e-2022-09-09-17-09-48'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='cuvil-4f230e4-2022-09-09-17-17-28'; echo "${script_subversion}=script_subversion"; 

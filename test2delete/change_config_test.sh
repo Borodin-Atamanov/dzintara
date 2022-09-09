@@ -15,6 +15,8 @@ load_file_to_var "$fname" config
 #echo -e "\n\n\n";
 #cat $fname | xxd
 
+replace_line_by_string "$config"
+
 fname="/home/i/github/dzible/test2delete/change_config_test2.txt"
 save_var_to_file "$fname" config
 
