@@ -548,6 +548,7 @@ function replace_line_by_string ()
     return -1;
   fi;
 
+  [[ "$replace_line_by_string_add_slide_if_no_needle" == "" ]] && declare -g "replace_line_by_string_add_slide_if_no_needle=1"
 
   #find all strings with needle
   #haystack2="$(  echo -n "${haystack2}" | grep --fixed-strings --ignore-case "${needle}" )"
@@ -557,16 +558,14 @@ function replace_line_by_string ()
     #haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
     :
   fi;
-
-
-
   #search=()
   #replace=()
   #Save old $IFS
   old_IFS="$IFS"
   #replace all strings to "$slide" with sed in loop over all lines
   #echo -n "$haystack2" | while IFS= read -r line ; do :
-  haystack2=""; #output var
+  #haystack2=""; #output var
+  exit_code=0;  # by default we don't change any line in variable
   while IFS= read -r line; do
     #echo -n "$haystack2" |
     #echo -n "$haystack2" | sed --expression="s${xff}${line}${xff}new${xff}g"
@@ -583,6 +582,7 @@ function replace_line_by_string ()
       #show_var line needle stop_word
       #change this line to slide
       line="$slide";
+      exit_code=1;
     else
       #echo -n "NO: ";
       #show_var line needle stop_word
@@ -637,6 +637,13 @@ function replace_line_by_string ()
 
   #haystack3="${haystack3//$v1/$v2}"
   #echo "$haystack2" | xxd
+
+  #if we did't find needle and we should add it to file - let's do it
+  if [[ "$replace_line_by_string_add_slide_if_no_needle" != "" ]] && [ $exit_code -eq 0 ]; then
+    echo "$slide";
+  fi;
+  #show_var replace_line_by_string_add_slide_if_no_needle exit_code
+  return $exit_code;
 }
 export -f replace_line_by_string
 
@@ -821,4 +828,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='tucin-50b1a58-2022-09-09-22-24-16'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='irini-2b37e4f-2022-09-09-22-41-10'; echo "${script_subversion}=script_subversion"; 

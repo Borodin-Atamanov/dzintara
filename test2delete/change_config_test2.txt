@@ -1,6 +1,6 @@
 HiddenServiceDir /var/lib/tor/hidden_service/
-HiddenServicePort 80 127.0.0.1:80
-HiddenServicePort 8080 127.0.0.1:8080
+without sed=1
+without sed=1
 HiddenServicePort 30222 127.0.0.1:30222
 
 #Комменты
