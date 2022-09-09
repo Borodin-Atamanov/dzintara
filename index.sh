@@ -498,7 +498,9 @@ export -f load_file_to_var
 
 function save_var_to_file ()
 {
-  :
+  local fname="$1"  #path to file or something like file
+  local var_name="$2"
+  echo -n "${!var_name}" > "${fname}"
 }
 export -f save_var_to_file
 
@@ -697,4 +699,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='fevar-f2fe796-2022-09-09-16-57-14'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xabor-9c1754e-2022-09-09-17-09-48'; echo "${script_subversion}=script_subversion"; 

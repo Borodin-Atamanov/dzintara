@@ -11,10 +11,11 @@ fname="/home/i/github/dzible/test2delete/change_config_test.txt"
 load_file_to_var "$fname" config
 #md5sum $fname
 
-echo -n "$config" | xxd
 
 #echo -e "\n\n\n";
 #cat $fname | xxd
 
 fname="/home/i/github/dzible/test2delete/change_config_test2.txt"
 save_var_to_file "$fname" config
+
+echo -n "$config" | xxd
