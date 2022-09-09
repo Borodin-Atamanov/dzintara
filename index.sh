@@ -647,6 +647,29 @@ function replace_line_by_string ()
 }
 export -f replace_line_by_string
 
+function add_line_to_file ()
+{
+  #function adds line to file if it not exists in file
+  # $1 - file fullpath
+  # $2 - line to add
+  fname="$1"
+  line2add="$2"
+  comments_sign="$3"
+  [[ "$comments_sign" == "" ]] && comments_sign='#';
+  if [[ -e "${fname}" ]] ; then
+    #file or named pipe exists
+    load_file_to_var "$fname" config_al2f
+    config_al2f=$( replace_line_by_string "$config_al2f" "$line2add" "$comments_sign" )
+    changed=$?
+    show_var changed fname
+    #echo "$config_al2f"
+    save_var_to_file "$fname" config_al2f
+    return 0;
+  fi;
+  return 1;
+}
+export -f add_line_to_file
+
 
 declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
@@ -828,4 +851,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='zarum-d4309a0-2022-09-09-22-47-01'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='enaru-073f8cd-2022-09-09-23-06-22'; echo "${script_subversion}=script_subversion"; 
