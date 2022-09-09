@@ -607,7 +607,6 @@ function add_line_to_file ()
 }
 export -f add_line_to_file
 
-
 declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
@@ -646,7 +645,6 @@ declare_and_export timeout_task $(echo -n "$timeout_3") #maximum life time for e
 declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time for every task
 #declare -x -g timeout_task="$timeout_4";  #timeout for tasks
 #timeout_task
-
 
 set +x
 
@@ -788,4 +786,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='badag-229bed4-2022-09-09-23-27-19'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='efero-e0f53c9-2022-09-09-23-30-29'; echo "${script_subversion}=script_subversion"; 
