@@ -471,9 +471,20 @@ function min ()
 }
 export -f min
 
+
 function load_file_to_var ()
 {
-  :
+  local fname="$1"  #path to file or something like file
+  local var_name="$2"
+  if [ -e "${fname}" ]; then
+    #file or named pipe exists
+    file_value=$( cat "${fname}" );
+    command_eval='declare -g '${var_name}'="$file_value"';
+    show_var command_eval
+    #eval ("$command_eval");
+  else
+    :
+  fi
 }
 export -f load_file_to_var
 
@@ -678,4 +689,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='icife-65f6c95-2022-09-09-15-59-06'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='bibax-8592497-2022-09-09-16-17-40'; echo "${script_subversion}=script_subversion"; 
