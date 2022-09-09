@@ -526,6 +526,8 @@ function replace_line_by_string ()
 
   haystack2="${haystack}";
   haystack3="${haystack}";
+
+
   #find all strings with needle
   haystack2="$(  echo -n "${haystack2}" | grep --fixed-strings --ignore-case "${needle}" )"
 
@@ -534,8 +536,14 @@ function replace_line_by_string ()
     haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
   fi;
 
-  search=()
-  replace=()
+  #TODO find line numbers
+
+  #replace whole string on selected line numbers
+
+  echo "$haystack2"
+
+  #search=()
+  #replace=()
   #Save old $IFS
   #old_IFS="$IFS"
   #replace all strings to "$slide" with sed in loop over all lines
@@ -543,8 +551,8 @@ function replace_line_by_string ()
   while IFS= read -r line; do
     #echo -n "$haystack2" |
     #echo -n "$haystack2" | sed --expression="s${xff}${line}${xff}new${xff}g"
-    line="$(trim $line)"
-    slide="$(trim $slide)"
+    #line="$(trim $line)"
+    #slide="$(trim $slide)"
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
     #haystack3="${haystack3/$line/$slide}"
@@ -552,7 +560,7 @@ function replace_line_by_string ()
     #IFS="$old_IFS"
     #line=" "
     #slide="@"
-    echo "search=[${line}], replace=[${slide}]"
+    #echo "search=[${line}], replace=[${slide}]"
     search+=("${line}")
     replace+=("${slide}")
     #eval_this='haystack3="${haystack3//$line/$slide}"'
@@ -573,26 +581,16 @@ function replace_line_by_string ()
     vari=123
   #done
   done <<< "$haystack2"
-
-  show_var vari
-  show_var search replace
+  #show_var search replace
 
   #loop over array with search and replace strings
-  arraylength="${#search[@]}"
-  show_var arraylength
-  for (( i=0; i<$arraylength; i++ ));
-  do
-    echo "index: $i, value: ${search[$i]} ${replace[$i]}"
-  done
+  #arraylength="${#search[@]}"
+  #show_var arraylength
+  #for (( i=0; i<$arraylength; i++ ));
+  #do
+  #  echo "index: $i, value: ${search[$i]} ${replace[$i]}"
+  #done
 
-
-  line="HiddenServicePort 8080 127.0.0.1:8080"
-    slide="@"
-    haystack3="${haystack3//$line/$slide}"
-  #ascii=$(for x in {0..9} {A..F}; do for y in {0..9} {A..F}; do echo -ne "\x$x$y"; done; done)
-  #$'\x0FF'
-  v1='/';
-  v2="_";
   #haystack3="${haystack3//$v1/$v2}"
   echo "$haystack3"
 }
@@ -779,4 +777,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rocof-2172092-2022-09-09-19-29-23'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='codis-eb2a438-2022-09-09-19-34-17'; echo "${script_subversion}=script_subversion"; 
