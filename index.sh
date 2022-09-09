@@ -471,6 +471,32 @@ function min ()
 }
 export -f min
 
+function load_file_to_variable ()
+{
+  :
+}
+export -f load_file_to_variable
+
+function save_variable_to_file ()
+{
+  :
+}
+export -f load_file_to_variable
+
+function replace_line_by_string ()
+{
+  #function find strings in file, contains substring $1. And replace the string with $2
+  #if original string contains $3 - then nothing will changed if file
+  #function use global variables to define function's behavior
+  #if $1 is 'reset' - then global variables will reset to default values
+  #echo -n $(( $2 < $1 ? $2 : $1 ))
+  if [[ "$1" = 'reset' ]]; then
+    :
+  fi;
+}
+export -f replace_line_by_string
+
+
 declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
@@ -651,4 +677,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='adifa-999dbbf-2022-09-09-15-19-08'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='talel-ce0c7a7-2022-09-09-15-36-28'; echo "${script_subversion}=script_subversion"; 
