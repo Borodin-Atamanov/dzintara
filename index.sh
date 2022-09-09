@@ -476,13 +476,21 @@ function load_file_to_var ()
 {
   local fname="$1"  #path to file or something like file
   local var_name="$2"
-  if [ -e "${fname}" ]; then
+  if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
     file_value=$( cat "${fname}" );
-    command_eval='declare -g '${var_name}'="$file_value"';
-    show_var command_eval
-    #eval ("$command_eval");
+    #command_eval='declare -g "'${var_name}'=$file_value"';
+    command_eval='declare -g "'${var_name}'=$(cat "'${fname}'" )"';
+    #this command removes newlines in the end of file
+    #echo "$command_eval"
+    #show_var command_eval
+    eval "$command_eval";
+    #variable with name "${var_name}" now contains value from file, but without newlines in the end
+    #md5_of_var=$(md5 "${!var_name}")
+    #show_var md5_of_var
+    #echo -n "";
   else
+    echo "File is not exists $fname";
     :
   fi
 }
@@ -689,4 +697,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='bibax-8592497-2022-09-09-16-17-40'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='fevar-f2fe796-2022-09-09-16-57-14'; echo "${script_subversion}=script_subversion"; 
