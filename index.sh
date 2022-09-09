@@ -515,24 +515,86 @@ function replace_line_by_string ()
   local needle="$2"; #search for this substring
   local slide="$3"; #and replace sting to slide (if needle found in the string)
   local stop_word="$4"; #if stop word found in string - then this stings is untouchable
+  local xff=$(echo -n -e $'\xFF'); #delimeter with HEX code 0xFF
+  local xff='|'
+
   if [[ "$haystack" = 'reset' ]]; then
     #if line not in file - add it in the end
     :
     return -1;
   fi;
 
-  new_haystack="${haystack}";
+  haystack2="${haystack}";
+  haystack3="${haystack}";
   #find all strings with needle
-  new_haystack="$(  echo -n "${new_haystack}" | grep --fixed-strings --ignore-case "${needle}" )"
+  haystack2="$(  echo -n "${haystack2}" | grep --fixed-strings --ignore-case "${needle}" )"
 
   #remove all strings with stop_word
   if [[ "${stop_word}" != "" ]]; then
-    new_haystack="$(  echo -n "${new_haystack}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
+    haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
   fi;
 
+  search=()
+  replace=()
+  #Save old $IFS
+  #old_IFS="$IFS"
+  #replace all strings to "$slide" with sed in loop over all lines
+  #echo -n "$haystack2" | while IFS= read -r line ; do :
+  while IFS= read -r line; do
+    #echo -n "$haystack2" |
+    #echo -n "$haystack2" | sed --expression="s${xff}${line}${xff}new${xff}g"
+    line="$(trim $line)"
+    slide="$(trim $slide)"
+    #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
+    #haystack4="${haystack3/${line}/${slide}}"
+    #haystack3="${haystack3/$line/$slide}"
+
+    #IFS="$old_IFS"
+    #line=" "
+    #slide="@"
+    echo "search=[${line}], replace=[${slide}]"
+    search+=("${line}")
+    replace+=("${slide}")
+    #eval_this='haystack3="${haystack3//$line/$slide}"'
+    #show_var eval_this
+    #eval $eval_this
+    #haystack3="${haystack3//$line/$slide}" #doesnt work!
+    haystack3="${haystack3//$line/$slide}"
+
+    #haystack_eval="${haystack_eval}"
+    #haystack3="${haystack3//${line}/${slide}}"
+    #haystack4="${haystack3//80/99}"
+    #haystack3="$haystack4"
+    # BASH
+    #echo "s${xff}${line}${xff}new${xff}g"
+
+    #echo -n "$haystack2" | sed --expression="s|${line}|new|g"
+    #show_var line
+    vari=123
+  #done
+  done <<< "$haystack2"
+
+  show_var vari
+  show_var search replace
+
+  #loop over array with search and replace strings
+  arraylength="${#search[@]}"
+  show_var arraylength
+  for (( i=0; i<$arraylength; i++ ));
+  do
+    echo "index: $i, value: ${search[$i]} ${replace[$i]}"
+  done
 
 
-  echo "$new_haystack"
+  line="HiddenServicePort 8080 127.0.0.1:8080"
+    slide="@"
+    haystack3="${haystack3//$line/$slide}"
+  #ascii=$(for x in {0..9} {A..F}; do for y in {0..9} {A..F}; do echo -ne "\x$x$y"; done; done)
+  #$'\x0FF'
+  v1='/';
+  v2="_";
+  #haystack3="${haystack3//$v1/$v2}"
+  echo "$haystack3"
 }
 export -f replace_line_by_string
 
@@ -717,4 +779,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='lacis-fdb0da3-2022-09-09-17-39-36'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='rocof-2172092-2022-09-09-19-29-23'; echo "${script_subversion}=script_subversion"; 
