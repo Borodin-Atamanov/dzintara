@@ -64,16 +64,14 @@ save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 
 #add dzible functions and variables to shell autorun
-#TODO check what string is not in file
-echo  "source ${load_variables_file}" nocd >> "/home/i/.bash_profile"
-echo  "source ${load_variables_file}" nocd >> "/home/i/.bashrc"
-echo  "source ${load_variables_file}" nocd >> "/home/i/.profile"
+line_to_add="source ${load_variables_file} nocd"
+add_line_to_file "/home/i/.bash_profile" "$line_to_add"
+add_line_to_file "/home/i/.bashrc" "$line_to_add"
+add_line_to_file "/home/i/.profile" "$line_to_add"
 
-echo  "source ${load_variables_file}" nocd >> "/root/.bash_profile"
-echo  "source ${load_variables_file}" nocd >> "/root/.bashrc"
-echo  "source ${load_variables_file}" nocd >> "/root/.profile"
-
-#install_system stterm
+add_line_to_file "/root/.bash_profile" "$line_to_add"
+add_line_to_file "/root/.bashrc" "$line_to_add"
+add_line_to_file "/root/.profile" "$line_to_add"
 
 #add script as autorun service to systemd for root
 #create systemd service unit file

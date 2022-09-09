@@ -558,87 +558,24 @@ function replace_line_by_string ()
     #haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
     :
   fi;
-  #search=()
-  #replace=()
-  #Save old $IFS
-  old_IFS="$IFS"
-  #replace all strings to "$slide" with sed in loop over all lines
-  #echo -n "$haystack2" | while IFS= read -r line ; do :
-  #haystack2=""; #output var
   exit_code=0;  # by default we don't change any line in variable
   while IFS= read -r line; do
-    #echo -n "$haystack2" |
-    #echo -n "$haystack2" | sed --expression="s${xff}${line}${xff}new${xff}g"
-    #line="$(trim $line)"
-    #slide="$(trim $slide)"
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
-    #haystack3="${haystack3/$line/$slide}"
-    #show_var line
-
-    #if [ is_substr "$line" "$needle" ] && [ ! is_substr "$line" "$stop_word" ]; then
     if is_substr "$line" "$needle" && ! is_substr "$line" "$stop_word" ; then
-      #echo -n "YES: ";
-      #show_var line needle stop_word
       #change this line to slide
       line="$slide";
       exit_code=1;
     else
       #echo -n "NO: ";
-      #show_var line needle stop_word
       #Don't change this line to slide
       :
     fi
-    #echo -n "$line" | xxd
-    #haystack2="${haystack2}${line}$'\n'";
-    #IFS="$old_IFS"
-    #echo -e "$line\n\n\n" | xxd
-    #haystack2="$(echo -e "${haystack2}${line}${x0a}\n\n\n"; )" ;
-    #haystack2+="${line}"
-    #haystack2+="${x0a}${x0a}${x0a}"
-    #echo -e "123\n\n\n" | xxd
-    #echo "${haystack2}${line}";
-
-    #IFS="$old_IFS"
-    #line=" "
-    #slide="@"
-    #echo "search=[${line}], replace=[${slide}]"
-    #search+=("${line}")
-    #replace+=("${slide}")
-    #eval_this='haystack3="${haystack3//$line/$slide}"'
-    #show_var eval_this
-    #eval $eval_this
     #haystack3="${haystack3//$line/$slide}" #doesnt work for me in some cases!
-    #haystack3="${haystack3//$line/$slide}"
-
-    #haystack_eval="${haystack_eval}"
-    #haystack3="${haystack3//${line}/${slide}}"
-    #haystack4="${haystack3//80/99}"
-    #haystack3="$haystack4"
-    # BASH
     #echo "s${xff}${line}${xff}new${xff}g"
-
-    #echo -n "$haystack2" | sed --expression="s|${line}|new|g"
-    #show_var line
-    #done
-    #vari=123123
     echo "$line"
   done <<< "$haystack"
-  #show_var vari
-  #show_var search replace
-
-  #loop over array with search and replace strings
-  #arraylength="${#search[@]}"
-  #show_var arraylength
-  #for (( i=0; i<$arraylength; i++ ));
-  #do
-  #  echo "index: $i, value: ${search[$i]} ${replace[$i]}"
-  #done
-
-  #haystack3="${haystack3//$v1/$v2}"
-  #echo "$haystack2" | xxd
-
-  #if we did't find needle and we should add it to file - let's do it
+  #if we did't find needle and we should add $slide to file - let's do it
   if [[ "$replace_line_by_string_add_slide_if_no_needle" != "" ]] && [ $exit_code -eq 0 ]; then
     echo "$slide";
   fi;
@@ -851,4 +788,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='enaru-073f8cd-2022-09-09-23-06-22'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ukeme-2df91eb-2022-09-09-23-24-39'; echo "${script_subversion}=script_subversion"; 
