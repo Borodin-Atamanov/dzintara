@@ -489,6 +489,8 @@ function is_substr ()
   fi
   #echo "${needle##*$haystack*}";
   #show_var exit_code
+  >&2 echo -n "is_substr() ";
+  >&2 show_var haystack needle exit_code
   return $exit_code
   #return [[ -z "$1" ]] || { [[ -z "${2##*$1*}" ]] && [[ -n "$2" ]];};
 }
@@ -558,14 +560,18 @@ function replace_line_by_string ()
     #haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
     :
   fi;
-  exit_code=0;  # by default we don't change any line in variable
+  any_line_changed=0;  # by default we don't change any line in variable
   while IFS= read -r line; do
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
+    #>&2 echo line="$line" needle="$needle" stop_word="$stop_word"
+    >&2 echo -n "replace_line_by_string() ";
+    >&2 show_var line needle slide stop_word
     if is_substr "$line" "$needle" && ! is_substr "$line" "$stop_word" ; then
       #change this line to slide
       line="$slide";
-      exit_code=1;
+      any_line_changed=1;
+      >&2  echo 'CHANGE!'
     else
       #echo -n "NO: ";
       #Don't change this line to slide
@@ -576,11 +582,13 @@ function replace_line_by_string ()
     echo "$line"
   done <<< "$haystack"
   #if we did't find needle and we should add $slide to file - let's do it
-  if [[ "$replace_line_by_string_add_slide_if_no_needle" != "" ]] && [ $exit_code -eq 0 ]; then
+  if [[ "$replace_line_by_string_add_slide_if_no_needle" = "1" ]] && [[ "$any_line_changed" = "0" ]]; then
     echo "$slide";
+    any_line_changed=1
+    #TODO dont add $slide if it in file and include stop_word
   fi;
-  #show_var replace_line_by_string_add_slide_if_no_needle exit_code
-  return $exit_code;
+  #show_var replace_line_by_string_add_slide_if_no_needle any_line_changed
+  return $any_line_changed;
 }
 export -f replace_line_by_string
 
@@ -596,7 +604,7 @@ function add_line_to_file ()
   if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
     load_file_to_var "$fname" config_al2f
-    config_al2f=$( replace_line_by_string "$config_al2f" "$line2add" "$comments_sign" )
+    config_al2f=$( replace_line_by_string "$config_al2f" "$line2add" "$line2add" "$comments_sign" )
     changed=$?
     show_var changed fname
     #echo "$config_al2f"
@@ -786,4 +794,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='bamol-21cc65e-2022-09-09-23-41-37'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='tunub-18f2972-2022-09-10-00-20-43'; echo "${script_subversion}=script_subversion"; 

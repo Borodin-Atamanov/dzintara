@@ -7,6 +7,13 @@ source "${work_dir}tasks/1.sh"
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 
+line_to_add="echo source ${load_variables_file} nocd"
+
+add_line_to_file "/home/i/github/dzible/test2delete/change_config_test.txt" "$line_to_add"
+mcedit "/home/i/github/dzible/test2delete/change_config_test.txt"
+
+exit 0
+
 fname="/home/i/github/dzible/test2delete/change_config_test.txt"
 load_file_to_var "$fname" config
 #md5sum $fname
