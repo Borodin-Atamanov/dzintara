@@ -471,26 +471,27 @@ function min ()
 }
 export -f min
 
-function load_file_to_variable ()
+function load_file_to_var ()
 {
   :
 }
-export -f load_file_to_variable
+export -f load_file_to_var
 
-function save_variable_to_file ()
+function save_var_to_file ()
 {
   :
 }
-export -f load_file_to_variable
+export -f save_var_to_file
 
 function replace_line_by_string ()
 {
-  #function find strings in file, contains substring $1. And replace the string with $2
+  #function find strings in variable, contains substring $1. And replace the string with $2
   #if original string contains $3 - then nothing will changed if file
   #function use global variables to define function's behavior
   #if $1 is 'reset' - then global variables will reset to default values
   #echo -n $(( $2 < $1 ? $2 : $1 ))
-  if [[ "$1" = 'reset' ]]; then
+  local haystack="$1";
+  if [[ "$haystack" = 'reset' ]]; then
     :
   fi;
 }
@@ -677,4 +678,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='talel-ce0c7a7-2022-09-09-15-36-28'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='icife-65f6c95-2022-09-09-15-59-06'; echo "${script_subversion}=script_subversion"; 

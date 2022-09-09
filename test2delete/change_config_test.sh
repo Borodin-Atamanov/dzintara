@@ -7,3 +7,4 @@ set -x
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 
+load_file_to_variable
