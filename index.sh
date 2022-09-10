@@ -526,6 +526,7 @@ export -f load_file_to_var
 
 function read_var ()
 {
+  #read user input to variable
   local var_name="$1"
   local message="$2"
   read -p "${message}" temp_var < /dev/tty;
@@ -533,6 +534,8 @@ function read_var ()
   #>&2 echo $command_eval;
   #>&2 show_var command_eval
   eval "$command_eval";
+  #use:
+  #random_var=$(random_str 5); read_var "$random_var"  "write random variable: "; echo "${!random_var}"
 }
 export -f read_var
 
@@ -816,4 +819,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='agexe-849d62b-2022-09-10-17-46-16'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='berak-b3c0bee-2022-09-10-17-47-45'; echo "${script_subversion}=script_subversion"; 
