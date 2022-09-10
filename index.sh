@@ -528,11 +528,10 @@ function read_var ()
 {
   local var_name="$1"
   local message="$2"
-  read -s -p "${message}" temp_var < /dev/tty;
-  command_eval='declare -g "'${var_name}'="${temp_var}";';
-  #this command removes newlines in the end of file
-  #echo "$command_eval"
-  #show_var command_eval
+  read -p "${message}" temp_var < /dev/tty;
+  command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; echo "$'${var_name}'"; ';
+  #>&2 echo $command_eval;
+  #>&2 show_var command_eval
   eval "$command_eval";
 }
 export -f read_var
@@ -817,4 +816,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='deroc-ab158cb-2022-09-10-17-17-22'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='agexe-849d62b-2022-09-10-17-46-16'; echo "${script_subversion}=script_subversion"; 
