@@ -58,8 +58,8 @@ function run_task ()
 
 function encrypt_aes ()
 {
-  passkey="${1}"
-  data="${2}"
+  local passkey="${1}"
+  local data="${2}"
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
   exit_code=$?
@@ -69,8 +69,8 @@ export -f encrypt_aes
 
 function decrypt_aes ()
 {
-  passkey="${1}"
-  data="${2}"
+  local passkey="${1}"
+  local data="${2}"
   echo -n "${data}" | base64 -d -i | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
   exit_code=$?
   return $exit_code
@@ -85,15 +85,15 @@ export -f md5
 
 function base64_encode ()
 {
-  data="${1}"
-  base64="$( get_command_fullpath base64 )";
+  local data="${1}"
+  local base64="$( get_command_fullpath base64 )";
   echo -n "${data}" | $base64 -e -A | tr -d \\n;
 }
 export -f base64_encode
 
 function base64_decode ()
 {
-  data="${1}"
+  local data="${1}"
   base64="$( get_command_fullpath base64 )";
   echo -n "${data}" | $base64 -d -i
   decrypt_error=$?;
@@ -102,7 +102,7 @@ export -f base64_decode
 
 function save_var_in_base64 ()
 {
-  varname="${1}"
+  local varname="${1}"
   varname=$(trim "${varname}");
   value="${2}"
   value=$(base64_encode "${value}");
@@ -118,7 +118,7 @@ export -f save_var_in_base64
 
 function save_var_in_base32 ()
 {
-  varname="${1}"
+  local varname="${1}"
   varname=$(trim "${varname}");
   value="${2}"
   value=$(echo -n "${value}" | base32 --wrap=0);
@@ -133,9 +133,9 @@ export -f save_var_in_base32
 
 function save_var_in_text ()
 {
-  varname="${1}"
+  local varname="${1}"
   varname=$(trim "${varname}");
-  value="${2}"
+  local value="${2}"
   echo -n 'declare -g -x ';
   echo -n "${varname}";
   echo -n '=';
@@ -147,10 +147,10 @@ export -f save_var_in_text
 
 function random_str ()
 {
-    len="${1}";
-    vowels="euioa";
-    consonants="rtpsdfgklzxcvbnm";
-    random_str=;
+    local len="${1}";
+    local vowels="euioa";
+    local consonants="rtpsdfgklzxcvbnm";
+    local random_str=;
     for y in `seq 1 ${len}`; do
         for x in `seq 1 2`; do
             random_str="${random_str}${consonants:$(( RANDOM % ${#consonants} )):1}${vowels:$(( RANDOM % ${#vowels} )):1}";
@@ -174,8 +174,8 @@ export -f trim
 
 function declare_and_export ()
 {
-  varname="${1}"
-  value="${2}"
+  local varname="${1}"
+  local value="${2}"
   declare -g -x "$varname=$value";
   export "$varname=$value";
   #echo "$varname=$value";
@@ -185,9 +185,9 @@ export -f declare_and_export
 
 function get_command_fullpath ()
 {
-  command="${1}";
+  local command="${1}";
   command=$(trim "$command");
-  fullpath_maybe=$(type -p "$command");
+  local fullpath_maybe=$(type -p "$command");
   fullpath_maybe=$(trim "$fullpath_maybe");
   if [[ "${fullpath_maybe}" = "" ]] ; then
     fullpath_maybe="$command";
@@ -209,7 +209,7 @@ export -f generate_and_save_root_vault
 
 function get_var ()
 {
-  varname="${1}";
+  local varname="${1}";
   #declare -g "get_var_last_name=$varname";
   #export "get_var_last_name=$varname";
   #return value of variable with name "$varname"
@@ -235,9 +235,9 @@ export -f show_var
 function cvt_xrandr ()
 {
   #function add new screen resolution to xrandr  with cvt
-  width="${1}";  width=$((width / 8 * 8));
-  height="${2}";
-  fps="${3}";
+  local width="${1}";  width=$((width / 8 * 8));
+  local height="${2}";
+  local fps="${3}";
 
   #acitve connected_display (HDMI-1, AVI-1, etc)
   connected_display=$(xrandr | grep " connected " | awk '{ print$1 }')
@@ -272,11 +272,11 @@ function wait_for_exit_code ()
     #examples:
     #wait_for_exit_code 42 31337 ' exit 1 ' - wait for exit code=42 for 31337 seconds.
     #wait_for_exit_code 5 31337 ' exit 5 ' - wait for exit code=5 for 31337 seconds. (but it exits immediately, because exit code equal)
-    timeout=$2
-    exit_code_to_check=$1
+    local timeout=$2
+    local exit_code_to_check=$1
     shift 2
     #all other aruments become to executed command
-    command="$@";
+    local command="$@";
 
     while [ $timeout -ge 0 ]
     do
@@ -304,7 +304,7 @@ function is_process_return_this_code
   # if given command returns exit code equals to $1 - this function will return 1 as exit code, otherwise - return exit code 0
   #use: if is_process_return_this_code 0 'xprop -root' ; then echo 111; else echo 000; fi;
   #if is_process_return_this_code 15 'exit 15' ; then echo "equal"; else echo "NOT equal"; fi;
-  exit_code_to_check="${1}";
+  local exit_code_to_check="${1}";
   shift 1
   command="$@";
   #returned_text="$( ( $command ) >/dev/null )"
@@ -324,7 +324,7 @@ export -f is_process_return_this_code
 function is_process_running
 {
   #use: if [ "$(is_process_running Xorg)" -ge 1 ]; then echo 111; else echo 000; fi;
-  app="${1}";
+  local app="${1}";
   if [ "$(ps -e | grep --ignore-case --count "${app}")" -ge 1 ];
   then
     return 0; #none zero exit code means error in the bash, and here I don't want to break the rules )
@@ -352,9 +352,9 @@ export -f is_root
 
 function install_system ()
 {
-  app="${1}";
+  local app="${1}";
   shift 1
-  arguments="$@";
+  local arguments="$@";
   if [[ "${app}" = 'update' ]] ; then
     timeout --kill-after=77 $timeout_task apt-get --yes update | cat;
     slog "<6>apt-get update"
@@ -427,7 +427,7 @@ function slog ()
   # <5>notice: normal, but significant condition.
   # <6>info: informational message.
   # <7>debug: messages that are useful for debugging.
-  message="$1";
+  local message="$1";
   if [[ "${service_name}" = "" ]]  ; then
     declare -x -g service_name='dzible';
   fi;
@@ -445,12 +445,12 @@ function telemetry_send ()
   #required dzible.telemetry systemd service
   local file="$1"; #file
   local message="$2"; #message
-  random_dir_name="${telemetry_queue_dir}$( ymdhms )-$( random_str 5; )-$RANDOM";
+  local random_dir_name="${telemetry_queue_dir}$( ymdhms )-$( random_str 5; )-$RANDOM";
   mkdir -pv "${random_dir_name}";
-  text_filename="${random_dir_name}/text.txt";
-  file_filename="${random_dir_name}/file.txt";
-  send_filename="${random_dir_name}/send.txt";
-  filename_realpath_to_send="$(realpath --quiet "$file")"; #get full path to file
+  local text_filename="${random_dir_name}/text.txt";
+  local file_filename="${random_dir_name}/file.txt";
+  local send_filename="${random_dir_name}/send.txt";
+  local filename_realpath_to_send="$(realpath --quiet "$file")"; #get full path to file
   #write filename to file
   if [[ "$file" != "" ]]; then
     echo -n "${filename_realpath_to_send}" >"${file_filename}";
@@ -711,7 +711,15 @@ then
     #md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
     #echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
     master_password="${master_password_from_file}"
+
     #decrypt data
+    load_var_from_file "${root_vault_file}" encrypted_root_data
+    show_var encrypted_root_data
+    decrypted_root_data=$( decrypt_aes "${master_password}" "${encrypted_root_data}")
+    #exit_code=$?
+    show_var decrypted_root_data
+    #show_var  exit_code
+    #eval "$decrypted_root_data";
 else
     echo "root_vault_file=${root_vault_file} file is empty";
     # if root_vault_file is not exists - generate it
@@ -726,6 +734,7 @@ else
     echo -n "${master_password}" > "${master_password_file}";   #save to file
 fi
 
+exit 0;
 
 
 declare_and_export computer_name 'pipyau'
@@ -863,4 +872,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='nezuf-9cec740-2022-09-10-23-19-29'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='azexo-b5165cc-2022-09-10-23-52-48'; echo "${script_subversion}=script_subversion"; 
