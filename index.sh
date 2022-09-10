@@ -648,6 +648,7 @@ declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #w
 declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
+declare_and_export telemetry_original_vault_file "${install_dir}/vault/public_telemetry_tokens.crypt"; #original place for telemetry vault
 declare_and_export telemetry_vault_file "/etc/telemetry.dzi"; #contains encrypted token to send telegram messages
 declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
 declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect
@@ -819,4 +820,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='durix-7e6c702-2022-09-10-18-03-49'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='omaca-612268d-2022-09-10-18-11-33'; echo "${script_subversion}=script_subversion"; 

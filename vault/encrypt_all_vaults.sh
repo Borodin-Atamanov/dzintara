@@ -1,8 +1,11 @@
 #!/usr/bin/bash
-#script encode all "vault/*plain*" files with AES, save with save names, and '*.crypt' extension
+#script encode all "vault/*plain*" files with AES, same with save names, and '*.crypt' extension
 
 #load all functions and variables
+old_dir=$(pwd)
+cd ..
 source index.sh fun
+cd "$old_dir"
 
 echo "master_password_file='${master_password_file}'";
 

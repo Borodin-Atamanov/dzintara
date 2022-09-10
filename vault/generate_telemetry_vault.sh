@@ -13,13 +13,14 @@ cd "$old_dir"
 #encrypt all files with plain data
 #echo $crypted_file
 # load data from file to variable
+fname=$(basename $telemetry_original_vault_file)
+crypted_file="${fname%.*}.crypt";
 file_data=$(cat "public_telemetry_tokens.txt");
-crypted_file="public_telemetry_tokens.crypt";
 #echo  $file_data;
 #encrypt data with master_password
 encrypted_data=$( encrypt_aes "${telemetry_vault_file}" "${file_data}"; )
 echo -n "${encrypted_data}" > "${crypted_file}";
-
+show_var fname crypted_file
 cat "${crypted_file}"
 
 echo "";
