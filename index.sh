@@ -490,8 +490,8 @@ function is_substr ()
   fi
   #echo "${needle##*$haystack*}";
   #show_var exit_code
-  >&2 echo -n "is_substr() ";
-  >&2 show_var haystack needle exit_code
+  #>&2 echo -n "is_substr() ";
+  #>&2 show_var haystack needle exit_code
   return $exit_code
   #return [[ -z "$1" ]] || { [[ -z "${2##*$1*}" ]] && [[ -n "$2" ]];};
 }
@@ -566,8 +566,8 @@ function replace_line_by_string ()
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
     #>&2 echo line="$line" needle="$needle" stop_word="$stop_word"
-    >&2 echo -n "replace_line_by_string() ";
-    >&2 show_var line needle slide stop_word
+    #>&2 echo -n "replace_line_by_string() ";
+    #>&2 show_var line needle slide stop_word
     if is_substr "$line" "$needle" && ! is_substr "$line" "$stop_word" ; then
       #change this line to slide
       line="$slide";
@@ -795,4 +795,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='azabo-daf0551-2022-09-10-13-02-35'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xutir-712365f-2022-09-10-13-35-13'; echo "${script_subversion}=script_subversion"; 

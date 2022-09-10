@@ -127,10 +127,13 @@ function telemetry_send_telegram_dir ()
     slog "<7>$(show_var request)";
     result="$( eval "$request" )";
     #curl -s -X POST "${request_url}sendDocument" -d chat_id="${telemetry_telegram_bot_chat_id}" -d text="${send_text}"
+    # result="{"ok":false,"error_code":404,"description":"Not Found"}"
     slog "<7>$(show_var result)";
     : "${telemetry_next_wait:=1}"; #set default value if variable is not set
     #check result for "ok" substring
-    if [[ "$result" == *'"ok"'* ]]; then
+    #if [[ "$result" == *'"ok"'* ]]; then
+    #if is_substr  "$result" '"ok"'; then
+    if is_substr  "$result" '"ok"' && ! is_substr  "$result" 'error_code' ; then
         slog '<7>result is "ok"';
         exit_code=0;
         declare -x -g telemetry_next_wait="0.$RANDOM";
