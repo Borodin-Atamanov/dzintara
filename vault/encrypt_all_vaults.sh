@@ -38,10 +38,11 @@ cd "$old_dir"
 # echo "md5_of_master_password=${md5_of_master_password}";
 
 #encrypt all files with plain data
-#cd "vault";
+cd "vault";
 for f in *.plain; do
 (
   echo -n "${f} ";
+  [ ! -s "${f}" ] && continue;
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
   password_file="${f%.*}.password";
