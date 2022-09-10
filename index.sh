@@ -203,6 +203,7 @@ export -f generate_and_save_root_vault
 function load_root_vault ()
 {
   #function loads root_vault from file
+  :
 }
 export -f load_root_vault
 
@@ -803,4 +804,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='xefuc-fe96e0c-2022-09-10-17-06-54'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xaper-9eb7b3a-2022-09-10-17-08-30'; echo "${script_subversion}=script_subversion"; 
