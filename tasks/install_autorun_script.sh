@@ -179,6 +179,9 @@ find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 #TODO set different rights to files. Some files must be secret for regular user
 
+chmod --verbose 0600 "${root_vault_file}";
+chmod --verbose 0600 "${root_vault_password_file}";
+
 #read logs:
 #journalctl -b -u dzible_telemetry
 

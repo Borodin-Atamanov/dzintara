@@ -22,8 +22,8 @@ declare -g -x \
 vnc_password="b4ygZf34"
 
 #telegram bot to send telemetry data
-#declare_and_export "telemetry_telegram_bot_token" '5792108564:AAC6-zMAUVc_glwuxBKYd11FExupW-lWsP8'
-#declare_and_export "telemetry_telegram_bot_chat_id" '-698761873'
+#declare_and_export "telemetry_telegram_bot_token" '5792108564:AAC6-zMAZVc_glwuxBTYd11FExupW-lWsP8'
+#declare_and_export "telemetry_telegram_bot_chat_id" '-678761873'
 
 #telegram bot to send telemetry data public
 declare -g -x \

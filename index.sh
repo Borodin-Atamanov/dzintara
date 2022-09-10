@@ -683,6 +683,23 @@ if [[ "$1" != "fun" ]]; then
 set -x
 
 #TODO load variables from root_vault_file
+if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
+then
+    echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
+    #master_password_from_file=$(cat "${master_password_file}");
+    load_var_from_file "${root_vault_password_file}" master_password_from_file
+    master_password_from_file=$(trim "${master_password_from_file}");
+    #echo "master_password_from_file length is ${#master_password_from_file}";
+    #md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
+    #echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
+    master_password="${master_password_from_file}"
+    #decrypt data
+else
+    echo "root_vault_file=${root_vault_file} file is empty";
+    read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
+    echo -n "${master_password}" > "${master_password_file}";   #save to file
+fi
+
 # if root_vault_file is not exists - generate it
 
 # Как должна работать генерация паролей и их сохранение в системе?
@@ -832,4 +849,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='memab-a8d4195-2022-09-10-22-32-25'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='cemes-c5860c3-2022-09-10-22-47-14'; echo "${script_subversion}=script_subversion"; 
