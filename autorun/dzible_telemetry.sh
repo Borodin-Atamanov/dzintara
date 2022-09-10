@@ -31,7 +31,7 @@ slog "<5>start dzible.telemetry. It will send some anonymous telemetry data."
 
 #decrypt telemetry vault
 #encrypted_data=$(cat "${root_vault_file}");
-load_file_to_var "$telemetry_vault_file" encrypted_data
+load_var_from_file "$telemetry_vault_file" encrypted_data
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
 decrypted_data=$(decrypt_aes "$telemetry_vault_file" "${encrypted_data}")
 show_var decrypted_data

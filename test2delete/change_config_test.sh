@@ -15,7 +15,7 @@ mcedit "/home/i/github/dzible/test2delete/change_config_test.txt"
 exit 0
 
 fname="/home/i/github/dzible/test2delete/change_config_test.txt"
-load_file_to_var "$fname" config
+load_var_from_file "$fname" config
 #md5sum $fname
 
 
