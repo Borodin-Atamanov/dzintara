@@ -524,6 +524,19 @@ function load_file_to_var ()
 }
 export -f load_file_to_var
 
+function read_var ()
+{
+  local var_name="$1"
+  local message="$2"
+  read -s -p "${message}" temp_var < /dev/tty;
+  command_eval='declare -g "'${var_name}'="${temp_var}";';
+  #this command removes newlines in the end of file
+  #echo "$command_eval"
+  #show_var command_eval
+  eval "$command_eval";
+}
+export -f read_var
+
 function save_var_to_file ()
 {
   local fname="$1"  #path to file or something like file
@@ -804,4 +817,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='xaper-9eb7b3a-2022-09-10-17-08-30'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='deroc-ab158cb-2022-09-10-17-17-22'; echo "${script_subversion}=script_subversion"; 
