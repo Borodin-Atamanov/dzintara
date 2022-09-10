@@ -63,6 +63,7 @@ function encrypt_aes ()
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
   exit_code=$?
+  return $exit_code
 }
 export -f encrypt_aes
 
@@ -72,6 +73,7 @@ function decrypt_aes ()
   data="${2}"
   echo -n "${data}" | openssl base64 -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
   exit_code=$?
+  return $exit_code
 }
 export -f decrypt_aes
 
@@ -200,7 +202,7 @@ export -f generate_and_save_root_vault
 
 function load_root_vault ()
 {
-  :
+  #function loads root_vault from file
 }
 export -f load_root_vault
 
@@ -503,7 +505,7 @@ function load_file_to_var ()
   local var_name="$2"
   if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
-    file_value=$( cat "${fname}" );
+    #file_value=$( cat "${fname}" );
     #command_eval='declare -g "'${var_name}'=$file_value"';
     command_eval='declare -g "'${var_name}'=$(cat "'${fname}'" )"';
     #this command removes newlines in the end of file
@@ -515,7 +517,7 @@ function load_file_to_var ()
     #show_var md5_of_var
     #echo -n "";
   else
-    echo "File is not exists $fname";
+    >&2 echo "File is not exists $fname";
     :
   fi
 }
@@ -630,6 +632,7 @@ declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #w
 declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
+declare_and_export telemetry_vault_file "/etc/telemetry.dzi"; #contains encrypted token to send telegram messages
 declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
 declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect
 declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/dzible_network_telemetry.timer"; #will run sometimes by timer
@@ -642,8 +645,8 @@ declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/syst
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
 
-declare_and_export root_vault_file "${install_dir}autorun/root_vault"; #file with encrypted root secret variables
-declare_and_export root_vault_password_file "${install_dir}autorun/root_vault_password";  #file with password to decrypt encrypted root secret variables
+declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root secret variables
+declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
 declare_and_export timeout_2 77 #timeout for operations like update config files
@@ -659,6 +662,11 @@ set +x
 
 if [[ "$1" != "fun" ]]; then
 set -x
+
+#TODO load variables from root_vault_file
+# if root_vault_file is not exists - generate it
+
+
 
 declare_and_export computer_name 'pipyau'
 declare_and_export secrets 'secrets' #preffix for vault variables names
@@ -795,4 +803,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='xutir-712365f-2022-09-10-13-35-13'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xefuc-fe96e0c-2022-09-10-17-06-54'; echo "${script_subversion}=script_subversion"; 

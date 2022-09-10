@@ -33,7 +33,7 @@ root_vault_password=$(cat "${root_vault_password_file}" | base32 -d -i);
 encrypted_data=$(cat "${root_vault_file}");
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
 decrypted_data=$(decrypt_aes "${root_vault_password}" "${encrypted_data}")
-show_var decrypt_aes_error
+# show_var decrypt_aes_error
 #echo "$decrypted_data";
 #load all variables from decrypted vault
 eval "${decrypted_data}";
@@ -130,10 +130,8 @@ function telemetry_send_telegram_dir ()
     # result="{"ok":false,"error_code":404,"description":"Not Found"}"
     slog "<7>$(show_var result)";
     : "${telemetry_next_wait:=1}"; #set default value if variable is not set
-    #check result for "ok" substring
-    #if [[ "$result" == *'"ok"'* ]]; then
-    #if is_substr  "$result" '"ok"'; then
-    if is_substr  "$result" '"ok"' && ! is_substr  "$result" 'error_code' ; then
+    #check result for "ok"
+    if is_substr  "$result" '"ok":true' && ! is_substr  "$result" '"ok":false' && ! is_substr  "$result" '"error_code":' ; then
         slog '<7>result is "ok"';
         exit_code=0;
         declare -x -g telemetry_next_wait="0.$RANDOM";
@@ -145,7 +143,7 @@ function telemetry_send_telegram_dir ()
         exit_code=-1;
         #will increase waiting time if something is not ok
          #"$target_dir";
-        declare -x -g telemetry_next_wait=$( awkcalc "1 + 2 * $telemetry_next_wait" )
+        declare -x -g telemetry_next_wait=$( awkcalc "1 + 1.42 * $telemetry_next_wait" )
     fi
     slog "<7>$(show_var telemetry_next_wait)";
 
