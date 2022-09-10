@@ -216,7 +216,7 @@ local www_password="$(random_str 5; random_str 5; random_str 5; )";
 local vnc_password="$(random_str 4; random_str 4; )";
 
 local declare_g_x_nl_sl='declare -g -x \';  #
-local root_vailt_plain=$(cat <<_ENDOFFILE
+local root_vault_plain=$(cat <<_ENDOFFILE
 
 #hostname
 ${declare_g_x_nl_sl}
@@ -243,7 +243,29 @@ vnc_password='${vnc_password}';
 # file generated ${ymdhms}                                                                      .
 _ENDOFFILE
 )
-  echo "$root_vailt_plain"
+  #now $root_vault_plain contains passwords in plain text format
+  #echo "$root_vault_plain"
+
+  # Сохранить базу паролей в особое место
+  # Сохранить пароль в другое особое место
+  # Поставить права на файлы только root для чтения
+
+  [ -s "${root_vault_file}" ] && return 1;
+  [ -s "${root_vault_password_file}" ] && return 1;
+  #echo $crypted_file
+  # load data from file to variable
+  #file_data=$(cat "${f}");
+  local root_vault_password="${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}$(  random_str 50; random_str 50; )";
+  #root_vault_password="$(trim "${root_vault_password}")"
+  local root_vault_crypt=$( encrypt_aes "${root_vault_password}" "$root_vault_plain"; )
+  #load_var_from_file "${root_vault_file}" file_data
+  #load_var_from_file "${root_vault_password_file}" file with password
+  #echo "password_from_file length is ${#master_password}";
+  #echo  $file_data;
+  #encrypt data with master_password
+  #echo -n "${encrypted_data}" > "${crypted_file}";
+  save_var_to_file "${root_vault_password_file}" root_vault_password
+  save_var_to_file "${root_vault_file}" root_vault_crypt
   :
 }
 export -f generate_and_save_root_vault
@@ -761,18 +783,12 @@ then
     show_var decrypted_root_data
     #TODO check: is password right?
     #echo "aes_error=$aes_error"
-    #eval "$decrypted_root_data";
+    eval "$decrypted_root_data";
 else
     echo "root_vault_file=${root_vault_file} file is empty";
     # if root_vault_file is not exists - generate it
     generate_and_save_root_vault
-
-    # Если базы нет - генерирует пароли, сохраняет базу
-    # Сохранить базу паролей в особое место
-    # Сохранить пароль в другое особое место
-    # Поставить права на файлы только root для чтения
-    read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
-    echo -n "${master_password}" > "${master_password_file}";   #save to file
+    #read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
 fi
 
 generate_and_save_root_vault
@@ -914,4 +930,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ubena-7041533-2022-09-11-00-41-31'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='lulet-6e0b5fe-2022-09-11-01-00-56'; echo "${script_subversion}=script_subversion"; 
