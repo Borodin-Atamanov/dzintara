@@ -198,16 +198,14 @@ export -f get_command_fullpath
 
 function generate_and_save_root_vault ()
 {
+  #function generate new root vault with passwords, save it.
+  #uses vars:
+  #"${root_vault_file}"
+  #"${root_vault_password_file}"
+
   :
 }
 export -f generate_and_save_root_vault
-
-function load_root_vault ()
-{
-  #function loads root_vault from file
-  :
-}
-export -f load_root_vault
 
 function get_var ()
 {
@@ -716,19 +714,19 @@ then
     #decrypt data
 else
     echo "root_vault_file=${root_vault_file} file is empty";
-    #TODO generate new passwords
+    # if root_vault_file is not exists - generate it
+    generate_and_save_root_vault
+
+
+    # Если базы нет - генерирует пароли, сохраняет базу
+    # Сохранить базу паролей в особое место
+    # Сохранить пароль в другое особое место
+    # Поставить права на файлы только root для чтения
     read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
     echo -n "${master_password}" > "${master_password_file}";   #save to file
 fi
 
-# if root_vault_file is not exists - generate it
 
-# Как должна работать генерация паролей и их сохранение в системе?
-# Проверить, есть ли база с паролями, доступны ли переменные в ней?
-# Если базы нет - генерирует пароли, сохраняет базу
-# Сохранить базу паролей в особое место
-# Сохранить пароль в другое особое место
-# Поставить права на файлы только root для чтения
 
 declare_and_export computer_name 'pipyau'
 declare_and_export secrets 'secrets' #preffix for vault variables names
@@ -865,4 +863,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='nizoc-d9dce2e-2022-09-10-23-14-38'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nezuf-9cec740-2022-09-10-23-19-29'; echo "${script_subversion}=script_subversion"; 
