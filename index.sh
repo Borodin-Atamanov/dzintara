@@ -71,7 +71,7 @@ function decrypt_aes ()
 {
   passkey="${1}"
   data="${2}"
-  echo -n "${data}" | openssl base64 -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
+  echo -n "${data}" | base64 -d -i | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
   exit_code=$?
   return $exit_code
 }
@@ -86,14 +86,16 @@ export -f md5
 function base64_encode ()
 {
   data="${1}"
-  echo -n "${data}" | openssl base64 -e -A | tr -d \\n;
+  base64="$( get_command_fullpath base64 )";
+  echo -n "${data}" | $base64 -e -A | tr -d \\n;
 }
 export -f base64_encode
 
 function base64_decode ()
 {
   data="${1}"
-  echo -n "${data}" | openssl base64 -d
+  base64="$( get_command_fullpath base64 )";
+  echo -n "${data}" | $base64 -d -i
   decrypt_error=$?;
 }
 export -f base64_decode
@@ -104,11 +106,11 @@ function save_var_in_base64 ()
   varname=$(trim "${varname}");
   value="${2}"
   value=$(base64_encode "${value}");
-  openssl_fullpath="$( get_command_fullpath openssl )";
+  base64="$( get_command_fullpath base64 )";
   echo -n 'declare -g -x ';
   echo -n "${varname}";
   echo -n '=$(echo -n';
-  echo -n " '${value}' | ${openssl_fullpath} base64 -d ); ";
+  echo -n " '${value}' | $base64 -d -i ); ";
   #result will be like this "var=$(echo 'dmFyaWFibGUgaXMgaGVyZQ=='  | openssl base64 -d);"
   echo "";
 }
@@ -830,4 +832,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='obose-3476f99-2022-09-10-20-08-55'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xogap-3e10bfb-2022-09-10-21-09-10'; echo "${script_subversion}=script_subversion"; 
