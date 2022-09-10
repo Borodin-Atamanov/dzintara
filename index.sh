@@ -531,6 +531,7 @@ function read_var ()
 {
   #read user input to variable
   local var_name="$1"
+  [ -z "$var_name" ] && return -1
   local message="$2"
   read -p "${message}" temp_var < /dev/tty;
   command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; # echo "$'${var_name}'"; ';
@@ -864,4 +865,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='oxuxi-3f7587d-2022-09-10-23-11-37'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nizoc-d9dce2e-2022-09-10-23-14-38'; echo "${script_subversion}=script_subversion"; 
