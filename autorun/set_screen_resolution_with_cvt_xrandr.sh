@@ -30,6 +30,11 @@ cvt_xrandr 1920 1080 60
 cvt_xrandr 1360 768 60
 cvt_xrandr 1280 1024 60
 
+#normal
+#xrandr --output HDMI-A-1  --mode 3840x2160 --panning 3840x2160 --scale 1x1
+#if mode is 0.5 of panning - panning activated
+#xrandr --output HDMI-A-1  --mode 3840x2160 --panning 1920x1080 --scale 1x1
+
 if [ is_root ]; then
     #run only from root
     install_system autorandr
