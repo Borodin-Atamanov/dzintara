@@ -34,10 +34,11 @@ slog "<5>start dzible.telemetry. It will send some anonymous telemetry data."
 load_file_to_var "$telemetry_vault_file" encrypted_data
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
 decrypted_data=$(decrypt_aes "$telemetry_vault_file" "${encrypted_data}")
-# show_var decrypt_aes_error
+show_var decrypted_data
 #echo "$decrypted_data";
 #load all variables from decrypted vault
 eval "${decrypted_data}";
+sleep 15
 #echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
 
 #show_var telemetry_telegram_bot_token
@@ -125,7 +126,7 @@ function telemetry_send_telegram_dir ()
         #send only text message, without file
         request="timeout --kill-after=$timeout_1 $timeout_2 curl --no-progress-meter --request POST --data chat_id='${telemetry_telegram_bot_chat_id}' --data text='${send_text}' '${request_url}sendMessage'  "
     fi;
-    #slog "<7>$(show_var request)";
+    slog "<7>$(show_var request)";
     result="$( eval "$request" )";
     #curl -s -X POST "${request_url}sendDocument" -d chat_id="${telemetry_telegram_bot_chat_id}" -d text="${send_text}"
     # result="{"ok":false,"error_code":404,"description":"Not Found"}"

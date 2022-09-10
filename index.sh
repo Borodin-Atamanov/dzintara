@@ -683,7 +683,17 @@ set -x
 #TODO load variables from root_vault_file
 # if root_vault_file is not exists - generate it
 
-
+# Как должна работать генерация паролей и их сохранение в системе?
+#
+# Проверить, есть ли база с паролями, доступны ли переменные в ней?
+#
+# Если базы нет - генерирует пароли, сохраняет базу
+#
+# Сохранить базу паролей в особое место
+#
+# Сохранить пароль в другое особое место
+#
+# Поставить права на файлы только root для чтения
 
 declare_and_export computer_name 'pipyau'
 declare_and_export secrets 'secrets' #preffix for vault variables names
@@ -820,4 +830,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='lurin-e9bc377-2022-09-10-19-33-06'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='idono-5c98a9c-2022-09-10-19-48-23'; echo "${script_subversion}=script_subversion"; 
