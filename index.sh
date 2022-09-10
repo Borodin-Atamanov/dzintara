@@ -659,14 +659,13 @@ declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/
 declare_and_export xkeyboard_autorun_script_file "${install_dir}autorun/xkeyboard_autorun.sh"; #will run in as systemd.service and sometimes by timer
 declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzible_xkeyboard_autorun.service"; #for autorun with systemd
 #declare_and_export xkeyboard_autorun_timer_file "/etc/systemd/system/dzible_xkeyboard_autorun.timer"; #will run sometimes by timer
+declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root secret variables
+declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
 declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
 declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzible_pipes_root_autorun.service"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzible_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
-
-declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root secret variables
-declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
 declare_and_export timeout_2 77 #timeout for operations like update config files
@@ -833,4 +832,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='umeto-82c0ca7-2022-09-10-21-48-04'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='tizos-40750b5-2022-09-10-21-59-06'; echo "${script_subversion}=script_subversion"; 
