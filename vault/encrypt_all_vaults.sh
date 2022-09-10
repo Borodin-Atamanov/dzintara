@@ -4,7 +4,7 @@
 #load all functions and variables
 old_dir=$(pwd)
 cd ..
-source index.sh fun
+source /home/i/github/dzible/index.sh fun
 cd "$old_dir"
 
 #echo "master_password_file='${master_password_file}'";
