@@ -62,8 +62,8 @@ function encrypt_aes ()
   local data="${2}"
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
-  exit_code=$?
-  return $exit_code
+  declare -g aes_error=$?
+  return $aes_error
 }
 export -f encrypt_aes
 
@@ -72,8 +72,8 @@ function decrypt_aes ()
   local passkey="${1}"
   local data="${2}"
   echo -n "${data}" | base64 -d -i | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
-  exit_code=$?
-  return $exit_code
+  declare -g aes_error=$?; # aes_error always empty
+  return $aes_error
 }
 export -f decrypt_aes
 
@@ -241,10 +241,9 @@ ${declare_g_x_nl_sl}
 vnc_password='${vnc_password}';
 
 # file generated ${ymdhms}                                                                      .
-
-
 _ENDOFFILE
 )
+  echo "$root_vailt_plain"
   :
 }
 export -f generate_and_save_root_vault
@@ -760,7 +759,8 @@ then
     decrypted_root_data=$( decrypt_aes "${master_password}" "${encrypted_root_data}")
     #exit_code=$?
     show_var decrypted_root_data
-    #show_var  exit_code
+    #TODO check: is password right?
+    #echo "aes_error=$aes_error"
     #eval "$decrypted_root_data";
 else
     echo "root_vault_file=${root_vault_file} file is empty";
@@ -775,6 +775,7 @@ else
     echo -n "${master_password}" > "${master_password_file}";   #save to file
 fi
 
+generate_and_save_root_vault
 exit 0;
 
 
@@ -855,7 +856,7 @@ echo "md5_of_master_password=${md5_of_master_password}";
 encrypted_data=$(cat "${crypted_vault_file}");
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
 decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
-echo "decrypt_aes_error=${decrypt_aes_error}";
+show_var decrypt_aes_error
 #echo "$decrypted_data";
 #load all variables from decrypted vault
 eval "${decrypted_data}";
@@ -913,4 +914,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='uxero-b55f4d3-2022-09-11-00-14-11'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='uganu-6ef71e2-2022-09-11-00-38-44'; echo "${script_subversion}=script_subversion"; 
