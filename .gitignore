@@ -2,6 +2,7 @@
 #/host_vars
 /vault/*plain*
 /vault/*.txt
+/vault/*.pass
 /vault/*.password
 master_password.txt
 /test
