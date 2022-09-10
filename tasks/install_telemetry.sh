@@ -21,29 +21,31 @@ chmod --verbose 0777 "${telemetry_queue_dir}";
 
 #generate password to encrypt root.vault file
 root_vault_password="$( random_str 37;  )$( ymdhms )$RANDOM"
-show_var root_vault_password_file
+#show_var root_vault_password_file
 #save password to file
 #save_var_in_base32 root_vault_password "$( get_var "root_vault_password" )" > "${root_vault_password_file}"
 #root_vault_password
-echo -n "$root_vault_password" | base32 > "${root_vault_password_file}"
-cat "${root_vault_password_file}"
+#echo -n "$root_vault_password" | base32 > "${root_vault_password_file}"
+#cat "${root_vault_password_file}"
 
 #accumulate variables in string
 root_vault_plain='';
 root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_token "$( get_var "telemetry_telegram_bot_token" )" )";
 root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_chat_id "$( get_var "telemetry_telegram_bot_chat_id" )" )";
 root_vault_plain="${root_vault_plain} random_var='$( ymdhms )'; ";
-show_var root_vault_plain
+#show_var root_vault_plain
 
 #encrypt data with password with AES
 encrypted_data=$( encrypt_aes "${root_vault_password}" "${root_vault_plain}"; )
 echo -n "${encrypted_data}" > "${root_vault_file}";
 show_var encrypted_data
 
-chmod --verbose 0600 "${root_vault_file}";
-chmod --verbose 0600 "${root_vault_password_file}"
-chown --verbose --changes --recursive  root:root "${root_vault_file}";
-chown --verbose --changes --recursive  root:root "${root_vault_password_file}"
+cp -v "$telemetry_original_vault_file" "$telemetry_vault_file"
+
+chmod --verbose 0600 "${telemetry_vault_file}";
+#chmod --verbose 0600 "${root_vault_password_file}"
+chown --verbose --changes --recursive  root:root "${telemetry_vault_file}";
+#chown --verbose --changes --recursive  root:root "${root_vault_password_file}"
 
 # decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
 # echo "decrypt_aes_error=${decrypt_aes_error}";

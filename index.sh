@@ -503,7 +503,7 @@ export -f is_substr
 function load_file_to_var ()
 {
   local fname="$1"  #path to file or something like file
-  local var_name="$2"
+  local var_name="$2" #load data from file to this variable
   if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
     #file_value=$( cat "${fname}" );
@@ -788,7 +788,7 @@ show_var task_pid_file
 run_task show_script_subversion
 run_task sleep 4
 run_task install_autorun_script
-#run_task install_telemetry
+run_task install_telemetry
 run_task install_gui_apps
 run_task install_xbindkeys
 run_task show_script_subversion
@@ -820,4 +820,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rexuf-6f4701f-2022-09-10-18-34-27'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='etore-423c006-2022-09-10-18-50-22'; echo "${script_subversion}=script_subversion"; 

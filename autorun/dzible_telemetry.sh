@@ -26,13 +26,14 @@ slog "<5>start dzible.telemetry. It will send some anonymous telemetry data."
 
 #load password to decrypt secrets
 #source "${root_vault_password_file}";
-root_vault_password=$(cat "${root_vault_password_file}" | base32 -d -i);
+#root_vault_password=$(cat "${root_vault_password_file}" | base32 -d -i);
 #show_var root_vault_password
 
-#decrypt root vault
-encrypted_data=$(cat "${root_vault_file}");
+#decrypt telemetry vault
+#encrypted_data=$(cat "${root_vault_file}");
+load_file_to_var "$telemetry_vault_file" encrypted_data
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
-decrypted_data=$(decrypt_aes "${root_vault_password}" "${encrypted_data}")
+decrypted_data=$(decrypt_aes "$telemetry_vault_file" "${encrypted_data}")
 # show_var decrypt_aes_error
 #echo "$decrypted_data";
 #load all variables from decrypted vault
