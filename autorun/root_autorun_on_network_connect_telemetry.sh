@@ -72,7 +72,7 @@ ${tor_hostname}
 
 ipfy
 ${ipfy4}
-${ipfy6}
+[${ipfy6}]
 
 netstat
 ${netstat}
@@ -115,7 +115,7 @@ $ymdhms
 ${hostname}
 ${tor_hostname}
 ${ipfy4}
-${ipfy6}
+[${ipfy6}]
 _ENDOFFILE
 )
 
