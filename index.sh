@@ -198,11 +198,53 @@ export -f get_command_fullpath
 
 function generate_and_save_root_vault ()
 {
-  #function generate new root vault with passwords, save it.
-  #uses vars:
-  #"${root_vault_file}"
-  #"${root_vault_password_file}"
+#function generate new root vault with passwords, save it.
+#uses vars:
+#"${root_vault_file}"
+#"${root_vault_password_file}"
 
+#if files non empty - dont overwrite it, return
+[ -s "${root_vault_file}" ] && return 1;
+[ -s "${root_vault_password_file}" ] && return 1;
+
+local ymdhms=$(ymdhms)
+local hostname="$(random_str 5; random_str 3; )";
+local root_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5; random_str 3;)";
+local user_i_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5;)";
+local www_user="$(random_str 5; random_str 3; random_str 5;)";
+local www_password="$(random_str 5; random_str 5; random_str 5; )";
+local vnc_password="$(random_str 4; random_str 4; )";
+
+local declare_g_x_nl_sl='declare -g -x \';  #
+local root_vailt_plain=$(cat <<_ENDOFFILE
+
+#hostname
+${declare_g_x_nl_sl}
+hostname='${hostname}';
+
+#root password
+${declare_g_x_nl_sl}
+root_password='${root_password}';
+
+#user i password
+${declare_g_x_nl_sl}
+user_i_password='${user_i_password}';
+
+#user and pass for web-access for root file directory
+${declare_g_x_nl_sl}
+www_user='${www_user}';
+${declare_g_x_nl_sl}
+www_password='${www_password}';
+
+#VNC password
+${declare_g_x_nl_sl}
+vnc_password='${vnc_password}';
+
+# file generated ${ymdhms}                                                                      .
+
+
+_ENDOFFILE
+)
   :
 }
 export -f generate_and_save_root_vault
@@ -725,7 +767,6 @@ else
     # if root_vault_file is not exists - generate it
     generate_and_save_root_vault
 
-
     # Если базы нет - генерирует пароли, сохраняет базу
     # Сохранить базу паролей в особое место
     # Сохранить пароль в другое особое место
@@ -872,4 +913,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='azexo-b5165cc-2022-09-10-23-52-48'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='uxero-b55f4d3-2022-09-11-00-14-11'; echo "${script_subversion}=script_subversion"; 
