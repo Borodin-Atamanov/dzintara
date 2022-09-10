@@ -7,19 +7,23 @@ cd ..
 source index.sh fun
 cd "$old_dir"
 
-exit 0;
-
+#global var:
+#telemetry_vault_file
 
 #encrypt all files with plain data
-crypted_file="${f%.*}.crypt";
 #echo $crypted_file
 # load data from file to variable
-file_data=$(cat "${f}");
+file_data=$(cat "public_telemetry_tokens.txt");
+crypted_file="public_telemetry_tokens.crypt";
 #echo  $file_data;
 #encrypt data with master_password
-encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
+encrypted_data=$( encrypt_aes "${telemetry_vault_file}" "${file_data}"; )
 echo -n "${encrypted_data}" > "${crypted_file}";
 
+cat "${crypted_file}"
+
+echo "";
+exit 0
 
 random_pass=$(random_str 6000)
 #random_str 6

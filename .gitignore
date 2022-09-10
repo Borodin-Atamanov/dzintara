@@ -1,6 +1,7 @@
 #push2git.sh
 #/host_vars
 /vault/*plain*
+/vault/*.txt
 master_password.txt
 master_password.txt
 /test
