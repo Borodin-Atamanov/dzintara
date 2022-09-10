@@ -45,7 +45,9 @@ for f in *.plain; do
   [ ! -s "${f}" ] && continue;
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
+  [ ! -s "${crypted_file}" ] && continue;
   password_file="${f%.*}.password";
+  [ ! -s "${password_file}" ] && continue;
   #echo $crypted_file
   # load data from file to variable
   #file_data=$(cat "${f}");

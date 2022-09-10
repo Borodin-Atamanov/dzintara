@@ -181,7 +181,8 @@ find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 
 chmod --verbose 0600 "${root_vault_file}";
 chmod --verbose 0600 "${root_vault_password_file}";
-
+chown --verbose --changes root:root "${root_vault_file}";
+chown --verbose --changes root:root "${root_vault_password_file}";
 #read logs:
 #journalctl -b -u dzible_telemetry
 

@@ -533,7 +533,7 @@ function read_var ()
   local var_name="$1"
   local message="$2"
   read -p "${message}" temp_var < /dev/tty;
-  command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; echo "$'${var_name}'"; ';
+  command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; # echo "$'${var_name}'"; ';
   #>&2 echo $command_eval;
   #>&2 show_var command_eval
   eval "$command_eval";
@@ -619,9 +619,9 @@ function add_line_to_file ()
   #function adds line to file if it not exists in file
   # $1 - file fullpath
   # $2 - line to add
-  fname="$1"
-  line2add="$2"
-  comments_sign="$3"
+  local fname="$1"
+  local line2add="$2"
+  local comments_sign="$3"
   [[ "$comments_sign" == "" ]] && comments_sign='#';
   if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
@@ -636,6 +636,25 @@ function add_line_to_file ()
   return 1;
 }
 export -f add_line_to_file
+
+function search_and_replace ()
+{
+  #function search and replace in variable
+  # $1 - haystack - string with variable name. This variable will changed. Maybe
+  local haystack_name="$1";
+  local haystack="${!haystack_name}";
+  # $2 - needle - variable name. Function will search for needle in haystack
+  local needle_name="$2";
+  local needle="${!needle_name}";
+  # $3 - slide. variable name. Function will replace every needle to slide
+  local slide_name="$3";
+  local slide="${!slide_name}";
+  local haystack2="${haystack//$needle/$slide}" #
+  command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
+  eval "$command_eval";
+}
+export -f add_line_to_file
+
 
 declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
 declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
@@ -682,7 +701,7 @@ set +x
 if [[ "$1" != "fun" ]]; then
 set -x
 
-#TODO load variables from root_vault_file
+# load variables from root_vault_file
 if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
 then
     echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
@@ -696,6 +715,7 @@ then
     #decrypt data
 else
     echo "root_vault_file=${root_vault_file} file is empty";
+    #TODO generate new passwords
     read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
     echo -n "${master_password}" > "${master_password_file}";   #save to file
 fi
@@ -703,15 +723,10 @@ fi
 # if root_vault_file is not exists - generate it
 
 # Как должна работать генерация паролей и их сохранение в системе?
-#
 # Проверить, есть ли база с паролями, доступны ли переменные в ней?
-#
 # Если базы нет - генерирует пароли, сохраняет базу
-#
 # Сохранить базу паролей в особое место
-#
 # Сохранить пароль в другое особое место
-#
 # Поставить права на файлы только root для чтения
 
 declare_and_export computer_name 'pipyau'
@@ -849,4 +864,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cemes-c5860c3-2022-09-10-22-47-14'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='oxuxi-3f7587d-2022-09-10-23-11-37'; echo "${script_subversion}=script_subversion"; 
