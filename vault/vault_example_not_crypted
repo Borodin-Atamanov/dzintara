@@ -1,0 +1,34 @@
+
+#hostname
+declare -g -x \
+hostname='new_host'
+
+#root password
+declare -g -x \
+root_password="t0evnaw4g7q34vgfawer8gv354g"
+
+#user i password
+declare -g -x \
+user_i_password="pfg9384v45by46gv5qgq5343c34c"
+
+#user and pass for web-access for root file directory
+declare -g -x \
+www_user="t34589y452bv32545g23v54g52v55v"
+declare -g -x \
+www_password="5345465tb6v253441653446tvg34cff"
+
+#VNC password
+declare -g -x \
+vnc_password="b4ygZf34"
+
+#telegram bot to send telemetry data
+#declare_and_export "telemetry_telegram_bot_token" '5792108564:AAC6-zMAUVc_glwuxBKYd11FExupW-lWsP8'
+#declare_and_export "telemetry_telegram_bot_chat_id" '-698761873'
+
+#telegram bot to send telemetry data public
+declare -g -x \
+telemetry_telegram_bot_token='5523932933:AABmZWZw47uFk1d1AuLcF1hZ1CjQ1Jt91d0'
+declare -g -x \
+telemetry_telegram_bot_chat_id='-1007681211602'
+
+#export
