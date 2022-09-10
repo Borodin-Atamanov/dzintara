@@ -24,7 +24,7 @@ crypted_file="${fname%.*}.crypt";
 echo -n "${encrypted_data}" > "${crypted_file}";
 show_var crypted_file
 
-load_file_to_var "${crypted_file}" encrypted_data2
+load_var_from_file "${crypted_file}" encrypted_data2
 
 show_var encrypted_data2
 

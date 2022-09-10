@@ -7,55 +7,58 @@ cd ..
 source index.sh fun
 cd "$old_dir"
 
-echo "master_password_file='${master_password_file}'";
+#echo "master_password_file='${master_password_file}'";
 
 #ask for master_password if it is not set
 #read -s -p "master_password" master_password; export master_password;
-# echo "${master_password}";
-if [[ -v master_password ]];
-then
-    echo "master_password is already set"
-else
-    echo "master_password is not set";
-    if [ -s "${master_password_file}" ]
-    then
-        echo "${master_password_file} file is not empty, load master_password from it"
-        master_password_from_file=$(cat "${master_password_file}");
-        master_password_from_file=$(trim "${master_password_from_file}");
-        #echo "master_password_from_file length is ${#master_password_from_file}";
-        md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
-        echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
-        master_password="${master_password_from_file}"
-    else
-        echo "${master_password_file} file is empty"
-        read -s -p "Enter master_password (Password will not shown):" master_password;
-    fi
-    echo "master_password length is ${#master_password}";
-    #export master_password="${master_password}";
-    export master_password;
-fi
-md5_of_master_password=$(md5 "${master_password}");
-echo "md5_of_master_password=${md5_of_master_password}";
+# # echo "${master_password}";
+# if [[ -v master_password ]];
+# then
+#     echo "master_password is already set"
+# else
+#     echo "master_password is not set";
+#     if [ -s "${master_password_file}" ]
+#     then
+#         echo "${master_password_file} file is not empty, load master_password from it"
+#         master_password_from_file=$(cat "${master_password_file}");
+#         master_password_from_file=$(trim "${master_password_from_file}");
+#         #echo "master_password_from_file length is ${#master_password_from_file}";
+#         md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
+#         echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
+#         master_password="${master_password_from_file}"
+#     else
+#         echo "${master_password_file} file is empty"
+#         read -s -p "Enter master_password (Password will not shown):" master_password;
+#     fi
+#     echo "master_password length is ${#master_password}";
+#     #export master_password="${master_password}";
+#     export master_password;
+# fi
+# md5_of_master_password=$(md5 "${master_password}");
+# echo "md5_of_master_password=${md5_of_master_password}";
 
 #encrypt all files with plain data
-cd "vault";
-for f in *plain*; do
+#cd "vault";
+for f in *.plain; do
 (
   echo -n "${f} ";
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
+  password_file="${f%.*}.password";
   #echo $crypted_file
   # load data from file to variable
-  file_data=$(cat "${f}");
+  #file_data=$(cat "${f}");
+  load_var_from_file "${f}" file_data
   #echo  $file_data;
   #encrypt data with master_password
   encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
-  echo -n "${encrypted_data}" > "${crypted_file}";
-  if [ -s "${crypted_file}" ]; then echo "crypted to ${crypted_file}"; fi;
+  #echo -n "${encrypted_data}" > "${crypted_file}";
+  save_var_to_file "$crypted_file" encrypted_data
+  [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}";
   #echo "$encrypted_data";
 )
 done;
-cd "..";
+#cd "..";
 
 exit 0;
 

@@ -502,8 +502,9 @@ function is_substr ()
 }
 export -f is_substr
 
-function load_file_to_var ()
+function load_var_from_file ()
 {
+  #load_var_from_file
   local fname="$1"  #path to file or something like file
   local var_name="$2" #load data from file to this variable
   if [[ -e "${fname}" ]] ; then
@@ -524,7 +525,7 @@ function load_file_to_var ()
     :
   fi
 }
-export -f load_file_to_var
+export -f load_var_from_file
 
 function read_var ()
 {
@@ -624,7 +625,7 @@ function add_line_to_file ()
   [[ "$comments_sign" == "" ]] && comments_sign='#';
   if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
-    load_file_to_var "$fname" config_al2f
+    load_var_from_file "$fname" config_al2f
     config_al2f=$( replace_line_by_string "$config_al2f" "$line2add" "$line2add" "$comments_sign" )
     changed=$?
     show_var changed fname
@@ -832,4 +833,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kumun-097bcb4-2022-09-10-21-26-04'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='paxux-6d1a618-2022-09-10-21-34-52'; echo "${script_subversion}=script_subversion"; 
