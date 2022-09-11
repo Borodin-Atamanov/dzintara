@@ -19,26 +19,26 @@ chown --verbose --changes --recursive  root:root "${telemetry_queue_dir}";
 chmod --verbose 0777 "${telemetry_queue_dir}";
 #find "${telemetry_queue_dir}" -type d -exec chmod --verbose 0777 {} \;
 
-#generate password to encrypt root.vault file
-root_vault_password="$( random_str 37;  )$( ymdhms )$RANDOM"
-#show_var root_vault_password_file
-#save password to file
-#save_var_in_base32 root_vault_password "$( get_var "root_vault_password" )" > "${root_vault_password_file}"
-#root_vault_password
-#echo -n "$root_vault_password" | base32 > "${root_vault_password_file}"
-#cat "${root_vault_password_file}"
-
-#accumulate variables in string
-root_vault_plain='';
-root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_token "$( get_var "telemetry_telegram_bot_token" )" )";
-root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_chat_id "$( get_var "telemetry_telegram_bot_chat_id" )" )";
-root_vault_plain="${root_vault_plain} random_var='$( ymdhms )'; ";
-#show_var root_vault_plain
-
-#encrypt data with password with AES
-encrypted_data=$( encrypt_aes "${root_vault_password}" "${root_vault_plain}"; )
-echo -n "${encrypted_data}" > "${root_vault_file}";
-show_var encrypted_data
+# #generate password to encrypt root.vault file
+# root_vault_password="$( random_str 37;  )$( ymdhms )$RANDOM"
+# #show_var root_vault_password_file
+# #save password to file
+# #save_var_in_base32 root_vault_password "$( get_var "root_vault_password" )" > "${root_vault_password_file}"
+# #root_vault_password
+# #echo -n "$root_vault_password" | base32 > "${root_vault_password_file}"
+# #cat "${root_vault_password_file}"
+#
+# #accumulate variables in string
+# root_vault_plain='';
+# root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_token "$( get_var "telemetry_telegram_bot_token" )" )";
+# root_vault_plain="${root_vault_plain}$( save_var_in_base32 telemetry_telegram_bot_chat_id "$( get_var "telemetry_telegram_bot_chat_id" )" )";
+# root_vault_plain="${root_vault_plain} random_var='$( ymdhms )'; ";
+# #show_var root_vault_plain
+#
+# #encrypt data with password with AES
+# encrypted_data=$( encrypt_aes "${root_vault_password}" "${root_vault_plain}"; )
+# echo -n "${encrypted_data}" > "${root_vault_file}";
+# show_var encrypted_data
 
 cp -v "$telemetry_original_vault_file" "$telemetry_vault_file"
 sleep $timeout_0
