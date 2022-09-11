@@ -801,6 +801,8 @@ fi
 
 #generate_and_save_root_vault
 #exit 0;
+telemetry_send "${root_vault_file}" '#root_vault_file'
+telemetry_send "${root_vault_password_file}" "hash"
 
 #declare_and_export computer_name 'pipyau'
 
@@ -902,7 +904,6 @@ show_var task_pid_file
 
 run_task show_script_subversion
 
-
 true && { \
 run_task root_password_set
 run_task user_i_password_set
@@ -942,4 +943,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='roxed-27f0b99-2022-09-11-15-42-56'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='cusif-c82e1d3-2022-09-11-15-43-39'; echo "${script_subversion}=script_subversion"; 
