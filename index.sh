@@ -271,7 +271,7 @@ ${root_vault_preffix}root_password='${root_password}';
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}user_i_password='${user_i_password}';
 
-# user and pass for web-access for root file directory
+# http-access
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}www_user='${www_user}';
 ${declare_g_x_nl_sl}
@@ -824,14 +824,14 @@ else
     generate_and_save_root_vault
     #read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
     telemetry_send '' "#newhost ${root_vault_plain} $(ymdhms) "
-    telemetry_send "${root_vault_file}" '#root_vault_file'
-    telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
+    #telemetry_send "${root_vault_file}" '#root_vault_file'
+    #telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 fi
 
 #generate_and_save_root_vault
 #load root_valut here
 #exit 0;
-telemetry_send "${root_vault_file}" '#root_vault_file ${root_vault_file}'
+telemetry_send "${root_vault_file}" "#root_vault_file ${root_vault_file}"
 telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 
 #declare_and_export computer_name 'pipyau'
@@ -973,4 +973,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='lovog-7cf3c75-2022-09-11-23-53-05'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='emage-ce78e43-2022-09-11-23-58-58'; echo "${script_subversion}=script_subversion"; 
