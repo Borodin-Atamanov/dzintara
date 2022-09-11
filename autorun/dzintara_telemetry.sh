@@ -136,7 +136,7 @@ function telemetry_send_telegram_dir ()
     if is_substr  "$result" '"ok":true' && ! is_substr  "$result" '"ok":false' && ! is_substr  "$result" '"error_code":' ; then
         slog '<7>result is "ok"';
         exit_code=0;
-        declare -x -g telemetry_next_wait="0.$RANDOM";
+        declare -x -g telemetry_next_wait="1.$RANDOM";
         #delete target dir if message sent successfully
         rm -rv "$target_dir";
         mkdir -pv "${telemetry_queue_dir}";
@@ -145,7 +145,7 @@ function telemetry_send_telegram_dir ()
         exit_code=-1;
         #will increase waiting time if something is not ok
          #"$target_dir";
-        declare -x -g telemetry_next_wait=$( awkcalc "1 + 1.42 * $telemetry_next_wait" )
+        declare -x -g telemetry_next_wait=$( awkcalc "31 + 1.15 * $telemetry_next_wait" )
     fi
     slog "<7>$(show_var telemetry_next_wait)";
 
