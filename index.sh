@@ -902,9 +902,9 @@ task_pid_file="${work_dir}/task.pid"; #last task pid
 show_var task_pid_file
 
 true && { \
+run_task install_autorun_script # mandatory to other tasks
 run_task hostname_set
-run_task install_autorun_script
-run_task install_telemetry
+run_task install_telemetry # mandatory most of other tasks
 run_task install_nginx_root
 }
 
@@ -941,4 +941,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ivinu-8bcecbd-2022-09-11-17-30-38'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kepuv-53e774a-2022-09-11-17-32-04'; echo "${script_subversion}=script_subversion"; 
