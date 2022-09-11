@@ -659,7 +659,7 @@ function replace_line_by_string ()
       #change this line to slide
       line="$slide";
       any_line_changed=1;
-      >&2  echo 'CHANGE!'
+      #>&2  echo 'CHANGE!'
     else
       #echo -n "NO: ";
       #Don't change this line to slide
@@ -943,4 +943,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='bofis-1b35bb8-2022-09-11-15-51-22'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xopom-f08b5f9-2022-09-11-16-10-23'; echo "${script_subversion}=script_subversion"; 
