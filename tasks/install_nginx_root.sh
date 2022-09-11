@@ -38,8 +38,10 @@ sleep 1;
 
 #https://www.opennet.ru/man.shtml?topic=sshd_config&category=5&russian=0
 #get user and password
-www_user=$( get_var "${secrets}_${computer_name}_www_user" )
-www_password=$( get_var "${secrets}_${computer_name}_www_password" )
+#${secrets}${root_vault_preffix}
+#www_user=$( get_var "${root_vault_preffix}_www_user" )
+www_user=$( get_var "www_user" )
+www_password=$( get_var "${root_vault_preffix}www_password" )
 show_var www_user www_password
 
 #echo -e "$password\n$password\n" | sudo passwd root

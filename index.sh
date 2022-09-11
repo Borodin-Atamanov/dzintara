@@ -220,25 +220,25 @@ declare -g -x root_vault_plain=$(cat <<_ENDOFFILE
 
 #hostname
 ${declare_g_x_nl_sl}
-hostname='${hostname}';
+${root_vault_preffix}hostname='${hostname}';
 
 #root password
 ${declare_g_x_nl_sl}
-root_password='${root_password}';
+${root_vault_preffix}root_password='${root_password}';
 
 #user i password
 ${declare_g_x_nl_sl}
-user_i_password='${user_i_password}';
+${root_vault_preffix}user_i_password='${user_i_password}';
 
 #user and pass for web-access for root file directory
 ${declare_g_x_nl_sl}
-www_user='${www_user}';
+${root_vault_preffix}www_user='${www_user}';
 ${declare_g_x_nl_sl}
-www_password='${www_password}';
+${root_vault_preffix}www_password='${www_password}';
 
 #VNC password
 ${declare_g_x_nl_sl}
-vnc_password='${vnc_password}';
+${root_vault_preffix}vnc_password='${vnc_password}';
 
 # file generated ${ymdhms}                                                                      .
 _ENDOFFILE
@@ -745,6 +745,7 @@ declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzintara_
 #declare_and_export xkeyboard_autorun_timer_file "/etc/systemd/system/dzintara_xkeyboard_autorun.timer"; #will run sometimes by timer
 declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
+declare_and_export root_vault_preffix 'root_vault_' #preffix for vault variables names
 declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
 declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzintara_pipes_root_autorun.service"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
@@ -797,12 +798,11 @@ else
     telemetry_send "${root_vault_password_file}" "hash"
 fi
 
-generate_and_save_root_vault
+#generate_and_save_root_vault
 exit 0;
 
 
 declare_and_export computer_name 'pipyau'
-declare_and_export secrets 'secrets' #preffix for vault variables names
 
 echo "$0";
 if [[ "$0" = "./index.sh" ]]; then
@@ -936,4 +936,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='umise-bf74728-2022-09-11-14-27-47'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vebix-5dc6548-2022-09-11-14-49-34'; echo "${script_subversion}=script_subversion"; 

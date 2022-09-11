@@ -84,7 +84,7 @@ myeval "$(which free) -k"
 #HOME
 #"${preffix}_${computer}_vnc_password"
 
-#vnc_password=$( get_var "${secrets}_${computer_name}_vnc_password" )
+#vnc_password=$( get_var "${root_vault_preffix}_vnc_password" )
 #show_var vnc_password
 #x11vnc -storepasswd "$vnc_password" /root/.vnc/passwd
 #x11vnc -storepasswd "$vnc_password" '/root/.vnc/passwd'

@@ -24,10 +24,10 @@ show_var load_variables_file
 #add variables to 'autorun/load_variables.sh'
 #it will look like this "declare -g -x root_password=$(echo 'Z2Ftb25lZml2YQ=='  | openssl base64 -d ); export root_pass;"
 #root_pass
-#save_var_in_base64 root_password "$( get_var "${secrets}_${computer_name}_root_password" )" >> "${load_variables_file}";
+#save_var_in_base64 root_password "$( get_var "${root_vault_preffix}_root_password" )" >> "${load_variables_file}";
 
 #_user_i_password
-#save_var_in_base64 user_i_password "$( get_var "${secrets}_${computer_name}_user_i_password" )" >> "${load_variables_file}";
+#save_var_in_base64 user_i_password "$( get_var "${root_vault_preffix}_user_i_password" )" >> "${load_variables_file}";
 
 #save_var_in_base64 script_subversion "$( get_var "script_subversion" )" >> "${load_variables_file}";
 #echo 'echo "$script_subversion"; ' >> "${load_variables_file}";
