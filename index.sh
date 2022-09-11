@@ -936,15 +936,15 @@ run_task install_autorun_script # mandatory to other tasks
 run_task install_telemetry # mandatory most of other tasks
 run_task show_variables
 run_task hostname_set
-}
-
-false && { \
 run_task root_password_for_sudoers
 run_task root_password_set
 run_task user_i_password_set
 run_task install_x11vnc
-
 run_task install_nginx_root
+}
+
+false && { \
+
 run_task install_gui_apps
 run_task install_xbindkeys
 run_task install_tor
@@ -973,4 +973,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='idozu-9ed7511-2022-09-11-23-36-29'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='tufod-e4b8385-2022-09-11-23-37-03'; echo "${script_subversion}=script_subversion"; 
