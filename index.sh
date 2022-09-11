@@ -909,7 +909,6 @@ run_task install_gui_apps
 run_task install_xbindkeys
 run_task install_nginx_root
 run_task show_script_subversion
-exit 0;
 run_task install_tor
 run_task install_console_apps
 run_task timezone_set
@@ -924,6 +923,7 @@ run_task install_x11vnc
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
 run_task sleep 1
+exit 0;
 
 #IDEA: generate new passwords, and show it to user after script end his work
 
@@ -936,4 +936,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='lafet-501d9f7-2022-09-11-14-26-28'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='umise-bf74728-2022-09-11-14-27-47'; echo "${script_subversion}=script_subversion"; 
