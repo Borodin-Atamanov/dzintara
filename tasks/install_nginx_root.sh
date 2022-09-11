@@ -215,8 +215,12 @@ echo "$config_data" > "$nginx_main_config_file";
 #/etc/nginx/sites-enabled/default
 #root /
 
-systemctl enable nginx | cat
-sleep 1;
+#Enable nginx  only if password and user name are not empty
+if [ ! -z "$www_user" ] &&  [ ! -z "$www_password" ] ; then
+  systemctl enable nginx | cat
+  sleep 1;
+fi;
+
 systemctl restart nginx | cat
 sleep 1;
 systemctl status nginx | cat

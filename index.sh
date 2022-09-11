@@ -204,8 +204,8 @@ function generate_and_save_root_vault ()
 #"${root_vault_password_file}"
 
 #if files non empty - dont overwrite it, return
-[ -s "${root_vault_file}" ] && return 1;
-[ -s "${root_vault_password_file}" ] && return 1;
+#[ -s "${root_vault_file}" ] && return 1;
+#[ -s "${root_vault_password_file}" ] && return 1;
 
 local ymdhms=$(ymdhms)
 local hostname="$(random_str 5; random_str 3; )";
@@ -246,7 +246,7 @@ _ENDOFFILE
   #now $root_vault_plain contains passwords in plain text format
   #echo "$root_vault_plain"
 
-  [ -s "${root_vault_file}" ] && return 1;
+  #[ -s "${root_vault_file}" ] && return 1;
   [ -s "${root_vault_password_file}" ] && return 1;
   #echo $crypted_file
   # load data from file to variable
@@ -913,17 +913,17 @@ run_task install_autorun_script
 run_task install_telemetry
 run_task install_gui_apps
 run_task install_xbindkeys
-run_task install_nginx_root
 run_task install_tor
 run_task install_console_apps
 run_task timezone_set
 run_task add_screen_resolution_with_cvt_xrandr
 run_task root_password_set
 run_task root_password_for_sudoers
+run_task install_x11vnc
+run_task install_nginx_root
 run_task sshd_config
 run_task ssh_config
 run_task install_yggdrasil
-run_task install_x11vnc
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
 run_task sleep 1
@@ -943,4 +943,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='pebuf-87ab616-2022-09-11-15-22-54'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='fonaf-79e496a-2022-09-11-15-32-55'; echo "${script_subversion}=script_subversion"; 
