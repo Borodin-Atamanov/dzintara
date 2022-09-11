@@ -175,9 +175,11 @@ chown --verbose --changes --recursive  i:i "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 #for dev
-find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
-find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
-#TODO set different rights to files. Some files must be secret for regular user
+#find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
+#find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
+#set different rights to files. Some files must be secret for regular user
+find "${install_dir}" -type f -not -name "*.sh" -exec chmod --verbose 0644 {} \;
+find "${install_dir}" -type f -name "*.sh" -exec chmod --verbose 0755 {} \;
 
 chmod --verbose 0600 "${root_vault_file}";
 chmod --verbose 0600 "${root_vault_password_file}";
