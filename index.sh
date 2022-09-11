@@ -217,7 +217,6 @@ local vnc_password="$(random_str 4; random_str 4; )";
 
 local declare_g_x_nl_sl='declare -g -x \';  #
 declare -g -x root_vault_plain=$(cat <<_ENDOFFILE
-
 #hostname
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}hostname='${hostname}';
@@ -240,6 +239,7 @@ ${root_vault_preffix}www_password='${www_password}';
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}vnc_password='${vnc_password}';
 
+#dzintara
 # file generated ${ymdhms}                                                                      .
 _ENDOFFILE
 )
@@ -267,19 +267,15 @@ _ENDOFFILE
   chmod --verbose 0600 "${root_vault_password_file}";
   chmod --verbose 0600 "${root_vault_file}";
 
-  # check what passwords in file, and we can decrypt it
+  # TODO check what passwords in file, and we can decrypt it
   load_var_from_file "${root_vault_file}" root_vault_encypted2
   load_var_from_file "${root_vault_password_file}" master_password2
-  #echo "password_from_file length is ${#master_password}";
-  #echo  $file_data;
-  #encrypt data with master_password
   decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
-
   show_var decrypted_data
 
   #TODO generate text message to human with passwords in last task
   #declare -g -x root_vault_plain_human="${root_vault_plain}"
-  eval "${root_vault_plain}";
+  eval "${decrypted_data}";
   sleep $timeout_1
 }
 export -f generate_and_save_root_vault
@@ -782,21 +778,12 @@ if [[ "$1" != "fun" ]]; then
 if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
 then
     echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
-    #master_password_from_file=$(cat "${master_password_file}");
-    load_var_from_file "${root_vault_password_file}" master_password_from_file
-    master_password_from_file=$(trim "${master_password_from_file}");
-    #echo "master_password_from_file length is ${#master_password_from_file}";
-    #md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
-    #echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
-    master_password="${master_password_from_file}"
 
-    #decrypt data
-    load_var_from_file "${root_vault_file}" encrypted_root_data
-    show_var encrypted_root_data
-    decrypted_root_data=$( decrypt_aes "${master_password}" "${encrypted_root_data}")
-    #exit_code=$?
-    show_var decrypted_root_data
     #TODO check: is password right?
+    load_var_from_file "${root_vault_file}" root_vault_encypted2
+    load_var_from_file "${root_vault_password_file}" master_password2
+    decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+    show_var decrypted_data
     #echo "aes_error=$aes_error"
     eval "$decrypted_root_data";
 else
@@ -951,4 +938,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kezex-9fcd2b9-2022-09-11-19-26-05'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='upane-32accea-2022-09-11-19-42-54'; echo "${script_subversion}=script_subversion"; 
