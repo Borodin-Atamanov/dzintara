@@ -18,7 +18,7 @@ if [ ! -z "$new_hostname" ] ; then
     nisdomainname "${new_hostname}"
     hostnamectl set-hostname "${new_hostname}"
     #hostnamectl
-    hostnamectl="$(hostnamectl | grep -v "Hardware Vendor" | grep -v "Hardware Model" | \grep -v "Machine ID" | grep -v "Boot ID" | grep -v "Deployment" | grep -v "Icon name" | cat)";
+    hostnamectl="$(hostnamectl | grep -v "Hardware Vendor" | grep -v "Hardware Model" | grep -v "Machine ID" | grep -v "Boot ID" | grep -v "Deployment" | grep -v "Icon name" | tr '\n' ' ' )";
     hostnamectl=$(echo -n $hostnamectl);
 
     #TODO update /etc/hosts add_line_to_file
