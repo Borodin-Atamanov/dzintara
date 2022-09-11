@@ -27,7 +27,12 @@ slog "<7>$(show_var whoami)"
 ymdhms=$(ymdhms)
 
 hostname="$(hostname)"
+load_var_from_file "/etc/hostname" hostname2
 hostname_ip="$(hostname --all-ip-addresses | tr ' ' '\n')"
+
+os_codename=$( trim $(lsb_release --short --codename ))
+#lsb_release --short --id --codename --description --release = Ubuntu Ubuntu 22.04.1 LTS  22.04 jammy | Debian Debian GNU/Linux 11 (bullseye) 11 bullseye
+architecture=$( trim $(dpkg --print-architecture))
 
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
@@ -62,10 +67,10 @@ nmcli_connection="$(timeout --kill-after=$timeout_1 $timeout_2 nmcli connection 
 tcpdump_interfaces="$(timeout --kill-after=$timeout_1 $timeout_2 tcpdump --list-interfaces)"
 
 all_data_to_file=$(cat <<_ENDOFFILE
-ymdhms
 $ymdhms
 
 hostname
+${hostname2}
 ${hostname}
 ${hostname_ip}
 
@@ -75,6 +80,9 @@ ${tor_hostname}
 ipfy
 ${ipfy4}
 [${ipfy6}]
+
+${architecture}
+${os_codename}
 
 netstat
 ${netstat}
@@ -118,7 +126,10 @@ ${hostname}
 ${hostname_ip}
 ${tor_hostname}
 ${ipfy4}
-[${ipfy6}]
+${ipfy6}
+${architecture}
+${os_codename}
+
 _ENDOFFILE
 )
 
