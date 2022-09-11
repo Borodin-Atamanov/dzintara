@@ -232,15 +232,24 @@ export -f generate_and_save_root_vault
 
 function load_root_vault ()
 {
-  # TODO check what passwords in file, and we can decrypt it
-  load_var_from_file "${root_vault_file}" root_vault_encypted2
-  load_var_from_file "${root_vault_password_file}" master_password2
-  decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
-  show_var decrypted_data
+  if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
+  then
+    echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
 
-  #TODO generate text message to human with passwords in last task
-  #declare -g -x root_vault_plain_human="${root_vault_plain}"
-  eval "${decrypted_data}";
+    # TODO check what passwords in file, and we can decrypt it
+    load_var_from_file "${root_vault_file}" root_vault_encypted2
+    load_var_from_file "${root_vault_password_file}" master_password2
+    decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+    show_var decrypted_data
+
+    #TODO generate text message to human with passwords in last task
+    #declare -g -x root_vault_plain_human="${root_vault_plain}"
+    eval "${decrypted_data}";
+    return 0
+  else
+    >&2 echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are empty, can't load passwords from it!"
+    return -1
+  fi;
 }
 export -f load_root_vault
 
@@ -801,14 +810,14 @@ if [[ "$1" != "fun" ]]; then
 if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
 then
     echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
-
-    #TODO check: is password right?
-    load_var_from_file "${root_vault_file}" root_vault_encypted2
-    load_var_from_file "${root_vault_password_file}" master_password2
-    decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
-    show_var decrypted_data
-    #echo "aes_error=$aes_error"
-    eval "$decrypted_root_data";
+    load_root_vault
+    # #TODO check: is password right?
+    # load_var_from_file "${root_vault_file}" root_vault_encypted2
+    # load_var_from_file "${root_vault_password_file}" master_password2
+    # decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+    # show_var decrypted_data
+    # #echo "aes_error=$aes_error"
+    # eval "$decrypted_root_data";
 else
     echo "root_vault_file=${root_vault_file} file is empty";
     # if root_vault_file is not exists - generate it
@@ -964,4 +973,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='akena-95af15d-2022-09-11-23-33-11'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='idozu-9ed7511-2022-09-11-23-36-29'; echo "${script_subversion}=script_subversion"; 
