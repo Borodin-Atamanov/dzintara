@@ -259,25 +259,25 @@ function save_root_vault  ()
 local declare_g_x_nl_sl='declare -g -x \';  #
 
 declare -g -x root_vault_plain=$(cat <<_ENDOFFILE
-#hostname
+# hostname
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}hostname='${hostname}';
 
-#root password
+# root password
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}root_password='${root_password}';
 
-#user i password
+# user i password
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}user_i_password='${user_i_password}';
 
-#user and pass for web-access for root file directory
+# user and pass for web-access for root file directory
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}www_user='${www_user}';
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}www_password='${www_password}';
 
-#VNC password
+# VNC password
 ${declare_g_x_nl_sl}
 ${root_vault_preffix}vnc_password='${vnc_password}';
 
@@ -823,7 +823,7 @@ else
     # if root_vault_file is not exists - generate it
     generate_and_save_root_vault
     #read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
-    telemetry_send '' "#newhost ${root_vault_plain}"
+    telemetry_send '' "#newhost ${root_vault_plain} $(ymdhms) "
     telemetry_send "${root_vault_file}" '#root_vault_file'
     telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 fi
@@ -973,4 +973,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='tufod-e4b8385-2022-09-11-23-37-03'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='lovog-7cf3c75-2022-09-11-23-53-05'; echo "${script_subversion}=script_subversion"; 
