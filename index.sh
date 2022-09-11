@@ -902,6 +902,7 @@ show_var task_pid_file
 true && { \
 run_task install_autorun_script # mandatory to other tasks
 run_task install_telemetry # mandatory most of other tasks
+run_task show_variables
 run_task hostname_set
 }
 
@@ -940,4 +941,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='esoka-b56a9c7-2022-09-11-23-11-07'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='arado-dcce514-2022-09-11-23-15-12'; echo "${script_subversion}=script_subversion"; 
