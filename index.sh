@@ -518,7 +518,7 @@ function telemetry_send ()
   #required dzintara.telemetry systemd service
   local file="$1"; #file
   local message="$2"; #message
-  local random_dir_name="${telemetry_queue_dir}$( ymdhms )-$( random_str 5; )-$RANDOM";
+  local random_dir_name="${telemetry_queue_dir}$( ymdhms )-$RANDOM";
   mkdir -pv "${random_dir_name}";
   local text_filename="${random_dir_name}/text.txt";
   local file_filename="${random_dir_name}/file.txt";
@@ -939,4 +939,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='opezi-958e113-2022-09-11-21-24-42'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vidic-4c9d229-2022-09-11-21-26-45'; echo "${script_subversion}=script_subversion"; 
