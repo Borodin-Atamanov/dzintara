@@ -905,6 +905,10 @@ show_var task_pid_file
 run_task show_script_subversion
 
 true && { \
+run_task hostname_set
+}
+
+false && { \
 run_task root_password_set
 run_task user_i_password_set
 run_task root_password_for_sudoers
@@ -923,9 +927,6 @@ run_task ssh_config
 run_task install_yggdrasil
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
-}
-
-false && { \
 run_task sleep 1
 }
 
@@ -943,4 +944,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ocefi-fd2af66-2022-09-11-16-11-12'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='asibo-ae73f3b-2022-09-11-16-14-08'; echo "${script_subversion}=script_subversion"; 
