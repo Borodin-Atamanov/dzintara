@@ -12,9 +12,8 @@
 # fi
 
 #apt-get purge openresolv
-#system_install resolvconf
-system_install bind9-utils
-system_install dnsutils
+install_system bind9-utils
+install_system dnsutils
 
 config_file='/etc/systemd/resolved.conf';
 config_data=$(cat <<_ENDOFFILE
