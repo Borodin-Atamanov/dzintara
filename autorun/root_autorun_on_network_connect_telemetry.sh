@@ -27,6 +27,7 @@ slog "<7>$(show_var whoami)"
 ymdhms=$(ymdhms)
 
 hostname="$(hostname)"
+hostname_ip="$(hostname --all-ip-addresses | tr ' ' '\n')"
 
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
@@ -66,6 +67,7 @@ $ymdhms
 
 hostname
 ${hostname}
+${hostname_ip}
 
 tor_hostname
 ${tor_hostname}
@@ -113,6 +115,7 @@ _ENDOFFILE
 all_data_to_message=$(cat <<_ENDOFFILE
 $ymdhms
 ${hostname}
+${hostname_ip}
 ${tor_hostname}
 ${ipfy4}
 [${ipfy6}]
