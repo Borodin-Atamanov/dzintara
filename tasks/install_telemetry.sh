@@ -41,10 +41,13 @@ echo -n "${encrypted_data}" > "${root_vault_file}";
 show_var encrypted_data
 
 cp -v "$telemetry_original_vault_file" "$telemetry_vault_file"
+sleep $timeout_0
 
 chmod --verbose 0600 "${telemetry_vault_file}";
+sleep $timeout_0
 #chmod --verbose 0600 "${root_vault_password_file}"
 chown --verbose --changes --recursive  root:root "${telemetry_vault_file}";
+sleep $timeout_0
 #chown --verbose --changes --recursive  root:root "${root_vault_password_file}"
 
 # decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
