@@ -3,7 +3,7 @@
 #License: MIT
 #load this script before any task
 
-if [[ "$dzible_function_loaded" != "1" ]]; then
+if [[ "$dzintara_function_loaded" != "1" ]]; then
   #load all functions and variables
   source "${work_dir}/index.sh" fun
 fi;

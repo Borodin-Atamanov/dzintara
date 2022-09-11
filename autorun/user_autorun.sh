@@ -4,9 +4,9 @@
 #License: MIT
 #script autorun on target system in user mode, before GUI starts.
 
-source "/home/i/bin/dzible/autorun/load_variables.sh"
-declare_and_export work_dir "/home/i/bin/dzible/"
-declare -x -g service_name='dzible.user_autorun';   #for slog systemd logs
+source "/home/i/bin/dzintara/autorun/load_variables.sh"
+declare_and_export work_dir "/home/i/bin/dzintara/"
+declare -x -g service_name='dzintara.user_autorun';   #for slog systemd logs
 
 #access control disabled, clients can connect from any host
 # xhost +

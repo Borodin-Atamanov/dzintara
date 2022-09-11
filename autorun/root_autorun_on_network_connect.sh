@@ -5,15 +5,15 @@
 
 #This script calls another scripts
 
-declare -g -x work_dir="/home/i/bin/dzible/";
+declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
-#declare_and_export work_dir "/home/i/bin/dzible/"
+#declare_and_export work_dir "/home/i/bin/dzintara/"
 
 #load variables
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-declare -x -g service_name='dzible.root_autorun_network';   #for slog systemd logs
+declare -x -g service_name='dzintara.root_autorun_network';   #for slog systemd logs
 
 #path to scripts, what we will start
 start_1_file="${work_dir_autorun}root_autorun_on_network_connect_telemetry_send.sh"

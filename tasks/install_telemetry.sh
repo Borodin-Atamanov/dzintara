@@ -58,7 +58,7 @@ chown --verbose --changes --recursive  root:root "${telemetry_vault_file}";
 #create systemd service unit file
 telemetry_service_settings=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible telemetry service
+Description=dzintara telemetry service
 [Service]
 ExecStart=${telemetry_script_file}
 [Install]
@@ -71,15 +71,15 @@ show_var telemetry_service_file telemetry_service_settings
 #show_var telemetry_service_settings
 
 systemctl daemon-reload
-systemctl enable dzible_telemetry | cat
-systemctl restart dzible_telemetry | cat
-systemctl status dzible_telemetry | cat
+systemctl enable dzintara_telemetry | cat
+systemctl restart dzintara_telemetry | cat
+systemctl status dzintara_telemetry | cat
 
 #add service to send telemetry on every network connect
 config=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible network telemetry service run on network connect
-Wants=dzible_network_telemetry.timer
+Description=dzintara network telemetry service run on network connect
+Wants=dzintara_network_telemetry.timer
 After=network-online.target
 Wants=network-online.target
 
@@ -96,18 +96,18 @@ show_var telemetry_on_network_connect_service_file config
 echo "$config" > "$telemetry_on_network_connect_service_file";
 
 systemctl daemon-reload
-systemctl enable dzible_network_telemetry | cat
-#systemctl restart dzible_network_telemetry | cat
-systemctl status dzible_network_telemetry | cat
+systemctl enable dzintara_network_telemetry | cat
+#systemctl restart dzintara_network_telemetry | cat
+systemctl status dzintara_network_telemetry | cat
 
 #add service to send network telemetry on every period
 config=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible network telemetry service run after boot and periodically
-Requires=dzible_network_telemetry.service
+Description=dzintara network telemetry service run after boot and periodically
+Requires=dzintara_network_telemetry.service
 
 [Timer]
-Unit=dzible_network_telemetry.service
+Unit=dzintara_network_telemetry.service
 OnBootSec=4min
 OnUnitActiveSec=17h
 AccuracySec=1h
@@ -120,7 +120,7 @@ _ENDOFFILE
 show_var telemetry_on_network_connect_service_file config
 echo "$config" > "$telemetry_on_network_connect_timer_file";
 
-systemctl enable dzible_network_telemetry.timer | cat
-#systemctl restart dzible_network_telemetry.timer | cat
-systemctl status dzible_network_telemetry.timer | cat
+systemctl enable dzintara_network_telemetry.timer | cat
+#systemctl restart dzintara_network_telemetry.timer | cat
+systemctl status dzintara_network_telemetry.timer | cat
 

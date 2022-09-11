@@ -4,7 +4,7 @@
 #License: MIT
 #script sends some telemetry data in background
 
-work_dir='/home/i/github/dzible/'; source "${work_dir}tasks/1.sh"
+work_dir='/home/i/github/dzintara/'; source "${work_dir}tasks/1.sh"
 
 #send_telemetry 'augeas_test.sh' 'hello world '
 

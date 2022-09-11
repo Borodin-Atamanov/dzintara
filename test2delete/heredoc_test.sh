@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-work_dir='/home/i/github/dzible/';
+work_dir='/home/i/github/dzintara/';
 source "${work_dir}tasks/1.sh"
 
 #set -x
@@ -36,7 +36,7 @@ show_var varia
 
 telemetry_service_settings=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible telemetry service
+Description=dzintara telemetry service
 [Service]
 ExecStart=${telemetry_script_file}
 [Install]

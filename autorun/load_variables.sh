@@ -4,9 +4,9 @@
 #This file contains automaticaly generated variables, what using in target system in every run
 
 #load functions and default variables
-#source "/home/i/bin/dzible/index.sh" fun
+#source "/home/i/bin/dzintara/index.sh" fun
 
 #One can find generated variables below
-#this script will load all dzible functions, variables, etc
+#this script will load all dzintara functions, variables, etc
 
 

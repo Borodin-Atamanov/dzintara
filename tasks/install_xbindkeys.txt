@@ -5,7 +5,7 @@
 #keystate_capslock = enable
 #keystate_scrolllock= enable
 
-"echo 'cvt_xrandr 1280 1024 60' > /home/i/bin/dzible/autorun/pipe_user_i_commands.fifo &"
+"echo 'cvt_xrandr 1280 1024 60' > /home/i/bin/dzintara/autorun/pipe_user_i_commands.fifo &"
   m:0xd + c:20
   Control+Shift+Alt + minus
 

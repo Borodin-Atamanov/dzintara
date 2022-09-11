@@ -6,23 +6,23 @@
 #read data from telemetry_queue_dir
 
 #view logs:
-#journalctl --all --follow --priority=7 -t dzible_telemetry
-#tail -f /var/log/syslog | grep dzible;
+#journalctl --all --follow --priority=7 -t dzintara_telemetry
+#tail -f /var/log/syslog | grep dzintara;
 
-declare -g -x work_dir="/home/i/bin/dzible/";
+declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
-#declare_and_export work_dir "/home/i/bin/dzible/"
+#declare_and_export work_dir "/home/i/bin/dzintara/"
 
 #load variables
-#source "/home/i/bin/dzible/autorun/load_variables.sh"
+#source "/home/i/bin/dzintara/autorun/load_variables.sh"
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
 #load secret variables
 source "${work_dir_autorun}load_variables.sh";
 
-declare -x -g service_name='dzible.telemetry';   #for slog systemd logs
-slog "<5>start dzible.telemetry. It will send some anonymous telemetry data."
+declare -x -g service_name='dzintara.telemetry';   #for slog systemd logs
+slog "<5>start dzintara.telemetry. It will send some anonymous telemetry data."
 
 #load password to decrypt secrets
 #source "${root_vault_password_file}";
@@ -189,9 +189,9 @@ while : ; do :
     show_var inotifyresult
 done;
 
-#send_telemetry "/home/i/github/dzible/test/heredoc_test.sh" "sended file /proc/cpuinfo"
+#send_telemetry "/home/i/github/dzintara/test/heredoc_test.sh" "sended file /proc/cpuinfo"
 file1="/proc/cpuinfo";
-file1="/home/i/github/dzible/LICENSE"
+file1="/home/i/github/dzintara/LICENSE"
 send_telemetry "${file1}" "${file1} sended file "
 
 #exit 0;

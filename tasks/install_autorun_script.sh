@@ -53,7 +53,7 @@ echo 'fi' >> "${load_variables_file}";
 #echo "cd '${install_dir}';" >> "${load_variables_file}";
 
 echo 'source "${work_dir}/index.sh" fun' >> "${load_variables_file}";
-#source "/home/i/bin/dzible/index.sh" fun
+#source "/home/i/bin/dzintara/index.sh" fun
 
 save_var_in_text DISPLAY "$DISPLAY" >> "${load_variables_file}";
 save_var_in_base32 DISPLAY "$DISPLAY" >> "${load_variables_file}";
@@ -63,7 +63,7 @@ save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 
-#add dzible functions and variables to shell autorun
+#add dzintara functions and variables to shell autorun
 line_to_add="source ${load_variables_file} nocd"
 add_line_to_file "/home/i/.bash_profile" "$line_to_add"
 add_line_to_file "/home/i/.bashrc" "$line_to_add"
@@ -75,9 +75,9 @@ add_line_to_file "/root/.profile" "$line_to_add"
 
 #add script as autorun service to systemd for root
 #create systemd service unit file
-dzible_service_settings=$(cat <<_ENDOFFILE
+dzintara_service_settings=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible autorun service
+Description=dzintara autorun service
 [Service]
 ExecStart=${root_autorun_file}
 [Install]
@@ -85,13 +85,13 @@ WantedBy=multi-user.target
 _ENDOFFILE
 )
 
-show_var dzible_service_settings
-echo "$dzible_service_settings" > "${root_autorun_service_file}";
+show_var dzintara_service_settings
+echo "$dzintara_service_settings" > "${root_autorun_service_file}";
 
 systemctl daemon-reload
-#systemctl restart dzible| cat
-systemctl enable dzible | cat
-systemctl status dzible | cat
+#systemctl restart dzintara| cat
+systemctl enable dzintara | cat
+systemctl status dzintara | cat
 
 sleep $timeout_0
 
@@ -103,7 +103,7 @@ sleep $timeout_0
 #create systemd service unit file
 service_unit=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible autorun service
+Description=dzintara autorun service
 [Service]
 ExecStart=${xkeyboard_autorun_script_file}
 Restart=always
@@ -116,9 +116,9 @@ show_var service_unit
 echo "$service_unit" > "${xkeyboard_autorun_service_file}";
 
 systemctl daemon-reload
-#systemctl restart dzible_xkeyboard_autorun| cat
-systemctl enable dzible_xkeyboard_autorun | cat
-systemctl status dzible_xkeyboard_autorun | cat
+#systemctl restart dzintara_xkeyboard_autorun| cat
+systemctl enable dzintara_xkeyboard_autorun | cat
+systemctl status dzintara_xkeyboard_autorun | cat
 sleep $timeout_0
 
 
@@ -126,7 +126,7 @@ sleep $timeout_0
 #this service will read from fifo pipe and run commands as root
 service_unit=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible run commands from named fifo pipe as root
+Description=dzintara run commands from named fifo pipe as root
 
 [Service]
 ExecStart=${run_command_from_pipes_script_file} root
@@ -143,7 +143,7 @@ echo "$service_unit" > "${run_command_from_root_pipes_service_file}";
 #this service will read from fifo pipe and run commands as user i
 service_unit=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzible run commands from named fifo pipe as user i
+Description=dzintara run commands from named fifo pipe as user i
 
 [Service]
 ExecStart=${run_command_from_pipes_script_file} i
@@ -161,14 +161,14 @@ rm -v "$run_command_from_user_i_pipe_file"
 sleep $timeout_0
 
 systemctl daemon-reload
-systemctl restart dzible_pipes_user_i_autorun| cat
-systemctl enable dzible_pipes_user_i_autorun | cat
-systemctl status dzible_pipes_user_i_autorun | cat
+systemctl restart dzintara_pipes_user_i_autorun| cat
+systemctl enable dzintara_pipes_user_i_autorun | cat
+systemctl status dzintara_pipes_user_i_autorun | cat
 sleep $timeout_0
 
-systemctl restart dzible_pipes_root_autorun| cat
-systemctl enable dzible_pipes_root_autorun | cat
-systemctl status dzible_pipes_root_autorun | cat
+systemctl restart dzintara_pipes_root_autorun| cat
+systemctl enable dzintara_pipes_root_autorun | cat
+systemctl status dzintara_pipes_root_autorun | cat
 sleep $timeout_0
 
 chown --verbose --changes --recursive  i:i "${install_dir}";
@@ -184,5 +184,5 @@ chmod --verbose 0600 "${root_vault_password_file}";
 chown --verbose --changes root:root "${root_vault_file}";
 chown --verbose --changes root:root "${root_vault_password_file}";
 #read logs:
-#journalctl -b -u dzible_telemetry
+#journalctl -b -u dzintara_telemetry
 

@@ -4,24 +4,24 @@
 #License: MIT
 #script autorun x11vnc
 
-declare -g -x work_dir="/home/i/bin/dzible/";
+declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
-#declare_and_export work_dir "/home/i/bin/dzible/"
+#declare_and_export work_dir "/home/i/bin/dzintara/"
 
 #load variables
-#source "/home/i/bin/dzible/autorun/load_variables.sh"
+#source "/home/i/bin/dzintara/autorun/load_variables.sh"
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-declare -x -g service_name='dzible.pipes_autorun';   #for slog systemd logs
+declare -x -g service_name='dzintara.pipes_autorun';   #for slog systemd logs
 
 #start plus root script
 user_id="$(id)"
 whoami="$(whoami)"
-slog "<7>dzible read from pipe and execute ${whoami} ${user_id}"
+slog "<7>dzintara read from pipe and execute ${whoami} ${user_id}"
 
 if [[ "$1" = 'root' ]]; then
-    declare -x -g service_name='dzible_pipes_root_autorun';   #for slog systemd logs
+    declare -x -g service_name='dzintara_pipes_root_autorun';   #for slog systemd logs
     fifo_path="${run_command_from_root_pipe_file}"
     user='root';
     slog "<7>ROOT fifo_path=${fifo_path}"
@@ -30,7 +30,7 @@ if [[ "$1" = 'root' ]]; then
     chown --verbose   root:root "${fifo_path}";
 else
     sleep 2;
-    declare -x -g service_name='dzible_pipes_user_i_autorun';   #for slog systemd logs
+    declare -x -g service_name='dzintara_pipes_user_i_autorun';   #for slog systemd logs
     fifo_path="${run_command_from_user_i_pipe_file}"
     user='i';
     slog "<7>USER fifo_path=${fifo_path}"

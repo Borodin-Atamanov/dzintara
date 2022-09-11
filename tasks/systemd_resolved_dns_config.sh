@@ -3,8 +3,8 @@
 #License: MIT
 #install and setup
 
-# declare -g -x work_dir='/home/i/github/dzible/'
-# source "/home/i/github/dzible/tasks/1.sh" #for development
+# declare -g -x work_dir='/home/i/github/dzintara/'
+# source "/home/i/github/dzintara/tasks/1.sh" #for development
 
 # if [[ ! is_root ]]; then
 #    echo "Must be run as root! $0"
@@ -45,7 +45,7 @@ _ENDOFFILE
 echo "$config_data" > "$config_file"
 #rm -v "$config_file"
 mkdir -pv '/etc/systemd/resolved.conf.d'
-cp "$config_file" '/etc/systemd/resolved.conf.d/dzible.conf'
+cp "$config_file" '/etc/systemd/resolved.conf.d/dzintara.conf'
 
 echo "nohook resolv.conf" >> '/etc/dhcpcd.conf'
 

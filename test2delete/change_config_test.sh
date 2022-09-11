@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-work_dir='/home/i/github/dzible/';
+work_dir='/home/i/github/dzintara/';
 source "${work_dir}tasks/1.sh"
 
 #set -x
@@ -9,12 +9,12 @@ source "${work_dir}tasks/1.sh"
 
 line_to_add="echo source ${load_variables_file} nocd"
 
-add_line_to_file "/home/i/github/dzible/test2delete/change_config_test.txt" "$line_to_add"
-mcedit "/home/i/github/dzible/test2delete/change_config_test.txt"
+add_line_to_file "/home/i/github/dzintara/test2delete/change_config_test.txt" "$line_to_add"
+mcedit "/home/i/github/dzintara/test2delete/change_config_test.txt"
 
 exit 0
 
-fname="/home/i/github/dzible/test2delete/change_config_test.txt"
+fname="/home/i/github/dzintara/test2delete/change_config_test.txt"
 load_var_from_file "$fname" config
 #md5sum $fname
 
@@ -27,7 +27,7 @@ changed=$?
 show_var changed
 echo "$config"
 
-fname="/home/i/github/dzible/test2delete/change_config_test2.txt"
+fname="/home/i/github/dzintara/test2delete/change_config_test2.txt"
 save_var_to_file "$fname" config
 
 #echo -n "$config" | xxd

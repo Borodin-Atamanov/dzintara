@@ -8,7 +8,7 @@
 #2. initialisation: set variables, etc
 #3. run tasks
 
-#wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzible/main/index.sh | sudo bash
+#wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
 #wget -qO - clck.ru/uRPBG | sudo bash
 
 function run_task ()
@@ -29,7 +29,7 @@ function run_task ()
   slog "<6>run_task ${task_name} ${arguments}";
   slog "<7>$(show_var task_script) $(show_var task_name) $(show_var arguments)";
   #if user press CTRL+C - we will exit from task with exit code 87
-  #trap dzible_task_terminator SIGINT
+  #trap dzintara_task_terminator SIGINT
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
@@ -478,13 +478,13 @@ function slog ()
 {
   #add message to systemd log
   #examples:
-  #slog "<7>debug message from dzible"
-  #slog "<4>warning message from dzible"
+  #slog "<7>debug message from dzintara"
+  #slog "<4>warning message from dzintara"
   #view logs with:
-  # journalctl --all --reverse --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_plus -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
-  # journalctl --all --follow --priority=7 -t dzible -t dzible.root_autorun -t dzible.root_autorun_plus -t dzible.root_autorun_gui -t dzible.user_autorun -t dzible.user_autorun_gui
-  # tail -f /var/log/syslog | grep dzible;
-  # cat /var/log/syslog | grep dzible;
+  # journalctl --all --reverse --priority=7 -t dzintara -t dzintara.root_autorun -t dzintara.root_autorun_plus -t dzintara.root_autorun_gui -t dzintara.user_autorun -t dzintara.user_autorun_gui
+  # journalctl --all --follow --priority=7 -t dzintara -t dzintara.root_autorun -t dzintara.root_autorun_plus -t dzintara.root_autorun_gui -t dzintara.user_autorun -t dzintara.user_autorun_gui
+  # tail -f /var/log/syslog | grep dzintara;
+  # cat /var/log/syslog | grep dzintara;
   # <0>emerg: the system is unusable.
   # <1>alert: action must be taken immediately.
   # <2>crit: critical conditions.
@@ -495,7 +495,7 @@ function slog ()
   # <7>debug: messages that are useful for debugging.
   local message="$1";
   if [[ "${service_name}" = "" ]]  ; then
-    declare -x -g service_name='dzible';
+    declare -x -g service_name='dzintara';
   fi;
   echo -n "${message}" | systemd-cat --identifier="${service_name}";
   return_code=$?
@@ -508,7 +508,7 @@ export -f slog
 function telemetry_send ()
 {
   #function save data in {$telemetry_queue_dir}
-  #required dzible.telemetry systemd service
+  #required dzintara.telemetry systemd service
   local file="$1"; #file
   local message="$2"; #message
   local random_dir_name="${telemetry_queue_dir}$( ymdhms )-$( random_str 5; )-$RANDOM";
@@ -524,7 +524,7 @@ function telemetry_send ()
   #write message to file
   echo -n "${message}" >"${text_filename}";
   #write ready-to-send flag to file
-  echo -n "if this file exists - message must be send by dzible.telemetry service" >"${send_filename}";
+  echo -n "if this file exists - message must be send by dzintara.telemetry service" >"${send_filename}";
   slog "<7>telemetry_send ${filename_realpath_to_send} $message"
 }
 export -f telemetry_send
@@ -721,33 +721,33 @@ function search_and_replace ()
 export -f add_line_to_file
 
 
-declare_and_export dzible_function_loaded "1"  #flag. Means what dzible functions loaded
-declare_and_export install_dir "/home/i/bin/dzible/"  #dzible will install himself to this directory
+declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
+declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
-declare_and_export master_password_file '/home/i/bin/dzible/master_password.txt' #path to file with password to decrypt vault file
-declare_and_export service_name 'dzible';   #for slog systemd logs
-declare_and_export dzible_github_url 'https://github.com/Borodin-Atamanov/dzible.git';
+declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
+declare_and_export service_name 'dzintara';   #for slog systemd logs
+declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzintara.git';
 
-declare_and_export root_autorun_service_file '/etc/systemd/system/dzible.service'; #dzible autorun service, what run on system boot
-declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzible-script after system install
+declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.service'; #dzintara autorun service, what run on system boot
+declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install
 declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
-declare_and_export telemetry_queue_dir '/var/spool/dzible_telemetry_queue/'  #directory, what used to save and send telemetry data
-declare_and_export telemetry_service_file '/etc/systemd/system/dzible_telemetry.service'  #dzible telemetry service, what run on system boot
-declare_and_export telemetry_script_file "${install_dir}autorun/dzible_telemetry.sh"; #will run in every boot with root rights
+declare_and_export telemetry_queue_dir '/var/spool/dzintara_telemetry_queue/'  #directory, what used to save and send telemetry data
+declare_and_export telemetry_service_file '/etc/systemd/system/dzintara_telemetry.service'  #dzintara telemetry service, what run on system boot
+declare_and_export telemetry_script_file "${install_dir}autorun/dzintara_telemetry.sh"; #will run in every boot with root rights
 declare_and_export telemetry_original_vault_file "${install_dir}/vault/example_telemetry_tokens.crypt"; #original place for telemetry vault
 declare_and_export telemetry_vault_file "/etc/telemetry.dzi"; #contains encrypted token to send telegram messages
 declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
-declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzible_network_telemetry.service"; #will run in every network connect
-declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/dzible_network_telemetry.timer"; #will run sometimes by timer
+declare_and_export telemetry_on_network_connect_service_file "/etc/systemd/system/dzintara_network_telemetry.service"; #will run in every network connect
+declare_and_export telemetry_on_network_connect_timer_file "/etc/systemd/system/dzintara_network_telemetry.timer"; #will run sometimes by timer
 declare_and_export xkeyboard_autorun_script_file "${install_dir}autorun/xkeyboard_autorun.sh"; #will run in as systemd.service and sometimes by timer
-declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzible_xkeyboard_autorun.service"; #for autorun with systemd
-#declare_and_export xkeyboard_autorun_timer_file "/etc/systemd/system/dzible_xkeyboard_autorun.timer"; #will run sometimes by timer
+declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzintara_xkeyboard_autorun.service"; #for autorun with systemd
+#declare_and_export xkeyboard_autorun_timer_file "/etc/systemd/system/dzintara_xkeyboard_autorun.timer"; #will run sometimes by timer
 declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
 declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
-declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzible_pipes_root_autorun.service"  #service will run command from the pipe as root
-declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzible_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
+declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzintara_pipes_root_autorun.service"  #service will run command from the pipe as root
+declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
 declare_and_export timeout_0 0.7 #timeout for fastest operations
@@ -823,13 +823,13 @@ install_system openssl
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
-  work_dir="${TMPDIR:-/tmp}/dzible_work_dir-$(date "+%F-%H-%M-%S")";
+  work_dir="${TMPDIR:-/tmp}/dzintara_work_dir-$(date "+%F-%H-%M-%S")";
   slog "<7>$(show_var work_dir)";
   mkdir -pv "${work_dir}";
   echo "clone scripts from github";
   slog "<7>$(show_var work_dir)";
-  slog "<7>$(show_var dzible_github_url)";
-  git clone --verbose --progress --depth 1 "${dzible_github_url}" "${work_dir}";
+  slog "<7>$(show_var dzintara_github_url)";
+  git clone --verbose --progress --depth 1 "${dzintara_github_url}" "${work_dir}";
   # try to copy ${master_password_file} from current directory to work_dir
   cp --verbose --update "${master_password_file}" "${work_dir}/"
   cd "${work_dir}";
@@ -907,6 +907,7 @@ run_task install_autorun_script
 run_task install_telemetry
 run_task install_gui_apps
 run_task install_xbindkeys
+run_task install_nginx_root
 run_task show_script_subversion
 exit 0;
 run_task install_tor
@@ -919,7 +920,6 @@ run_task root_password_for_sudoers
 run_task sshd_config
 run_task ssh_config
 run_task install_yggdrasil
-run_task install_nginx_root
 run_task install_x11vnc
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
@@ -936,4 +936,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='esota-47b3d16-2022-09-11-13-30-27'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ezuza-b83d037-2022-09-11-13-31-55'; echo "${script_subversion}=script_subversion"; 

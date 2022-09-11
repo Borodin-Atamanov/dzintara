@@ -4,16 +4,16 @@
 #License: MIT
 #script autorun x11vnc
 
-declare -g -x work_dir="/home/i/bin/dzible/";
+declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
-#declare_and_export work_dir "/home/i/bin/dzible/"
+#declare_and_export work_dir "/home/i/bin/dzintara/"
 
 #load variables
-#source "/home/i/bin/dzible/autorun/load_variables.sh"
+#source "/home/i/bin/dzintara/autorun/load_variables.sh"
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-declare -x -g service_name='dzible.xkeyboard';   #for slog systemd logs
+declare -x -g service_name='dzintara.xkeyboard';   #for slog systemd logs
 
 #start plus root script
 whoami="$(whoami)"
@@ -28,9 +28,9 @@ bash="$( get_command_fullpath bash )";
 
 #echo -e "remove Lock = Caps_Lock\nremove Control = Control_L\nkeysym Control_L = Caps_Lock\nkeysym Caps_Lock = Control_L\nadd Lock = Caps_Lock\nadd Control = Control_L\n" | xmodmap -v -
 #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk"
-nohup $bash -c "{ while : ; do source /home/i/bin/dzible/autorun/load_variables.sh nocd; timeout --kill-after=$timeout_2 $timeout_4 $gxkb; sleep $timeout_1; done; } &"
+nohup $bash -c "{ while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after=$timeout_2 $timeout_4 $gxkb; sleep $timeout_1; done; } &"
 sleep $timeout_0
-nohup $bash -c "{ while : ; do source /home/i/bin/dzible/autorun/load_variables.sh nocd; timeout --kill-after=$timeout_2 $timeout_4 $xneur; sleep $timeout_1; done; } &"
+nohup $bash -c "{ while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after=$timeout_2 $timeout_4 $xneur; sleep $timeout_1; done; } &"
 
 #while : ; do :
 for ((i=7;i>=0;i--)); do
