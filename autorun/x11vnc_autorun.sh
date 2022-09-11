@@ -26,7 +26,7 @@ declare_and_export fullpath_nohup "$( get_command_fullpath nohup )";
 #HOME
 #"${preffix}_${computer}_vnc_password"
 
-#vnc_password=$( get_var "${root_vault_preffix}_vnc_password" )
+#vnc_password=$( get_var "${root_vault_preffix}vnc_password" )
 #show_var vnc_password
 #x11vnc -storepasswd "$vnc_password" /root/.vnc/passwd
 #x11vnc -storepasswd "$vnc_password" '/root/.vnc/passwd'

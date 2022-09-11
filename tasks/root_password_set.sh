@@ -3,7 +3,7 @@
 #License: MIT
 source "${work_dir}tasks/1.sh"
 
-var_name="${root_vault_preffix}_root_password";
+var_name="${root_vault_preffix}root_password";
 show_var "$var_name"
 
 
