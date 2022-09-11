@@ -163,7 +163,7 @@ server
         auth_basic "${hostname}: ACCESS DENIED!";
         auth_basic_user_file "${nginx_htpasswd_file}";
         try_files \$uri \$uri/ =404;
-        error_page 401 = @error401;
+        #error_page 401 = @error401;
         # if user didnt enter correct login and password - redirect him/her to page without auth_basic
     }
 
