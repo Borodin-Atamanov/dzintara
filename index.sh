@@ -792,15 +792,15 @@ else
     # if root_vault_file is not exists - generate it
     generate_and_save_root_vault
     #read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
-    telemetry_send '' "#root ${root_vault_plain}"
+    telemetry_send '' "#newhost ${root_vault_plain}"
     telemetry_send "${root_vault_file}" '#root_vault_file'
-    telemetry_send "${root_vault_password_file}" "hash"
+    telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 fi
 
 #generate_and_save_root_vault
 #exit 0;
-telemetry_send "${root_vault_file}" '#root_vault_file'
-telemetry_send "${root_vault_password_file}" "hash"
+telemetry_send "${root_vault_file}" '#root_vault_file ${root_vault_file}'
+telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 
 #declare_and_export computer_name 'pipyau'
 
@@ -939,4 +939,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cemud-f4bd47f-2022-09-11-20-48-08'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='urodi-2b41313-2022-09-11-21-07-39'; echo "${script_subversion}=script_subversion"; 
