@@ -29,6 +29,9 @@ ymdhms=$(ymdhms)
 hostname="$(hostname)"
 load_var_from_file "/etc/hostname" hostname2
 hostname_ip="$(hostname --all-ip-addresses | tr ' ' '\n')"
+hostnamectl="$(hostnamectl | grep -v "Hardware Vendor" | grep -v "Hardware Model" | grep -v "Machine ID" | grep -v "Boot ID" | grep -v "Deployment" | grep -v "Icon name" | tr '\n' ' ' )";
+hostnamectl=$(echo -n $hostnamectl);
+
 
 os_codename=$( trim $(lsb_release --short --codename ))
 #lsb_release --short --id --codename --description --release = Ubuntu Ubuntu 22.04.1 LTS  22.04 jammy | Debian Debian GNU/Linux 11 (bullseye) 11 bullseye
@@ -37,7 +40,8 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
-hostnamectl_status="$(hostnamectl status)"
+
+
 
 netstat="$(timeout --kill-after=$timeout_1 $timeout_2 netstat -tunlp)"
 
@@ -86,7 +90,7 @@ ${ipfy4}
 ${architecture}
 ${os_codename}
 
-${hostnamectl_status}
+${hostnamectl}
 
 netstat
 ${netstat}
