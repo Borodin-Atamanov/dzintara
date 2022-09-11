@@ -9,7 +9,7 @@
 #3. run tasks
 
 #wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
-#wget -qO - clck.ru/uRPBG | sudo bash
+#wget -qO - clck.ru/z34AD | sudo bash
 
 function run_task ()
 {
@@ -943,4 +943,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cusif-c82e1d3-2022-09-11-15-43-39'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ifafe-162eafe-2022-09-11-15-47-48'; echo "${script_subversion}=script_subversion"; 
