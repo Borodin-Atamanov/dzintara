@@ -269,7 +269,7 @@ _ENDOFFILE
 
   # check what passwords in file, and we can decrypt it
   load_var_from_file "${root_vault_file}" root_vault_encypted2
-  load_var_from_file "${password_file}" master_password2
+  load_var_from_file "${root_vault_password_file}" master_password2
   #echo "password_from_file length is ${#master_password}";
   #echo  $file_data;
   #encrypt data with master_password
@@ -951,4 +951,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='acexu-850fbb7-2022-09-11-19-16-45'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kezex-9fcd2b9-2022-09-11-19-26-05'; echo "${script_subversion}=script_subversion"; 
