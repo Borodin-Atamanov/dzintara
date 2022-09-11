@@ -799,10 +799,9 @@ else
 fi
 
 #generate_and_save_root_vault
-exit 0;
+#exit 0;
 
-
-declare_and_export computer_name 'pipyau'
+#declare_and_export computer_name 'pipyau'
 
 echo "$0";
 if [[ "$0" = "./index.sh" ]]; then
@@ -936,4 +935,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='podet-5635e6b-2022-09-11-14-51-06'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ucamo-c97feb3-2022-09-11-14-52-49'; echo "${script_subversion}=script_subversion"; 
