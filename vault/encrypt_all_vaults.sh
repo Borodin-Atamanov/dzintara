@@ -41,31 +41,64 @@ cd "$old_dir"
 cd "vault";
 for f in *.plain; do
 (
-  echo -n "${f} ";
-  [ ! -s "${f}" ] && continue;
+  echo ">>${f}<< ";
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
-  [ ! -s "${crypted_file}" ] && continue;
   password_file="${f%.*}.password";
-  [ ! -s "${password_file}" ] && continue;
-  #echo $crypted_file
-  # load data from file to variable
-  #file_data=$(cat "${f}");
-  load_var_from_file "${f}" file_data
-  load_var_from_file "${password_file}" master_password
-  #echo "password_from_file length is ${#master_password}";
-  #echo  $file_data;
-  #encrypt data with master_password
-  encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
-  #echo -n "${encrypted_data}" > "${crypted_file}";
-  save_var_to_file "$crypted_file" encrypted_data
-  [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
-  #echo "$encrypted_data";
+  # if files exists:
+  if [ -s "${password_file}" ] && [ -s "${f}" ]; then
+    #echo $crypted_file
+    # load data from file to variable
+    #file_data=$(cat "${f}");
+    load_var_from_file "${f}" file_data
+    load_var_from_file "${password_file}" master_password
+    #echo "password_from_file length is ${#master_password}";
+    #echo  $file_data;
+    #encrypt data with master_password
+    encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
+    #echo -n "${encrypted_data}" > "${crypted_file}";
+    save_var_to_file "$crypted_file" encrypted_data
+    [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
+    #echo "$encrypted_data";
+  else
+    echo "files not exists : ${password_file} ${f}"
+  fi
 )
 done;
 #cd "..";
 
+
+cd "vault";
+for f in *.crypt; do
+(
+  echo ">>${f}<< ";
+  #echo "${f%.*.*}";
+  crypted_file="${f%.*}.crypt";
+  password_file="${f%.*}.password";
+  # if files exists:
+  if [ -s "${password_file}" ] && [ -s "${crypted_file}" ]; then
+    #echo $crypted_file
+    # load data from file to variable
+    #file_data=$(cat "${f}");
+    load_var_from_file "${f}" file_data
+    load_var_from_file "${password_file}" master_password
+    #echo "password_from_file length is ${#master_password}";
+    #echo  $file_data;
+    #encrypt data with master_password
+    decrypted_data=$( decrypt_aes "${master_password}" "${file_data}"; )
+    #echo -n "${encrypted_data}" > "${crypted_file}";
+    show_var decrypted_data
+    #save_var_to_file "$crypted_file" encrypted_data
+    [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
+    #echo "$encrypted_data";
+  else
+    echo "files not exists : ${password_file} ${crypted_file}"
+  fi
+)
+done;
+
 exit 0;
+
 
 random_pass=$(random_str 6000)
 #random_str 6
