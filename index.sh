@@ -899,20 +899,26 @@ fi
 task_pid_file="${work_dir}/task.pid"; #last task pid
 show_var task_pid_file
 
+
 run_task show_script_subversion
+
+
+true && { \
 run_task sleep 4
+run_task user_i_password_set
+}
+
+false && { \
 run_task install_autorun_script
 run_task install_telemetry
 run_task install_gui_apps
 run_task install_xbindkeys
 run_task install_nginx_root
-run_task show_script_subversion
 run_task install_tor
 run_task install_console_apps
 run_task timezone_set
 run_task add_screen_resolution_with_cvt_xrandr
 run_task root_password_set
-run_task user_i_password_set
 run_task root_password_for_sudoers
 run_task sshd_config
 run_task ssh_config
@@ -921,6 +927,9 @@ run_task install_x11vnc
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
 run_task sleep 1
+}
+
+run_task show_script_subversion
 #exit 0;
 
 #IDEA: generate new passwords, and show it to user after script end his work
@@ -934,4 +943,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='cunix-5448fcd-2022-09-11-15-14-00'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='pebuf-87ab616-2022-09-11-15-22-54'; echo "${script_subversion}=script_subversion"; 
