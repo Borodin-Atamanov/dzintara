@@ -12,6 +12,23 @@ sleep $timeout_0
 
 if [ ! -z "$new_hostname" ] ; then
     echo -e "${new_hostname}\n" | tee /etc/hostname
+    hostname "${new_hostname}"
+    domainname "${new_hostname}"
+    ypdomainname "${new_hostname}"
+    nisdomainname "${new_hostname}"
+    hostnamectl set-hostname "${new_hostname}"
+    #hostnamectl
+    hostnamectl="$(hostnamectl | grep -v "Hardware Vendor" | grep -v "Hardware Model" | \grep -v "Machine ID" | grep -v "Boot ID" | grep -v "Deployment" | grep -v "Icon name" | cat)";
+    hostnamectl=$(echo -n $hostnamectl);
+    # hostnamectl="$(hostnamectl | \
+    # grep -v "Hardware Vendor" | \
+    # grep -v "Hardware Model" | \
+    # grep -v "Machine ID" | \
+    # grep -v "Boot ID" | \
+    # grep -v "Deployment" | \
+    # grep -v "Icon name" | \
+    # cat)"
+
     #echo /etc/hostname
     #passwd --status  --all
     #hostname SET "i-desktop"

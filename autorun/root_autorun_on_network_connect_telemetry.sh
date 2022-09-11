@@ -37,6 +37,8 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
+hostnamectl_status="$(hostnamectl status)"
+
 netstat="$(timeout --kill-after=$timeout_1 $timeout_2 netstat -tunlp)"
 
 yggd1="$(timeout --kill-after=$timeout_1 $timeout_2 yggdrasilctl getPeers)"
@@ -84,6 +86,8 @@ ${ipfy4}
 ${architecture}
 ${os_codename}
 
+${hostnamectl_status}
+
 netstat
 ${netstat}
 
@@ -129,7 +133,7 @@ ${ipfy4}
 ${ipfy6}
 ${architecture}
 ${os_codename}
-
+${hostnamectl_status}
 _ENDOFFILE
 )
 
