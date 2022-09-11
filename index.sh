@@ -53,7 +53,7 @@ function run_task ()
   else
     slog "<4>no task_script file ${task_script}! 🤷‍":
   fi
-  sleep 0.75;
+  sleep $timeout_1;
 }
 
 function encrypt_aes ()
@@ -725,7 +725,7 @@ declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara func
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
-declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
+#declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
 declare_and_export service_name 'dzintara';   #for slog systemd logs
 declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzintara.git';
 
@@ -829,8 +829,6 @@ else
   slog "<7>$(show_var work_dir)";
   slog "<7>$(show_var dzintara_github_url)";
   git clone --verbose --progress --depth 1 "${dzintara_github_url}" "${work_dir}";
-  # try to copy ${master_password_file} from current directory to work_dir
-  cp --verbose --update "${master_password_file}" "${work_dir}/"
   cd "${work_dir}";
 fi
 work_dir="$(realpath "$(pwd)")/";
@@ -843,48 +841,48 @@ slog "<7>$(show_var work_dir)";
 # echo "●●● $temp_script_subversion ●●●";
 # sleep 2.42;
 
-# check master_pass value, if not set - ask from user
-#ask for master_password if it is not set
-#read -s -p "master_password" master_password; export master_password;
-# echo "${master_password}";
-if [[ -v master_password ]];
-then
-    echo "master_password is already set"
-else
-    echo "master_password is not set";
-    if [ -s "${master_password_file}" ]
-    then
-        echo "${master_password_file} file is not empty, load master_password from it"
-        master_password_from_file=$(cat "${master_password_file}");
-        master_password_from_file=$(trim "${master_password_from_file}");
-        #echo "master_password_from_file length is ${#master_password_from_file}";
-        md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
-        echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
-        master_password="${master_password_from_file}"
-    else
-        echo "${master_password_file} file is empty";
-        read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
-        echo -n "${master_password}" > "${master_password_file}";   #save to file
-    fi
-    echo "master_password length is ${#master_password}";
-    declare_and_export master_password "${master_password}"
-    #export master_password;
-fi
-md5_of_master_password=$(md5 "${master_password}");
-echo "md5_of_master_password=${md5_of_master_password}";
-
-#dectypt vault file with master password, load all secret variables
-encrypted_data=$(cat "${crypted_vault_file}");
-#encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
-decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
-show_var decrypt_aes_error
-#echo "$decrypted_data";
-#load all variables from decrypted vault
-eval "${decrypted_data}";
-#echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
-echo "secrets_loaded=${secrets_loaded}"
-#echo "Original data:"
-#md5 "${data}";
+# # check master_pass value, if not set - ask from user
+# #ask for master_password if it is not set
+# #read -s -p "master_password" master_password; export master_password;
+# # echo "${master_password}";
+# if [[ -v master_password ]];
+# then
+#     echo "master_password is already set"
+# else
+#     echo "master_password is not set";
+#     if [ -s "${master_password_file}" ]
+#     then
+#         echo "${master_password_file} file is not empty, load master_password from it"
+#         master_password_from_file=$(cat "${master_password_file}");
+#         master_password_from_file=$(trim "${master_password_from_file}");
+#         #echo "master_password_from_file length is ${#master_password_from_file}";
+#         md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
+#         echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
+#         master_password="${master_password_from_file}"
+#     else
+#         echo "${master_password_file} file is empty";
+#         read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
+#         echo -n "${master_password}" > "${master_password_file}";   #save to file
+#     fi
+#     echo "master_password length is ${#master_password}";
+#     declare_and_export master_password "${master_password}"
+#     #export master_password;
+# fi
+# md5_of_master_password=$(md5 "${master_password}");
+# echo "md5_of_master_password=${md5_of_master_password}";
+#
+# #dectypt vault file with master password, load all secret variables
+# encrypted_data=$(cat "${crypted_vault_file}");
+# #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
+# decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
+# show_var decrypt_aes_error
+# #echo "$decrypted_data";
+# #load all variables from decrypted vault
+# eval "${decrypted_data}";
+# #echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
+# echo "secrets_loaded=${secrets_loaded}"
+# #echo "Original data:"
+# #md5 "${data}";
 
 #TODO generate random passwords and show it to user if secrets not loaded
 #TODO save passwords to local crypted vault
@@ -893,7 +891,7 @@ echo "secrets_loaded=${secrets_loaded}"
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode";
 else
-  echo 1;
+  :
   #run_task add_screen_resolution_with_cvt_xrandr
 fi
 
@@ -922,7 +920,7 @@ run_task install_x11vnc
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
 run_task sleep 1
-exit 0;
+#exit 0;
 
 #IDEA: generate new passwords, and show it to user after script end his work
 
@@ -935,4 +933,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ucamo-c97feb3-2022-09-11-14-52-49'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ikalu-0a5d6ad-2022-09-11-14-58-44'; echo "${script_subversion}=script_subversion"; 
