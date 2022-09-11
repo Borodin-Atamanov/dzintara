@@ -270,6 +270,7 @@ _ENDOFFILE
   #TODO generate text message to human with passwords in last task
   #declare -g -x root_vault_plain_human="${root_vault_plain}"
   eval "${root_vault_plain}";
+  sleep $timeout_1
 }
 export -f generate_and_save_root_vault
 
@@ -933,4 +934,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ikalu-0a5d6ad-2022-09-11-14-58-44'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='cunix-5448fcd-2022-09-11-15-14-00'; echo "${script_subversion}=script_subversion"; 
