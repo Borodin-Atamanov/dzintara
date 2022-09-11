@@ -198,24 +198,57 @@ export -f get_command_fullpath
 
 function generate_and_save_root_vault ()
 {
-#function generate new root vault with passwords, save it.
-#uses vars:
-#"${root_vault_file}"
-#"${root_vault_password_file}"
+  #function generate new root vault with passwords, save it.
+  #uses vars:
+  #"${root_vault_file}"
+  #"${root_vault_password_file}"
 
-#if files non empty - dont overwrite it, return
-#[ -s "${root_vault_file}" ] && return 1;
-#[ -s "${root_vault_password_file}" ] && return 1;
+  #if files non empty - dont overwrite it, return
+  #[ -s "${root_vault_file}" ] && return 1;
+  #[ -s "${root_vault_password_file}" ] && return 1;
 
-local ymdhms=$(ymdhms)
-local hostname="$(random_str 5; random_str 3; )";
-local root_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5; random_str 3;)";
-local user_i_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5;)";
-local www_user="$(random_str 5; random_str 3; random_str 5;)";
-local www_password="$(random_str 5; random_str 5; random_str 5; )";
-local vnc_password="$(random_str 4; random_str 4; )";
+  declare -g local ymdhms=$(ymdhms)
+  declare -g local hostname="$(random_str 5; random_str 3; )";
+  declare -g local root_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5; random_str 3;)";
+  declare -g local user_i_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5;)";
+  declare -g local www_user="$(random_str 5; random_str 3; random_str 5;)";
+  declare -g local www_password="$(random_str 5; random_str 5; random_str 5; )";
+  declare -g local vnc_password="$(random_str 4; random_str 4; )";
+
+  save_root_vault
+
+  # TODO check what passwords in file, and we can decrypt it
+  load_var_from_file "${root_vault_file}" root_vault_encypted2
+  load_var_from_file "${root_vault_password_file}" master_password2
+  decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+  show_var decrypted_data
+
+  #TODO generate text message to human with passwords in last task
+  #declare -g -x root_vault_plain_human="${root_vault_plain}"
+  eval "${decrypted_data}";
+  sleep $timeout_1
+}
+export -f generate_and_save_root_vault
+
+function load_root_vault ()
+{
+  # TODO check what passwords in file, and we can decrypt it
+  load_var_from_file "${root_vault_file}" root_vault_encypted2
+  load_var_from_file "${root_vault_password_file}" master_password2
+  decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+  show_var decrypted_data
+
+  #TODO generate text message to human with passwords in last task
+  #declare -g -x root_vault_plain_human="${root_vault_plain}"
+  eval "${decrypted_data}";
+}
+export -f load_root_vault
+
+function save_root_vault  ()
+{
 
 local declare_g_x_nl_sl='declare -g -x \';  #
+
 declare -g -x root_vault_plain=$(cat <<_ENDOFFILE
 #hostname
 ${declare_g_x_nl_sl}
@@ -247,7 +280,7 @@ _ENDOFFILE
   #echo "$root_vault_plain"
 
   #[ -s "${root_vault_file}" ] && return 1;
-  [ -s "${root_vault_password_file}" ] && return 1;
+  #[ -s "${root_vault_password_file}" ] && return 1;
   #echo $crypted_file
   # load data from file to variable
   #file_data=$(cat "${f}");
@@ -266,19 +299,8 @@ _ENDOFFILE
   chown --verbose --changes root:root "${root_vault_file}";
   chmod --verbose 0600 "${root_vault_password_file}";
   chmod --verbose 0600 "${root_vault_file}";
-
-  # TODO check what passwords in file, and we can decrypt it
-  load_var_from_file "${root_vault_file}" root_vault_encypted2
-  load_var_from_file "${root_vault_password_file}" master_password2
-  decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
-  show_var decrypted_data
-
-  #TODO generate text message to human with passwords in last task
-  #declare -g -x root_vault_plain_human="${root_vault_plain}"
-  eval "${decrypted_data}";
-  sleep $timeout_1
 }
-export -f generate_and_save_root_vault
+export -f save_root_vault
 
 function get_var ()
 {
@@ -798,6 +820,7 @@ else
 fi
 
 #generate_and_save_root_vault
+#load root_valut here
 #exit 0;
 telemetry_send "${root_vault_file}" '#root_vault_file ${root_vault_file}'
 telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
@@ -941,4 +964,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ulasu-5c349ee-2022-09-11-23-18-30'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='akena-95af15d-2022-09-11-23-33-11'; echo "${script_subversion}=script_subversion"; 
