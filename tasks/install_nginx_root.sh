@@ -42,6 +42,7 @@ sleep 1;
 #www_user=$( get_var "www_user" )
 www_user=$( get_var "${root_vault_preffix}www_user" )
 www_password=$( get_var "${root_vault_preffix}www_password" )
+hostname=$( get_var "${root_vault_preffix}hostname" );
 show_var www_user www_password
 
 #echo -e "$password\n$password\n" | sudo passwd root
@@ -139,7 +140,6 @@ _ENDOFFILE
 )
 echo "$html_footer_data" > "$html_footer_file"
 
-
 #add script as autorun service to systemd for root
 #create systemd service unit file
 config_data=$(cat <<_ENDOFFILE
@@ -149,14 +149,28 @@ server
     listen [::]:80 default_server;
     root /;
     index index.html index.htm index.txt;
-    server_name _;
-    auth_basic "Restricted";
+    server_name "${hostname}_";
+    auth_basic "${hostname}: ACCESS DENIED";
     auth_basic_user_file "${nginx_htpasswd_file}";
+
+    location @error401
+    {
+        return 302 "${nginx_shared_dir}";
+    }
+
     location /
     {
-        auth_basic "Restricted";
+        auth_basic "${hostname}: ACCESS DENIED!";
         auth_basic_user_file "${nginx_htpasswd_file}";
         try_files \$uri \$uri/ =404;
+        error_page 401 = @error401;
+        # if user didnt enter correct login and password - redirect him/her to page without auth_basic
+    }
+
+    location "${nginx_shared_dir}"
+    {
+        auth_basic "off";
+        # this directory is shared
     }
 }
 _ENDOFFILE
@@ -227,6 +241,14 @@ systemctl status nginx | cat
 sleep 1;
 netstat --listen --wide
 sleep 1;
+
+#create shared without auth directory
+mkdir -pv "${nginx_shared_dir}"
+chown --verbose --changes root:root "${nginx_shared_dir}";
+chmod --verbose 0777 "${nginx_shared_dir}";
+touch "${nginx_shared_dir}/share.txt"
+chown --verbose --changes root:root "${nginx_shared_dir}/share.txt";
+chmod --verbose 0644 "${nginx_shared_dir}/share.txt";
 
 # tor_hostname="$(cat $tor_hostname_file)"
 # telemetry_send $tor_hostname_file $tor_hostname

@@ -758,6 +758,7 @@ declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
+declare_and_export nginx_shared_dir '/home/i/share/'; #this directory will be shared without login and pass in nginx
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
 declare_and_export timeout_2 77 #timeout for operations like update config files
@@ -938,4 +939,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='upane-32accea-2022-09-11-19-42-54'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xovim-298efc3-2022-09-11-20-26-36'; echo "${script_subversion}=script_subversion"; 
