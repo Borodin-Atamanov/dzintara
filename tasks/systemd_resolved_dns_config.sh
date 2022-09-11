@@ -110,6 +110,10 @@ sleep 1.1;
 netstat -tulpn
 sleep 1.1;
 
+#computer will become to router
+add_line_to_file '/etc/sysctl.conf' 'net.ipv4.ip_forward=1'
+add_line_to_file '/etc/sysctl.conf' 'net.ipv6.conf.all.forwarding=1'
+
 #systemctl disable --now avahi-daemon.service
 #systemctl disable --now avahi-daemon.socket
 exit 0;
