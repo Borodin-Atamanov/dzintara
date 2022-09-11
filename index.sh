@@ -267,6 +267,16 @@ _ENDOFFILE
   chmod --verbose 0600 "${root_vault_password_file}";
   chmod --verbose 0600 "${root_vault_file}";
 
+  # check what passwords in file, and we can decrypt it
+  load_var_from_file "${root_vault_file}" root_vault_encypted2
+  load_var_from_file "${password_file}" master_password2
+  #echo "password_from_file length is ${#master_password}";
+  #echo  $file_data;
+  #encrypt data with master_password
+  decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+
+  show_var decrypted_data
+
   #TODO generate text message to human with passwords in last task
   #declare -g -x root_vault_plain_human="${root_vault_plain}"
   eval "${root_vault_plain}";
@@ -941,4 +951,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='abedi-971c7d1-2022-09-11-18-28-01'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='acexu-850fbb7-2022-09-11-19-16-45'; echo "${script_subversion}=script_subversion"; 
