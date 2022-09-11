@@ -3,5 +3,6 @@
 #License: MIT
 source "${work_dir}tasks/1.sh"
 
-export
+#export
+( set -o posix ; set )
 sleep $timeout_1
