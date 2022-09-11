@@ -171,7 +171,7 @@ systemctl enable dzintara_pipes_root_autorun | cat
 systemctl status dzintara_pipes_root_autorun | cat
 sleep $timeout_0
 
-chown --verbose --changes --recursive  i:i "${install_dir}";
+chown --verbose --changes --recursive  root:root "${install_dir}";
 find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
 find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 #for dev
@@ -180,6 +180,8 @@ find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
 #set different rights to files. Some files must be secret for regular user
 find "${install_dir}" -type f -not -name "*.sh" -exec chmod --verbose 0644 {} \;
 find "${install_dir}" -type f -name "*.sh" -exec chmod --verbose 0755 {} \;
+
+find "${install_dir}autorun" -type f -name "*user*.sh" -exec chown --verbose --changes --recursive  i:i {} \;
 
 chmod --verbose 0600 "${root_vault_file}";
 chmod --verbose 0600 "${root_vault_password_file}";
