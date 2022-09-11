@@ -766,7 +766,7 @@ declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time fo
 set +x
 
 if [[ "$1" != "fun" ]]; then
-set -x
+#set -x
 
 # load variables from root_vault_file
 if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
@@ -901,9 +901,6 @@ fi
 task_pid_file="${work_dir}/task.pid"; #last task pid
 show_var task_pid_file
 
-
-run_task show_script_subversion
-
 true && { \
 run_task hostname_set
 }
@@ -944,4 +941,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ipusu-baba6bf-2022-09-11-16-16-03'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='odale-7054d8c-2022-09-11-16-20-08'; echo "${script_subversion}=script_subversion"; 
