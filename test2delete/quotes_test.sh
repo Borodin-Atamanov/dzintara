@@ -18,6 +18,17 @@ vari=\
 
 ';
 
+
+echo -e "\n\n";
+#set -x
+search_and_replace_hex vari "0a" "34"
+set +x
+
+echo "after replace: ";
+echo "$vari"
+
+exit 0
+
 #search_and_replace vari "'" '"'"'
 echo "Original: ";
 echo "$vari"
@@ -27,3 +38,4 @@ echo "$vari"
 hex_2_bin vari
 echo "hex_2_bin : ";
 echo "$vari"
+

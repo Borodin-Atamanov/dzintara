@@ -762,25 +762,74 @@ export -f search_and_replace
 function search_and_replace_hex ()
 {
   #function search and replace in variable
-  # $1 - haystack - string with variable name. Variable contains is text, not HEX! This variable will changed in case of successful search-and-replace
-  local haystack_name="$1";
-  local haystack="${!haystack_name}";
+  # $1 - haystack - string with variable name. $1 contains variable name, not data! This variable will changed in case of successful search-and-replace
+  haystack_name="$1";
+  haystack="${!haystack_name}";
   # $2 - needle - string with hex like this "20 32 FD 16 11"
-  local needle_name="$2";
-  local needle="${!needle_name}";
+  needle="${2}";
   # $3 - slide. string with hex like this "20 32 FD 16 11"
-  local slide_name="$3";
-  local slide="${!slide_name}";
-  local haystack_hex="${haystack}"
+  slide="${3}";
+  #r1v trim "$needle"
+  echo "01needle=$needle"
+  needle="$(trim "$needle")";
+  #validate hex strings
+  needle="$(echo -n "$needle" | tr '\n' ' ' | sed 's/   / /g' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+
+  #hex_2_bin needle
+  #hex_2_bin slide
+  #bin_2_hex needle
+  #bin_2_hex slide
+  # convert to hex input data
+  haystack_hex="${haystack}";
   bin_2_hex haystack_hex
-  #local haystack_hex
+  # replace hex needle to hex slide in hex haystack
+  show_var needle slide
+  show_var 'before HEX:' haystack_hex
   haystack_hex="${haystack_hex//$needle/$slide}" #
+  #haystack_hex="${haystack_hex//0a/$slide}" #
+  show_var 'after HEX: ' haystack_hex
+  hex_2_bin haystack_hex
   #command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
-  declare -g ${input}="$output";
-  #eval "$command_eval";
-  # TODO remove eval, make output="${!input}". Is it possible? --- declare -g ${input}="$output";
+  declare -g ${haystack_name}="$haystack_hex";
 }
 export -f search_and_replace_hex
+
+function r1v ()
+{
+  #set all command stdout to variable with name from $1
+  #command is in other arguments
+  #                         +-------+-------+-----------+
+  #                 VAR is: | unset | empty | non-empty |
+  # +-----------------------+-------+-------+-----------+
+  # | [ -z "${VAR}" ]       | true  | true  | false     |
+  # | [ -z "${VAR+set}" ]   | true  | false | false     |
+  # | [ -z "${VAR-unset}" ] | false | true  | false     |
+  # | [ -n "${VAR}" ]       | false | false | true      |
+  # | [ -n "${VAR+set}" ]   | false | true  | true      |
+  # | [ -n "${VAR-unset}" ] | true  | false | true      |
+  # +-----------------------+-------+-------+-----------+
+  local var_name="$1"
+  var_name="${var_name}";
+  [ -z "$var_name" ] && return -1 #variable is empty or unset
+  shift 1;
+  echo "$@"
+  local run2var="$( $@ )"
+  :
+}
+export -f r2v
+
+function hex_2_valid ()
+{
+  #valid hex string to format like this "0d 0a 33 25 ff 1d"
+  local input="$1";
+  local output="${!input}"; #get value from variable name
+  #TODO change IFS or something to stop BASH from eating "0x0D" at the end off any strings
+  output="$(echo -n "$output" | od -t x1 -An | tr '\n' ' ' | sed 's/  \+/ /g' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+  #output="$(echo -n "$output" | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+  #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
+  declare -g ${input}="$output";
+}
+export -f bin_2_hex
 
 function bin_2_hex ()
 {
@@ -788,7 +837,9 @@ function bin_2_hex ()
   local input="$1";
   local output="${!input}"; #get value from variable name
   #show_var output
-  output="$(echo -n "$output" | od -t x1 -An | tr '\n' ' ' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+  #TODO change IFS or something to stop BASH from eating "0x0D" at the end off any strings
+  output="$(echo -n "$output" | od -t x1 -An )"
+  hex_2_valid output
   #output="$(echo -n "$output" | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
   #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
   declare -g ${input}="$output";
@@ -801,6 +852,7 @@ function hex_2_bin ()
   local input="$1";
   local output="${!input}"; #get value from variable name
   #show_var output
+  hex_2_valid output
   output="$(echo -n "$output" | cat | xxd -r -p )"
   #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
   declare -g ${input}="$output";
@@ -1029,4 +1081,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='zidur-daef4d4-2022-09-13-00-32-01'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ubevo-18a5808-2022-09-13-02-15-34'; echo "${script_subversion}=script_subversion"; 
