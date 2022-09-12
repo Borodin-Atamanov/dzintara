@@ -18,5 +18,12 @@ vari=\
 
 ';
 
+#search_and_replace vari "'" '"'"'
+echo "Original: ";
 echo "$vari"
-
+bin_2_hex vari
+echo "bin_2_hex : ";
+echo "$vari"
+hex_2_bin vari
+echo "hex_2_bin : ";
+echo "$vari"

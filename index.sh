@@ -756,16 +756,55 @@ function search_and_replace ()
   command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
   eval "$command_eval";
 }
-export -f add_line_to_file
+export -f search_and_replace
+
+
+function search_and_replace_hex ()
+{
+  #function search and replace in variable
+  # $1 - haystack - string with variable name. Variable contains is text, not HEX! This variable will changed in case of successful search-and-replace
+  local haystack_name="$1";
+  local haystack="${!haystack_name}";
+  # $2 - needle - string with hex like this "20 32 FD 16 11"
+  local needle_name="$2";
+  local needle="${!needle_name}";
+  # $3 - slide. string with hex like this "20 32 FD 16 11"
+  local slide_name="$3";
+  local slide="${!slide_name}";
+  local haystack_hex="${haystack}"
+  bin_2_hex haystack_hex
+  #local haystack_hex
+  haystack_hex="${haystack_hex//$needle/$slide}" #
+  #command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
+  declare -g ${input}="$output";
+  #eval "$command_eval";
+  # TODO remove eval, make output="${!input}". Is it possible? --- declare -g ${input}="$output";
+}
+export -f search_and_replace_hex
 
 function bin_2_hex ()
 {
-  od -t x1 -An | tr '\n' ' '
+  #change value of variable, that name is in $1 to hex format " 20 1f 9A FF 00 "
+  local input="$1";
+  local output="${!input}"; #get value from variable name
+  #show_var output
+  output="$(echo -n "$output" | od -t x1 -An | tr '\n' ' ' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+  #output="$(echo -n "$output" | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+  #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
+  declare -g ${input}="$output";
 }
 export -f bin_2_hex
 
 function hex_2_bin ()
 {
+  #change value of variable, that name is in $1 from hex format " 20 1f 9A FF 00 BA be " to binary format
+  local input="$1";
+  local output="${!input}"; #get value from variable name
+  #show_var output
+  output="$(echo -n "$output" | cat | xxd -r -p )"
+  #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
+  declare -g ${input}="$output";
+  #TODO
   #od -t x1 -An | tr '\n' ' '
   #xxd -r -p
   :
@@ -981,7 +1020,8 @@ run_task show_script_subversion
 #TODO show passwords to user
 
 else
-    echo 'functions loaded';
+    #echo 'functions loaded';
+    :
 fi; #end of fun if
 
 #find . -type f -name '*.*' -print0 | xargs -0 sed --debug -i 's/_root_password/_root_passwordword/g'
@@ -989,4 +1029,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ixubi-ef7ab4a-2022-09-12-22-09-41'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='zidur-daef4d4-2022-09-13-00-32-01'; echo "${script_subversion}=script_subversion"; 
