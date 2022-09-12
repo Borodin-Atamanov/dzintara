@@ -768,10 +768,9 @@ function hex_2_bin ()
 {
   #od -t x1 -An | tr '\n' ' '
   #xxd -r -p
+  :
 }
 export -f hex_2_bin
-
-
 
 
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
@@ -990,4 +989,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='uleli-1eda27e-2022-09-12-22-06-07'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ixubi-ef7ab4a-2022-09-12-22-09-41'; echo "${script_subversion}=script_subversion"; 
