@@ -812,7 +812,7 @@ function r1v ()
   local run2var="$( $@ )"
   :
 }
-export -f r2v
+export -f r1v
 
 function hex_2_valid ()
 {
@@ -825,7 +825,7 @@ function hex_2_valid ()
   #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
   declare -g ${input}="$output";
 }
-export -f bin_2_hex
+export -f hex_2_valid
 
 function bin_2_hex ()
 {
@@ -1076,4 +1076,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='bepip-169ca95-2022-09-13-02-40-40'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='akoci-549c3f9-2022-09-13-02-47-06'; echo "${script_subversion}=script_subversion"; 
