@@ -114,6 +114,10 @@ function telemetry_send_telegram_dir ()
     then
         #read file name to variable
         send_text=$(cat "${target_dir}/text.txt");
+        #27 -> 27 22 27 22 27
+        #' --> '"'"'
+        #escape quote in variable
+        search_and_replace_hex send_text "27" "27 22 27 22 27"
     fi;
 
     slog "<7>$(show_var send_file send_text)"

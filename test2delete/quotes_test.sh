@@ -21,10 +21,12 @@ vari=\
 
 echo -e "\n\n";
 #set -x
-search_and_replace_hex vari "0a 27" "34"
-search_and_replace_hex vari "0a" "34"
-search_and_replace_hex vari "27" ""
-search_and_replace_hex vari "20" ""
+# search_and_replace_hex vari "0a 27" "34"
+# search_and_replace_hex vari "0a" "34"
+# search_and_replace_hex vari "27" ""
+# search_and_replace_hex vari "20" ""
+search_and_replace_hex vari "27" "27 22 27 22 27"
+#27 ->
 set +x
 
 echo "after replace: ";
