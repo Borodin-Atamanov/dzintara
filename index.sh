@@ -758,6 +758,21 @@ function search_and_replace ()
 }
 export -f add_line_to_file
 
+function bin_2_hex ()
+{
+  od -t x1 -An | tr '\n' ' '
+}
+export -f bin_2_hex
+
+function hex_2_bin ()
+{
+  #od -t x1 -An | tr '\n' ' '
+  #xxd -r -p
+}
+export -f hex_2_bin
+
+
+
 
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
@@ -975,4 +990,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='xuger-ebc79ef-2022-09-12-15-09-05'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='uleli-1eda27e-2022-09-12-22-06-07'; echo "${script_subversion}=script_subversion"; 
