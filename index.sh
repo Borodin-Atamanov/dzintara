@@ -758,11 +758,13 @@ function search_and_replace ()
 }
 export -f search_and_replace
 
-
 function search_and_replace_hex ()
 {
   #function search and replace in variable
   # $1 - haystack - string with variable name. $1 contains variable name, not data! This variable will changed in case of successful search-and-replace
+  # examples:
+  # search_and_replace_hex variable_name "0a 0a" "34"
+
   haystack_name="$1";
   haystack="${!haystack_name}";
   # $2 - needle - string with hex like this "20 32 FD 16 11"
@@ -770,21 +772,15 @@ function search_and_replace_hex ()
   # $3 - slide. string with hex like this "20 32 FD 16 11"
   slide="${3}";
   #r1v trim "$needle"
-  echo "01needle=$needle"
-  needle="$(trim "$needle")";
   #validate hex strings
-  needle="$(echo -n "$needle" | tr '\n' ' ' | sed 's/   / /g' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
-
-  #hex_2_bin needle
-  #hex_2_bin slide
-  #bin_2_hex needle
-  #bin_2_hex slide
+  hex_2_valid needle
+  hex_2_valid slide
   # convert to hex input data
   haystack_hex="${haystack}";
   bin_2_hex haystack_hex
-  # replace hex needle to hex slide in hex haystack
   show_var needle slide
   show_var 'before HEX:' haystack_hex
+  # replace hex needle to hex slide in hex haystack
   haystack_hex="${haystack_hex//$needle/$slide}" #
   #haystack_hex="${haystack_hex//0a/$slide}" #
   show_var 'after HEX: ' haystack_hex
@@ -824,7 +820,7 @@ function hex_2_valid ()
   local input="$1";
   local output="${!input}"; #get value from variable name
   #TODO change IFS or something to stop BASH from eating "0x0D" at the end off any strings
-  output="$(echo -n "$output" | od -t x1 -An | tr '\n' ' ' | sed 's/  \+/ /g' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
+  output="$(echo -n "$output" | tr '\n' ' ' | sed 's/  \+/ /g' | sed 's/  / /g' | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
   #output="$(echo -n "$output" | sed 's/[^0-F] //g' | tr '[:upper:]' '[:lower:]' )"
   #command_eval='declare -g "'${input}'"; '${input}'="$output"; ';
   declare -g ${input}="$output";
@@ -859,7 +855,6 @@ function hex_2_bin ()
   #TODO
   #od -t x1 -An | tr '\n' ' '
   #xxd -r -p
-  :
 }
 export -f hex_2_bin
 
@@ -1081,4 +1076,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ubevo-18a5808-2022-09-13-02-15-34'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='oluzi-2d46a87-2022-09-13-02-27-02'; echo "${script_subversion}=script_subversion"; 
