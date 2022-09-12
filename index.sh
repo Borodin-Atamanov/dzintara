@@ -9,7 +9,7 @@
 #3. run tasks
 
 #wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
-#t
+# wget -qO - clck.ru/z34AD | sudo bash
 
 function run_task ()
 {
@@ -941,9 +941,6 @@ run_task root_password_set
 run_task user_i_password_set
 run_task install_x11vnc
 run_task install_nginx_root
-}
-
-false && { \
 
 run_task install_gui_apps
 run_task install_xbindkeys
@@ -957,6 +954,11 @@ run_task install_yggdrasil
 run_task show_script_subversion
 run_task systemd_resolved_dns_config
 run_task sleep 1
+}
+
+false && { \
+
+
 }
 
 run_task show_script_subversion
@@ -973,4 +975,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='kexux-4983db6-2022-09-12-00-51-57'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ikabo-fd4437f-2022-09-12-15-08-53'; echo "${script_subversion}=script_subversion"; 
