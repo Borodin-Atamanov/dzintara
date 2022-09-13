@@ -35,6 +35,7 @@ declare_and_export fullpath_nohup "$( get_command_fullpath nohup )";
 x11vnc_start_command="x11vnc -6 -reopen -scale 0.5 -shared -forever -loop7777 -users i -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 2 -passwdfile /root/.vnc/passwd ";
 x11vnc_start_command="x11vnc -6 -reopen -scale 0.75 -shared -forever -loop7777 -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 2 -ncache_cr -ncache 10  -rfbauth /root/.vnc/passwd ";
 x11vnc_start_command="x11vnc -6 -reopen -scale 0.75 -shared -forever -loop7777 -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 2 -ncache_cr -ncache 10  -rfbauth /root/.vnc/passwd >/dev/null ";
+x11vnc_start_command="x11vnc -6 -reopen -scale 0.75 -shared -forever -loop7777 -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 1 -rfbauth /root/.vnc/passwd >/dev/null ";
 #/root/.vnc/passwd
 #-usepw If  no  other password method was supplied on the command line, first look for ~/.vnc/passwd and if found use it with -rfbauth; next, look for ~/.vnc/passwdfile and use it with -passwdfile; otherwise, prompt the user for a password to create ~/.vnc/passwd and use it with the -rfbauth option.  If none of these succeed x11vnc exits immediately.
 #-viewpasswd string Supply a 2nd password for view-only logins.  The -passwd (full-access) password must also be supplied.
