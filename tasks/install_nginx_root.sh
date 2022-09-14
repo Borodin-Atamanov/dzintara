@@ -146,13 +146,32 @@ echo "$html_footer_data" > "$html_footer_file"
 config_data=$(cat <<_ENDOFFILE
 server
 {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    # listen 80 default_server;
+    # listen [::]:80 default_server;
+    listen 80;
+    listen [::]:80 ipv6only=on;
+    listen 443 ssl;
+    listen [::]:443 ipv6only=on ssl;
+
+    # Enable SSL
+    ssl_certificate ${nginx_self_signed_public_cert_file};
+    ssl_certificate_key ${nginx_self_signed_private_key_file};
+    ssl_session_timeout 5m;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
+    ssl_prefer_server_ciphers on;
+
     root /;
     index index.html index.htm index.txt;
     server_name "${hostname}_";
     auth_basic "${hostname}: ACCESS DENIED";
     auth_basic_user_file "${nginx_htpasswd_file}";
+
+    location "${nginx_shared_dir}"
+    {
+        auth_basic "off";
+        # this directory is shared
+    }
 
     location @error401
     {
@@ -168,12 +187,9 @@ server
         # if user didnt enter correct login and password - redirect him/her to page without auth_basic
     }
 
-    location "${nginx_shared_dir}"
-    {
-        auth_basic "off";
-        # this directory is shared
-    }
 }
+
+
 _ENDOFFILE
 )
 
@@ -230,22 +246,21 @@ echo "$config_data" > "$nginx_main_config_file";
 #/etc/nginx/sites-enabled/default
 #root /
 
-#Enable nginx  only if password and user name are not empty
-if [ ! -z "$www_user" ] &&  [ ! -z "$www_password" ] ; then
-  systemctl enable nginx | cat
-  sleep 1;
-fi;
-
 # generate self signed cert.
 #declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-selfsigned.key'; # private self-signed key for https
 #declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
 
 #openssl req -x509 -out localhost.cert -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config <( \ printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
-foo=${foo:="I must have been unset empty or null!"}
-
 #openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -config "$temp_config_file"
 openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -subj "/C=GB/ST=London/L=London/O=Dzintara/OU=Dzintara/CN=Dzintara.com"
+
+
+#Enable nginx  only if password and user name are not empty
+if [ ! -z "$www_user" ] &&  [ ! -z "$www_password" ] ; then
+  systemctl enable nginx | cat
+  sleep 1;
+fi;
 
 systemctl restart nginx | cat
 sleep 1;
