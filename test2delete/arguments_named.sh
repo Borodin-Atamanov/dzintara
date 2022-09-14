@@ -27,7 +27,7 @@ parse_key_value "$@"
 #parse_key_value "$@"
 
 if [[ "$tasks" != "" ]]; then
-   echo 'Run custom tasks!'
+   echo 'Run custom tasks'
    for this_task in $tasks;
    do
       show_var this_task

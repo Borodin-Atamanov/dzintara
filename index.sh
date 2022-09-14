@@ -916,6 +916,7 @@ declare_and_export timeout_4 7777 #timeout for operations like recompiling somet
 declare_and_export timeout_5 77777 #timeout for long operations
 declare_and_export timeout_task $(echo -n "$timeout_3") #maximum life time for every task
 declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time for every task
+declare_and_export task_pid_file "${work_dir}/task.pid"; #last task pid
 #declare -x -g timeout_task="$timeout_4";  #timeout for tasks
 #timeout_task
 
@@ -987,103 +988,47 @@ work_dir="$(realpath "$(pwd)")/";
 declare_and_export work_dir "${work_dir}"
 slog "<7>$(show_var work_dir)";
 
-# temp_script_subversion=$( cat "${work_dir}index.sh" | grep '^script_subversion' );
-# echo "$temp_script_subversion";
-# temp_script_subversion=$( eval "${temp_script_subversion}" );
-# echo "●●● $temp_script_subversion ●●●";
-# sleep 2.42;
-
-# # check master_pass value, if not set - ask from user
-# #ask for master_password if it is not set
-# #read -s -p "master_password" master_password; export master_password;
-# # echo "${master_password}";
-# if [[ -v master_password ]];
-# then
-#     echo "master_password is already set"
-# else
-#     echo "master_password is not set";
-#     if [ -s "${master_password_file}" ]
-#     then
-#         echo "${master_password_file} file is not empty, load master_password from it"
-#         master_password_from_file=$(cat "${master_password_file}");
-#         master_password_from_file=$(trim "${master_password_from_file}");
-#         #echo "master_password_from_file length is ${#master_password_from_file}";
-#         md5_of_master_password_from_file=$(md5 "${master_password_from_file}");
-#         echo "md5_of_master_password_from_file=${md5_of_master_password_from_file}";
-#         master_password="${master_password_from_file}"
-#     else
-#         echo "${master_password_file} file is empty";
-#         read -s -p "Enter master_password (Password will not shown):" master_password < /dev/tty;
-#         echo -n "${master_password}" > "${master_password_file}";   #save to file
-#     fi
-#     echo "master_password length is ${#master_password}";
-#     declare_and_export master_password "${master_password}"
-#     #export master_password;
-# fi
-# md5_of_master_password=$(md5 "${master_password}");
-# echo "md5_of_master_password=${md5_of_master_password}";
-#
-# #dectypt vault file with master password, load all secret variables
-# encrypted_data=$(cat "${crypted_vault_file}");
-# #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
-# decrypted_data=$(decrypt_aes "${master_password}" "${encrypted_data}")
-# show_var decrypt_aes_error
-# #echo "$decrypted_data";
-# #load all variables from decrypted vault
-# eval "${decrypted_data}";
-# #echo "secrets_pipyau_root_password=${secrets_pipyau_root_password}"
-# echo "secrets_loaded=${secrets_loaded}"
-# #echo "Original data:"
-# #md5 "${data}";
-
-#TODO generate random passwords and show it to user if secrets not loaded
-#TODO save passwords to local crypted vault
-#TODO if passwords already generated - don't change passwords
 
 if [[ "${test_mode}" = "1" ]]; then
-  echo "local test mode";
+  echo "local test mode: don't run mandatory tasks";
 else
-  :
-  #run_task add_screen_resolution_with_cvt_xrandr
+  run_task install_autorun_script # mandatory to other tasks
+  run_task install_telemetry # mandatory most of other tasks
 fi
 
-task_pid_file="${work_dir}/task.pid"; #last task pid
-show_var task_pid_file
-
-true && { \
-run_task install_autorun_script # mandatory to other tasks
-run_task install_telemetry # mandatory most of other tasks
-run_task show_variables
-run_task hostname_set
-run_task root_password_for_sudoers
-run_task root_password_set
-run_task user_i_password_set
-run_task install_x11vnc
-run_task install_nginx_root
-
-run_task install_gui_apps
-run_task install_xbindkeys
-run_task install_tor
-run_task install_console_apps
-run_task timezone_set
-run_task add_screen_resolution_with_cvt_xrandr
-run_task sshd_config
-run_task ssh_config
-run_task install_yggdrasil
-run_task show_script_subversion
-run_task systemd_resolved_dns_config
-run_task sleep 1
-}
-
-false && { \
-:
-
-}
-
-run_task show_script_subversion
-#exit 0;
-
-#TODO show passwords to user
+# tasks ki
+if [[ "$tasks" != "" ]]; then
+  echo "Tasks lisk from arguments: Run custom tasks: [$tasks]";
+  sleep $timeout_0
+  for this_task in $tasks;
+  do
+    show_var this_task
+    sleep $timeout_0
+    run_task "${this_task}"
+    :
+  done;
+  else
+  #default tasks will run
+  run_task show_variables
+  run_task hostname_set
+  run_task root_password_for_sudoers
+  run_task root_password_set
+  run_task user_i_password_set
+  run_task install_x11vnc
+  run_task install_nginx_root
+  run_task install_gui_apps
+  run_task install_xbindkeys
+  run_task install_tor
+  run_task install_console_apps
+  run_task timezone_set
+  run_task add_screen_resolution_with_cvt_xrandr
+  run_task sshd_config
+  run_task ssh_config
+  run_task install_yggdrasil
+  run_task systemd_resolved_dns_config
+  run_task show_script_subversion
+    :
+fi
 
 else
     #echo 'functions loaded';
@@ -1095,4 +1040,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='oxomu-f8620a2-2022-09-14-12-51-09'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='enoxa-6dd441f-2022-09-14-15-06-32'; echo "${script_subversion}=script_subversion"; 
