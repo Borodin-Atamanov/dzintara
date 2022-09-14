@@ -7,19 +7,24 @@ source "${work_dir}tasks/1.sh"
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 
-for argument in "$@"
-do
-   key=$(echo $argument | cut -f1 -d=)
+function parse_key_value ()
+{
+   for argument in "$@"
+   do
+      key=$(echo $argument | cut -f1 -d=)
+      key_length=${#key}
+      value="${argument:$key_length+1}"
+      if [[ "$value" != "" ]]; then
+         declare -g -x "$key"="$value"
+         #echo "$key"="$value"
+         #show_var "$key"
+      fi
+   done
+}
+export -f parse_key_value
 
-   key_length=${#key}
-   value="${argument:$key_length+1}"
-
-   #export "$key"="$value"
-   if [[ "$value" != "" ]]; then
-      declare -g -x "$key"="$value"
-   fi
-done
-
+parse_key_value "$@"
+#parse_key_value "$@"
 
 if [[ "$tasks" != "" ]]; then
    echo 'Run some tasks!'

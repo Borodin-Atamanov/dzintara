@@ -858,6 +858,24 @@ function hex_2_bin ()
 }
 export -f hex_2_bin
 
+function parse_key_value ()
+{
+  #function parse strings like 'value1="v a l u e" val2=2222 flag1 flag2' to variables. Only variables with values will be parsed
+   for argument in "$@"
+   do
+      key=$(echo $argument | cut -f1 -d=)
+      key_length=${#key}
+      value="${argument:$key_length+1}"
+      if [[ "$value" != "" ]]; then
+         declare -g -x "$key"="$value"
+         #echo "$key"="$value"
+         #show_var "$key"
+      fi
+   done
+}
+export -f parse_key_value
+
+parse_key_value "$@"
 
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
@@ -1077,4 +1095,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='efuse-dff721f-2022-09-14-12-37-51'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gipac-5f11cb2-2022-09-14-12-47-41'; echo "${script_subversion}=script_subversion"; 
