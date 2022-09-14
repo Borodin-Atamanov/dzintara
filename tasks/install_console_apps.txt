@@ -35,6 +35,7 @@ htop
 #python3
 #
 mediainfo
+exiftool
 #ffmpeg
 #imagemagick
 #mkvmerge

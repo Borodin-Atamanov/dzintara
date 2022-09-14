@@ -478,8 +478,9 @@ function install_system ()
     return 0;
   fi
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
+    #TODO create interprocess variable to check what update was minute ago
     timeout --kill-after=77 $timeout_task dpkg --configure -a | cat;
-    timeout --kill-after=77 $timeout_task  apt-get --yes update | cat;
+    timeout --kill-after=77 $timeout_task apt-get --yes update | cat;
     timeout --kill-after=77 $timeout_task apt-get --yes autoremove | cat;
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
@@ -1066,4 +1067,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='esefi-59b522a-2022-09-15-00-30-20'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='lekis-080dc04-2022-09-15-00-38-31'; echo "${script_subversion}=script_subversion"; 
