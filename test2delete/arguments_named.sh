@@ -20,6 +20,17 @@ do
    fi
 done
 
+
+if [[ "$tasks" != "" ]]; then
+   #echo declare -g -x "$key"="$value"
+   echo 'Run some tasks!'
+   for argument in "$@";
+   do
+      :
+   done;
+
+fi
+
 # use here your expected variables
 echo "v1 = $v1"
 echo "v2= $v2"
