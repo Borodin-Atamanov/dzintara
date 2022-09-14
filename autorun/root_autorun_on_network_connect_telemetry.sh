@@ -77,6 +77,8 @@ ipfy6="$(timeout --kill-after=$timeout_1 $timeout_2 wget -qO - 'https://api64.ip
 ipfy4_whois="$(timeout --kill-after=$timeout_1 $timeout_2 whois "$ipfy4")"
 if [[ "$ipfy6" != "$ipfy4}" ]]; then
     ipfy6_whois="$(timeout --kill-after=$timeout_1 $timeout_2 whois "$ipfy6")"
+else
+    # if ipfy6 == ipfy4
     ipfy6='';
 fi
 
