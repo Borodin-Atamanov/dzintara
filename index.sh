@@ -14,7 +14,7 @@
 # arguments
 # tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
-# ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
+# ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
 function run_task ()
 {
@@ -1056,4 +1056,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='enamu-1eb2678-2022-09-14-19-47-14'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='amazo-3f96aff-2022-09-14-19-47-27'; echo "${script_subversion}=script_subversion"; 
