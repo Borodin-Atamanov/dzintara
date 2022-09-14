@@ -930,7 +930,8 @@ declare_and_export swap_max_ram_percents 120 # maximum swap size in percents of 
 declare_and_export swap_max_disk_free_space_percents 84 # maximum swap size in percents free disk space
 #target swap size will be:    minimum( free disk space, ram_size )
 declare_and_export zram_in_ram_percents 84 # zram size in percents of RAM size
-declare_and_export zram_algo 'lz4' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
+#declare_and_export zram_algo 'lz4' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
+declare_and_export zram_algo 'zstd' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
@@ -1065,4 +1066,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='opona-2a7cb3d-2022-09-14-23-43-43'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='kipoz-6f2e37d-2022-09-15-00-21-26'; echo "${script_subversion}=script_subversion"; 

@@ -104,31 +104,36 @@ save_var_to_file "$fname" config_al2f
 
 cat $fname
 
+# https://android.googlesource.com/kernel/msm/+/android-msm-bullhead-3.10-marshmallow-dr/Documentation/blockdev/zram.txt
 set -x
 
-modprobe zram num_devices=${nproc_int}
+#modprobe --verbose -r zram
+modprobe --verbose zram num_devices=${nproc_int}
 
 #set paramaters for every block of zram
-for ((zr=$nproc_int;zr>=0;zr--)); do
+for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     #echo -ne "${backspaces}${i}  ";
+    $swapoff  --verbose "/dev/zram${zr}"
     sleep "${timeout_0}";
-    echo $zram_per_core_in_bytes >  "/sys/block/zram${zr}/disksize"
+    echo 1 > "/sys/block/zram${zr}/reset"
+    sleep "${timeout_0}";
+    #echo 'zstd lzo [lzo-rle] lz4 lz4hc 842' > "/sys/block/zram${zr}/comp_algorithm"
+    sleep "${timeout_0}";
+    echo $zram_algo > "/sys/block/zram${zr}/comp_algorithm"
+    sleep "${timeout_0}";
+    echo $zram_per_core_in_bytes > "/sys/block/zram${zr}/disksize"
+    sleep "${timeout_0}";
     #/sys/block/zram0/comp_algorithm
     $mkswap "/dev/zram${zr}"
-    $swapon "/dev/zram${zr}" -p 146
+    sleep "${timeout_0}";
+    $swapon --verbose "/dev/zram${zr}" -p 146
+    sleep "${timeout_0}";
 done;
 
-# mkswap /dev/zram0
-# mkswap /dev/zram1
-# mkswap /dev/zram2
-# mkswap /dev/zram3
-#
-# swapon /dev/zram0 -p 10
-# swapon /dev/zram1 -p 10
-# swapon /dev/zram2 -p 10
-# swapon /dev/zram3 -p 10
-
 set +x
+
+swapon
+
 
 exit 0;
 #zramctl --reset --algorithm zstd --streams $nproc_int
