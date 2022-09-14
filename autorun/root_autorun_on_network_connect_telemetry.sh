@@ -42,6 +42,9 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
+
+top_b_n_1="$(top -b -n 1)"
+
 uname_a="$(uname -a)"
 
 lsscsi="$(lsscsi)"
@@ -136,6 +139,9 @@ ${nmcli_connection}
 
 tcpdump_interfaces
 ${tcpdump_interfaces}
+
+top -b -n 1
+${top_b_n_1}
 
 lsscsi
 ${lsscsi}
