@@ -26,6 +26,8 @@ slog "<7>$(show_var EUID)"
 whoami="$(whoami)"
 slog "<7>$(show_var whoami)"
 
+sleep $timeout_2
+
 ymdhms=$(ymdhms)
 
 hostname="$(hostname)"

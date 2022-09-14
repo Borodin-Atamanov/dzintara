@@ -104,7 +104,7 @@ echo "$config" > "$telemetry_on_network_connect_service_file";
 
 systemctl daemon-reload
 systemctl enable dzintara_network_telemetry | cat
-systemctl restart dzintara_network_telemetry | cat
+#systemctl restart dzintara_network_telemetry | cat
 systemctl status dzintara_network_telemetry | cat
 
 #add service to send network telemetry on every period
