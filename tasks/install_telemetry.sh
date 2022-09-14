@@ -10,7 +10,11 @@
 #    exit 1
 # fi
 
-install_system inotify-tools
+if [[ "${test_mode}" = "1" ]]; then
+    echo "local test mode, so don't try to install apps";
+else
+    install_system inotify-tools
+fi
 
 #create directory for install scripts
 show_var telemetry_queue_dir

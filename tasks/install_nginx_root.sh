@@ -278,19 +278,20 @@ emailAddress_default        = test@example.com
 _ENDOFFILE
 )
 
-show_var nginx_main_config_file config_data
-temp_config_file="/tmp/openssl_config_to_generate_certs.conf";
-echo "$config_data" > "$temp_config_file"
+# show_var nginx_main_config_file config_data
+# temp_config_file="/tmp/openssl_config_to_generate_certs.conf";
+# echo "$config_data" > "$temp_config_file"
 
 #openssl req -x509 -out localhost.cert -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config <( \ printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
-openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -config "$temp_config_file"
+#openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -config "$temp_config_file"
+openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -subj "/C=GB/ST=London/L=London/O=Dzintara/OU=Dzintara/CN=Dzintara.com"
 
 systemctl restart nginx | cat
 sleep 1;
 systemctl status nginx | cat
 sleep 1;
-netstat --listen --wide
+netstat -tulpn
 sleep 1;
 
 #create shared without auth directory
