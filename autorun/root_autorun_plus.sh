@@ -21,7 +21,7 @@ slog "<5>start"
 
 #swap_autorun.sh
 
-( /home/i/bin/dzible/autorun/swap_autorun.sh )
+( /home/i/bin/dzintara/autorun/swap_autorun.sh )
 
 slog "<7>end"
 
