@@ -238,7 +238,13 @@ function load_root_vault ()
 
     # TODO check what passwords in file, and we can decrypt it
     load_var_from_file "${root_vault_file}" root_vault_encypted2
+    #show_var root_vault_encypted2
     load_var_from_file "${root_vault_password_file}" master_password2
+    #show_var master_password2
+    if [[ "${root_vault_encypted2}" == "" ]] || [[ "${master_password2}" == "" ]]
+      >&2 echo "root_vault_file=${root_vault_file} or root_vault_password_file=${root_vault_password_file} gives empty result. Maybe permissions is not enough? Are you root?"
+      return -1
+    fi
     decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
     show_var decrypted_data
 
@@ -922,9 +928,17 @@ declare_and_export task_pid_file "${work_dir}/task.pid"; #last task pid
 
 set +x
 
+if [[ "$0" = "./index.sh" ]]; then
+    # test mode activating when script loads from local machine, not from git
+    test_mode=1;
+else
+    test_mode=0;
+fi
+
 if [[ "$1" != "fun" ]]; then
 #set -x
 
+#TODO use load_root_vault to check what rool_vault is ok
 # load variables from root_vault_file
 if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
 then
@@ -950,31 +964,22 @@ fi
 #generate_and_save_root_vault
 #load root_valut here
 #exit 0;
-telemetry_send "${root_vault_file}" "#root_vault_file ${root_vault_file}"
-telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
+#telemetry_send "${root_vault_file}" "#root_vault_file ${root_vault_file}"
+#telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 
 #declare_and_export computer_name 'pipyau'
 
-echo "$0";
-if [[ "$0" = "./index.sh" ]]; then
-    # test mode activating when script loads from local machine, not from git
-    test_mode=1;
-else
-    test_mode=0;
-fi
-
 if [[ "${test_mode}" = "1" ]]; then
-    echo "local test mode on";
+  echo "local test mode on";
 else
-    echo "local test mode off";
+  echo "local test mode off";
 fi
-
-install_system git
-install_system openssl
 
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
+  install_system git
+  install_system openssl
   work_dir="${TMPDIR:-/tmp}/dzintara_work_dir-$(date "+%F-%H-%M-%S")";
   slog "<7>$(show_var work_dir)";
   mkdir -pv "${work_dir}";
@@ -988,9 +993,8 @@ work_dir="$(realpath "$(pwd)")/";
 declare_and_export work_dir "${work_dir}"
 slog "<7>$(show_var work_dir)";
 
-
 if [[ "${test_mode}" = "1" ]]; then
-  echo "local test mode: don't run mandatory tasks";
+  echo "local test mode on: don't run mandatory tasks";
 else
   run_task install_autorun_script # mandatory to other tasks
   run_task install_telemetry # mandatory most of other tasks
@@ -1027,7 +1031,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_yggdrasil
   run_task systemd_resolved_dns_config
   run_task show_script_subversion
-    :
+  :
 fi
 
 else
@@ -1040,4 +1044,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='enoxa-6dd441f-2022-09-14-15-06-32'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ixatu-5ffd959-2022-09-14-15-22-17'; echo "${script_subversion}=script_subversion"; 
