@@ -918,6 +918,11 @@ declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/syst
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
 declare_and_export nginx_shared_dir '/home/i/share/'; #this directory will be shared without login and pass in nginx
+declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-selfsigned.key'; # private self-signed key for https
+declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
+#declare_and_export o_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
+#openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
 declare_and_export timeout_2 77 #timeout for operations like update config files
@@ -1050,4 +1055,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='eseta-1d6fdc8-2022-09-14-17-24-32'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='puvum-1092362-2022-09-14-19-36-16'; echo "${script_subversion}=script_subversion"; 
