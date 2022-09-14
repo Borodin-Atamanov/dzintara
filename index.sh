@@ -11,6 +11,9 @@
 #wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
 # wget -qO - clck.ru/z34AD | sudo bash
 
+# arguments
+# tasks="countdown:15:0.1 show_script_subversion:arg1:arg2 install_nginx "
+
 function run_task ()
 {
   declare -g -x task_name="${1}";
@@ -784,15 +787,15 @@ function search_and_replace_hex ()
   # convert to hex input data
   haystack_hex="${haystack}";
   bin_2_hex haystack_hex
-  show_var needle slide
-  show_var 'before HEX:' haystack_hex
+  #show_var needle slide
+  #show_var 'before HEX:' haystack_hex
   # replace hex needle to hex slide in hex haystack
   haystack_hex="${haystack_hex//$needle/$slide}" #
   #haystack_hex="${haystack_hex//0a/$slide}" #
-  show_var 'after HEX: ' haystack_hex
+  #show_var 'after HEX: ' haystack_hex
   hex_2_bin haystack_hex
   #command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
-  declare -g ${haystack_name}="$haystack_hex";
+  declare -g "${haystack_name}"="$haystack_hex";
 }
 export -f search_and_replace_hex
 
@@ -1004,12 +1007,13 @@ fi
 if [[ "$tasks" != "" ]]; then
   echo "Tasks lisk from arguments: Run custom tasks: [$tasks]";
   sleep $timeout_0
-  for this_task in $tasks;
+  for this_task_with_args in $tasks;
   do
-    show_var this_task
+    # replace ":" with " "
+    search_and_replace_hex this_task_with_args 3A 20
+    show_var this_task_with_args
     sleep $timeout_0
-    run_task "${this_task}"
-    :
+    run_task $this_task_with_args
   done;
   else
   #default tasks will run
@@ -1044,4 +1048,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='navog-d960e4e-2022-09-14-15-26-01'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='bosiv-ec68da9-2022-09-14-15-55-40'; echo "${script_subversion}=script_subversion"; 
