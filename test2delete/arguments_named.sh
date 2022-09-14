@@ -16,16 +16,16 @@ do
 
    #export "$key"="$value"
    if [[ "$value" != "" ]]; then
-      echo declare -g -x "$key"="$value"
+      declare -g -x "$key"="$value"
    fi
 done
 
 
 if [[ "$tasks" != "" ]]; then
-   #echo declare -g -x "$key"="$value"
    echo 'Run some tasks!'
-   for argument in "$@";
+   for this_task in $tasks;
    do
+      show_var this_task
       :
    done;
 
