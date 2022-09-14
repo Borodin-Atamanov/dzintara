@@ -20,6 +20,7 @@ openssh-sftp-server
 #privoxy
 #yggdrasil
 #
+lsscsi
 htop
 mc
 ncdu

@@ -5,6 +5,8 @@
 
 #This script calls another scripts
 
+
+
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzintara/"
@@ -40,8 +42,21 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
+uname_a="$(uname -a)"
 
+lsscsi="$(lsscsi)"
 
+fdisk_l="$(fdisk -l)"
+
+lsblk="$(lsblk)"
+
+lscpu="$(lscpu)"
+
+lsusb="$(lsusb)"
+
+lshw_short="$(lshw -short)"
+
+lspci="$(lspci)"
 
 netstat="$(timeout --kill-after=$timeout_1 $timeout_2 netstat -tunlp)"
 
@@ -92,6 +107,9 @@ ${os_codename}
 
 ${hostnamectl}
 
+uname -a
+${uname_a}
+
 netstat
 ${netstat}
 
@@ -119,11 +137,33 @@ ${nmcli_connection}
 tcpdump_interfaces
 ${tcpdump_interfaces}
 
+lsscsi
+${lsscsi}
+
+fdisk -l
+${fdisk_l}
+
+lsblk
+${lsblk}
+
+lscpu
+${lscpu}
+
+lsusb
+${lsusb}
+
 whois v4
 ${ipfy4_whois}
 
 whois v6
 ${ipfy6_whois}
+
+lshw -short
+${lshw_short}
+
+lspci
+${lspci}
+
 
 _ENDOFFILE
 )
@@ -142,10 +182,14 @@ _ENDOFFILE
 )
 
 #show_var all_data
-tmpfile="$(mktemp /tmp/network-${ymdhms}-XXXXX.txt)"
+tmpfile="$(mktemp /tmp/${hostname}-network-${ymdhms}-XXXXX.txt)"
 show_var tmpfile
 echo -n "$all_data_to_file" > "$tmpfile"
 
 telemetry_send "$tmpfile" "${all_data_to_message}"
 
 #slog "<5>finish $0"
+
+exit 0
+
+
