@@ -1,6 +1,6 @@
 
 #
-#zram-tools
+zram-tools
 augeas-tools
 nload
 nmap
