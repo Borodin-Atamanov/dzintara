@@ -241,9 +241,9 @@ function load_root_vault ()
     #show_var root_vault_encypted2
     load_var_from_file "${root_vault_password_file}" master_password2
     #show_var master_password2
-    if [[ "${root_vault_encypted2}" == "" ]] || [[ "${master_password2}" == "" ]]
+    if [[ "${root_vault_encypted2}" == "" ]] || [[ "${master_password2}" == "" ]]; then
       >&2 echo "root_vault_file=${root_vault_file} or root_vault_password_file=${root_vault_password_file} gives empty result. Maybe permissions is not enough? Are you root?"
-      return -1
+      return -1;
     fi
     decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
     show_var decrypted_data
@@ -1044,4 +1044,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ixatu-5ffd959-2022-09-14-15-22-17'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='useru-5274ebe-2022-09-14-15-23-01'; echo "${script_subversion}=script_subversion"; 
