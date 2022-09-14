@@ -11,6 +11,10 @@ bind9-utils
 wget
 curl
 git
+unrar
+unrar-free
+unzip
+webp
 
 ssh
 openssh-client
@@ -22,15 +26,21 @@ openssh-sftp-server
 #yggdrasil
 #
 lsscsi
-htop
-mc
+exfat-fuse
 ncdu
+fdupes
+mc
+htop
 #
 #python3
 #
+mediainfo
 #ffmpeg
 #imagemagick
 #mkvmerge
 #pngnq
 #
 calc
+
+
+

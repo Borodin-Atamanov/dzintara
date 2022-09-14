@@ -667,6 +667,7 @@ export -f save_var_to_file
 
 function replace_line_by_string ()
 {
+  #TODO get first parameters as variable name, not value
   #function search for strings contains substring $2 in variable, . And replace the string with $3
   #if original string contains $4 - then this string will not change
   #function use global variables to define function's behavior
@@ -928,6 +929,8 @@ declare_and_export swap_file_path '/swapfile.dzi' # path to swap file
 declare_and_export swap_max_ram_percents 120 # maximum swap size in percents of RAM
 declare_and_export swap_max_disk_free_space_percents 84 # maximum swap size in percents free disk space
 #target swap size will be:    minimum( free disk space, ram_size )
+declare_and_export zram_in_ram_percents 84 # zram size in percents of RAM size
+declare_and_export zram_algo 'lz4' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
@@ -1062,4 +1065,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='fetug-e6e39c6-2022-09-14-22-37-53'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nerug-8d0e6f3-2022-09-14-23-39-29'; echo "${script_subversion}=script_subversion"; 
