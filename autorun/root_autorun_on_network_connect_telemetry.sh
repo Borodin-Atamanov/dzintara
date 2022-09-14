@@ -42,8 +42,9 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
-
 top_b_n_1="$(top -b -n 1)"
+
+free_mega_wide_lohi="$(free --mega --wide --lohi)"
 
 uname_a="$(uname -a)"
 
@@ -141,6 +142,9 @@ ${nmcli_connection}
 
 tcpdump_interfaces
 ${tcpdump_interfaces}
+
+free --mega --wide --lohi
+${free_mega_wide_lohi}
 
 top -b -n 1
 ${top_b_n_1}
