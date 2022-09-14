@@ -2,7 +2,6 @@
 autorandr
 x11-utils
 x11-apps
-xneur
 xorg-x11-fonts
 numlockx
 xdotool
@@ -12,9 +11,10 @@ x11vnc
 oneko
 xterm
 rxvt-unicode
+xneur
 #keyboard layout indicator
 gxkb
 
 
-telegram-desktop
+#telegram-desktop
 

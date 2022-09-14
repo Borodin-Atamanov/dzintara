@@ -43,5 +43,4 @@ exiftool
 #
 calc
 
-
-
+lshw

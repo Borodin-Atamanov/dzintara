@@ -41,7 +41,7 @@ show_var swap_from_ram_size
 zram_from_ram_size=$(( ram_size_in_kb * zram_in_ram_percents / 100 ))
 show_var zram_from_ram_size
 zram_per_core_in_bytes=$(( zram_from_ram_size * 1024 / nproc_int))
-show_var zram_per_core_in_kb
+show_var zram_per_core_in_bytes
 
 free_disk_space_in_kb=$(df -k --local --block-size=1K --output=avail / | tr -d '\n' | sed 's/[^[:digit:]]\+//g')
 #free_disk_space_in_kb=1688152
@@ -101,14 +101,17 @@ config_al2f=$( replace_line_by_string "$config_al2f" "ALGO="  "ALGO=${zram_algo}
 config_al2f=$( replace_line_by_string "$config_al2f"  "PERCENT=" "PERCENT=${zram_in_ram_percents}" "#" )
 
 save_var_to_file "$fname" config_al2f
-
-cat $fname
+echo "" >> "$fname"
+#cat $fname
 
 # https://android.googlesource.com/kernel/msm/+/android-msm-bullhead-3.10-marshmallow-dr/Documentation/blockdev/zram.txt
 set -x
 
-#modprobe --verbose -r zram
+/usr/sbin/zramswap stop
+#zramctl
+# modprobe --verbose -r zram
 modprobe --verbose zram num_devices=${nproc_int}
+sleep "${timeout_1}";
 
 #set paramaters for every block of zram
 for ((zr=$((nproc_int-1));zr>=0;zr--)); do
@@ -116,12 +119,14 @@ for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     $swapoff  --verbose "/dev/zram${zr}"
     sleep "${timeout_0}";
     echo 1 > "/sys/block/zram${zr}/reset"
+    zramctl --reset "/dev/zram${zr}"
+    sleep "${timeout_0}";
+    zramctl "/dev/zram${zr}" --size $zram_per_core_in_bytes --streams ${nproc_int} --algorithm $zram_algo
+    echo $zram_per_core_in_bytes > "/sys/block/zram${zr}/disksize"
     sleep "${timeout_0}";
     #echo 'zstd lzo [lzo-rle] lz4 lz4hc 842' > "/sys/block/zram${zr}/comp_algorithm"
     sleep "${timeout_0}";
     echo $zram_algo > "/sys/block/zram${zr}/comp_algorithm"
-    sleep "${timeout_0}";
-    echo $zram_per_core_in_bytes > "/sys/block/zram${zr}/disksize"
     sleep "${timeout_0}";
     #/sys/block/zram0/comp_algorithm
     $mkswap "/dev/zram${zr}"
