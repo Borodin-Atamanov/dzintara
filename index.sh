@@ -8,7 +8,7 @@
 #2. initialisation: set variables, etc
 #3. run tasks
 
-#wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
+# wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
 # wget -qO - clck.ru/z34AD | sudo bash
 
 # arguments
@@ -1067,4 +1067,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ecuto-23aaf09-2022-09-15-02-14-04'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vufiv-5267438-2022-09-15-02-32-53'; echo "${script_subversion}=script_subversion"; 

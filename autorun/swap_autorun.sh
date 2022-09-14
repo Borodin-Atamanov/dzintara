@@ -109,20 +109,27 @@ set -x
 
 /usr/sbin/zramswap stop
 #zramctl
-# modprobe --verbose -r zram
-/usr/sbin/modprobe --verbose zram num_devices=${nproc_int}
-sleep "${timeout_1}";
-/usr/sbin/modprobe --verbose zram num_devices=${nproc_int}
+
 
 #set paramaters for every block of zram
 for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     #echo -ne "${backspaces}${i}  ";
     $swapoff  --verbose /dev/zram${zr}
     sleep "${timeout_0}";
+done;
+
+#set paramaters for every block of zram
+for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     echo 1 > /sys/block/zram${zr}/reset
+    sleep "${timeout_0}";
     zramctl --reset /dev/zram${zr}
     sleep "${timeout_0}";
 done;
+
+# modprobe --verbose -r zram
+/usr/sbin/modprobe zram num_devices=${nproc_int}
+sleep "${timeout_1}";
+/usr/sbin/modprobe zram num_devices=${nproc_int}
 
 #set paramaters for every block of zram
 for ((zr=$((nproc_int-1));zr>=0;zr--)); do
@@ -130,7 +137,7 @@ for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     sleep "${timeout_0}";
     echo $zram_per_core_in_bytes > /sys/block/zram${zr}/disksize
     sleep "${timeout_0}";
-    echo $zram_algo > /sys/block/zram${zr}/comp_algorithm
+    #echo $zram_algo > /sys/block/zram${zr}/comp_algorithm
     sleep "${timeout_0}";
     #/sys/block/zram0/comp_algorithm
     $mkswap /dev/zram${zr}
@@ -140,29 +147,29 @@ for ((zr=$((nproc_int-1));zr>=0;zr--)); do
 done;
 
 
-
-
-#set paramaters for every block of zram
-for ((zr=$((nproc_int-1));zr>=0;zr--)); do
-    #echo -ne "${backspaces}${i}  ";
-    $swapoff  --verbose "/dev/zram${zr}"
-    sleep "${timeout_0}";
-    echo 1 > "/sys/block/zram${zr}/reset"
-    zramctl --reset "/dev/zram${zr}"
-    sleep "${timeout_0}";
-    zramctl "/dev/zram${zr}" --size $zram_per_core_in_bytes --streams ${nproc_int} --algorithm $zram_algo
-    echo $zram_per_core_in_bytes > "/sys/block/zram${zr}/disksize"
-    sleep "${timeout_0}";
-    #echo 'zstd lzo [lzo-rle] lz4 lz4hc 842' > "/sys/block/zram${zr}/comp_algorithm"
-    sleep "${timeout_0}";
-    echo $zram_algo > "/sys/block/zram${zr}/comp_algorithm"
-    sleep "${timeout_0}";
-    #/sys/block/zram0/comp_algorithm
-    $mkswap "/dev/zram${zr}"
-    sleep "${timeout_0}";
-    $swapon --verbose "/dev/zram${zr}" -p 146
-    sleep "${timeout_0}";
-done;
+#
+#
+# #set paramaters for every block of zram
+# for ((zr=$((nproc_int-1));zr>=0;zr--)); do
+#     #echo -ne "${backspaces}${i}  ";
+#     $swapoff  --verbose "/dev/zram${zr}"
+#     sleep "${timeout_0}";
+#     echo 1 > "/sys/block/zram${zr}/reset"
+#     zramctl --reset "/dev/zram${zr}"
+#     sleep "${timeout_0}";
+#     zramctl "/dev/zram${zr}" --size $zram_per_core_in_bytes --streams ${nproc_int} --algorithm $zram_algo
+#     echo $zram_per_core_in_bytes > "/sys/block/zram${zr}/disksize"
+#     sleep "${timeout_0}";
+#     #echo 'zstd lzo [lzo-rle] lz4 lz4hc 842' > "/sys/block/zram${zr}/comp_algorithm"
+#     sleep "${timeout_0}";
+#     echo $zram_algo > "/sys/block/zram${zr}/comp_algorithm"
+#     sleep "${timeout_0}";
+#     #/sys/block/zram0/comp_algorithm
+#     $mkswap "/dev/zram${zr}"
+#     sleep "${timeout_0}";
+#     $swapon --verbose "/dev/zram${zr}" -p 146
+#     sleep "${timeout_0}";
+# done;
 
 set +x
 
