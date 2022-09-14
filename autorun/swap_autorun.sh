@@ -114,6 +114,8 @@ for ((zr=$nproc_int;zr>=0;zr--)); do
     sleep "${timeout_0}";
     echo $zram_per_core_in_bytes > "/sys/block/zram${zr}/disksize"
     #/sys/block/zram0/comp_algorithm
+    $mkswap "/dev/zram${zr}"
+    $swapon "/dev/zram${zr}" -p 146
 done;
 
 # mkswap /dev/zram0
