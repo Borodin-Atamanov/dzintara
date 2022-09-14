@@ -924,6 +924,10 @@ declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-se
 declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
 #declare_and_export o_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
 #openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+declare_and_export swap_file_path '/swapfile.dzi' # path to swap file
+declare_and_export swap_max_ram_percents 120 # maximum swap size in percents of RAM
+declare_and_export swap_max_disk_free_space_percents 84 # maximum swap size in percents free disk space
+#target swap size will be:    minimum( free disk space, ram_size )
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
@@ -1058,4 +1062,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='elogo-05c2eb5-2022-09-14-20-58-29'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='egito-78f2460-2022-09-14-22-35-24'; echo "${script_subversion}=script_subversion"; 
