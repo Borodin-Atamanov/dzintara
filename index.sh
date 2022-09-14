@@ -12,7 +12,8 @@
 # wget -qO - clck.ru/z34AD | sudo bash
 
 # arguments
-# tasks="countdown:15:0.1 show_script_subversion:arg1:arg2 install_nginx "
+# tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx "
+# ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 
 function run_task ()
 {
@@ -999,8 +1000,9 @@ slog "<7>$(show_var work_dir)";
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode on: don't run mandatory tasks";
 else
+  # run mandatory tasks at very first
   run_task install_autorun_script # mandatory to other tasks
-  run_task install_telemetry # mandatory most of other tasks
+  run_task install_telemetry # mandatory for most of the other tasks
 fi
 
 # tasks ki
@@ -1009,7 +1011,7 @@ if [[ "$tasks" != "" ]]; then
   sleep $timeout_0
   for this_task_with_args in $tasks;
   do
-    # replace ":" with " "
+    # replace ":" with " " (space)
     search_and_replace_hex this_task_with_args 3A 20
     show_var this_task_with_args
     sleep $timeout_0
@@ -1048,4 +1050,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='abepo-c47f54f-2022-09-14-16-14-57'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='xorag-03b8357-2022-09-14-16-24-32'; echo "${script_subversion}=script_subversion"; 
