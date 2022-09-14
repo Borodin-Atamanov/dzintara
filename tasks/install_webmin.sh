@@ -38,7 +38,7 @@ _ENDOFFILE
 )
 echo -e "$webmin_list_file_content" > "${webmin_list_file}"
 
-install_system  apt-transport-https
+install_system apt-transport-https
 install_system update
 install_system webmin
 

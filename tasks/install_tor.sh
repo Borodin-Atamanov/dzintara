@@ -14,9 +14,7 @@
 install_system apt-transport-https
 install_system lsb-release
 
-install_system update
-install_system tor deb.torproject.org-keyring
-install_system obfs4proxy
+
 
 #get info about OS
 
@@ -37,11 +35,13 @@ wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8C
 tor_list_file_content=$(cat <<_ENDOFFILE
 deb     [signed-by=${tor_key_file}] https://deb.torproject.org/torproject.org ${os_codename} main
 deb-src [signed-by=${tor_key_file}] https://deb.torproject.org/torproject.org ${os_codename} main
-
 _ENDOFFILE
 )
 echo -e "$tor_list_file_content" > "${tor_list_file}"
 
+install_system update
+install_system tor deb.torproject.org-keyring
+install_system obfs4proxy
 
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
