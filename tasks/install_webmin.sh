@@ -30,10 +30,7 @@ show_var architecture
 webmin_list_file='/etc/apt/sources.list.d/webmin.list';
 webmin_key_file='/usr/share/keyrings/jcameron-key.gpg';
 
-wget -qO- https://download.webmin.com/jcameron-key.asc
- | gpg --dearmor | tee "$webmin_key_file" | base64 | wc
-
-
+wget -qO- https://download.webmin.com/jcameron-key.asc  | gpg --dearmor | tee "$webmin_key_file" | base64 | wc
 
 webmin_list_file_content=$(cat <<_ENDOFFILE
 deb [signed-by=/usr/share/keyrings/jcameron-key.gpg] https://download.webmin.com/download/repository sarge contrib
