@@ -12,12 +12,12 @@
 
 
 #create directory for install scripts
-rm -rvf "${install_dir}";
+rm -rf "${install_dir}";
 mkdir -pv "${install_dir}";
 
 #copy scripts to install directory
 #cp --dereference --update --verbose --recursive --strip-trailing-slashes "${work_dir}" --target-directory="${install_dir}";
-rsync --verbose --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable  --info=progress2 --progress --stats --itemize-changes "${work_dir}/" "${install_dir}/";
+rsync --verbose --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable  --info=progress2 --progress --stats --itemize-changes "${work_dir}/" "${install_dir}/"  | tr -d '\n'
 
 show_var load_variables_file
 
@@ -156,8 +156,8 @@ _ENDOFFILE
 show_var service_unit
 echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
 
-rm -v "$run_command_from_root_pipe_file"
-rm -v "$run_command_from_user_i_pipe_file"
+rm -v "$run_command_from_root_pipe_file" | tr -d '\n'
+rm -v "$run_command_from_user_i_pipe_file" | tr -d '\n'
 sleep $timeout_0
 
 systemctl daemon-reload
@@ -171,22 +171,22 @@ systemctl enable dzintara_pipes_root_autorun | cat
 systemctl status dzintara_pipes_root_autorun | cat
 sleep $timeout_0
 
-chown --verbose --changes --recursive  root:root "${install_dir}";
-find "${install_dir}" -type d -exec chmod --verbose 0755 {} \;
-find "${install_dir}" -type f -exec chmod --verbose 0755 {} \;
+chown  --changes --recursive  root:root "${install_dir}";
+find "${install_dir}" -type d -exec chmod 0755 {} \;
+find "${install_dir}" -type f -exec chmod 0755 {} \;
 #for dev
 #find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
 #find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
 #set different rights to files. Some files must be secret for regular user
-find "${install_dir}" -type f -not -name "*.sh" -exec chmod --verbose 0644 {} \;
-find "${install_dir}" -type f -name "*.sh" -exec chmod --verbose 0755 {} \;
+find "${install_dir}" -type f -not -name "*.sh" -exec chmod 0644 {} \;
+find "${install_dir}" -type f -name "*.sh" -exec chmod 0755 {} \;
 
-find "${install_dir}autorun" -type f -name "*user*.sh" -exec chown --verbose --changes --recursive  i:i {} \;
+find "${install_dir}autorun" -type f -name "*user*.sh" -exec chown  --changes --recursive  i:i {} \;
 
-chmod --verbose 0600 "${root_vault_file}";
-chmod --verbose 0600 "${root_vault_password_file}";
-chown --verbose --changes root:root "${root_vault_file}";
-chown --verbose --changes root:root "${root_vault_password_file}";
+chmod  0600 "${root_vault_file}" | tr -d '\n'
+chmod  0600 "${root_vault_password_file}"
+chown  --changes root:root "${root_vault_file}"
+chown  --changes root:root "${root_vault_password_file}"
 #read logs:
 #journalctl -b -u dzintara_telemetry
 

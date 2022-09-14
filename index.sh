@@ -950,10 +950,11 @@ if [[ "$1" != "fun" ]]; then
 
 #TODO use load_root_vault to check what rool_vault is ok
 # load variables from root_vault_file
-if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
+#if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
+if load_root_vault
 then
     echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
-    load_root_vault
+    #load_root_vault
     # #TODO check: is password right?
     # load_var_from_file "${root_vault_file}" root_vault_encypted2
     # load_var_from_file "${root_vault_password_file}" master_password2
@@ -1056,4 +1057,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='amazo-3f96aff-2022-09-14-19-47-27'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='egiza-b9047bf-2022-09-14-19-59-48'; echo "${script_subversion}=script_subversion"; 

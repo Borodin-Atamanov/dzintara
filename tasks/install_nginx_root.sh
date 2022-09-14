@@ -239,50 +239,9 @@ fi;
 #declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-selfsigned.key'; # private self-signed key for https
 #declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
 
-#generate config file for openssl  cert generation
-config_data=$(cat <<_ENDOFFILE
-[ req ]
-default_bits        = 2048
-#default_keyfile     = server-key.pem
-distinguished_name  = subject
-req_extensions      = req_ext
-x509_extensions     = x509_ext
-string_mask         = utf8only
-
-# The Subject DN can be formed using X501 or RFC 4514 (see RFC 4519 for a description).
-#   Its sort of a mashup. For example, RFC 4514 does not provide emailAddress.
-[ subject ]
-countryName         = EN
-countryName_default     = US
-
-stateOrProvinceName     = CA
-stateOrProvinceName_default = NY
-
-localityName            = Dzintara
-localityName_default        = New York
-
-organizationName         = Dzintara
-organizationName_default    = Dzintara, LLC
-
-# Use a friendly name here because it's presented to the user. The server's DNS
-#   names are placed in Subject Alternate Names. Plus, DNS names here is deprecated
-#   by both IETF and CA/Browser Forums. If you place a DNS name here, then you
-#   must include the DNS name in the SAN too (otherwise, Chrome and others that
-#   strictly follow the CA/Browser Baseline Requirements will fail).
-commonName          = Dzintara
-commonName_default      = Dzintara
-
-emailAddress            = dzintara@brva.ru
-emailAddress_default        = test@example.com
-
-_ENDOFFILE
-)
-
-# show_var nginx_main_config_file config_data
-# temp_config_file="/tmp/openssl_config_to_generate_certs.conf";
-# echo "$config_data" > "$temp_config_file"
-
 #openssl req -x509 -out localhost.cert -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config <( \ printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+
+foo=${foo:="I must have been unset empty or null!"}
 
 #openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -config "$temp_config_file"
 openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout "$nginx_self_signed_private_key_file" -out "$nginx_self_signed_public_cert_file" -subj "/C=GB/ST=London/L=London/O=Dzintara/OU=Dzintara/CN=Dzintara.com"
