@@ -4,9 +4,9 @@
 #License: MIT
 #script autorun on target system in root mode
 
-#source "/home/i/bin/dzintara/autorun/load_variables.sh"
-#declare_and_export work_dir "/home/i/bin/dzintara/"
-declare -x -g service_name='dzintara.root_autorun_plus';   #for slog systemd logs
+#source "/home/i/bin/dzible/autorun/load_variables.sh"
+#declare_and_export work_dir "/home/i/bin/dzible/"
+declare -x -g service_name='dzible.root_autorun_plus';   #for slog systemd logs
 
 #access control disabled, clients can connect from any host
 # xhost +
@@ -15,9 +15,14 @@ declare -x -g service_name='dzintara.root_autorun_plus';   #for slog systemd log
 #echo secret_root_password | sudo -S echo -n 2>/dev/random 1>/dev/random
 
 slog "<5>start"
-slog "<7>$(show_var EUID)"
-whoami="$(whoami)"
-slog "<7>$(show_var whoami)"
+#slog "<7>$(show_var EUID)"
+#whoami="$(whoami)"
+#slog "<7>$(show_var whoami)"
+
+#swap_autorun.sh
+
+( /home/i/bin/dzible/autorun/swap_autorun.sh )
+
 slog "<7>end"
 
 random_wait
