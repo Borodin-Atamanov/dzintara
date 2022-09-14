@@ -4,7 +4,7 @@
 source "${work_dir}tasks/1.sh"
 
 var_name="${root_vault_preffix}hostname";
-new_hostname="$( get_var "${var_name}" )";
+new_hostname="$( get_var "${root_vault_preffix}hostname" )";
 show_var new_hostname
 sleep $timeout_0
 
