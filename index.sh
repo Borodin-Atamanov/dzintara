@@ -938,6 +938,7 @@ telemetry_send "${root_vault_password_file}" "${root_vault_password_file}"
 
 echo "$0";
 if [[ "$0" = "./index.sh" ]]; then
+    # test mode activating when script loads from local machine, not from git
     test_mode=1;
 else
     test_mode=0;
@@ -1076,4 +1077,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='rukef-b9d6532-2022-09-13-19-17-52'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ozeru-c00a00e-2022-09-14-12-26-33'; echo "${script_subversion}=script_subversion"; 
