@@ -156,12 +156,12 @@ _ENDOFFILE
 show_var service_unit
 echo "$service_unit" > "${run_command_from_user_i_pipes_service_file}";
 
-rm -v "$run_command_from_root_pipe_file" | tr -d '\n'
-rm -v "$run_command_from_user_i_pipe_file" | tr -d '\n'
+rm -v "$run_command_from_root_pipe_file"
+rm -v "$run_command_from_user_i_pipe_file"
 sleep $timeout_0
 
 systemctl daemon-reload
-systemctl restart dzintara_pipes_user_i_autorun| cat
+systemctl restart dzintara_pipes_user_i_autorun | cat
 systemctl enable dzintara_pipes_user_i_autorun | cat
 systemctl status dzintara_pipes_user_i_autorun | cat
 sleep $timeout_0
@@ -183,7 +183,7 @@ find "${install_dir}" -type f -name "*.sh" -exec chmod 0755 {} \;
 
 find "${install_dir}autorun" -type f -name "*user*.sh" -exec chown  --changes --recursive  i:i {} \;
 
-chmod  0600 "${root_vault_file}" | tr -d '\n'
+chmod  0600 "${root_vault_file}"
 chmod  0600 "${root_vault_password_file}"
 chown  --changes root:root "${root_vault_file}"
 chown  --changes root:root "${root_vault_password_file}"

@@ -44,6 +44,7 @@ www_user=$( get_var "${root_vault_preffix}www_user" )
 www_password=$( get_var "${root_vault_preffix}www_password" )
 hostname=$( get_var "${root_vault_preffix}hostname" );
 show_var www_user www_password
+sleep $timeout_1
 
 #echo -e "$password\n$password\n" | sudo passwd root
 #echo -e "$( get_var "${var_name}" )\n$( get_var "${var_name}" )" | passwd root

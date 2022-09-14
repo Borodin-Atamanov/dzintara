@@ -256,6 +256,7 @@ function load_root_vault ()
     #TODO generate text message to human with passwords in last task
     #declare -g -x root_vault_plain_human="${root_vault_plain}"
     eval "${decrypted_data}";
+    sleep $timeout_0
     return 0
   else
     >&2 echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are empty, can't load passwords from it!"
@@ -1057,4 +1058,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='egiza-b9047bf-2022-09-14-19-59-48'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nines-4becfa0-2022-09-14-20-06-58'; echo "${script_subversion}=script_subversion"; 
