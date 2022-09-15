@@ -46,6 +46,8 @@ tor_hostname="$(cat $tor_hostname_file)"
 
 top_b_n_1="$(top -b -n 1)"
 
+swapon="$(swapon)"
+
 free_mega_wide_lohi="$(free --mega --wide --lohi)"
 
 uname_a="$(uname -a)"
@@ -147,6 +149,9 @@ ${tcpdump_interfaces}
 
 free --mega --wide --lohi
 ${free_mega_wide_lohi}
+
+swapon
+${swapon}
 
 top -b -n 1
 ${top_b_n_1}
