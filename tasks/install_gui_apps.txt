@@ -18,3 +18,4 @@ gxkb
 
 #telegram-desktop
 
+#firefox-esr
