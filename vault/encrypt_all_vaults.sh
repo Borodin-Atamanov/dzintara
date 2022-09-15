@@ -71,7 +71,9 @@ for f in *.plain; do
 done;
 #cd "..";
 
-countdown 77 0.01
+exit;
+
+countdown 7 0.01
 
 echo 'Try to decrypt'
 cd "vault";
