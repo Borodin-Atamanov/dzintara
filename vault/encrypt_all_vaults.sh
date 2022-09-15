@@ -37,11 +37,12 @@ cd "$old_dir"
 # md5_of_master_password=$(md5 "${master_password}");
 # echo "md5_of_master_password=${md5_of_master_password}";
 
+
 #encrypt all files with plain data
 cd "vault";
 for f in *.plain; do
 (
-  echo ">>${f}<< ";
+  echo -e "\n\n\n>>${f}<< ";
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
   password_file="${f%.*}.password";
@@ -55,10 +56,13 @@ for f in *.plain; do
     #echo "password_from_file length is ${#master_password}";
     #echo  $file_data;
     #encrypt data with master_password
-    encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
+    #encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
+    set -x
+    encrypt_aes file_data "${master_password}";
+    set +x
     #echo -n "${encrypted_data}" > "${crypted_file}";
-    save_var_to_file "$crypted_file" encrypted_data
-    [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
+    save_var_to_file "$crypted_file" file_data
+    [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}, datalen=${#file_data}";
     #echo "$encrypted_data";
   else
     echo "files not exists : ${password_file} ${f}"
@@ -74,7 +78,7 @@ cd "vault";
 # check encryption with decryption
 for f in *.crypt; do
 (
-  echo "####${f}#### ";
+  echo -e "\n\n\n####${f}#### ";
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
   password_file="${f%.*}.password";
@@ -88,9 +92,10 @@ for f in *.crypt; do
     #echo "password_from_file length is ${#master_password}";
     #echo  $file_data;
     #encrypt data with master_password
-    decrypted_data=$( decrypt_aes "${master_password}" "${file_data}"; )
+    #decrypted_data=$( decrypt_aes "${master_password}" "${file_data}"; )
+    decrypt_aes file_data "${master_password}"
     #echo -n "${encrypted_data}" > "${crypted_file}";
-    show_var decrypted_data
+    show_var file_data
     #save_var_to_file "$crypted_file" encrypted_data
     #[ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
     #echo "$encrypted_data";

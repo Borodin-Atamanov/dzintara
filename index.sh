@@ -63,23 +63,32 @@ function run_task ()
 
 function encrypt_aes ()
 {
-  local passkey="${1}"
+  #function encrypt data with password using AES.
+  # $1 is variable name with data (not the data itself!) result will be save to variable with name from $1
+  local var_name="${1}"
+  local data="${!var_name}"
+  # $2 is the password string
+  local passkey="${2}"
   trim_var passkey
-  local data="${2}"
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
-  echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
-  declare -g aes_error=$?
-  return $aes_error
+  data="$( echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | base32 --wrap=0 )"
+  #declare -g aes_error=$?
+  declare -g ${var_name}="$output";
 }
 export -f encrypt_aes
 
 function decrypt_aes ()
 {
-  local passkey="${1}"
+  #function decrypt data with password using AES.
+  # $1 is variable name with data (not the data itself!) result will be save to variable with name from $1
+  local var_name="${1}"
+  local data="${!var_name}"
+  # $2 is the password string
+  local passkey="${2}"
   trim_var passkey
-  local data="${2}"
-  echo -n "${data}" | base64 -d -i | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
-  declare -g aes_error=$?; # aes_error always empty
+  data="$( echo -n "${data}" | base32 -i -d | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}"; )"
+  aes_error=$?; declare -g -x aes_error;
+  # aes_error always empty ?
   return $aes_error
 }
 export -f decrypt_aes
@@ -187,6 +196,13 @@ function trim_var()
     value="${value#"${value%%[![:space:]]*}"}"
     # remove trailing whitespace characters
     value="${value%"${value##*[![:space:]]}"}"
+
+    # new line
+    # remove leading
+    value="${value#"${value%%$'\n'*}"}"
+    # remove trailing
+    value="${value%"${value##*$'\n'}"}"
+    #value=${value%$'\n'} # remove
     declare -g -x "$var_name=$value";
 }
 export -f trim
@@ -239,7 +255,9 @@ function generate_and_save_root_vault ()
   # TODO check what passwords in file, and we can decrypt it
   load_var_from_file "${root_vault_file}" root_vault_encypted2
   load_var_from_file "${root_vault_password_file}" master_password2
-  decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+  #decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+  decrypted_data="${root_vault_encypted2}"
+  decrypt_aes decrypted_data "${master_password2}"
   show_var decrypted_data
 
   #TODO generate text message to human with passwords in last task
@@ -264,7 +282,9 @@ function load_root_vault ()
       >&2 echo "root_vault_file=${root_vault_file} or root_vault_password_file=${root_vault_password_file} gives empty result. Maybe permissions is not enough? Are you root?"
       return -1;
     fi
-    decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+    #decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
+    decrypted_data="${root_vault_encypted2}"
+    decrypt_aes decrypted_data "${master_password2}"
     show_var decrypted_data
 
     #TODO generate text message to human with passwords in last task
@@ -321,7 +341,9 @@ _ENDOFFILE
   #file_data=$(cat "${f}");
   local root_vault_password="${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}$(  random_str 50; random_str 50; )";
   #root_vault_password="$(trim "${root_vault_password}")"
-  local root_vault_crypt=$( encrypt_aes "${root_vault_password}" "$root_vault_plain"; )
+  #local root_vault_crypt=$( encrypt_aes "${root_vault_password}" "$root_vault_plain"; )
+  local root_vault_crypt="$root_vault_plain" "${root_vault_password}"
+  encrypt_aes root_vault_crypt "${root_vault_password}"
   #load_var_from_file "${root_vault_file}" file_data
   #load_var_from_file "${root_vault_password_file}" file with password
   #echo "password_from_file length is ${#master_password}";
@@ -1116,4 +1138,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='nefut-152d1ab-2022-09-15-20-52-00'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ixexu-22dfcf5-2022-09-15-21-44-07'; echo "${script_subversion}=script_subversion"; 
