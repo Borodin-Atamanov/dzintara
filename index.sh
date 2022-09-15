@@ -64,6 +64,7 @@ function run_task ()
 function encrypt_aes ()
 {
   local passkey="${1}"
+  trim_var passkey
   local data="${2}"
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | openssl base64 -e;
@@ -75,6 +76,7 @@ export -f encrypt_aes
 function decrypt_aes ()
 {
   local passkey="${1}"
+  trim_var passkey
   local data="${2}"
   echo -n "${data}" | base64 -d -i | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}";
   declare -g aes_error=$?; # aes_error always empty
@@ -174,6 +176,18 @@ function trim()
     # remove trailing whitespace characters
     var="${var%"${var##*[![:space:]]}"}"
     printf '%s' "$var"
+}
+export -f trim
+
+function trim_var()
+{
+    local var_name="${1}"
+    local value="${!var_name}"
+    # remove leading whitespace characters
+    value="${value#"${value%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    value="${value%"${value##*[![:space:]]}"}"
+    declare -g -x "$var_name=$value";
 }
 export -f trim
 
@@ -1102,4 +1116,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='uloko-3da4c0e-2022-09-15-20-40-27'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='nefut-152d1ab-2022-09-15-20-52-00'; echo "${script_subversion}=script_subversion"; 
