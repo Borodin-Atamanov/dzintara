@@ -84,6 +84,10 @@ sleep $timeout_0
 
 # setup zram
 
+# set kernel paramaters
+# vm.swappiness equal to zram_in_ram_percents. More percents - more agressive swap using
+sysctl -w vm.swappiness=${zram_in_ram_percents}
+
 fname='/etc/default/zramswap'
 set +x
 load_var_from_file "$fname" config_al2f
