@@ -1,30 +1,51 @@
 #!/usr/bin/bash
 
 work_dir='/home/i/github/dzintara/';
-source "${work_dir}tasks/1.sh"
+#source "${work_dir}tasks/1.sh"
+source /home/i/github/dzintara/index.sh fun
 
 #set -x
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 
-line_to_add="echo source ${load_variables_file} nocd"
+#line_to_add="echo source ${load_variables_file} nocd"
 
-add_line_to_file "/home/i/github/dzintara/test2delete/change_config_test.txt" "$line_to_add"
-mcedit "/home/i/github/dzintara/test2delete/change_config_test.txt"
+#add_line_to_file "/home/i/github/dzintara/test2delete/change_config_test.txt" "$line_to_add"
+#mcedit "/home/i/github/dzintara/test2delete/change_config_test.txt"
 
-exit 0
 
-fname="/home/i/github/dzintara/test2delete/change_config_test.txt"
+fname="/home/i/github/dzintara/test2delete/change_config_test2.txt"
 load_var_from_file "$fname" config
+echo "$config"
 #md5sum $fname
 
 
 #echo -e "\n\n\n";
 #cat $fname | xxd
 
-config=$( replace_line_by_string "$config" "80" 'without sed=1'  '#' )
-changed=$?
-show_var changed
+#set -x
+replace_line_by_string config "80" 'without sed=1'  '#'
+#set +x
+echo "$config"
+
+fname="/home/i/github/dzintara/test2delete/change_config_test3.txt"
+save_var_to_file "$fname" config
+
+mcview "$fname"
+
+exit 0
+
+fname="/home/i/github/dzintara/test2delete/change_config_test.txt"
+load_var_from_file "$fname" config
+
+
+#md5sum $fname
+
+
+#echo -e "\n\n\n";
+#cat $fname | xxd
+
+replace_line_by_string config "80" 'without sed=1'  '#' )
 echo "$config"
 
 fname="/home/i/github/dzintara/test2delete/change_config_test2.txt"

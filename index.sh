@@ -626,11 +626,21 @@ function load_var_from_file ()
     #file or named pipe exists
     #file_value=$( cat "${fname}" );
     #command_eval='declare -g "'${var_name}'=$file_value"';
-    command_eval='declare -g "'${var_name}'=$(cat "'${fname}'" )"';
+
+    #command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; # echo "$'${var_name}'"; ';
+    #>&2 echo $command_eval;
+    #>&2 show_var command_eval
+    #eval "$command_eval";
+
+    local temp_var="$(<"${fname}")"
+    local x0a=$'\x0A'; #HEX code char
+    temp_var="${temp_var}${x0a}";  # add new line at the end because bash remove it
+    declare -g "${var_name}"="$temp_var";
+    #command_eval='declare -g "'${var_name}'=$(cat "'${fname}'" )"';
     #this command removes newlines in the end of file
     #echo "$command_eval"
     #show_var command_eval
-    eval "$command_eval";
+    #eval "$command_eval";
     #variable with name "${var_name}" now contains value from file, but without newlines in the end
     #md5_of_var=$(md5 "${!var_name}")
     #show_var md5_of_var
@@ -649,10 +659,11 @@ function read_var ()
   [ -z "$var_name" ] && return -1
   local message="$2"
   read -p "${message}" temp_var < /dev/tty;
-  command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; # echo "$'${var_name}'"; ';
+  #command_eval='declare -g -x "'${var_name}'"; '${var_name}'="$temp_var"; # echo "$'${var_name}'"; ';
   #>&2 echo $command_eval;
   #>&2 show_var command_eval
-  eval "$command_eval";
+  #eval "$command_eval";
+  declare -g "${var_name}"="$temp_var";
   #use:
   #random_var=$(random_str 5); read_var "$random_var"  "write random variable: "; echo "${!random_var}"
 }
@@ -662,29 +673,31 @@ function save_var_to_file ()
 {
   local fname="$1"  #path to file or something like file
   local var_name="$2"
-  echo -n "${!var_name}" > "${fname}"
+  #local x0a=$'\x0A'; #HEX code of new line char
+  #echo -n "${!var_name}${x0a}" > "${fname}" # add new line at the end because bash remove it
+  echo "${!var_name}" > "${fname}" # add new line at the end because bash remove it
 }
 export -f save_var_to_file
 
 function replace_line_by_string ()
 {
-  #TODO get first parameters as variable name, not value
   #function search for strings contains substring $2 in variable, . And replace the string with $3
+  #get first parameter as variable name, not a value!
   #if original string contains $4 - then this string will not change
   #function use global variables to define function's behavior
   #if $1 is 'reset' - then global variables will reset to default values
   #echo -n $(( $2 < $1 ? $2 : $1 ))
-  local haystack="$1";  #multiline variable, where the function will search
+  #local haystack="$1";  #multiline variable, where the function will search
+  local haystack_name="$1";
+  local haystack="${!haystack_name}";
+  local haystack2=''
+
   local needle="$2"; #search for this substring
   local slide="$3"; #and replace sting to slide (if needle found in the string)
   local stop_word="$4"; #if stop word found in string - then this stings is untouchable
-  #local xff=$(echo -n -e $'\xFF'); #delimeter with HEX code 0xFF
-  #local xff='|'
-  local x0a=$(echo -n -e $'\x0A'); #HEX code char
-  local x0a=$(echo -n -e "\n"); #HEX code char
 
-  if [[ "$haystack" = 'reset' ]]; then
-    #if line not in file - add it in the end
+  if [[ "$haystack" = 'reset_reset_reset' ]]; then
+    # reset global defined vars for this function
     :
     return -1;
   fi;
@@ -699,13 +712,15 @@ function replace_line_by_string ()
     #haystack2="$( echo -n "${haystack2}" | grep --fixed-strings --ignore-case --invert-match "${stop_word}" )"
     :
   fi;
-  any_line_changed=0;  # by default we don't change any line in variable
+  local any_line_changed=0;  # by default we don't change any line in variable
+  local slide_already_here=0;  # if slide is already in one or more strings - don't add slide in the end
   while IFS= read -r line; do
     #haystack3=$( echo -n "$haystack3" | sed --expression="s${xff}${line}${xff}${slide}${xff}g" );
     #haystack4="${haystack3/${line}/${slide}}"
     #>&2 echo line="$line" needle="$needle" stop_word="$stop_word"
     #>&2 echo -n "replace_line_by_string() ";
     #>&2 show_var line needle slide stop_word
+    #show_var line needle stop_word
     if is_substr "$line" "$needle" && ! is_substr "$line" "$stop_word" ; then
       #change this line to slide
       line="$slide";
@@ -716,17 +731,34 @@ function replace_line_by_string ()
       #Don't change this line to slide
       :
     fi
+    # check if line contains $slide and not contains stop_word
+    if is_substr "$line" "$slide" && ! is_substr "$line" "$stop_word" ; then
+      #change this line to slide
+      line="$slide";
+      any_line_changed=1;
+      #>&2  echo 'CHANGE!'
+    else
+      #echo -n "NO: ";
+      #Don't change this line to slide
+      :
+    fi
+
+
     #haystack3="${haystack3//$line/$slide}" #doesnt work for me in some cases!
     #echo "s${xff}${line}${xff}new${xff}g"
-    echo "$line"
+    #echo "$line"
+    haystack2="${haystack2}${line}${x0a}"
   done <<< "$haystack"
   #if we did't find needle and we should add $slide to file - let's do it
   if [[ "$replace_line_by_string_add_slide_if_no_needle" = "1" ]] && [[ "$any_line_changed" = "0" ]]; then
-    echo "$slide";
+    #echo "$slide";
+    haystack2="${haystack2}${slide}${x0a}"
     any_line_changed=1
-    #TODO dont add $slide if it in file and include stop_word
+    #TODO dont add $slide if it in file and not include stop_word
   fi;
   #show_var replace_line_by_string_add_slide_if_no_needle any_line_changed
+  declare -g "${haystack_name}"="$haystack2";
+
   return $any_line_changed;
 }
 export -f replace_line_by_string
@@ -743,7 +775,8 @@ function add_line_to_file ()
   if [[ -e "${fname}" ]] ; then
     #file or named pipe exists
     load_var_from_file "$fname" config_al2f
-    config_al2f=$( replace_line_by_string "$config_al2f" "$line2add" "$line2add" "$comments_sign" )
+    #config_al2f=$( replace_line_by_string "$config_al2f" "$line2add" "$line2add" "$comments_sign" )
+    replace_line_by_string config_al2f "$line2add" "$line2add" "$comments_sign"
     changed=$?
     show_var changed fname
     #echo "$config_al2f"
@@ -767,8 +800,9 @@ function search_and_replace ()
   local slide_name="$3";
   local slide="${!slide_name}";
   local haystack2="${haystack//$needle/$slide}" #
-  command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
-  eval "$command_eval";
+  #command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
+  #eval "$command_eval";
+  declare -g "${haystack_name}"="$haystack2";
 }
 export -f search_and_replace
 
@@ -891,6 +925,7 @@ export -f parse_key_value
 
 parse_key_value "$@"
 
+declare_and_export x0a $'\x0A' # new line chars used in many functions
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
@@ -1068,4 +1103,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ubala-10ad525-2022-09-15-17-43-09'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='lufos-a977530-2022-09-15-19-55-49'; echo "${script_subversion}=script_subversion"; 

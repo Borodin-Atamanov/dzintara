@@ -14,4 +14,5 @@ HiddenServicePort 30222 127.0.0.1:30222
 .
 echo source /home/i/bin/dzintara/autorun/load_variables.sh nocd
 
+without sed=1
 

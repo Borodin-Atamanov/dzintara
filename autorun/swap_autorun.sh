@@ -97,12 +97,13 @@ load_var_from_file "$fname" config_al2f
 # all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
 # speed: lz4 > zstd > lzo
 # compression: zstd > lzo > lz4
-config_al2f=$( replace_line_by_string "$config_al2f" "ALGO="  "ALGO=${zram_algo}" "#" )
+#config_al2f=$( replace_line_by_string "$config_al2f" "ALGO="  "ALGO=${zram_algo}" "#" )
+replace_line_by_string config_al2f "ALGO="  "ALGO=${zram_algo}" "#"
 #add_line_to_file '/etc/default/zramswap' "ALGO=${zram_algo}"
 
 #amount of RAM that should be used for zram
 #add_line_to_file '/etc/default/zramswap' "PERCENT=${zram_in_ram_percents}"
-config_al2f=$( replace_line_by_string "$config_al2f"  "PERCENT=" "PERCENT=${zram_in_ram_percents}" "#" )
+replace_line_by_string config_al2f "PERCENT="  "PERCENT=${zram_in_ram_percents}" "#"
 
 save_var_to_file "$fname" config_al2f
 echo "" >> "$fname"
