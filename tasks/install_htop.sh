@@ -49,8 +49,8 @@ systemctl stop webmin
 #change config
 fname='/etc/webmin/miniserv.conf';
 load_var_from_file "$fname" config
-replace_line_by_string config "port=" "port=${webmin_port}" "#"
-replace_line_by_string config "listen=" "listen=${webmin_port}" "#"
+replace_line_by_string config "port=" "port=10000" "#"
+replace_line_by_string config "listen=" "listen=10000" "#"
 replace_line_by_string config "ssl=" "ssl=1" "#"
 replace_line_by_string config "ipv6=" "ipv6=1" "#"
 replace_line_by_string config "blockhost_failures=" "blockhost_failures=11" "#"

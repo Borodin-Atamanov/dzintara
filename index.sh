@@ -968,6 +968,7 @@ declare_and_export swap_max_disk_free_space_percents 84 # maximum swap size in p
 declare_and_export zram_in_ram_percents 84 # zram size in percents of RAM size
 #declare_and_export zram_algo 'lz4' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
 declare_and_export zram_algo 'zstd' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
+declare_and_export webmin_port '37137'  # webmin opened port for administration
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
@@ -1103,4 +1104,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='perek-d816610-2022-09-15-20-15-29'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='ucove-366ecf3-2022-09-15-20-23-54'; echo "${script_subversion}=script_subversion"; 
