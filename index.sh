@@ -16,6 +16,8 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
+#export dzintara_version='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${dzintara_version}";
+
 function run_task ()
 {
   declare -g -x task_name="${1}";
@@ -1154,4 +1156,7 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${script_subversion}=script_subversion"; 
+#export script_subversion='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${script_subversion}=script_subversion";
+
+declare -g -x script_version='biloru-2022-09-160127-217df7c'; 
+
