@@ -1145,4 +1145,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='nadak-f212a30-2022-09-16-00-36-04'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='lilub-b38e128-2022-09-16-00-37-38'; echo "${script_subversion}=script_subversion"; 
