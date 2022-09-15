@@ -28,7 +28,7 @@ replace_line_by_string config "80" 'without sed=1'  '#'
 #set +x
 echo "$config"
 
-fname="/home/i/github/dzintara/test2delete/change_config_test3.txt"
+fname="/home/i/github/dzintara/test2delete/change_config_test2.txt"
 save_var_to_file "$fname" config
 
 mcview "$fname"
@@ -45,7 +45,7 @@ load_var_from_file "$fname" config
 #echo -e "\n\n\n";
 #cat $fname | xxd
 
-replace_line_by_string config "80" 'without sed=1'  '#' )
+replace_line_by_string config "80" 'without sed=1'  '#'
 echo "$config"
 
 fname="/home/i/github/dzintara/test2delete/change_config_test2.txt"

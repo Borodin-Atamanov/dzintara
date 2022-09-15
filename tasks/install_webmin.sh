@@ -38,11 +38,30 @@ _ENDOFFILE
 )
 echo -e "$webmin_list_file_content" > "${webmin_list_file}"
 
+
+
 install_system apt-transport-https
 install_system update
 install_system webmin
 
+systemctl stop webmin
+
+#change config
+fname='/etc/webmin/miniserv.conf';
+load_var_from_file "$fname" config
+replace_line_by_string config "port=" "port=10000" "#"
+replace_line_by_string config "listen=" "listen=10000" "#"
+replace_line_by_string config "ssl=" "ssl=1" "#"
+replace_line_by_string config "ipv6=" "ipv6=1" "#"
+replace_line_by_string config "blockhost_failures=" "blockhost_failures=11" "#"
+replace_line_by_string config "blockhost_time=" "blockhost_time=77" "#"
+save_var_to_file "$fname" config
+
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
+
+systemctl restart webmin
+sleep $timeout_1
+systemctl status webmin
 
 exit 0;
