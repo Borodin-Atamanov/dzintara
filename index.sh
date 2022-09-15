@@ -522,9 +522,17 @@ function install_system ()
   fi
   if [[ "${install_system_updated}" = "" ]] || [[ "${install_system_updated}" = 0 ]]  ; then
     #TODO create interprocess variable to check what update was minute ago
+    #find monitor_running_flag -mmin +60
+    #test "$( find root_vault_test.sh -mmin +7 )"; echo $?
+    tfile="${ipc_dir}/install_system_update"; # file to save time of last update
+    find "${tfile}" -mmin +7;
+    is_file_old=$?
+    show_var is_file_old
+    sleep $timeout_0
     timeout --kill-after=77 $timeout_task dpkg --configure -a | cat;
     timeout --kill-after=77 $timeout_task apt-get --yes update | cat;
     timeout --kill-after=77 $timeout_task apt-get --yes autoremove | cat;
+    touch "$tfile";
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
@@ -994,6 +1002,7 @@ declare_and_export xkeyboard_autorun_service_file "/etc/systemd/system/dzintara_
 declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root secret variables
 declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
 declare_and_export root_vault_preffix 'root_vault_' #preffix for vault variables names
+declare_and_export ipc_dir "${install_dir}ipc"  # directory to interprocess communication
 declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
 declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzintara_pipes_root_autorun.service"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
@@ -1145,4 +1154,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='lilub-b38e128-2022-09-16-00-37-38'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${script_subversion}=script_subversion"; 
