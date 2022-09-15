@@ -33,7 +33,9 @@ slog "<5>start dzintara.telemetry. It will send some anonymous telemetry data."
 #encrypted_data=$(cat "${root_vault_file}");
 load_var_from_file "$telemetry_vault_file" encrypted_data
 #encrypted_data=$( encrypt_aes "${pass}" "${data}"; )
-decrypted_data=$(decrypt_aes "$telemetry_vault_file" "${encrypted_data}")
+#decrypted_data=$(decrypt_aes "$telemetry_vault_file" "${encrypted_data}")
+decrypted_data="$encrypted_data"
+decrypt_aes decrypted_data telemetry_vault_file
 show_var decrypted_data
 #echo "$decrypted_data";
 #load all variables from decrypted vault

@@ -261,7 +261,7 @@ function generate_and_save_root_vault ()
   #decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
   decrypted_data="${root_vault_encypted2}"
   decrypt_aes decrypted_data "${master_password2}"
-  show_var decrypted_data
+  #show_var decrypted_data
 
   #TODO generate text message to human with passwords in last task
   #declare -g -x root_vault_plain_human="${root_vault_plain}"
@@ -289,7 +289,7 @@ function load_root_vault ()
     decrypted_data="${root_vault_encypted2}"
     #trim_var master_password2
     decrypt_aes decrypted_data "${master_password2}"
-    show_var decrypted_data
+    #show_var decrypted_data
 
     #TODO generate text message to human with passwords in last task
     #declare -g -x root_vault_plain_human="${root_vault_plain}"
@@ -1142,4 +1142,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='igani-61d088c-2022-09-15-23-14-21'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='zesex-4939324-2022-09-15-23-21-07'; echo "${script_subversion}=script_subversion"; 
