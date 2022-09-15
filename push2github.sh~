@@ -16,7 +16,7 @@ time ( \
 
     #change version in file
     load_var_from_file "index.sh" index_sh_code
-    script_version="$(random_str 5)$(random_str 1)-$(git rev-list --all --count)-$(date "+%y%m%d%H%M")";
+    script_version="$(random_str 5)$(random_str 1)-$(date "+%y%m%d%H%M")-$(git describe  --always --tags)";
     script_version_code_preffix='declare -g -x script_version=';
     script_version_code="${script_version_code_preffix}'${script_version}'; ";
     replace_line_by_string index_sh_code "${script_version_code_preffix}" "${script_version_code}" '#'
