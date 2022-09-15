@@ -18,6 +18,7 @@ unzip
 webp
 
 ssh
+sshfs
 openssh-client
 sshpass
 openssh-server

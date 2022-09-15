@@ -86,6 +86,9 @@ function decrypt_aes ()
   # $2 is the password string
   passkey="${2}"
   trim_var passkey
+  passkey_hex="${passkey}"
+  >&2 bin_2_hex passkey_hex
+  show_var passkey_hex passkey
   data="$( echo -n "${data}" | base32 -i -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}"; )"
   aes_error=$?; declare -g -x aes_error;
   # aes_error always empty ?
@@ -1142,4 +1145,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ecice-5890549-2022-09-15-23-27-57'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='vonet-d490a2e-2022-09-16-00-25-25'; echo "${script_subversion}=script_subversion"; 
