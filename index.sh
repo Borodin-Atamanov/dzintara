@@ -68,12 +68,12 @@ function encrypt_aes ()
   local var_name="${1}"
   local data="${!var_name}"
   # $2 is the password string
-  local passkey="${2}"
+  passkey="${2}"
   trim_var passkey
   #openssl enc -in PrimaryDataFile -out EncryptedDataFile -e -aes256 -pass "${passkey}" -pbkdf2
   data="$( echo -n "${data}" | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}" | base32 --wrap=0 )"
   #declare -g aes_error=$?
-  declare -g ${var_name}="$output";
+  declare -g ${var_name}="$data";
 }
 export -f encrypt_aes
 
@@ -84,11 +84,12 @@ function decrypt_aes ()
   local var_name="${1}"
   local data="${!var_name}"
   # $2 is the password string
-  local passkey="${2}"
+  passkey="${2}"
   trim_var passkey
-  data="$( echo -n "${data}" | base32 -i -d | openssl enc -e -aes-256-cbc -pbkdf2  -pass "pass:${passkey}"; )"
+  data="$( echo -n "${data}" | base32 -i -d | openssl enc -d -aes-256-cbc -pbkdf2  -pass "pass:${passkey}"; )"
   aes_error=$?; declare -g -x aes_error;
   # aes_error always empty ?
+  declare -g ${var_name}="$data";
   return $aes_error
 }
 export -f decrypt_aes
@@ -191,19 +192,19 @@ export -f trim
 function trim_var()
 {
     local var_name="${1}"
-    local value="${!var_name}"
+    local val="${!var_name}"
     # remove leading whitespace characters
-    value="${value#"${value%%[![:space:]]*}"}"
+    val="${val#"${val%%[![:space:]]*}"}"
     # remove trailing whitespace characters
-    value="${value%"${value##*[![:space:]]}"}"
+    val="${val%"${val##*[![:space:]]}"}"
 
     # new line
     # remove leading
-    value="${value#"${value%%$'\n'*}"}"
+    #value="${value#"${value%%$'\n'*}"}"
     # remove trailing
-    value="${value%"${value##*$'\n'}"}"
+    #value="${value%"${value##*$'\n'}"}"
     #value=${value%$'\n'} # remove
-    declare -g -x "$var_name=$value";
+    declare -g -x "$var_name=$val";
 }
 export -f trim
 
@@ -252,6 +253,8 @@ function generate_and_save_root_vault ()
 
   save_root_vault
 
+  #return 0
+
   # TODO check what passwords in file, and we can decrypt it
   load_var_from_file "${root_vault_file}" root_vault_encypted2
   load_var_from_file "${root_vault_password_file}" master_password2
@@ -262,8 +265,8 @@ function generate_and_save_root_vault ()
 
   #TODO generate text message to human with passwords in last task
   #declare -g -x root_vault_plain_human="${root_vault_plain}"
+  sleep $timeout_0
   eval "${decrypted_data}";
-  sleep $timeout_1
 }
 export -f generate_and_save_root_vault
 
@@ -284,6 +287,7 @@ function load_root_vault ()
     fi
     #decrypted_data=$( decrypt_aes "${master_password2}" "${root_vault_encypted2}"; )
     decrypted_data="${root_vault_encypted2}"
+    #trim_var master_password2
     decrypt_aes decrypted_data "${master_password2}"
     show_var decrypted_data
 
@@ -339,10 +343,10 @@ _ENDOFFILE
   #echo $crypted_file
   # load data from file to variable
   #file_data=$(cat "${f}");
-  local root_vault_password="${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}$(  random_str 50; random_str 50; )";
+  root_vault_password="${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}$(  random_str 50; random_str 50; )";
   #root_vault_password="$(trim "${root_vault_password}")"
   #local root_vault_crypt=$( encrypt_aes "${root_vault_password}" "$root_vault_plain"; )
-  local root_vault_crypt="$root_vault_plain" "${root_vault_password}"
+  root_vault_crypt="$root_vault_plain"
   encrypt_aes root_vault_crypt "${root_vault_password}"
   #load_var_from_file "${root_vault_file}" file_data
   #load_var_from_file "${root_vault_password_file}" file with password
@@ -1138,4 +1142,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ixexu-22dfcf5-2022-09-15-21-44-07'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='etata-f7b9cb8-2022-09-15-22-39-29'; echo "${script_subversion}=script_subversion"; 
