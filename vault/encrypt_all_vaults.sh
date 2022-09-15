@@ -67,11 +67,14 @@ for f in *.plain; do
 done;
 #cd "..";
 
+countdown 77 0.01
 
+echo 'Try to decrypt'
 cd "vault";
+# check encryption with decryption
 for f in *.crypt; do
 (
-  echo ">>${f}<< ";
+  echo "####${f}#### ";
   #echo "${f%.*.*}";
   crypted_file="${f%.*}.crypt";
   password_file="${f%.*}.password";
@@ -89,7 +92,7 @@ for f in *.crypt; do
     #echo -n "${encrypted_data}" > "${crypted_file}";
     show_var decrypted_data
     #save_var_to_file "$crypted_file" encrypted_data
-    [ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
+    #[ -s "${crypted_file}" ] && echo "crypted to ${crypted_file}, passlen=${#master_password}";
     #echo "$encrypted_data";
   else
     echo "files not exists : ${password_file} ${crypted_file}"

@@ -933,7 +933,7 @@ declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
 #declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
 declare_and_export service_name 'dzintara';   #for slog systemd logs
 declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzintara.git';
-
+#TODO add ssh port to config
 declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.service'; #dzintara autorun service, what run on system boot
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install
 declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
@@ -959,8 +959,6 @@ declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe
 declare_and_export nginx_shared_dir '/home/i/share/'; #this directory will be shared without login and pass in nginx
 declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-selfsigned.key'; # private self-signed key for https
 declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
-#declare_and_export o_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
-#openssl req -x509 -nodes -days 111111 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
 declare_and_export swap_file_path '/swapfile.dzi' # path to swap file
 declare_and_export swap_max_ram_percents 120 # maximum swap size in percents of RAM
 declare_and_export swap_max_disk_free_space_percents 84 # maximum swap size in percents free disk space
@@ -1104,4 +1102,4 @@ fi; #end of fun if
 
 #to delete script_subversion from script use
 #cat index.sh | grep -v '^script_subversion' | tee index-new.sh
-export script_subversion='ucove-366ecf3-2022-09-15-20-23-54'; echo "${script_subversion}=script_subversion"; 
+export script_subversion='uloko-3da4c0e-2022-09-15-20-40-27'; echo "${script_subversion}=script_subversion"; 
