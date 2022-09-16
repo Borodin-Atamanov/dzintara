@@ -80,7 +80,7 @@ cat "$torsocks_config_overwrite_file" >> "$torsocks_conf_file"
 #chmod -v -R 700  /var/lib/tor/
 #systemctl restart tor; journalctl -f -t tor
 
-netstat --listen | cat
+netstat -tulpn | cat
 sleep 1;
 systemctl enable tor | cat
 sleep 1;

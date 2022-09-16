@@ -10,7 +10,7 @@ declare -g -x work_dir_autorun="${work_dir}autorun/";
 
 #load variables
 #source "/home/i/bin/dzintara/autorun/load_variables.sh"
-source_load_variables="source ${work_dir_autorun}load_variables.sh";
+source_load_variables="source ${work_dir_autorun}load_variables.sh nocd";
 $source_load_variables;
 
 declare -x -g service_name='dzintara.xkeyboard';   #for slog systemd logs
@@ -28,9 +28,14 @@ bash="$( get_command_fullpath bash )";
 
 #echo -e "remove Lock = Caps_Lock\nremove Control = Control_L\nkeysym Control_L = Caps_Lock\nkeysym Caps_Lock = Control_L\nadd Lock = Caps_Lock\nadd Control = Control_L\n" | xmodmap -v -
 #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk"
-nohup $bash -c 'while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after='$timeout_2' '$timeout_4' '$gxkb'; sleep '$timeout_2'; done; ' &
-sleep $timeout_1
+$nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 #nohup $bash -c 'while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after='$timeout_2' '$timeout_4' '$xneur'; sleep '$timeout_2'; done; ' &
+$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xneur; done; " &
+sleep $timeout_1
+# nohup="$( get_command_fullpath nohup )"; \
+# source_load_variables="source '"$load_variables_file"'"; \
+# bash="$( get_command_fullpath bash )"; \
+# su --login i --shell="${bash}" --command="${source_load_variables}; xneur;"
 
 #while : ; do :
 for ((i=7;i>=0;i--)); do

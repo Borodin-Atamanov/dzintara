@@ -51,11 +51,20 @@ fname='/etc/webmin/miniserv.conf';
 load_var_from_file "$fname" config
 replace_line_by_string config "port=" "port=${webmin_port}" "#"
 replace_line_by_string config "listen=" "listen=${webmin_port}" "#"
+#TODO add miltiline listen here to listen ipv6 too
 replace_line_by_string config "ssl=" "ssl=1" "#"
 replace_line_by_string config "ipv6=" "ipv6=1" "#"
 replace_line_by_string config "blockhost_failures=" "blockhost_failures=11" "#"
 replace_line_by_string config "blockhost_time=" "blockhost_time=77" "#"
 save_var_to_file "$fname" config
+
+# listen x.x.x.x;
+# listen [x:x:x:x:x:x:x:x];
+# listen x.x.x.x:443 ssl;
+# listen [x:x:x:x:x:x:x:x]:443 ssl;
+# ssl_certificate /var/www/vhosts/testvps/ssl.cert;
+# ssl_certificate_key /var/www/vhosts/testvps/ssl.key;
+
 
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
