@@ -62,6 +62,7 @@ _ENDOFFILE
 
 user_text=$(cat <<_ENDOFFILE
 ${user_text}
+# ${hostname}
 # Save this important information about your system passwords in your password manager
 # This fille will delete after system reboot
 
