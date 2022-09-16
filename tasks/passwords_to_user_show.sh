@@ -183,7 +183,8 @@ ln -v --symbolic "${password_in_plain_text_for_user_file}" "${link_to_password_i
 source_load_variables="source '"$load_variables_file"'"
 bash="$( get_command_fullpath bash )";
 nohup="$( get_command_fullpath nohup )";
-#xdg-open http://127.0.0.1/${link_to_password_in_plain_text_for_user_file}
+
+sleep $timeout_0
 
 eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open http://127.0.0.1/${link_to_password_in_plain_text_for_user_file} & ' ";
 slog "<7>eval this  '${eval_this}'"
@@ -191,5 +192,8 @@ eval "${eval_this}";
 sleep $timeout_0
 
 
+eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open ${link_to_password_in_plain_text_for_user_file} & ' ";
+slog "<7>eval this  '${eval_this}'"
+eval "${eval_this}";
 sleep $timeout_0
 
