@@ -5,4 +5,9 @@ source "${work_dir}tasks/1.sh"
 
 #export
 ( set -o posix ; set )
-sleep $timeout_1
+sleep $timeout_0
+declare -x -F
+sleep $timeout_0
+
+
+

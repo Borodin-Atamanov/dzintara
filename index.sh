@@ -17,7 +17,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
 #export dzintara_version='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${dzintara_version}";
-declare -g -x script_version='kulala-152-2209160141'; 
+declare -g -x script_version='uvenoo-153-2209161406'; 
 
 function run_task ()
 {
@@ -212,7 +212,7 @@ function trim_var()
     #value=${value%$'\n'} # remove
     declare -g -x "$var_name=$val";
 }
-export -f trim
+export -f trim_var
 
 function declare_and_export ()
 {
@@ -976,6 +976,24 @@ function parse_key_value ()
    done
 }
 export -f parse_key_value
+
+function get_all_host_addresses
+{
+  all_host_ip=''
+  hostname_ip="$(hostname --all-ip-addresses)"
+  all_host_ip="${all_host_ip}${x0a}${hostname_ip}${x0a}"
+
+  # external ip
+  ipfy4="$(timeout --kill-after=$timeout_1 $timeout_2 wget -qO - 'https://api.ipify.org/?format=txt')"
+  all_host_ip="${all_host_ip}${x0a}${ipfy4}"
+  ipfy6="$(timeout --kill-after=$timeout_1 $timeout_2 wget -qO - 'https://api64.ipify.org/?format=txt')"
+  if [[ "$ipfy6" = "$ipfy4" ]]; then
+      ipfy6='';
+  else
+      all_host_ip="${all_host_ip}${x0a}${ipfy6}"
+  fi
+}
+export -f get_all_host_addresses
 
 parse_key_value "$@"
 
