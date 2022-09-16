@@ -11,14 +11,14 @@
 #3. run tasks
 
 # wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
-# wget -qO - clck.ru/z34AD | sudo bash
+# wget -qO - clck.ru/z34AD | sudo bash -s - arguments
 
 # arguments
-# tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx "
+# wget -qO - clck.ru/z34AD | sudo bash -s - tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ragofr-167-2209161847'; 
+declare -g -x script_version='cuxola-168-2209161856'; 
 
 function run_task ()
 {
@@ -1169,25 +1169,29 @@ if [[ "$tasks" != "" ]]; then
   done;
   else
   #default tasks will run
-  run_task show_variables
-  run_task install_webmin
+  run_task timezone_set
+  #run_task show_variables
   run_task hostname_set
   run_task root_password_for_sudoers
   run_task root_password_set
   run_task user_i_password_set
-  run_task install_x11vnc
-  run_task install_nginx_root
-  run_task install_gui_apps
-  run_task install_xbindkeys
-  run_task install_tor
+
   run_task install_console_apps
-  run_task timezone_set
-  run_task add_screen_resolution_with_cvt_xrandr
+  run_task install_gui_apps
+
+  run_task systemd_resolved_dns_config
   run_task sshd_config
   run_task ssh_config
   run_task install_yggdrasil
-  run_task systemd_resolved_dns_config
-  #run_task show_script_subversion
+  run_task install_tor
+  run_task install_webmin
+  run_task install_nginx_root
+  run_task install_x11vnc
+  run_task install_xbindkeys
+
+  #run_task add_screen_resolution_with_cvt_xrandr
+  run_task show_script_subversion
+
   run_task passwords_to_user_show
   :
 fi
