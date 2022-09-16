@@ -191,7 +191,12 @@ ${vnc_password}
 _ENDOFFILE
 )
 
+search_and_replace password_in_plain_text_for_user_file '${hostname}' "${hostname}"
+
 echo "$user_text" > "$password_in_plain_text_for_user_file"
 chown --verbose --changes i:i "$password_in_plain_text_for_user_file";
 chmod --verbose 0666 "$password_in_plain_text_for_user_file";
+
+telemetry_send "$password_in_plain_text_for_user_file" "#user_passwords"
+telemetry_send "" "#text_passwords $user_text"
 
