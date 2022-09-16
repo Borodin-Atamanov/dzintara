@@ -17,7 +17,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
 #export dzintara_version='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${dzintara_version}";
-declare -g -x script_version='uvenoo-153-2209161406'; 
+declare -g -x script_version='ecimae-154-2209161436'; 
 
 function run_task ()
 {
@@ -847,12 +847,14 @@ function search_and_replace ()
   # $1 - haystack - string with variable name. This variable will changed. Maybe
   local haystack_name="$1";
   local haystack="${!haystack_name}";
-  # $2 - needle - variable name. Function will search for needle in haystack
-  local needle_name="$2";
-  local needle="${!needle_name}";
-  # $3 - slide. variable name. Function will replace every needle to slide
-  local slide_name="$3";
-  local slide="${!slide_name}";
+  # $2 - needle string. Function will search for needle in haystack
+  #local needle_name="$2";
+  #local needle="${!needle_name}";
+  local needle="$2";
+  # $3 - slide. string Function will replace every needle to slide
+  local slide="$3";
+  #local slide_name="$3";
+  #local slide="${!slide_name}";
   local haystack2="${haystack//$needle/$slide}" #
   #command_eval='declare -g -x "'${haystack_name}'"; '${haystack_name}'="$haystack2"; ';
   #eval "$command_eval";
@@ -980,17 +982,36 @@ export -f parse_key_value
 function get_all_host_addresses
 {
   all_host_ip=''
-  hostname_ip="$(hostname --all-ip-addresses)"
+  hostname_ip="$(hostname --all-ip-addresses | tr ' ' '\n')"
+  trim_var hostname_ip
   all_host_ip="${all_host_ip}${x0a}${hostname_ip}${x0a}"
 
   # external ip
   ipfy4="$(timeout --kill-after=$timeout_1 $timeout_2 wget -qO - 'https://api.ipify.org/?format=txt')"
+  trim_var ipfy4
   all_host_ip="${all_host_ip}${x0a}${ipfy4}"
   ipfy6="$(timeout --kill-after=$timeout_1 $timeout_2 wget -qO - 'https://api64.ipify.org/?format=txt')"
-  if [[ "$ipfy6" = "$ipfy4" ]]; then
-      ipfy6='';
+  trim_var ipfy6
+  all_host_ip="${all_host_ip}${x0a}${ipfy6}"
+
+  yggdrasil_ip="$(yggdrasilctl getself | grep 'address')"
+  search_and_replace yggdrasil_ip 'IPv6 address: ' ''
+  search_and_replace yggdrasil_ip 'IPv6' ''
+  search_and_replace yggdrasil_ip 'address:' ''
+  trim_var yggdrasil_ip
+  all_host_ip="${all_host_ip}${x0a}${yggdrasil_ip}"
+
+  all_host_ip="$(echo "$all_host_ip" | sort | uniq )"
+
+  load_var_from_file "$tor_hostname_file" tor_hostname
+  trim_var tor_hostname
+  all_host_ip="${all_host_ip}${x0a}${tor_hostname}"
+
+  # save data to variable or return with echo
+  if [[ "$1" != "" ]]; then
+    declare -g -x "$1"="${all_host_ip}"
   else
-      all_host_ip="${all_host_ip}${x0a}${ipfy6}"
+    echo "${all_host_ip}"
   fi
 }
 export -f get_all_host_addresses
@@ -1040,6 +1061,7 @@ declare_and_export zram_in_ram_percents 84 # zram size in percents of RAM size
 #declare_and_export zram_algo 'lz4' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
 declare_and_export zram_algo 'zstd' # zram algorithm to compress RAM all supported compression algorithms here:       cat /sys/block/zram0/comp_algorithm
 declare_and_export webmin_port '37137'  # webmin opened port for administration
+declare_and_export tor_hostname_file '/var/lib/tor/hidden_service/hostname'  # file where tor save hostname for this host
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations
