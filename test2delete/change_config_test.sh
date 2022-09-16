@@ -4,7 +4,7 @@ work_dir='/home/i/github/dzintara/';
 #source "${work_dir}tasks/1.sh"
 source /home/i/github/dzintara/index.sh fun
 
-#set -x
+##set  -x
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 
@@ -23,7 +23,7 @@ echo "$config"
 #echo -e "\n\n\n";
 #cat $fname | xxd
 
-#set -x
+##set  -x
 replace_line_by_string config "80" 'without sed=1'  '#'
 #set +x
 echo "$config"

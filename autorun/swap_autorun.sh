@@ -59,7 +59,7 @@ sleep $timeout_0
 #swap_size_kb=$(awkcalc ${ram_size_in_kb}+1024*1024*3);
 #show_var swap_size_kb
 
-set -x
+#set  -x
 $swapoff -v "${swap_file_path}"
 $swapoff --all
 sleep $timeout_0
@@ -110,7 +110,7 @@ echo "" >> "$fname"
 #cat $fname
 
 # https://android.googlesource.com/kernel/msm/+/android-msm-bullhead-3.10-marshmallow-dr/Documentation/blockdev/zram.txt
-set -x
+#set  -x
 
 /usr/sbin/zramswap stop
 #zramctl

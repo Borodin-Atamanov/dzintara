@@ -18,7 +18,7 @@ while read elem; do
       elem_first_character="${elem:0:1}";
       echo "${elem}";
       if [[ "${elem_first_character}" != "#" ]]; then
-        set -x;
+        #set  -x;
         #apt-get ${dry_run} --allow-unauthenticated --show-progress --yes install "${elem}";
         install_system "${elem}"
         set +x

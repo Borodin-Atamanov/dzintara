@@ -57,7 +57,7 @@ for f in *.plain; do
     #echo  $file_data;
     #encrypt data with master_password
     #encrypted_data=$( encrypt_aes "${master_password}" "${file_data}"; )
-    set -x
+    #set  -x
     encrypt_aes file_data "${master_password}";
     set +x
     #echo -n "${encrypted_data}" > "${crypted_file}";

@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-set -x
+#set  -x
 export AUGEAS_ROOT=/dev/shm/augeas-sandbox
 mkdir $AUGEAS_ROOT
 sudo cp -prv /etc $AUGEAS_ROOT

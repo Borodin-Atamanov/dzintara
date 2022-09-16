@@ -70,7 +70,7 @@ decrypt_aes data $sdata
 data_hex="$data"
 bin_2_hex data_hex
 show_var data_hex data
-#set -x
+##set  -x
 #
 
 #save_root_vault

@@ -3,7 +3,7 @@
 work_dir='/home/i/github/dzintara/';
 source "${work_dir}tasks/1.sh"
 
-set -x
+#set  -x
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 

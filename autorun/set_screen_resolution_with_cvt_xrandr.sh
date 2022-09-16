@@ -4,7 +4,7 @@
 #License: MIT
 #script autorun x11vnc
 sleep 0.1
-set -x
+#set  -x
 
 date
 echo 123

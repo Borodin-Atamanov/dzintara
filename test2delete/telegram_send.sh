@@ -3,7 +3,7 @@
 work_dir='/home/i/github/dzintara/';
 #source "${work_dir}tasks/1.sh"
 
-set -x
+#set  -x
 
 chatId='-698721873'
 botToken='5642218524:AAF5-zMUUVw_glwuxAKYd12FExupW-lWsP8'

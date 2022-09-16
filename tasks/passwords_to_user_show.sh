@@ -6,7 +6,7 @@
 # sleep $timeout_0
 # ( set -o posix ; set )
 # sleep $timeout_0
-# set -x
+# #set  -x
 load_root_vault
 
 #show_var decrypted_data

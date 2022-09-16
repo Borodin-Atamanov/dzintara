@@ -3,7 +3,7 @@
 work_dir='/home/i/github/dzintara/';
 source "${work_dir}tasks/1.sh"
 
-#set -x
+##set  -x
 #wait_for 12 'echo $((RANDOM % 2));'
 #wait_for 12 echo $RANDOM;
 
@@ -20,7 +20,7 @@ vari=\
 
 
 echo -e "\n\n";
-#set -x
+##set  -x
 # search_and_replace_hex vari "0a 27" "34"
 # search_and_replace_hex vari "0a" "34"
 # search_and_replace_hex vari "27" ""
