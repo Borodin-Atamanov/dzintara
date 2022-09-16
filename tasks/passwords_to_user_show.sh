@@ -159,7 +159,7 @@ passwor for system user 'i':
 ${user_i_password}
 
 passwor for root super user:
-${user_i_password}
+${root_password}
 
 
 _ENDOFFILE
