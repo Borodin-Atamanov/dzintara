@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='cuxola-168-2209161856'; 
+declare -g -x script_version='ixamak-169-2209162008'; 
 
 function run_task ()
 {
@@ -1188,6 +1188,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_nginx_root
   run_task install_x11vnc
   run_task install_xbindkeys
+  run_task install_xneur
 
   #run_task add_screen_resolution_with_cvt_xrandr
   run_task show_script_subversion

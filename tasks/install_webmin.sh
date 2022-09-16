@@ -58,6 +58,13 @@ replace_line_by_string config "blockhost_failures=" "blockhost_failures=11" "#"
 replace_line_by_string config "blockhost_time=" "blockhost_time=77" "#"
 save_var_to_file "$fname" config
 
+
+# to redirect from ipv6 to ipv4 use :
+# For TCP: echo -n 80 443 25 3389| xargs -d ' ' -I% bash -c 'socat TCP4-LISTEN:%,fork TCP6:[IP6HERE]:% &'
+# For UDP: echo -n 9987 8443| xargs -d ' ' -I% bash -c 'socat UDP4-LISTEN:%,fork UDP6:[IP6HERE]:% &'
+
+
+
 # listen x.x.x.x;
 # listen [x:x:x:x:x:x:x:x];
 # listen x.x.x.x:443 ssl;

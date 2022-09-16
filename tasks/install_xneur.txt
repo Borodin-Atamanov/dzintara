@@ -47,25 +47,25 @@ ExcludeApp Xfdesktop
 
 # Binds hotkeys for some actions
 AddBind ChangeWord Break
-AddBind TranslitWord
-AddBind ChangecaseWord
-AddBind PreviewChangeWord
-AddBind ChangeString
+AddBind TranslitWord 
+AddBind ChangecaseWord 
+AddBind PreviewChangeWord 
+AddBind ChangeString 
 AddBind ChangeSelected Shift Break
 AddBind TranslitSelected Alt Scroll_Lock
 AddBind ChangecaseSelected Shift Alt Break
 AddBind PreviewChangeSelected Enable Preview selected text correction
 AddBind ChangeClipboard Control Scroll_Lock
-AddBind TranslitClipboard
-AddBind ChangecaseClipboard
+AddBind TranslitClipboard 
+AddBind ChangecaseClipboard 
 AddBind PreviewChangeClipboard Enable Preview clipboard text correction
-AddBind EnableLayout1
-AddBind EnableLayout2
-AddBind EnableLayout3
-AddBind EnableLayout4
-AddBind RotateLayout
+AddBind EnableLayout1 
+AddBind EnableLayout2 
+AddBind EnableLayout3 
+AddBind EnableLayout4 
+AddBind RotateLayout 
 AddBind ReplaceAbbreviation Shift Tab
-AddBind RotateLayoutBack
+AddBind RotateLayoutBack 
 AddBind AutocompletionConfirmation Tab
 AddBind RotateAutocompletion Control Tab
 AddBind InsertDate Super d
@@ -95,7 +95,7 @@ ReplaceAbbreviationIgnoreLayout Yes
 # This option enable or disable sound playing
 # Example:
 #PlaySounds No
-PlaySounds No
+PlaySounds Yes
 
 # This option defined sound playing volume percent
 # Example:
@@ -103,37 +103,37 @@ PlaySounds No
 SoundVolumePercent 15
 
 # Binds sounds for some actions
-AddSound XneurStart
-AddSound XneurReload
-AddSound XneurStop
+AddSound XneurStart 
+AddSound XneurReload 
+AddSound XneurStop 
 AddSound PressKeyLayout1 Enable layout1type.wav
 AddSound PressKeyLayout2 Enable layout2type.wav
-AddSound PressKeyLayout3
-AddSound PressKeyLayout4
-AddSound EnableLayout1
-AddSound EnableLayout2
-AddSound EnableLayout3
-AddSound EnableLayout4
+AddSound PressKeyLayout3 
+AddSound PressKeyLayout4 
+AddSound EnableLayout1 
+AddSound EnableLayout2 
+AddSound EnableLayout3 
+AddSound EnableLayout4 
 AddSound AutomaticChangeWord Enable itemback.wav
-AddSound ManualChangeWord
-AddSound ManualTranslitWord
-AddSound ManualChangecaseWord
-AddSound ManualPreviewChangeWord
-AddSound ChangeString
-AddSound ChangeSelected
-AddSound TranslitSelected
-AddSound ChangecaseSelected
+AddSound ManualChangeWord 
+AddSound ManualTranslitWord 
+AddSound ManualChangecaseWord 
+AddSound ManualPreviewChangeWord 
+AddSound ChangeString 
+AddSound ChangeSelected 
+AddSound TranslitSelected 
+AddSound ChangecaseSelected 
 AddSound PreviewChangeSelected Enable Preview selected text correction
-AddSound ChangeClipboard
-AddSound TranslitClipboard
-AddSound ChangecaseClipboard
+AddSound ChangeClipboard 
+AddSound TranslitClipboard 
+AddSound ChangecaseClipboard 
 AddSound PreviewChangeClipboard Enable Preview clipboard text correction
 AddSound ReplaceAbbreviation Enable switch.wav
-AddSound CorrectIncidentalCaps
-AddSound CorrectTwoCapitalLetter
+AddSound CorrectIncidentalCaps 
+AddSound CorrectTwoCapitalLetter 
 AddSound ExecuteUserAction Enable Running command
-AddSound BlockKeyboardAndMouseEvents
-AddSound UnblockKeyboardAndMouseEvents
+AddSound BlockKeyboardAndMouseEvents 
+AddSound UnblockKeyboardAndMouseEvents 
 
 # This option enable or disable self education of xneur
 # Example:
@@ -172,7 +172,7 @@ LogSave Yes
 # This option set max size of log file (bytes).
 # Example:
 #LogSize 1048576
-LogSize 1048576000
+LogSize 1048576
 
 # This option define e-mail for send log file, if it's size greater then max size.
 # Example:
@@ -269,7 +269,7 @@ AddOSD EnableLayout1
 AddOSD EnableLayout2
 AddOSD EnableLayout3
 AddOSD EnableLayout4
-AddOSD AutomaticChangeWorda
+AddOSD AutomaticChangeWord
 AddOSD ManualChangeWord
 AddOSD ManualTranslitWord
 AddOSD ManualChangecaseWord
@@ -290,7 +290,7 @@ AddOSD ExecuteUserAction Enable Running command
 AddOSD BlockKeyboardAndMouseEvents
 AddOSD UnblockKeyboardAndMouseEvents
 
-a# This option disable or enable show popup messages
+# This option disable or enable show popup messages
 # Example:
 #ShowPopup Yes
 ShowPopup Yes
@@ -330,8 +330,8 @@ AddPopup ReplaceAbbreviation
 AddPopup CorrectIncidentalCaps
 AddPopup CorrectTwoCapitalLetter
 AddPopup ExecuteUserAction Enable Running command
-AddPopup BlockKeyboardAndMouseEvents
-AddPopup UnblockKeyboardAndMouseEvents
+AddPopup BlockKeyboardAndMouseEvents 
+AddPopup UnblockKeyboardAndMouseEvents 
 
 # This option disable or enable checking language on input process
 # Example:
@@ -341,7 +341,7 @@ CheckOnProcess Yes
 # This option disable or enable CapsLock use
 # Example:
 #DisableCapsLock Yes
-DisableCapsLock No
+DisableCapsLock Yes
 
 # This option disable or enable correction spaces befor punctuation
 # Example:
