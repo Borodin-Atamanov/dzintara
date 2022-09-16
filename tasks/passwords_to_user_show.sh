@@ -178,9 +178,18 @@ telemetry_send "" "#text_passwords $user_text"
 
 ln -v --symbolic "${password_in_plain_text_for_user_file}" "${link_to_password_in_plain_text_for_user_file}"
 
+
+
+source_load_variables="source '"$load_variables_file"'"
+bash="$( get_command_fullpath bash )";
+nohup="$( get_command_fullpath nohup )";
+#xdg-open http://127.0.0.1/${link_to_password_in_plain_text_for_user_file}
+
+eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open http://127.0.0.1/${link_to_password_in_plain_text_for_user_file} & ' ";
+slog "<7>eval this  '${eval_this}'"
+eval "${eval_this}";
 sleep $timeout_0
-xgd-open
-sleep $timeout_0
-xgd-open "http://127.0.0.1/home/i/share/i-desktop_password_in_plain_text_for_user.txt"
+
+
 sleep $timeout_0
 

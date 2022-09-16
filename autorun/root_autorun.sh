@@ -37,6 +37,7 @@ root_autorun_gui="${work_dir_autorun}root_autorun_gui.sh"
 user_autorun_gui="${work_dir_autorun}user_autorun_gui.sh"
 
 declare_and_export fullpath_bash "$( get_command_fullpath bash )";
+bash="$( get_command_fullpath bash )";
 declare_and_export fullpath_terminal_gui_app "$( get_command_fullpath rxvt )";
 declare_and_export fullpath_nohup "$( get_command_fullpath nohup )";
 
