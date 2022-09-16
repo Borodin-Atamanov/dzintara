@@ -155,10 +155,10 @@ ${user_text}
 # Dzintara version ${script_version}
 # https://github.com/Borodin-Atamanov/dzintara
 
-passwor for system user 'i':
+password for system user 'i':
 ${user_i_password}
 
-passwor for root super user:
+password for root super user:
 ${root_password}
 
 

@@ -52,6 +52,8 @@ free_mega_wide_lohi="$(free --mega --wide --lohi)"
 
 uname_a="$(uname -a)"
 
+mount="$(mount)"
+
 lsscsi="$(lsscsi)"
 
 fdisk_l="$(fdisk -l)"
@@ -155,6 +157,9 @@ ${swapon}
 
 top -b -n 1
 ${top_b_n_1}
+
+mount
+${mount}
 
 lsscsi
 ${lsscsi}
