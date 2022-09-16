@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='uvuzai-159-2209161634'; 
+declare -g -x script_version='riputs-160-2209161646'; 
 
 function run_task ()
 {
@@ -1089,9 +1089,11 @@ fi
 if [[ "$1" != "fun" ]]; then
 #set -x
 
-#TODO use load_root_vault to check what rool_vault is ok
+#
 # load variables from root_vault_file
 #if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
+echo "$script_version";
+sleep $timeout_0
 if load_root_vault
 then
     echo "root_vault_file=${root_vault_file} and root_vault_password_file=${root_vault_password_file} files are not empty, load passwords from it"
