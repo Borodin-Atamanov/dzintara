@@ -49,8 +49,8 @@ remove_root_vault_preffix www_user
 remove_root_vault_preffix www_password
 remove_root_vault_preffix vnc_password
 
-get_all_host_addresses
-echo "$all_host_ip"
+get_all_host_addresses all_ip
+echo "$all_ip"
 sleep 1;
 
 declare -g -x user_text=$(cat <<_ENDOFFILE
