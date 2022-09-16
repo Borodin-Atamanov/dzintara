@@ -17,7 +17,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
 #export dzintara_version='gidos-6f3d26e-2022-09-16-01-11-47'; echo "${dzintara_version}";
-declare -g -x script_version='emegeu-157-2209161543'; 
+declare -g -x script_version='imipia-158-2209161600'; 
 
 function run_task ()
 {
