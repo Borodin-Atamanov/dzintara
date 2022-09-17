@@ -18,8 +18,8 @@ load_var_from_file "$config_file" config_var
 replace_line_by_string config "window_manager=" "window_manager=openbox" "#"
 save_var_to_file "$config_file" config_var
 
-
 # http://openbox.org/wiki/Help:Actions
+
 dzintara_lxde_rc_config_file="${work_dir}/tasks/lxde_config_rc.xml";
 
 lxde_rc_config_file='/etc/xdg/openbox/rc.xml';

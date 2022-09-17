@@ -102,8 +102,8 @@ tcpdump_interfaces="$(timeout --kill-after=$timeout_1 $timeout_2 tcpdump --list-
 inxi_data=""
 inxi_args=" --machine --cpu --sensors --battery --slots --disk --disk-full --usb --label --logical --raid --swap --bluetooth --network-advanced --ip --repos --memory --processes --audio   --full --info  "
 for arg in $inxi_args; do
-    inxi_cur="$(inxi -xxx $arg)"
-    inxi_data="${inxi_data}inxi -xxx $arg${x0a}${x0a}${inxi_cur}"
+    inxi_cur="$(inxi  --tty --no-ssl -xxx $arg)"
+    inxi_data="${inxi_data}${x0a}inxi $arg${x0a}${inxi_cur}${x0a}${x0a}"
     #sleep 1;
 done;
 

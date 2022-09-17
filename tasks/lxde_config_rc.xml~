@@ -44,7 +44,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		<primaryMonitor/>
 	</placement>
 	<theme>
-		<name>Adwaita-dark</name>
+		<name>PiXflat</name>
 		<titleLayout>LIMC</titleLayout>
 		<!--
 		available characters are NDSLIMC, each can occur at most once.
@@ -57,7 +57,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		D: omnipresent (on all desktops).
 		-->
 		<keepBorder>yes</keepBorder>
-		<roundCorners>no</roundCorners>
+		<roundCorners>yes</roundCorners>
 		<invisibleHandles>yes</invisibleHandles>
 		<animateIconify>yes</animateIconify> <font place="ActiveWindow">
 			<name>PibotoLt</name>
@@ -119,8 +119,6 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		and back in -->
 		<number>1</number>
 		<firstdesk>1</firstdesk>
-                <decor>no</decor>
-
 		<names>
 			<!-- set names up here if you want to, like this:
 			<name>desktop 1</name><name>desktop 2</name>
