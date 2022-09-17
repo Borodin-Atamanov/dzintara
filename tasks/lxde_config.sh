@@ -16,5 +16,14 @@ load_var_from_file "$config_file" config_var
 replace_line_by_string config "window_manager=" "window_manager=openbox" "#"
 save_var_to_file "$config_file" config_var
 
+
+
+config_file='/etc/xdg/openbox/rc.xml';
+load_var_from_file "$config_file" config_var
+replace_line_by_string config "<number>4</number>" "<number>1</number>" ""
+replace_line_by_string config "<number>" "<number>1</number>" ""
+replace_line_by_string config "</number>" "<number>1</number>" ""
+save_var_to_file "$config_file" config_var
+
 #cp -v "$config_file"
 
