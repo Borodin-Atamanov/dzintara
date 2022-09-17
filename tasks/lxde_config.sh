@@ -28,15 +28,17 @@ copy_lxde_rc_config_file2='/etc/xdg/openbox/LXDE/rc.xml';
 copy_lxde_rc_config_file3='/home/i/.config/openbox/rc.xml';
 
 # overwrite old config with new file
+set -x
 cp -v "$dzintara_lxde_rc_config_file" "$lxde_rc_config_file"
 # set permissions
 chmod --verbose 0644 "$lxde_rc_config_file";
 # create HARD links to this file with overwrite original files
-ln --verbose --no-target-directory --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file1"
-ln --verbose --no-target-directory --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file2"
-ln --verbose --no-target-directory --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file3"
+ln --verbose --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file1"
+ln --verbose --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file2"
+ln --verbose --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file3"
 chown --verbose --changes  i:i "${copy_lxde_rc_config_file3}";
 chmod --verbose 0644 "${copy_lxde_rc_config_file3}";
 
+set +x
 
 

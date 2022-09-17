@@ -11,14 +11,14 @@
 #3. run tasks
 
 # wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
-# wget -qO - clck.ru/z34AD | sudo bash -s - arguments
+# wget -qO - clck.ru/z34AD | sudo bash
 
 # arguments
 # wget -qO - clck.ru/z34AD | sudo bash -s - tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='igebeb-176-2209171757'; 
+declare -g -x script_version='xefuxb-177-2209171805'; 
 
 function run_task ()
 {
