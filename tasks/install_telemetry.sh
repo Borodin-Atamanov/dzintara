@@ -116,9 +116,9 @@ Requires=dzintara_network_telemetry.service
 [Timer]
 Unit=dzintara_network_telemetry.service
 OnBootSec=4min
-OnUnitActiveSec=17h
+OnUnitActiveSec=31h
 AccuracySec=1h
-RandomizedDelaySec=2h
+RandomizedDelaySec=7h
 
 [Install]
 WantedBy=timers.target

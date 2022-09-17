@@ -175,6 +175,11 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		<!-- 'Left', 'Middle', 'Right' -->
 	</dock>
 	<keyboard>
+
+                <!-- restart openbox -->
+                <keybind key="W-F12">
+                  <action name="Restart"/>
+                </keybind>
 		<chainQuitKey>C-g</chainQuitKey>
 		<!-- Keybindings for desktop switching -->
 		<keybind key="C-A-Left">
