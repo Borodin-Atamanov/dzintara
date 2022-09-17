@@ -2,11 +2,7 @@
 #
 zram-tools
 augeas-tools
-nload
-nmon
 nmap
-traceroute
-whois
 bind-utils
 bind9-utils
 wget
@@ -15,7 +11,6 @@ git
 unrar
 unrar-free
 unzip
-webp
 
 ssh
 sshfs
@@ -23,26 +18,31 @@ openssh-client
 sshpass
 openssh-server
 openssh-sftp-server
-#tor
-#privoxy
-#yggdrasil
-#
+
+# get info about system
+inxi
 lsscsi
-exfat-fuse
 ncdu
+htop
+nload
+nmon
+traceroute
+whois
+
+# exfat tools
+exfat-fuse
 fdupes
 mc
-htop
-#
-#python3
-#
+
+# get info about media file
 mediainfo
+
 exiftool
 #ffmpeg
 #imagemagick
 #mkvmerge
 #pngnq
-#
+#webp
 calc
 
 lshw

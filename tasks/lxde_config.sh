@@ -6,6 +6,7 @@
 # TODO check what LXDE is installed on the system
 
 install_system openbox
+install_system compton
 
 # https://wiki.archlinux.org/title/xcompmgr
 # install_system xcompmgr
