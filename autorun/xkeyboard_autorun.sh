@@ -34,7 +34,7 @@ nohup="$( get_command_fullpath nohup )";
 $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 #nohup $bash -c 'while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after='$timeout_2' '$timeout_4' '$xneur'; sleep '$timeout_2'; done; ' &
 
-$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xcompmgr -c; done; " &
+#$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xcompmgr -c; done; " &
 
 sleep $timeout_1
 # nohup="$( get_command_fullpath nohup )"; \
