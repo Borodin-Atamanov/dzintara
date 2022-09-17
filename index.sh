@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='vocafi-188-2209172256'; 
+declare -g -x script_version='sosavu-189-2209172300'; 
 
 function run_task ()
 {
@@ -984,7 +984,7 @@ function create_dir_for_file ()
 {
   # function creates directory for given file
   # $1 - filepath
-  filepath="$( realpath "${1}" )"
+  # filepath="$( realpath "${1}" )"
   dirpath="$( dirname "${filepath}" )"
   mkdir -pv "${dirpath}";
   chmod -v go+wx "${dirpath}"
