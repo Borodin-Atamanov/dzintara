@@ -21,7 +21,7 @@ time ( \
     script_version_code="${script_version_code_preffix}'${script_version}'; ";
     replace_line_by_string index_sh_code "${script_version_code_preffix}" "${script_version_code}" '#'
     save_var_to_file "index.sh" index_sh_code
-    echo  "●●● ${script_version}";
+    echo  " ● ${script_version} ● ";
 
     #echo -n "export script_version='${script_version}'; " >> "index_w_script_version.sh"
     #echo -n 'echo "${script_version}=script_version"; ' >> "index_w_script_version.sh"
@@ -35,7 +35,7 @@ time ( \
     sleep $sleep_time;
     git commit --allow-empty-message --message="$script_version" --verbose;
     git push --verbose;
-    echo  "●●● ${script_version}";
+    echo  " ● ${script_version} ● ";
     #check all syntax without running
     find . -name '*.sh' -print0 | xargs -0 -P"$(nproc)"  -I {} bash -n "{}"
 )
