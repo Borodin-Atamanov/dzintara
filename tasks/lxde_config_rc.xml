@@ -181,6 +181,12 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			<prompt>Are you sure?</prompt>
 		</keybind>
 
+		<keybind key="C-A-Escape">
+			<action name="Execute">
+				<command>timeout 7 xkill</command>
+			</action>
+		</keybind>
+
 		<chainQuitKey>C-g</chainQuitKey>
 
 		<!-- Use zero on numpad also -->
@@ -546,6 +552,18 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 
 		<context name="Frame">
 			<!-- this context is any app window itself -->
+			<mousebind button="W-Down" action="Click">
+				<action name="Execute">
+					<command>compton-trans -c -- -11</command>
+				</action>
+			</mousebind>
+			<mousebind button="W-Up" action="Click">
+				<action name="Execute">
+					<command>compton-trans -c -- +11</command>
+				</action>
+			</mousebind>
+			<!-- this ^ change opacity of active window -->
+
 			<mousebind button="W-Left" action="Drag">
 				<action name="Move" />
 			</mousebind>
@@ -572,7 +590,11 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<action name="Raise" />
 				<action name="Unshade" />
 			</mousebind>
+
+
 			<!--
+
+
 			<mousebind button="A-Up" action="Click"><action name="DesktopPrevious"/></mousebind><mousebind button="A-Down" action="Click"><action name="DesktopNext"/></mousebind><mousebind button="C-A-Up" action="Click"><action name="DesktopPrevious"/></mousebind><mousebind button="C-A-Down" action="Click"><action name="DesktopNext"/></mousebind><mousebind button="A-S-Up" action="Click"><action name="SendToDesktopPrevious"/></mousebind><mousebind button="A-S-Down" action="Click"><action name="SendToDesktopNext"/></mousebind>
 			-->
 		</context>
@@ -818,18 +840,6 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</mousebind>
 		</context>
 		<context name="MoveResize">
-			<mousebind button="Up" action="Click">
-				<action name="DesktopPrevious" />
-			</mousebind>
-			<mousebind button="Down" action="Click">
-				<action name="DesktopNext" />
-			</mousebind>
-			<mousebind button="A-Up" action="Click">
-				<action name="DesktopPrevious" />
-			</mousebind>
-			<mousebind button="A-Down" action="Click">
-				<action name="DesktopNext" />
-			</mousebind>
 		</context>
 	</mouse>
 	<menu>
