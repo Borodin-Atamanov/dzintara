@@ -45,7 +45,8 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 	</placement>
 	<theme>
 		<name>Adwaita-dark</name>
-		<titleLayout>LIMC</titleLayout>
+                <decor>no</decor>
+		<titleLayout>NLIMC</titleLayout>
 		<!--
 		available characters are NDSLIMC, each can occur at most once.
 		N: window icon
@@ -119,7 +120,6 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		and back in -->
 		<number>1</number>
 		<firstdesk>1</firstdesk>
-                <decor>no</decor>
 
 		<names>
 			<!-- set names up here if you want to, like this:
@@ -182,8 +182,23 @@ Copy the file to $HOME/.config/openbox/ instead. -->
                   <prompt>Are you sure?</prompt>
                 </keybind>
 		<chainQuitKey>C-g</chainQuitKey>
+
 		<!-- Keybindings for desktop switching -->
-		<keybind key="C-A-Left">
+		<keybind key="W-0">
+                        <action name="Focus"/>
+                        <action name="Raise"/>
+			<action name="UnmaximizeFull" />
+                        <action name="Unshade"/>
+			<action name="MoveResizeTo">
+                            <x>center</x>
+                            <y>center</y>
+			</action>
+		</keybind>
+                <keybind key="W-d">
+                    <action name="ToggleShowDesktop" />
+                </keybind>
+
+                <keybind key="C-A-Left">
 			<action name="UnmaximizeFull" />
 			<action name="MaximizeVert" />
 			<action name="MoveResizeTo">
@@ -193,7 +208,8 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<direction>west</direction>
 			</action>
 		</keybind>
-		<keybind key="C-A-Right">
+
+                <keybind key="C-A-Right">
 			<action name="UnmaximizeFull" />
 			<action name="MaximizeVert" />
 			<action name="MoveResizeTo">
@@ -212,9 +228,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		<!--
 		<keybind key="S-A-Left"><action name="SendToDesktopLeft"><dialog>no</dialog><wrap>no</wrap></action></keybind><keybind key="S-A-Right"><action name="SendToDesktopRight"><dialog>no</dialog><wrap>no</wrap></action></keybind><keybind key="S-A-Up"><action name="SendToDesktopUp"><dialog>no</dialog><wrap>no</wrap></action></keybind><keybind key="S-A-Down"><action name="SendToDesktopDown"><dialog>no</dialog><wrap>no</wrap></action></keybind>
 		-->
-		<keybind key="C-A-d">
-			<action name="ToggleShowDesktop" />
-		</keybind>
+
 		<!-- Keybindings for windows -->
 		<keybind key="A-F4">
 			<action name="Close" />
@@ -422,7 +436,9 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		<!-- Time before changing desktops when the pointer touches the edge of the
 		screen while moving a window, in milliseconds (1000 = 1 second).
 		Set this to 0 to disable warping -->
-		<context name="Frame">
+
+                <context name="Frame">
+                  <!-- this context is any app window itself -->
 			<mousebind button="W-Left" action="Drag">
 				<action name="Move" />
 			</mousebind>
@@ -477,6 +493,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				</action>
 			</mousebind>
 		</context>
+
 		<context name="Top">
 			<mousebind button="Left" action="Press">
 				<action name="Focus" />
