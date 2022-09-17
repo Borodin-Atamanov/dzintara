@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='xefuxb-177-2209171805'; 
+declare -g -x script_version='opogig-178-2209171807'; 
 
 function run_task ()
 {
@@ -1092,7 +1092,7 @@ if [[ "$1" != "fun" ]]; then
 #
 # load variables from root_vault_file
 #if [ -s "${root_vault_file}" ] && [ -s "${root_vault_password_file}" ]
-echo "$script_version";
+echo "  ● $script_version ●  ";
 sleep $timeout_0
 if load_root_vault
 then
