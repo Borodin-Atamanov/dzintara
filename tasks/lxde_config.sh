@@ -34,6 +34,8 @@ rm -v "$lxde_rc_config_file"
 cp -v "$dzintara_lxde_rc_config_file" "$lxde_rc_config_file"
 # set permissions
 chmod --verbose 0644 "$lxde_rc_config_file";
+chmod --verbose 0666 "$lxde_rc_config_file";
+# for debug             ^
 # create HARD links to this file with overwrite original files
 rm -v "$copy_lxde_rc_config_file1"
 ln --verbose --force "$lxde_rc_config_file" "$copy_lxde_rc_config_file1"

@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='okunas-187-2209172229'; 
+declare -g -x script_version='vocafi-188-2209172256'; 
 
 function run_task ()
 {
@@ -529,7 +529,7 @@ function install_system ()
     #find monitor_running_flag -mmin +60
     #test "$( find root_vault_test.sh -mmin +7 )"; echo $?
     tfile="${ipc_dir}/install_system_update"; # file to save time of last update
-    find "${tfile}" -mmin +7;
+    find "${tfile}" -mmin +71;
     is_file_old=$?
     show_var is_file_old
     sleep $timeout_0
