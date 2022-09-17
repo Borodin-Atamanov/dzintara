@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='pevivu-183-2209172029'; 
+declare -g -x script_version='ikumue-184-2209172154'; 
 
 function run_task ()
 {
@@ -979,6 +979,17 @@ function parse_key_value ()
    done
 }
 export -f parse_key_value
+
+function create_dir_for_file ()
+{
+  # function creates directory for given file
+  # $1 - filepath
+  filepath="$( realpath "${1}" )"
+  dirpath="$( dirname "${filepath}" )"
+  mkdir -pv "${dirpath}";
+  chmod -v go+wx "${dirpath}"
+}
+export -f create_dir_for_file
 
 function get_all_host_addresses
 {
