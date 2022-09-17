@@ -179,6 +179,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
                 <!-- restart openbox -->
                 <keybind key="W-F12">
                   <action name="Restart"/>
+                  <prompt>Are you sure?</prompt>
                 </keybind>
 		<chainQuitKey>C-g</chainQuitKey>
 		<!-- Keybindings for desktop switching -->
