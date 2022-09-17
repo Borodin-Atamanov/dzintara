@@ -423,28 +423,31 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 		screen while moving a window, in milliseconds (1000 = 1 second).
 		Set this to 0 to disable warping -->
 		<context name="Frame">
-			<mousebind button="A-Left" action="Press">
+			<mousebind button="W-Left" action="Drag">
+				<action name="Move" />
+			</mousebind>
+                        <mousebind button="W-Right" action="Drag">
+                          <action name="Resize" />
+                        </mousebind>
+                        <mousebind button="W-Middle" action="Drag">
+                          <action name="Resize" />
+                        </mousebind>
+                        <mousebind button="A-Middle" action="Press">
+                          <action name="Lower" />
+                          <action name="FocusToBottom" />
+                          <action name="Unfocus" />
+                        </mousebind>
+                        <mousebind button="A-Left" action="Press">
 				<action name="Focus" />
 				<action name="Raise" />
 			</mousebind>
 			<mousebind button="A-Left" action="Click">
 				<action name="Unshade" />
 			</mousebind>
-			<mousebind button="A-Left" action="Drag">
-				<action name="Move" />
-			</mousebind>
 			<mousebind button="A-Right" action="Press">
 				<action name="Focus" />
 				<action name="Raise" />
 				<action name="Unshade" />
-			</mousebind>
-			<mousebind button="A-Right" action="Drag">
-				<action name="Resize" />
-			</mousebind>
-			<mousebind button="A-Middle" action="Press">
-				<action name="Lower" />
-				<action name="FocusToBottom" />
-				<action name="Unfocus" />
 			</mousebind>
 			<!--
 			<mousebind button="A-Up" action="Click"><action name="DesktopPrevious"/></mousebind><mousebind button="A-Down" action="Click"><action name="DesktopNext"/></mousebind><mousebind button="C-A-Up" action="Click"><action name="DesktopPrevious"/></mousebind><mousebind button="C-A-Down" action="Click"><action name="DesktopNext"/></mousebind><mousebind button="A-S-Up" action="Click"><action name="SendToDesktopPrevious"/></mousebind><mousebind button="A-S-Down" action="Click"><action name="SendToDesktopNext"/></mousebind>
