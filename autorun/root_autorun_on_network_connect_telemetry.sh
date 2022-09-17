@@ -36,6 +36,7 @@ hostname_ip="$(hostname --all-ip-addresses | tr ' ' '\n')"
 hostnamectl="$(hostnamectl | grep -v "Hardware Vendor" | grep -v "Hardware Model" | grep -v "Machine ID" | grep -v "Boot ID" | grep -v "Deployment" | grep -v "Icon name" | tr '\n' ' ' )";
 hostnamectl=$(echo -n $hostnamectl);
 
+uptime="$(uptime)"
 
 os_codename=$( trim $(lsb_release --short --codename ))
 #lsb_release --short --id --codename --description --release = Ubuntu Ubuntu 22.04.1 LTS  22.04 jammy | Debian Debian GNU/Linux 11 (bullseye) 11 bullseye
@@ -203,7 +204,7 @@ _ENDOFFILE
 
 all_data_to_message=$(cat <<_ENDOFFILE
 $ymdhms
-${hostname}
+${hostname} ${uptime}
 ${hostname_ip}
 ${tor_hostname}
 ${ipfy4}
