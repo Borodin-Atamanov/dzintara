@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='itedoc-779-2209172358'; 
+declare -g -x script_version='uvilie-780-2209180014'; 
 
 function run_task ()
 {
@@ -985,7 +985,7 @@ function create_dir_for_file ()
   # function creates directory for given file
   # $1 - filepath
   # filepath="$( realpath "${1}" )"
-  dirpath="$( dirname "${filepath}" )"
+  dirpath="$( dirname "${1}" )"
   mkdir -pv "${dirpath}";
   chmod -v go+wx "${dirpath}"
 }
