@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ilanec-170-2209162324'; 
+declare -g -x script_version='xeridc-171-2209171352'; 
 
 function run_task ()
 {
@@ -1051,7 +1051,7 @@ declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
-declare_and_export nginx_shared_dir '/home/i/share/'; #this directory will be shared without login and pass in nginx
+declare_and_export nginx_shared_dir '/home/i/Public/'; #this directory will be shared without login and pass in nginx
 declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-selfsigned.key'; # private self-signed key for https
 declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
 declare_and_export swap_file_path '/swapfile.dzi' # path to swap file
@@ -1188,7 +1188,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_nginx_root
   run_task install_x11vnc
   run_task install_xbindkeys
-  run_task install_xneur
+  # run_task install_xneur
 
   #run_task add_screen_resolution_with_cvt_xrandr
   run_task show_script_subversion
