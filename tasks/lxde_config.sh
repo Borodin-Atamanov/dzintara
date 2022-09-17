@@ -46,3 +46,17 @@ chmod --verbose 0644 "${copy_lxde_rc_config_file3}";
 set +x
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

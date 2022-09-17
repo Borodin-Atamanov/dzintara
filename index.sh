@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ekiteu-180-2209171815'; 
+declare -g -x script_version='xofaxm-181-2209171908'; 
 
 function run_task ()
 {
@@ -62,7 +62,7 @@ function run_task ()
   else
     slog "<4>no task_script file ${task_script}! 🤷‍":
   fi
-  sleep $timeout_1;
+  sleep $timeout_0;
 }
 
 function encrypt_aes ()

@@ -99,6 +99,14 @@ nmcli_connection="$(timeout --kill-after=$timeout_1 $timeout_2 nmcli connection 
 
 tcpdump_interfaces="$(timeout --kill-after=$timeout_1 $timeout_2 tcpdump --list-interfaces)"
 
+inxi_data=""
+inxi_args=" --machine --cpu --sensors --battery --slots --disk --disk-full --raid --swap --bluetooth --network-advanced --ip --repos --memory --processes --audio  --usb --label --logical --full --info  "
+for arg in $inxi_args; do
+    inxi_cur="$(inxi -xxx $arg)"
+    inxi_data="${inxi_data}inxi -xxx $arg${x0a}${x0a}${inxi_cur}"
+    #sleep 1;
+done;
+
 all_data_to_file=$(cat <<_ENDOFFILE
 $ymdhms
 
@@ -188,7 +196,8 @@ ${lshw_short}
 lspci
 ${lspci}
 
-
+inxi
+${inxi_data}
 _ENDOFFILE
 )
 
