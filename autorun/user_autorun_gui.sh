@@ -20,15 +20,13 @@ slog "<7>$(show_var whoami)"
 
 xset led 3;
 /usr/bin/numlockx on
-nohup setxkbmap -layout "us,ru" &
-nohup setxkbmap -option "grp:shift_caps_switch,grp_led:scroll" &
-nohup xbindkeys &
+#nohup xbindkeys &
 
 #nohup telegram-desktop &
 
 random_wait
 
-run_task show_script_subversion
+#run_task show_script_subversion
 #run_task add_screen_resolution_with_cvt_xrandr
 
 #cvt_xrandr 1280 1024 60
@@ -36,9 +34,9 @@ run_task show_script_subversion
 #cvt_xrandr 1920 1080 60
 #cvt_xrandr 1360 768 60
 
-autorandr --debug --change
-autorandr --debug --load itworks
-autorandr --debug horizontal
+# autorandr --debug --change
+# autorandr --debug --load itworks
+# autorandr --debug horizontal
 
 #read
 

@@ -2,7 +2,7 @@
 #Post installation script for debian-like systems
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-#script autorun x11vnc
+#script autorun
 
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
@@ -25,12 +25,17 @@ setxkbmap="$( get_command_fullpath setxkbmap )";
 gxkb="$( get_command_fullpath gxkb )";
 xneur="$( get_command_fullpath xneur )";
 bash="$( get_command_fullpath bash )";
+xcompmgr="$( get_command_fullpath xcompmgr )";
+nohup="$( get_command_fullpath nohup )";
 
 #echo -e "remove Lock = Caps_Lock\nremove Control = Control_L\nkeysym Control_L = Caps_Lock\nkeysym Caps_Lock = Control_L\nadd Lock = Caps_Lock\nadd Control = Control_L\n" | xmodmap -v -
 #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk"
+
 $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 #nohup $bash -c 'while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after='$timeout_2' '$timeout_4' '$xneur'; sleep '$timeout_2'; done; ' &
-$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xneur; done; " &
+
+$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xcompmgr -c; done; " &
+
 sleep $timeout_1
 # nohup="$( get_command_fullpath nohup )"; \
 # source_load_variables="source '"$load_variables_file"'"; \
@@ -38,7 +43,7 @@ sleep $timeout_1
 # su --login i --shell="${bash}" --command="${source_load_variables}; xneur;"
 
 #while : ; do :
-for ((i=7;i>=0;i--)); do
+for ((i=5;i>=0;i--)); do
     #timeout --kill-after=$timeout_1 $timeout_2 $numlockx on
     $numlockx on
     $xset led 3;
@@ -56,4 +61,3 @@ for ((i=7;i>=0;i--)); do
     #sleep $timeout_1
 done;
 
-nohup $xneur &
