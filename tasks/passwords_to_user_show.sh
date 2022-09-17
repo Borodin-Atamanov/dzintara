@@ -125,12 +125,13 @@ user_text=$(cat <<_ENDOFFILE
 ${user_text}
 
 # VNC access
+${vnc_password}
 _ENDOFFILE
 )
 for this_addr in $all_addrs; do
 user_text=$(cat <<_ENDOFFILE
 ${user_text}
-vnc://${vnc_password}@${this_addr}
+${this_addr}
 _ENDOFFILE
 )
 done;
@@ -187,13 +188,13 @@ nohup="$( get_command_fullpath nohup )";
 
 sleep $timeout_0
 
-eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open http://127.0.0.1/${link_to_password_in_plain_text_for_user_file} & ' ";
+eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open http://127.0.0.1/${link_to_password_in_plain_text_for_user_file} ' & ";
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 sleep $timeout_0
 
 
-eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open ${link_to_password_in_plain_text_for_user_file} & ' ";
+eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open ${link_to_password_in_plain_text_for_user_file} ' & ";
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 sleep $timeout_0
