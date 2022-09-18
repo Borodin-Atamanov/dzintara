@@ -218,7 +218,15 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</keybind>
 
 			<keybind key="W-2 W-KP_Down">
-				<action name="ToggleMaximize"/>
+				<!--<action name="ToggleMaximize"/>-->
+				<action name="MoveResizeTo">
+					<width>102%</width>
+					<height>102%</height>
+				</action>
+				<action name="MoveResizeTo">
+					<x>center</x>
+					<y>center</y>
+				</action>
 			</keybind>
 
 			<keybind key="W-3 W-KP_Next">
@@ -375,7 +383,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<action name="UnmaximizeFull" />
 				<action name="ResizeRelative">
 					<top>-11</top>
-					<bottom>-5</bottom>
+					<bottom>-11</bottom>
 					<right>-11</right>
 					<left>-11</left>
 				</action>
