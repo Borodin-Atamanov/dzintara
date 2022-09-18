@@ -403,7 +403,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</keybind>
 			<keybind key="W-A-bracketright">
 				<action name="Execute">
-					<command>compton-trans -c -- +1</command>
+					<command>compton-trans -c +1</command>
 				</action>
 			</keybind>
 
