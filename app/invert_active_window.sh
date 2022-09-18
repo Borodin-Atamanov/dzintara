@@ -5,8 +5,8 @@
 #script adds invert flag to active window name
 # This used for invert window with compton composite manager and LXDE | LXQt keybindings
 
-source "/home/i/bin/dzintara/autorun/load_variables.sh"
-declare_and_export work_dir "/home/i/bin/dzintara/"
+#source "/home/i/bin/dzintara/autorun/load_variables.sh"
+#declare_and_export work_dir "/home/i/bin/dzintara/"
 
 # window_name=$(xdotool getwindowname $(xdotool getactivewindow) )
 window_id=$(xdotool getactivewindow)
@@ -15,14 +15,26 @@ invert_flag=' 31337'
 regex="(.*)${invert_flag}$"
 # TODO add toggle icon name, not only title of the window
 
+#show_var window_id
+hex_window_id="0x$(echo "obase=16; ${window_id}" | bc)"
+#show_var hex_window_id
+
+status="$(xprop -id "$hex_window_id" 8c TAG_INVERT | cut -d " " -f 3)";
+[ "$status" != 0 ] && status=0 || status=1;
+xprop -id "$hex_window_id" -format TAG_INVERT 8c -set TAG_INVERT "$status"
+
 if  [[ "$window_name" =~ $regex ]]; then
+    # window wal already inverted. Revert its previous title
     xdotool set_window --name "${BASH_REMATCH[1]}" $window_id
 else
     xdotool set_window --name "${window_name}${invert_flag}" $window_id
-    xdotool set_window --icon-name "${invert_flag}" $window_id
-    xdotool set_window --urgency 1 $window_id
+    #xdotool set_window --icon-name "${invert_flag}" $window_id
+    #xdotool set_window --urgency 1 $window_id
     # WM_ICON_NAME
 fi
+
+#window="$(bspc query -n focused -T | cut -d ',' -f 1 | sed 's/\{"id"://g')";
+
 
 # add to compton's config:
 # invert-color-include = [
