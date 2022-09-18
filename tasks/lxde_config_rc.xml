@@ -193,6 +193,12 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				</action>
 			</keybind>
 
+			<keybind key="W-C-I">
+				<action name="Execute">
+					<command>xcalib -i -a</command>
+				</action>
+			</keybind>
+
 			<chainQuitKey>C-g</chainQuitKey>
 
 			<!-- Use zero on numpad also -->
