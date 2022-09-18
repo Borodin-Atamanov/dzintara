@@ -193,7 +193,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				</action>
 			</keybind>
 
-			<keybind key="W-C-I">
+			<keybind key="W-C-i">
 				<action name="Execute">
 					<command>xcalib -i -a</command>
 				</action>
