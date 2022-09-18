@@ -10,7 +10,7 @@ declare_and_export work_dir "/home/i/bin/dzintara/"
 
 window_id=$(xdotool getactivewindow)
 window_name=$(xdotool getwindowname $window_id)
-invert_flag=' INVERT by dev@Borodin-Atamanov.ru '
+invert_flag='iNvRt'
 regex="(.*)${invert_flag}$"
 
 if  [[ "$window_name" =~ $regex ]]; then
@@ -21,5 +21,5 @@ fi
 
 # add to compton's config:
 # invert-color-include = [
-#     "name ~= '<inverted>$'"
+#     "name ~= 'iNvRt$'"
 # ];

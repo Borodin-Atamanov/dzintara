@@ -44,6 +44,10 @@ ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file3"
 chown --verbose --changes  i:i "${copy_lxde_rc_config_file3}";
 chmod --verbose 0644 "${copy_lxde_rc_config_file3}";
 
+# copy compton config
+cp -v "${work_dir}/tasksdata/etc:xgd:compton.conf"; "$compton_config_file"
+chmod --verbose 0644 "$compton_config_file";
+
 set +x
 
 
