@@ -187,7 +187,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</action>
 		</keybind>
 
-		<keybind key="W-I">
+		<keybind key="W-i">
 			<action name="Execute">
 				<command>/home/i/bin/dzintara/app/invert_active_window.sh >> /home/i/bin/dzintara/app/invert_active_window.log</command>
 				</action>
@@ -464,7 +464,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 					<command>scrot</command>
 				</action>
 			</keybind>
-			<keybind key="W-T">
+			<keybind key="W-t">
 				<action name="Execute">
 					<command>x-terminal-emulator</command>
 				</action>
