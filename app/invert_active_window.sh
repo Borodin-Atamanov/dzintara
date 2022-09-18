@@ -8,10 +8,12 @@
 source "/home/i/bin/dzintara/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzintara/"
 
+# window_name=$(xdotool getwindowname $(xdotool getactivewindow) )
 window_id=$(xdotool getactivewindow)
 window_name=$(xdotool getwindowname $window_id)
-invert_flag='iNvRt'
+invert_flag=' 31337'
 regex="(.*)${invert_flag}$"
+# TODO add toggle icon name, not only title of the window
 
 if  [[ "$window_name" =~ $regex ]]; then
     xdotool set_window --name "${BASH_REMATCH[1]}" $window_id
