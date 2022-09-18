@@ -19,9 +19,12 @@ regex="(.*)${invert_flag}$"
 hex_window_id="0x$(echo "obase=16; ${window_id}" | bc)"
 #show_var hex_window_id
 
-status="$(xprop -id "$hex_window_id" 8c TAG_INVERT | cut -d " " -f 3)";
-[ "$status" != 0 ] && status=0 || status=1;
+TAG_INVERT="$(xprop -id "$hex_window_id" 8c TAG_INVERT | cut -d " " -f 3)";
+[[ "$TAG_INVERT" != "0" ]] && status=0 || status=1;
 xprop -id "$hex_window_id" -format TAG_INVERT 8c -set TAG_INVERT "$status"
+
+echo "hex_window_id=$hex_window_id window_id=$window_id TAG_INVERT='$TAG_INVERT"
+exit
 
 if  [[ "$window_name" =~ $regex ]]; then
     # window wal already inverted. Revert its previous title
