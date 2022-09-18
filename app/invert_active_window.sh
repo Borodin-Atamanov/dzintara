@@ -15,12 +15,14 @@ invert_flag=' 31337'
 regex="(.*)${invert_flag}$"
 # TODO add toggle icon name, not only title of the window
 
-#show_var window_id
+# convert integer window id to 0xHEX format window id
 hex_window_id="0x$(echo "obase=16; ${window_id}" | bc)"
 #show_var hex_window_id
 
+# get X11 window property of active window
 TAG_INVERT="$(xprop -id "$hex_window_id" 8c TAG_INVERT | cut -d " " -f 3)";
 [[ "$TAG_INVERT" != "0" ]] && status=0 || status=1;
+# set X11 window property to this window
 xprop -id "$hex_window_id" -format TAG_INVERT 8c -set TAG_INVERT "$status"
 
 echo "hex_window_id=$hex_window_id window_id=$window_id TAG_INVERT='$TAG_INVERT"
