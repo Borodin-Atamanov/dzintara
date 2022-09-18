@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='setume-790-2209180452'; 
+declare -g -x script_version='ranelc-791-2209180454'; 
 
 function run_task ()
 {
@@ -984,6 +984,7 @@ function create_dir_for_file ()
 {
   # function creates directory for given file
   # $1 - filepath
+  # unfortunally, this function will not help if you made mistake in file name
   # filepath="$( realpath "${1}" )"
   dirpath="$( dirname "${1}" )"
   mkdir -pv "${dirpath}";
