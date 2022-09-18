@@ -38,8 +38,9 @@ compton="$( get_command_fullpath compton )";
 # compton --backend glx --vsync opengl-swc
 #$compton --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 --daemon
 
-$compton --daemon --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 &
+$compton --daemon --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 &
 
+# fallback mode
 $nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84; sleep $timeout_2; done; " &
 
 $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
