@@ -19,6 +19,9 @@ if  [[ "$window_name" =~ $regex ]]; then
     xdotool set_window --name "${BASH_REMATCH[1]}" $window_id
 else
     xdotool set_window --name "${window_name}${invert_flag}" $window_id
+    xdotool set_window --icon-name "${invert_flag}" $window_id
+    xdotool set_window --urgency 1 $window_id
+    # WM_ICON_NAME
 fi
 
 # add to compton's config:

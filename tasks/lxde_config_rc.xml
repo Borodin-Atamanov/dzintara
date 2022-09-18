@@ -213,12 +213,6 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				</action>
 			</keybind>
 
-			<keybind key="W-S-Down">
-				<action name="ResizeRelative">
-					<bottom>-5</bottom>
-				</action>
-			</keybind>
-
 			<keybind key="W-1 W-Escape">
 				<action name="Iconify"/>
 			</keybind>
@@ -378,6 +372,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</keybind>
 
 			<keybind key="W-S-Down">
+				<action name="UnmaximizeFull" />
 				<action name="ResizeRelative">
 					<top>-11</top>
 					<bottom>-5</bottom>
@@ -387,6 +382,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</keybind>
 
 			<keybind key="W-S-Up">
+				<action name="UnmaximizeFull" />
 				<action name="ResizeRelative">
 					<top>11</top>
 					<bottom>11</bottom>
