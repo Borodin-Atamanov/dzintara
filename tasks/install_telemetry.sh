@@ -131,3 +131,21 @@ systemctl enable dzintara_network_telemetry.timer | cat
 systemctl restart dzintara_network_telemetry.timer | cat
 systemctl status dzintara_network_telemetry.timer | cat
 
+config=$(cat <<_ENDOFFILE
+[Unit]
+Description=dzintara telemetry service
+[Service]
+ExecStart=${dns_archivist_script_file}
+[Install]
+WantedBy=multi-user.target
+_ENDOFFILE
+)
+
+echo "$config" > "$dns_archivist_service_file";
+show_var dns_archivist_service_file dns_archivist_script_file config
+#show_var telemetry_service_settings
+
+systemctl daemon-reload
+systemctl enable dns_archivist | cat
+systemctl restart dns_archivist | cat
+systemctl status dns_archivist | cat

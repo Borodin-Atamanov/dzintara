@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='agukeo-810-2209191600'; 
+declare -g -x script_version='aduroo-811-2209191856'; 
 
 function run_task ()
 {
@@ -1043,6 +1043,9 @@ declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzin
 declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.service'; #dzintara autorun service, what run on system boot
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install
 declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
+declare_and_export dns_archivist_log_dir '/var/logs/dns_archivist/requests/'  # dns requests logs will be saved here
+declare_and_export dns_archivist_service_file '/etc/systemd/system/dns_archivist.service'  #dzintara telemetry service, what run on system boot
+declare_and_export dns_archivist_script_file "${install_dir}autorun/dns_archivist.sh"; #will run in every boot with root rights
 declare_and_export telemetry_queue_dir '/var/spool/dzintara_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzintara_telemetry.service'  #dzintara telemetry service, what run on system boot
 declare_and_export telemetry_script_file "${install_dir}autorun/dzintara_telemetry.sh"; #will run in every boot with root rights
@@ -1063,7 +1066,7 @@ declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i
 declare_and_export run_command_from_root_pipe_file "${install_dir}autorun/pipe_root_commands.fifo"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipe_file "${install_dir}autorun/pipe_user_i_commands.fifo"  #service will run command from the pipe as user i
-declare_and_export nginx_shared_dir '/home/i/Public/'; #this directory will be shared without login and pass in nginx
+declare_and_export nginx_shared_dir '/home/i/public/'; #this directory will be shared without login and pass in nginx
 declare_and_export nginx_self_signed_private_key_file '/etc/ssl/private/nginx-selfsigned.key'; # private self-signed key for https
 declare_and_export nginx_self_signed_public_cert_file '/etc/ssl/certs/nginx-selfsigned.crt'; # public self-signed key for https
 declare_and_export swap_file_path '/swapfile.dzi' # path to swap file
