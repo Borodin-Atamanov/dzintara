@@ -21,15 +21,15 @@ declare -x -g service_name='xselection archivist dzintara';   #for slog systemd 
 slog "<5>start xselection archivist dzintara. It will log selection content."
 
 #create new dir for logs
-mkdir -pv "$dns_archivist_log_dir"
-chmod -v go+wx "$dns_archivist_log_dir"
-log_fname="${dns_archivist_log_dir}dns-$(ymdhms).txt"
+mkdir -pv "$xselection_archivist_log_dir"
+chmod -v go+wx "$xselection_archivist_log_dir"
+#log_fname="${xselection_archivist_log_dir}-xselection-$(ymdhms).txt"
 chmod -v 0644 "$log_fname"
 #tcpdump -t -l -n -i any '(tcp dst port 53) or (udp dst port 53) or (tcp src port 53) or (udp src port 53)' | grep -F ' A? ' | rev | awk '{print $2}' | rev > "$log_fname"
 # start logging
 
 # this capture not all DNS queries, most of the browser's queries is not here:
-tcpdump -t -l -n -i any | grep -F ' A? ' | awk '{print $(NF-1)}' >> "$log_fname"
+#tcpdump -t -l -n -i any | grep -F ' A? ' | awk '{print $(NF-1)}' >> "$log_fname"
 # TODO find solution how to get all local DNS requests.
 
 exit
