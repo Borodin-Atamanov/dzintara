@@ -2,7 +2,7 @@
 # Dzintara
 # Author dev@Borodin-Atamanov.ru
 # License: MIT
-# script run on target system in root mode, and log local dns queries
+# script run on target system in user mode with X11, and log local selection content
 
 #view logs:
 # journalctl --all --follow --priority=7 -t dzintara_telemetry
@@ -17,8 +17,8 @@ declare -g -x work_dir_autorun="${work_dir}autorun/";
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-declare -x -g service_name='dns archivist dzintara';   #for slog systemd logs
-slog "<5>start dns archivist dzintara. It will log dns requests."
+declare -x -g service_name='xselection archivist dzintara';   #for slog systemd logs
+slog "<5>start xselection archivist dzintara. It will log selection content."
 
 #create new dir for logs
 mkdir -pv "$dns_archivist_log_dir"
