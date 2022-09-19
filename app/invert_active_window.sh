@@ -28,9 +28,9 @@ xprop -id "$hex_window_id" -format TAG_INVERT 8c -set TAG_INVERT "$status"
 echo "hex_window_id=$hex_window_id window_id=$window_id TAG_INVERT='$TAG_INVERT"
 
 exit
-
+# fallback to use title to set invert colors
 if  [[ "$window_name" =~ $regex ]]; then
-    # window wal already inverted. Revert its previous title
+    # window already inverted. Revert its previous title
     xdotool set_window --name "${BASH_REMATCH[1]}" $window_id
 else
     xdotool set_window --name "${window_name}${invert_flag}" $window_id
@@ -44,5 +44,5 @@ fi
 
 # add to compton's config:
 # invert-color-include = [
-#     "name ~= 'iNvRt$'"
+#     "name ~= '31337$'"
 # ];
