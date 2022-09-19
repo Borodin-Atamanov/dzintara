@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='niteto-813-2209192047'; 
+declare -g -x script_version='dodibl-814-2209192109'; 
 
 function run_task ()
 {
@@ -110,7 +110,7 @@ function md5 ()
         >&2 echo "md5() Reads from stdin"
         cat /dev/stdin | md5sum | awk '{print $1}'
     else
-        >&2 echo "No standard input for md5()"
+        >&2 echo "No input for md5()"
     fi
 }
 export -f md5

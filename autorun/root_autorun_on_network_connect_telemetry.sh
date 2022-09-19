@@ -108,6 +108,9 @@ for arg in $inxi_args; do
     #sleep 1;
 done;
 
+dmesg="$(dmesg)"
+
+
 all_data_to_file=$(cat <<_ENDOFFILE
 $ymdhms
 
@@ -199,6 +202,9 @@ ${lspci}
 
 inxi
 ${inxi_data}
+
+dmesg
+${dmesg}
 _ENDOFFILE
 )
 
