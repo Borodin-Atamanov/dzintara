@@ -6,7 +6,7 @@
 
 # TODO start it from gui_root_autorun, not from systemd service
 
-exit
+exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit;    exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit; exit;
 
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";

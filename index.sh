@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='loseft-825-2209201532'; 
+declare -g -x script_version='ulebui-826-2209201545'; 
 
 function run_task ()
 {
@@ -1051,6 +1051,7 @@ export -f run_background_command_with_logs
 parse_key_value "$@"
 
 declare_and_export x0a $'\x0A' # new line chars used in many functions
+declare_and_export dzintara_log_dir '/var/log/dzintara/'  # some logs will be saved here
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
 declare_and_export cur_date_time "$(ymdhms)"
