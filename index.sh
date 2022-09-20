@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='otupin-828-2209201627'; 
+declare -g -x script_version='ufoxoi-829-2209201637'; 
 
 function run_task ()
 {
@@ -1054,10 +1054,10 @@ function run_background_command_with_logs ()
   : "${run_as_user:=root}"
   : "${run_counts:=2147473131}"
   : "${run_sleep:=77}"
+  : "${source_load_variables:=source $load_variables_file}"
 
   mkdir -pv "${dzintara_log_dir}"
-  # $nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file; sleep $timeout_2; done; > ${dzintara_log_dir}compton.log >>file1 2>>file2 " &
-  eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >>${dzintara_log_dir}compton.log 2>>${dzintara_log_dir}${command_short}.log ' & "
+  eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >${dzintara_log_dir}compton.log 2>${dzintara_log_dir}${command_short}.log ' & "
   slog "<7>eval_this=$eval_this"
   eval $eval_this
 
@@ -1071,6 +1071,7 @@ declare_and_export x0a $'\x0A' # new line chars used in many functions
 declare_and_export dzintara_log_dir '/var/log/dzintara/'  # some logs will be saved here
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
+#declare_and_export source_load_variables "/home/i/bin/dzintara/autorun"
 declare_and_export cur_date_time "$(ymdhms)"
 declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
 #declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
