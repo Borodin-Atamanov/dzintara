@@ -71,7 +71,7 @@ for f in *.plain; do
 done;
 #cd "..";
 
-aexit;
+exit;
 
 countdown 7 0.01
 

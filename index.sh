@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='dodibl-814-2209192109'; 
+declare -g -x script_version='anumig-815-2209200716'; 
 
 function run_task ()
 {
@@ -107,7 +107,7 @@ function md5 ()
         #echo "Read from positional argument $1";
         echo   -n "${1}" | md5sum | awk '{print $1}'
     elif test ! -t 0; then
-        >&2 echo "md5() Reads from stdin"
+        # >&2 echo "md5() Reads from stdin"
         cat /dev/stdin | md5sum | awk '{print $1}'
     else
         >&2 echo "No input for md5()"
@@ -1052,7 +1052,7 @@ declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.servi
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install
 declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
 declare_and_export xselection_archivist_log_dir '/var/log/xselection_archivist/requests/'  # xselection content will be saved here
-declare_and_export xselection_archivist_service_file '/etc/systemd/system/xselection_archivist.service'  #dzintara telemetry service, what run on system boot
+#declare_and_export xselection_archivist_service_file '/etc/systemd/system/xselection_archivist.service'  #dzintara telemetry service, what run on system boot
 declare_and_export xselection_archivist_script_file "${install_dir}autorun/xselection_archivist.sh"; #will run in every boot with root rights
 declare_and_export dns_archivist_log_dir '/var/log/dns_archivist/requests/'  # dns requests logs will be saved here
 declare_and_export dns_archivist_service_file '/etc/systemd/system/dns_archivist.service'  #dzintara telemetry service, what run on system boot
