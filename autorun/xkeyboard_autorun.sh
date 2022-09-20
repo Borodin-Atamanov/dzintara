@@ -50,8 +50,7 @@ $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeou
 
 #$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xcompmgr -c; done; " &
 
-$nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; ${work_dir_autorun}xselection_archivist.sh; done; " &
-
+$nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; ${xselection_archivist_script_file}; done; " &
 
 sleep $timeout_1
 # nohup="$( get_command_fullpath nohup )"; \
