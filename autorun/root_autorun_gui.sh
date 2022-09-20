@@ -9,79 +9,31 @@ source "/home/i/bin/dzintara/autorun/load_variables.sh"
 declare -x -g service_name='dzintara.root_autorun_gui';   #for slog systemd logs
 
 slog "<5>start"
-slog "<7>$(show_var EUID)"
-whoami="$(whoami)"
-slog "<7>$(show_var whoami)"
-#countdown 31337 0.1
-#sleep 37
 
-( /home/i/bin/dzintara/autorun/x11vnc_autorun.sh )
+bash="$( get_command_fullpath bash )";
+numlockx="$( get_command_fullpath numlockx )";
+xset="$( get_command_fullpath xset )";
+setxkbmap="$( get_command_fullpath setxkbmap )";
+gxkb="$( get_command_fullpath gxkb )";
+nohup="$( get_command_fullpath nohup )";
+compton="$( get_command_fullpath compton )";
 
-random_wait
+$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84; sleep $timeout_2; done; " &
+
+$nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
+
+$nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; ${xselection_archivist_script_file}; done; " &
+
+# sleep $timeout_1
+
+$nohup $numlockx on &
+
+$nohup $xset led 3 &
+
+$nohup $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk" &
+
+$nohup  /home/i/bin/dzintara/autorun/x11vnc_autorun.sh &
+
+# random_wait
 
 slog "<5>finish $0"
-
-#
-# #( xmessage -buttons ok,no,wow -default wow -timeout 4 -print -nearmouse "hello" ); echo $?
-# #xconsole
-# #xmessage "some message here'
-#
-# #declare_and_export work_dir
-# #work_dir="/home/i/bin/dzintara/autorun";
-#
-# #access control disabled, clients can connect from any host
-# #xhost +
-#
-# #for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;
-#
-# #wait untill x server starts (or if waiting time is over)
-# echo "wait for Xorg" | tee --append "${work_dir}autorun/logs.root";
-# date | tee --append "${work_dir}autorun/logs.root";
-#
-# #wait_for 133 'is_process_running Xorg'
-#
-# wait_for 333 ' is_process_return_this_code 0 " timeout 42 xprop -root "  '
-# #if is_process_return_this_code 0 'xprop -root ' ; then echo "Xorg running"; else echo "Xorg NOT running"; fi;
-#
-# echo "Xorg loaded" | tee --append "${work_dir}autorun/logs.root";
-# date | tee --append "${work_dir}autorun/logs.root";
-#
-# #TODO create lock file?
-# #В цикле вызываем скрипт от пользователя. До тех пор, пока lock-файл не исчезнет.
-# #
-# # Запустили скрипт.
-# #
-# #
-#
-# #sleep 11;
-#
-# #echo "waiting completed" | tee --append "${work_dir}autorun/logs.root";
-# date | tee --append "${work_dir}autorun/logs.root";
-#
-# #TODO wait for lock file, generated after success execution if the script
-# #TODO delete lock file if it is too old
-#
-# #su i --preserve-environment --pty --command "source /home/i/bin/dzintara/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
-# #sudo --user=i --shell  "source /home/i/bin/dzintara/autorun/load_variables.sh; cvt_xrandr 1280 1024 60; "
-# #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; source /home/i/bin/dzintara/autorun/load_variables.sh; cvt_xrandr 1280 1024 60;"
-# #autorandr --debug --load itworks
-# #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; autorandr --debug --load itworks" #dont work for me
-#
-# #su i --preserve-environment --pty --command "source /home/i/bin/dzintara/autorun/load_variables.sh; time chromium-browser; ";
-# #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzintara/autorun/load_variables.sh; cvt_xrandr 1280 1024 60;";
-#
-# #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzintara/autorun/load_variables.sh; time chromium-browser; ";
-# #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzintara/autorun/load_variables.sh; time stterm -T 'Borodin-Atamanov system update' -e command '/bin/bash -c \'for ((i=42;i>=0;i--)); do echo -ne "\b\b\b\b\b\b\b\b $i  "; sleep 1.42; done;\'' ";
-# #su --login i --pty --shell="/bin/bash" --command="source /home/i/bin/dzintara/autorun/load_variables.sh; stterm -e /bin/bash -c source /home/i/bin/dzintara/autorun/load_variables.sh; sleep 35; ";
-# #su --login i --pty --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'ls; read; sleep 35;' ";
-# su --login i --shell="/bin/bash"  --command="source /home/i/bin/dzintara/autorun/load_variables.sh; xterm -e '/home/i/bin/dzintara/autorun/user_autorun.sh;' ";
-#
-# #su --login i --shell="/bin/bash"  --command="export DISPLAY=:0; xterm -e 'xset led 3; /home/i/bin/dzintara/autorun/user_autorun.sh; read; read; read; ' ";
-# #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; xset led 3; /bin/bash -l -v -c xterm -e 'xset led 3; /home/i/bin/dzintara/autorun/user_autorun.sh; read; read; read; ' ";
-#
-# #Работает:
-# #su --login i --pty --shell="/bin/bash" --command="export DISPLAY=:0; chromium-browser; ";
-#
-# #TODO run user_autorun.sh script in graphical environment on target computer
-#
-#

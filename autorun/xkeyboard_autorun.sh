@@ -19,7 +19,6 @@ $source_load_variables;
 
 declare -x -g service_name='dzintara.xkeyboard';   #for slog systemd logs
 
-#start plus root script
 whoami="$(whoami)"
 slog "<7>start X11 input settings update service"
 
