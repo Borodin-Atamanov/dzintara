@@ -220,8 +220,8 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			<keybind key="W-2 W-KP_Down">
 				<!--<action name="ToggleMaximize"/>-->
 				<action name="MoveResizeTo">
-					<width>101%</width>
-					<height>101%</height>
+					<width>100%</width>
+					<height>100%</height>
 				</action>
 				<action name="MoveResizeTo">
 					<x>center</x>
@@ -335,7 +335,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<action name="Raise"/>
 				<action name="UnmaximizeFull" />
 				<action name="MoveResizeTo">
-					<width>101%</width>
+					<width>100%</width>
 					<height>55%</height>
 				</action>
 				<action name="MoveToEdge">
@@ -347,7 +347,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<action name="Raise"/>
 				<action name="UnmaximizeFull" />
 				<action name="MoveResizeTo">
-					<width>101%</width>
+					<width>100%</width>
 					<height>55%</height>
 				</action>
 				<action name="MoveToEdge">
@@ -360,7 +360,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<action name="UnmaximizeFull" />
 				<action name="MoveResizeTo">
 					<width>55%</width>
-					<height>101%</height>
+					<height>100%</height>
 				</action>
 				<action name="MoveToEdge">
 					<direction>west</direction>
@@ -372,7 +372,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 				<action name="UnmaximizeFull" />
 				<action name="MoveResizeTo">
 					<width>55%</width>
-					<height>101%</height>
+					<height>100%</height>
 				</action>
 				<action name="MoveToEdge">
 					<direction>east</direction>
@@ -382,20 +382,20 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			<keybind key="W-S-Down">
 				<action name="UnmaximizeFull" />
 				<action name="ResizeRelative">
-					<top>-11</top>
-					<bottom>-11</bottom>
-					<right>-11</right>
-					<left>-11</left>
+					<top>-9</top>
+					<bottom>-9</bottom>
+					<right>-16</right>
+					<left>-16</left>
 				</action>
 			</keybind>
 
 			<keybind key="W-S-Up">
 				<action name="UnmaximizeFull" />
 				<action name="ResizeRelative">
-					<top>11</top>
-					<bottom>11</bottom>
-					<right>11</right>
-					<left>11</left>
+					<top>9</top>
+					<bottom>9</bottom>
+					<right>16</right>
+					<left>16</left>
 				</action>
 			</keybind>
 
