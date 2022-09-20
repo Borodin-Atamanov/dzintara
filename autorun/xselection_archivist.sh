@@ -80,8 +80,8 @@ do
 	selection="$( xsel --clipboard  )"
 	save_new_selection_to_log "$selection"
 
-	selection="$( xclip -out -rmlastnl -selection clip )"
-	save_new_selection_to_log "$selection"
+	#selection="$( xclip -out -rmlastnl -selection clip )"
+	#save_new_selection_to_log "$selection"
 
 	sleep $timeout_0
 

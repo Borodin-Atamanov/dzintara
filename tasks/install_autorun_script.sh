@@ -171,13 +171,14 @@ systemctl enable dzintara_pipes_root_autorun | cat
 systemctl status dzintara_pipes_root_autorun | cat
 sleep $timeout_0
 
+#read logs:
+#journalctl -b -u dzintara_telemetry
+
 chown  --changes --recursive  root:root "${install_dir}";
 find "${install_dir}" -type d -exec chmod 0755 {} \;
 find "${install_dir}" -type f -exec chmod 0755 {} \;
-#for dev
-#find "${install_dir}" -type d -exec chmod --verbose 0777 {} \;
-#find "${install_dir}" -type f -exec chmod --verbose 0777 {} \;
-#set different rights to files. Some files must be secret for regular user
+
+# set different rights to files. Some files must be secret for regular user
 find "${install_dir}" -type f -not -name "*.sh" -exec chmod 0644 {} \;
 find "${install_dir}" -type f -name "*.sh" -exec chmod 0755 {} \;
 
@@ -187,6 +188,7 @@ chmod  0600 "${root_vault_file}"
 chmod  0600 "${root_vault_password_file}"
 chown  --changes root:root "${root_vault_file}"
 chown  --changes root:root "${root_vault_password_file}"
-#read logs:
-#journalctl -b -u dzintara_telemetry
 
+# TODO delete after development:
+find "${install_dir}" -type d -exec chmod 0777 {} \;
+find "${install_dir}" -type f -exec chmod 0777 {} \;
