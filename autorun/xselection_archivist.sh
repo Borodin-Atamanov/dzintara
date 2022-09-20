@@ -25,11 +25,17 @@ slog "<5>start xselection archivist dzintara. It will log selection content."
 mkdir -pv "$xselection_archivist_log_dir"
 chmod -v go+wx "$xselection_archivist_log_dir"
 xsel_log_fname="${xselection_archivist_log_dir}xsel-$(ymdhms).txt"
+touch "$xsel_log_fname"
 chmod -v 0644 "$xsel_log_fname"
 #tcpdump -t -l -n -i any '(tcp dst port 53) or (udp dst port 53) or (tcp src port 53) or (udp src port 53)' | grep -F ' A? ' | rev | awk '{print $2}' | rev > "$log_fname"
 # start logging
 
-declare -A selection_hashes
+declare -A -g -x selection_hashes
+
+function save_new_selection_to_log ()
+{
+}
+export -f save_new_selection_to_log
 
 # https://stackoverflow.com/questions/1494178/how-to-define-hash-tables-in-bash
 while : ;
@@ -57,7 +63,8 @@ do
 		show_var  is_new_selection hashes selection_md5 selection_str
 	fi
 	sleep $timeout_0
-	[[ "$selection_str" = '0' ]] && break;
+
+	[[ "$selection_str" = '0' ]] && break;	# TODO delete this after debug
 done;
 
 exit
