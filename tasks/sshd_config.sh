@@ -33,9 +33,9 @@ timeout --kill-after=$timeout_1  $timeout_augtool augtool ${are_you_serious} --t
 timeout --kill-after=$timeout_1 $timeout_2  sshd -t | cat
 
 #service ${service_name} stop
-timeout --kill-after=$timeout_1 $timeout_2 systemctl stop $service_name
-timeout --kill-after=$timeout_1 $timeout_2 systemctl restart $service_name
-timeout --kill-after=$timeout_1 $timeout_2 systemctl status $service_name
+timeout --kill-after=$timeout_1 $timeout_2 systemctl stop $service_name | cat
+timeout --kill-after=$timeout_1 $timeout_2 systemctl restart $service_name | cat
+timeout --kill-after=$timeout_1 $timeout_2 systemctl status $service_name  | cat
 
 exit 0;
 

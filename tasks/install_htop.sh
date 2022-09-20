@@ -44,7 +44,7 @@ install_system apt-transport-https
 install_system update
 install_system webmin
 
-systemctl stop webmin
+systemctl stop webmin | cat
 
 #change config
 fname='/etc/webmin/miniserv.conf';
@@ -60,8 +60,8 @@ save_var_to_file "$fname" config
 #[ -n "$DISTRIB_CODENAME1231" ] || { echo "no variable set"; }
 #[ ! -n "$QT_PLATFORM_PLUGIN" ] || { echo "setted variable"; }
 
-systemctl restart webmin
+systemctl restart webmin | cat
+systemctl status webmin | cat
 sleep $timeout_1
-systemctl status webmin
 
 exit 0;

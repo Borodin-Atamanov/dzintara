@@ -64,12 +64,12 @@ user_text=$(cat <<_ENDOFFILE
 ${user_text}
 # ${hostname}
 # Save this important information about your system passwords in your password manager
-# This fille will delete after system reboot
+# This file will delete after system reboot
 
-passwor for system user 'i':
+password for system user 'i':
 ${user_i_password}
 
-passwor for root super user:
+password for root super user:
 ${user_i_password}
 
 
@@ -179,8 +179,6 @@ telemetry_send "$password_in_plain_text_for_user_file" "#user_passwords"
 telemetry_send "" "#text_passwords $user_text"
 
 ln -v --symbolic "${password_in_plain_text_for_user_file}" "${link_to_password_in_plain_text_for_user_file}"
-
-
 
 source_load_variables="source '"$load_variables_file"'"
 bash="$( get_command_fullpath bash )";
