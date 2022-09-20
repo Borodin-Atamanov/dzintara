@@ -29,7 +29,7 @@ chmod -v 0644 "$log_fname"
 # start logging
 
 # this capture not all DNS queries, most of the browser's queries is not here:
-tcpdump -t -l -n -i any | grep -F ' A? ' | awk '{print $(NF-1)}' >> "$log_fname"
+tcpdump -t -l -n -i any | grep -F ' A? ' | awk '{ print $(NF-1); fflush() }' >> "$log_fname"
 # TODO find solution how to get all local DNS requests.
 
 exit

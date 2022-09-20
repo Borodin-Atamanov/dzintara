@@ -60,7 +60,7 @@ function save_new_selection_to_log ()
 			str_add_last_active_window_title_to_log="";
 		else
 			# if active window changed - add its name to log
-			str_add_last_active_window_title_to_log="—— ${active_window_title} —— ${x0a}";
+			str_add_last_active_window_title_to_log="${x0a} ● ${active_window_title} ● ${x0a}";
 		fi
 		echo "${str_add_last_active_window_title_to_log}${selection_str}" >> "$xsel_log_fname"
 		declare -g last_active_window_title="$active_window_title"

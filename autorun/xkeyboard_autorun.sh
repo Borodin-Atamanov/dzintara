@@ -4,6 +4,8 @@
 #License: MIT
 #script autorun
 
+# TODO start it from gui_root_autorun, not from systemd service
+
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzintara/"
@@ -38,21 +40,26 @@ compton="$( get_command_fullpath compton )";
 # compton --backend glx --vsync opengl-swc
 #$compton --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 --daemon
 
-$compton --daemon --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 &
 
-# fallback mode
-$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84; sleep $timeout_2; done; " &
+$compton --daemon --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 &
+# fallback mode (if something wrong with daemon
+$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84; sleep $timeout_3; done; " &
 
 $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 #nohup $bash -c 'while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after='$timeout_2' '$timeout_4' '$xneur'; sleep '$timeout_2'; done; ' &
 
 #$nohup su --login i --shell="${bash}" --command="${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $xcompmgr -c; done; " &
 
+$nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; ${work_dir_autorun}xselection_archivist.sh; done; " &
+
+
 sleep $timeout_1
 # nohup="$( get_command_fullpath nohup )"; \
 # source_load_variables="source '"$load_variables_file"'"; \
 # bash="$( get_command_fullpath bash )"; \
 # su --login i --shell="${bash}" --command="${source_load_variables}; xneur;"
+
+
 
 #while : ; do :
 for ((i=5;i>=0;i--)); do

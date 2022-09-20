@@ -103,7 +103,7 @@ sleep $timeout_0
 #create systemd service unit file
 service_unit=$(cat <<_ENDOFFILE
 [Unit]
-Description=dzintara autorun service
+Description=dzintara xkeyboard autorun service
 [Service]
 ExecStart=${xkeyboard_autorun_script_file}
 Restart=always
