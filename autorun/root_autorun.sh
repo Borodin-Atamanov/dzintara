@@ -85,7 +85,7 @@ eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_vari
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 
-sleep $timeout_0
+sleep $timeout_1
 
 slog "<7>start root GUI script ${root_autorun_gui}";
 #eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzintara/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzintara/autorun/user_autorun_gui.sh & " ';
