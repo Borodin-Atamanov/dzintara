@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ukexio-821-2209201454'; 
+declare -g -x script_version='gaparb-822-2209201454'; 
 
 function run_task ()
 {
@@ -1044,6 +1044,7 @@ function run_background_command_with_logs ()
   # user name
   # count of starts command
   # sleep between starts
+  :
 }
 export -f run_background_command_with_logs
 
