@@ -11,10 +11,11 @@ x11vnc
 oneko
 xterm
 rxvt-unicode
-xneur
+#xneur
 #keyboard layout indicator
 gxkb
-
+# https://github.com/jceb/dex
+dex
 
 #telegram-desktop
 
