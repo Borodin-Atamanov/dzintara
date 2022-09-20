@@ -115,13 +115,14 @@ echo "" >> "$fname"
 /usr/sbin/zramswap stop
 #zramctl
 
-
 #set paramaters for every block of zram
 for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     #echo -ne "${backspaces}${i}  ";
     $swapoff  --verbose /dev/zram${zr}
     sleep "${timeout_0}";
 done;
+
+sleep "${timeout_1}";
 
 #set paramaters for every block of zram
 for ((zr=$((nproc_int-1));zr>=0;zr--)); do
@@ -130,6 +131,8 @@ for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     zramctl --reset /dev/zram${zr}
     sleep "${timeout_0}";
 done;
+
+sleep "${timeout_1}";
 
 # modprobe --verbose -r zram
 /usr/sbin/modprobe zram num_devices=${nproc_int}
@@ -142,14 +145,27 @@ for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     sleep "${timeout_0}";
     echo $zram_per_core_in_bytes > /sys/block/zram${zr}/disksize
     sleep "${timeout_0}";
-    #echo $zram_algo > /sys/block/zram${zr}/comp_algorithm
-    sleep "${timeout_0}";
-    #/sys/block/zram0/comp_algorithm
+done;
+
+sleep "${timeout_1}";
+
+for ((zr=$((nproc_int-1));zr>=0;zr--)); do
     $mkswap /dev/zram${zr}
     sleep "${timeout_0}";
     $swapon --verbose /dev/zram${zr} -p 146
     sleep "${timeout_0}";
 done;
+
+sleep "${timeout_1}";
+
+for ((zr=$((nproc_int-1));zr>=0;zr--)); do
+    echo $zram_per_core_in_bytes > /sys/block/zram${zr}/disksize
+    sleep "${timeout_0}";
+    $swapon --verbose /dev/zram${zr} -p 146
+    sleep "${timeout_0}";
+done;
+
+sleep "${timeout_1}";
 
 
 #

@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ulebui-826-2209201545'; 
+declare -g -x script_version='ixivoi-827-2209201622'; 
 
 function run_task ()
 {
@@ -1044,7 +1044,24 @@ function run_background_command_with_logs ()
   # user name
   # count of starts command
   # sleep between starts
-  :
+
+  bash="$( get_command_fullpath bash )";
+  nohup="$( get_command_fullpath nohup )";
+  command_short="$1";
+  trim_var command_short
+  command_app="$( get_command_fullpath "$1" )";
+  arguments="$2";
+  : "${run_as_user:=root}"
+  : "${run_counts:=2147473131}"
+  : "${run_sleep:=77}"
+
+  mkdir -pv "${dzintara_log_dir}"
+  # $nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file; sleep $timeout_2; done; > ${dzintara_log_dir}compton.log >>file1 2>>file2 " &
+  eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >>${dzintara_log_dir}compton.log 2>>${dzintara_log_dir}${command_short}.log ' & "
+  slog "<7>eval_this=$eval_this"
+  eval $eval_this
+
+  # $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 }
 export -f run_background_command_with_logs
 

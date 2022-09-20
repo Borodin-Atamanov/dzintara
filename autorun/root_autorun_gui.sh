@@ -18,7 +18,7 @@ gxkb="$( get_command_fullpath gxkb )";
 nohup="$( get_command_fullpath nohup )";
 compton="$( get_command_fullpath compton )";
 
-$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file; sleep $timeout_2; done; > ${dzintara_log_dir}compton >>file1 2>>file2 " &
+$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file; sleep $timeout_2; done; > ${dzintara_log_dir}compton.log >>file1 2>>file2 " &
 
 $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 
