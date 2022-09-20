@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='taxunn-833-2209202041'; 
+declare -g -x script_version='igesic-834-2209202107'; 
 
 function run_task ()
 {
@@ -1052,12 +1052,14 @@ function run_background_command_with_logs ()
   command_app="$( get_command_fullpath "$1" )";
   arguments="$2";
   : "${run_as_user:=root}"
-  : "${run_counts:=2147473131}"
+  : "${run_counts:=1}"
   : "${run_sleep:=77}"
   : "${source_load_variables:=source $load_variables_file}"
 
   mkdir -pv "${dzintara_log_dir}"
-  eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >${dzintara_log_dir}compton.log 2>${dzintara_log_dir}${command_short}.log ' & "
+  # eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
+  # eval_this="$bash -c '${source_load_variables}; ${command_app} ${arguments}; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
+  eval_this="$nohup $bash -c '${source_load_variables}; for ((i=${run_counts};i>0;i--)) do : ; ${command_app} ${arguments} >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log; echo $i; sleep ${run_sleep}; done;' & "
   slog "<7>eval_this=$eval_this"
   eval $eval_this
 
