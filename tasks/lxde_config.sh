@@ -6,6 +6,7 @@
 # TODO check what LXDE is installed on the system
 
 install_system openbox
+apt-get --assume-yes --force-yes purge xcompmgr | cat
 install_system compton
 
 # https://wiki.archlinux.org/title/xcompmgr
