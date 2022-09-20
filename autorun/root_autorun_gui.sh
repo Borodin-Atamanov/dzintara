@@ -18,7 +18,7 @@ run_background_command_with_logs gxkb
 #$nohup $bash -c '${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; ' &
 sleep $timeout_0
 
-run_background_command_with_logs "${xselection_archivist_script_file}"
+run_background_command_with_logs $xselection_archivist_script_file
 #$nohup $bash -c '${source_load_variables}; while : ; do sleep $timeout_1; ${xselection_archivist_script_file}; done; ' &
 sleep $timeout_0
 

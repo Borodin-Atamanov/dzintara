@@ -9,7 +9,6 @@ install_system openbox
 install_system compton
 
 apt-get --assume-yes purge xcompmgr | cat
-
 rm -f '/etc/xdg/autostart/xcompmgr.desktop'
 
 # https://wiki.archlinux.org/title/xcompmgr
