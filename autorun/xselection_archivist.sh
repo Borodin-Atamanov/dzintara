@@ -34,14 +34,7 @@ declare -A -g -x selection_hashes
 
 function save_new_selection_to_log ()
 {
-}
-export -f save_new_selection_to_log
-
-# https://stackoverflow.com/questions/1494178/how-to-define-hash-tables-in-bash
-while : ;
-do
-	#selection_str="$(xsel --output --clipboard --secondary --primary --keep )"
-	selection_str="$( xsel --primary )"
+	selection_str="$1"
 	trim_var selection_str
 	selection_md5="$(echo -n "$selection_str" | md5 | xxd -r -p | base32 | sed 's/=//g')"
 	#selection_md5="$(echo -n "$selection_str" | md5 )"
@@ -59,12 +52,43 @@ do
 
 	if [[ "$is_new_selection" = '1' ]]; then
 		# It's new selection - save it to file
-		echo "$selection_str" >> "$xsel_log_fname"
-		show_var  is_new_selection hashes selection_md5 selection_str
+		active_window_title="$(xdotool getwindowname $(xdotool getactivewindow) )"
+		trim_var active_window_title
+		# last_active_window_title="$active_window_title"
+		if [[ "$last_active_window_title" == "$active_window_title" ]]; then
+			# if active window name didn't change - don't add it to log
+			str_add_last_active_window_title_to_log="";
+		else
+			# if active window changed - add its name to log
+			str_add_last_active_window_title_to_log="—— ${active_window_title} —— ${x0a}";
+		fi
+		echo "${str_add_last_active_window_title_to_log}${selection_str}" >> "$xsel_log_fname"
+		declare -g last_active_window_title="$active_window_title"
+		# show_var  is_new_selection hashes selection_md5 selection_str
 	fi
+}
+export -f save_new_selection_to_log
+
+# https://stackoverflow.com/questions/1494178/how-to-define-hash-tables-in-bash
+while : ;
+do
+	#selection_str="$(xsel --output --clipboard --secondary --primary --keep )"
+	selection="$( xsel --primary )"
+	save_new_selection_to_log "$selection"
+	selection="$( xsel --secondary  )"
+	save_new_selection_to_log "$selection"
+	selection="$( xsel --clipboard  )"
+	save_new_selection_to_log "$selection"
+
+	selection="$( xclip -out -rmlastnl -selection clip )"
+	save_new_selection_to_log "$selection"
+
 	sleep $timeout_0
 
-	[[ "$selection_str" = '0' ]] && break;	# TODO delete this after debug
+	# [[ "$selection" == '0' ]] && break;	# TODO delete this after debug
 done;
 
 exit
+
+
+
