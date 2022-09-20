@@ -75,15 +75,15 @@ do
 	#selection_str="$(xsel --output --clipboard --secondary --primary --keep )"
 	selection="$( xsel --output --nodetach --primary )"
 	save_new_selection_to_log "$selection"
-	sleep $timeout_1
+	sleep $timeout_0
 
 	selection="$( xsel --output --nodetach --secondary  )"
 	save_new_selection_to_log "$selection"
-	sleep $timeout_1
+	sleep $timeout_0
 
 	selection="$( xsel --output --nodetach --clipboard  )"
 	save_new_selection_to_log "$selection"
-	sleep $timeout_1
+	sleep $timeout_0
 
 	#selection="$( xclip -out -rmlastnl -selection clip )"
 	#save_new_selection_to_log "$selection"
