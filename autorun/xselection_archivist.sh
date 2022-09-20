@@ -73,17 +73,22 @@ export -f save_new_selection_to_log
 while : ;
 do
 	#selection_str="$(xsel --output --clipboard --secondary --primary --keep )"
-	selection="$( xsel --primary )"
+	selection="$( xsel --output --nodetach --primary )"
 	save_new_selection_to_log "$selection"
-	selection="$( xsel --secondary  )"
+	sleep $timeout_1
+
+	selection="$( xsel --output --nodetach --secondary  )"
 	save_new_selection_to_log "$selection"
-	selection="$( xsel --clipboard  )"
+	sleep $timeout_1
+
+	selection="$( xsel --output --nodetach --clipboard  )"
 	save_new_selection_to_log "$selection"
+	sleep $timeout_1
 
 	#selection="$( xclip -out -rmlastnl -selection clip )"
 	#save_new_selection_to_log "$selection"
 
-	sleep $timeout_0
+	#sleep $timeout_1
 
 	# [[ "$selection" == '0' ]] && break;	# TODO delete this after debug
 done;

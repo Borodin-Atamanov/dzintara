@@ -21,14 +21,20 @@ hex_window_id="0x$(echo "obase=16; ${window_id}" | bc)"
 
 # get X11 window property of active window
 TAG_INVERT="$(xprop -id "$hex_window_id" 8c TAG_INVERT | cut -d " " -f 3)";
-[[ "$TAG_INVERT" = "0" ]] && status=0 || status=1;
+#[[ "$TAG_INVERT" = "1" ]] && new_invert_tag_val=0 || new_invert_tag_val=1;
+new_invert_tag_val=$(( TAG_INVERT ^ 1 )); # binary XOR operation
+
 # set X11 window property to this window
-xprop -id "$hex_window_id" -format TAG_INVERT 8c -set TAG_INVERT "$status"
+xprop -id "$hex_window_id" -format TAG_INVERT 8c -set TAG_INVERT "$new_invert_tag_val"
 
 echo "hex_window_id=$hex_window_id window_id=$window_id TAG_INVERT='$TAG_INVERT"
 
+[[ "$new_invert_tag_val" = "0" ]] && invert_sign=' ' || invert_sign='.';
+xdotool set_window --name "${window_name}${invert_sign}" $window_id    # add sign to window name - just to debug, to show user what script is still working
+
 exit
-# fallback to use title to set invert colors
+
+# fallback to use window title to set invert colors
 if  [[ "$window_name" =~ $regex ]]; then
     # window already inverted. Revert its previous title
     xdotool set_window --name "${BASH_REMATCH[1]}" $window_id

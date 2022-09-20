@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='avuvad-820-2209201108'; 
+declare -g -x script_version='ukexio-821-2209201454'; 
 
 function run_task ()
 {
@@ -1036,6 +1036,16 @@ function get_all_host_addresses
   fi
 }
 export -f get_all_host_addresses
+
+function run_background_command_with_logs ()
+{
+  # $1 - command to run
+  # $2 - all arguments in one string
+  # user name
+  # count of starts command
+  # sleep between starts
+}
+export -f run_background_command_with_logs
 
 parse_key_value "$@"
 

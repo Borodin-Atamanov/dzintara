@@ -6,6 +6,8 @@
 
 # TODO start it from gui_root_autorun, not from systemd service
 
+exit
+
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzintara/"
@@ -21,15 +23,15 @@ declare -x -g service_name='dzintara.xkeyboard';   #for slog systemd logs
 whoami="$(whoami)"
 slog "<7>start X11 input settings update service"
 
+bash="$( get_command_fullpath bash )";
 numlockx="$( get_command_fullpath numlockx )";
 xset="$( get_command_fullpath xset )";
 setxkbmap="$( get_command_fullpath setxkbmap )";
 gxkb="$( get_command_fullpath gxkb )";
-xneur="$( get_command_fullpath xneur )";
-bash="$( get_command_fullpath bash )";
-xcompmgr="$( get_command_fullpath xcompmgr )";
+#xneur="$( get_command_fullpath xneur )";
 nohup="$( get_command_fullpath nohup )";
 compton="$( get_command_fullpath compton )";
+#xcompmgr="$( get_command_fullpath xcompmgr )";
 
 #echo -e "remove Lock = Caps_Lock\nremove Control = Control_L\nkeysym Control_L = Caps_Lock\nkeysym Caps_Lock = Control_L\nadd Lock = Caps_Lock\nadd Control = Control_L\n" | xmodmap -v -
 #timeout --kill-after=$timeout_1 $timeout_2 $setxkbmap -layout "us,ru" -option "" -option "grp:shift_caps_switch" -option "grp_led:scroll" -option "grp_led:caps" -option "compose:sclk"
@@ -43,7 +45,7 @@ compton="$( get_command_fullpath compton )";
 
 $compton --daemon --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84 &
 # fallback mode (if something wrong with daemon
-$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84; sleep $timeout_3; done; " &
+$nohup $bash -c "${source_load_variables}; while : ; do $compton --config $compton_config_file --backend glx --paint-on-overlay --vsync opengl-swc --shadow-radius=5 --menu-opacity=0.87 --no-dock-shadow --inactive-opacity=0.87 --frame-opacity=0.84; sleep $timeout_2; done; " &
 
 $nohup $bash -c "${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; " &
 #nohup $bash -c 'while : ; do source /home/i/bin/dzintara/autorun/load_variables.sh nocd; timeout --kill-after='$timeout_2' '$timeout_4' '$xneur'; sleep '$timeout_2'; done; ' &

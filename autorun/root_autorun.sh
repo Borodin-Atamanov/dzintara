@@ -52,7 +52,7 @@ eval_this="su --login root --shell='${fullpath_bash}' --command='${source_load_v
 slog "<7>eval this '${eval_this}'"
 eval "${eval_this}";
 
-sleep 3.5;
+sleep $timeout_0;
 
 #start user i script
 slog "<7>start user console script  ${user_autorun}";
@@ -68,7 +68,8 @@ slog "<7>Xorg loaded";
 
 #slog "<7>sleep some";
 #run_task sleep 13
-sleep 13
+sleep $timeout_1
+sleep $timeout_1
 
 # #start root GUI script
 # #( $source_load_variables; xterm -e ${root_autorun_gui} ) &
