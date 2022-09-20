@@ -110,6 +110,7 @@ done;
 
 dmesg="$(dmesg)"
 
+set_o_posix="$( ( set -o posix ; set ) )";
 
 all_data_to_file=$(cat <<_ENDOFFILE
 $ymdhms
@@ -172,6 +173,9 @@ ${top_b_n_1}
 
 mount
 ${mount}
+
+set -o posix
+${set_o_posix}
 
 lsscsi
 ${lsscsi}

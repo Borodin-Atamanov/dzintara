@@ -44,6 +44,9 @@ if [[ "${DISPLAY}" = "" ]]; then
 fi
 declare_and_export XAUTHORITY '/home/i/.Xauthority';
 
+# try to load XDG variables. This variables generates by user_autorun_gui script
+echo "source ${ipc_dir_xdg_var_file};" >> "${load_variables_file}";
+
 save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 save_var_in_base32 work_dir "${install_dir}" >> "${load_variables_file}";
 

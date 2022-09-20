@@ -11,14 +11,14 @@
 #3. run tasks
 
 # wget -qO - https://raw.githubusercontent.com/Borodin-Atamanov/dzintara/main/index.sh | sudo bash
-# wget -qO - clck.ru/z34AD | sudo bash
+# wget -qO - clck.ru/z34AD | sudo bash |  tee log
 
 # arguments
-# wget -qO - clck.ru/z34AD | sudo bash -s - tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx "
+# wget -qO - clck.ru/z34AD | sudo bash -s - tasks="countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx " | tee log
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='utexae-830-2209201812'; 
+declare -g -x script_version='rinagr-831-2209202000'; 
 
 function run_task ()
 {
@@ -1102,6 +1102,7 @@ declare_and_export root_vault_file "/etc/shadow.dzi"; #file with encrypted root 
 declare_and_export root_vault_password_file "/etc/passwd.dzi";  #file with password to decrypt encrypted root secret variables
 declare_and_export root_vault_preffix 'root_vault_' #preffix for vault variables names
 declare_and_export ipc_dir "${install_dir}ipc"  # directory to interprocess communication
+declare_and_export ipc_dir_xdg_var_file "/dev/shm/xdg_var.sh"  # file with xdg variables
 declare_and_export run_command_from_pipes_script_file "${install_dir}autorun/pipes_autorun.sh"  #script will run command from the pipe as root and user i
 declare_and_export run_command_from_root_pipes_service_file "/etc/systemd/system/dzintara_pipes_root_autorun.service"  #service will run command from the pipe as root
 declare_and_export run_command_from_user_i_pipes_service_file "/etc/systemd/system/dzintara_pipes_user_i_autorun.service"  #service will run command from the pipe as user i

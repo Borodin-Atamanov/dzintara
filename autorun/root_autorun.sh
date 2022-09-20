@@ -77,6 +77,16 @@ sleep $timeout_1
 # slog "<7>eval this '${eval_this}'"
 # eval "${eval_this}";
 
+
+#start user i GUI script
+slog "<7>start user GUI script ${user_autorun_gui}";
+#eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzintara/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzintara/autorun/user_autorun_gui.sh & " ';
+eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${user_autorun_gui} & ' ";
+slog "<7>eval this  '${eval_this}'"
+eval "${eval_this}";
+
+sleep $timeout_1
+
 slog "<7>start root GUI script ${root_autorun_gui}";
 #eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzintara/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzintara/autorun/user_autorun_gui.sh & " ';
 eval_this="su --login root --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${root_autorun_gui} & ' ";
@@ -92,12 +102,6 @@ eval "${eval_this}";
 #slog "<7>sleep 2";
 sleep 2.5;
 
-#start user i GUI script
-slog "<7>start user GUI script ${user_autorun_gui}";
-#eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzintara/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzintara/autorun/user_autorun_gui.sh & " ';
-eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_variables};  ${fullpath_nohup} ${fullpath_terminal_gui_app} -e ${user_autorun_gui} & ' ";
-slog "<7>eval this  '${eval_this}'"
-eval "${eval_this}";
 
 slog "<5>finish $0"
 

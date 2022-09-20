@@ -3,8 +3,24 @@
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
 #script autorun on target system in user mode after GUI starts. It will never starts in pure console computers, f.e. servers
+
+# export all XDG-variables to use in other scripts
+# set -a  # or: set -o allexport
+# . ./environment
+# set +a
+
+x_variables="$( printenv | grep -F 'X' )"
+set -o allexport
+eval $x_variables;
+set +a
+x2_variables="$( export | grep -F 'X' )"
+
 source "/home/i/bin/dzintara/autorun/load_variables.sh"
 declare -x -g service_name='dzintara.user_autorun_gui';   #for slog systemd logs
+
+# export XDG-variables to file, and other scripts will use it (some of XDG variables needed to run gui apps)
+${ipc_dir_xdg_var_file}
+save_var_to_file "${ipc_dir_xdg_var_file}" x2_variables
 
 #access control disabled, clients can connect from any host
 # xhost +
