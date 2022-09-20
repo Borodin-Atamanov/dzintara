@@ -15,7 +15,7 @@ install_system compton
 
 config_file='/etc/xdg/lxsession/LXDE-pi/desktop.conf';
 load_var_from_file "$config_file" config_var
-replace_line_by_string config "window_manager=" "window_manager=openbox" "#"
+replace_line_by_string config_var "window_manager=" "window_manager=openbox" "#"
 save_var_to_file "$config_file" config_var
 
 # http://openbox.org/wiki/Help:Actions
