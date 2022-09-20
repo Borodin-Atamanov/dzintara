@@ -4,6 +4,10 @@
 #License: MIT
 #script autorun x11vnc
 
+exit;
+
+# this file is not needed anymore
+
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
 #declare_and_export work_dir "/home/i/bin/dzintara/"

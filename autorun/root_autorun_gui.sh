@@ -18,7 +18,7 @@ run_background_command_with_logs gxkb
 #$nohup $bash -c '${source_load_variables}; while : ; do sleep $timeout_1; timeout --kill-after=$timeout_2 $timeout_5 $gxkb; done; ' &
 sleep $timeout_0
 
-run_background_command_with_logs '${xselection_archivist_script_file}'
+run_background_command_with_logs "${xselection_archivist_script_file}"
 #$nohup $bash -c '${source_load_variables}; while : ; do sleep $timeout_1; ${xselection_archivist_script_file}; done; ' &
 sleep $timeout_0
 
@@ -33,7 +33,7 @@ sleep $timeout_0
 run_background_command_with_logs setxkbmap " -layout 'us,ru' -option '' -option 'grp:shift_caps_switch' -option 'grp_led:scroll' -option 'grp_led:caps' -option 'compose:sclk' "
 sleep $timeout_0
 
-run_background_command_with_logs /home/i/bin/dzintara/autorun/x11vnc_autorun.sh
+run_background_command_with_logs x11vnc " -6 -reopen -scale 0.75 -shared -forever -loop7777 -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 1 -rfbauth /root/.vnc/passwd "
 sleep $timeout_0
 
 # random_wait
