@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+o#!/usr/bin/bash
 # Dzintara
 # Open source app for setup debian-like systems
 # https://github.com/Borodin-Atamanov/dzintara
@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='tekunr-843-2209211918'; 
+declare -g -x script_version='vononb-844-2209211918'; 
 
 function run_task ()
 {
