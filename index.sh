@@ -18,7 +18,7 @@ o#!/usr/bin/bash
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='vononb-844-2209211918'; 
+declare -g -x script_version='idecia-845-2209212007'; 
 
 function run_task ()
 {
@@ -1197,6 +1197,8 @@ fi
 if [[ "${test_mode}" = "1" ]]; then
   echo "local test mode, so don't clone github";
 else
+  install_system wget
+  install_system rsync
   install_system git
   install_system openssl
   work_dir="${TMPDIR:-/tmp}/dzintara_work_dir-$(date "+%F-%H-%M-%S")";
