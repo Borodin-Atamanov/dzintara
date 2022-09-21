@@ -5,6 +5,7 @@ augeas-tools
 nmap
 bind-utils
 bind9-utils
+tcpdump
 wget
 curl
 git

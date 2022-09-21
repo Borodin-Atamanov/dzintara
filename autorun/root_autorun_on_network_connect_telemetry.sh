@@ -45,6 +45,8 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
+wmctrl_l="$(wmctrl -l)"
+
 top_b_n_1="$(top -b -n 1)"
 
 swapon="$(swapon)"
@@ -121,6 +123,10 @@ hostname
 ${hostname2}
 ${hostname}
 ${hostname_ip}
+${hostnamectl}
+
+uname -a
+${uname_a}
 
 tor_hostname
 ${tor_hostname}
@@ -132,10 +138,8 @@ ${ipfy4}
 ${architecture}
 ${os_codename}
 
-${hostnamectl}
-
-uname -a
-${uname_a}
+wmctrl -l
+${wmctrl_l}
 
 netstat
 ${netstat}
