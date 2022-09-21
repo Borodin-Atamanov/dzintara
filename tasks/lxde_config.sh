@@ -20,8 +20,7 @@ rm -f '/etc/xdg/autostart/xcompmgr.desktop'
 # https://wiki.archlinux.org/title/xcompmgr
 # install_system xcompmgr
 
-# change some values in config
-
+# change some values in configs
 config_file='/etc/lightdm/lightdm.conf';
 load_var_from_file "$config_file" config_var
 replace_line_by_string config_var "autologin-user" "autologin-user=i" "#"
