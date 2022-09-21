@@ -141,7 +141,7 @@ sleep "${timeout_1}";
 
 #set paramaters for every block of zram
 for ((zr=$((nproc_int-1));zr>=0;zr--)); do
-    zramctl /dev/zram${zr} --size $zram_per_core_in_bytes --streams ${nproc_int} --algorithm $zram_algo
+    zramctl "/dev/zram${zr}" --size $zram_per_core_in_bytes --streams 2 --algorithm $zram_algo
     sleep "${timeout_0}";
     echo $zram_per_core_in_bytes > /sys/block/zram${zr}/disksize
     sleep "${timeout_0}";

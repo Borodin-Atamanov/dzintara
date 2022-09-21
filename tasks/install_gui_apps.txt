@@ -17,6 +17,9 @@ gxkb
 # https://github.com/jceb/dex
 dex
 
+# image viewer
+nomacs
+
 #telegram-desktop
 
 #firefox-esr

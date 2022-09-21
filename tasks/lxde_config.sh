@@ -27,6 +27,14 @@ replace_line_by_string config_var "autologin-user" "autologin-user=i" "#"
 replace_line_by_string config_var "autologin-user-timeout" "autologin-user-timeout=3" "#"
 save_var_to_file "$config_file" config_var
 
+
+config_file='/etc/sddm.conf.d/autologin';
+load_var_from_file "$config_file" config_var
+replace_line_by_string config_var "User=" "User=i" "#"
+replace_line_by_string config_var "Session=" "Session=lxqt.desktop" "#"
+replace_line_by_string config_var "Relogin=" "Relogin=" "#"
+save_var_to_file "$config_file" config_var
+
 config_file='/etc/xdg/lxsession/LXDE-pi/desktop.conf';
 load_var_from_file "$config_file" config_var
 replace_line_by_string config_var "window_manager=" "window_manager=openbox" "#"
@@ -43,7 +51,7 @@ copy_lxde_rc_config_file3='/home/i/.config/openbox/rc.xml';
 copy_lxde_rc_config_file5='/home/i/.config/openbox/lxde-rc.xml';
 
 # overwrite old config with new file
-set -x
+#set -x
 rm -v "$lxde_rc_config_file"
 cp -v "$dzintara_lxde_rc_config_file" "$lxde_rc_config_file"
 # set permissions
@@ -67,6 +75,8 @@ chmod --verbose 0644 "$compton_config_file";
 
 set +x
 
+systemctl status display-manager | cat
+sleep $timeout_0
 
 
 

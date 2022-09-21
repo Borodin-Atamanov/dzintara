@@ -49,6 +49,8 @@ top_b_n_1="$(top -b -n 1)"
 
 swapon="$(swapon)"
 
+zramctl_output_all="$(zramctl --output-all)"
+
 free_mega_wide_lohi="$(free --mega --wide --lohi)"
 
 uname_a="$(uname -a)"
@@ -167,6 +169,9 @@ ${free_mega_wide_lohi}
 
 swapon
 ${swapon}
+
+zramctl --output all
+${zramctl_output_all}
 
 top -b -n 1
 ${top_b_n_1}
