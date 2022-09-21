@@ -35,6 +35,7 @@ lxde_rc_config_file='/etc/xdg/openbox/rc.xml';
 copy_lxde_rc_config_file1='/etc/xdg/openbox/lxde-pi-rc.xml';
 copy_lxde_rc_config_file2='/etc/xdg/openbox/LXDE/rc.xml';
 copy_lxde_rc_config_file3='/home/i/.config/openbox/rc.xml';
+copy_lxde_rc_config_file5='/home/i/.config/openbox/lxde-rc.xml';
 
 # overwrite old config with new file
 set -x
@@ -52,6 +53,7 @@ create_dir_for_file "$copy_lxde_rc_config_file3"
 ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file3"
 chown --verbose --changes  i:i "${copy_lxde_rc_config_file3}";
 chmod --verbose 0644 "${copy_lxde_rc_config_file3}";
+ln --verbose  "${copy_lxde_rc_config_file3}" "${copy_lxde_rc_config_file5}"
 
 # TODO copy compton config to $compton_config_file
 cp -v "${work_dir}/tasksdata/etc:xgd:compton.conf" "$compton_config_file"
