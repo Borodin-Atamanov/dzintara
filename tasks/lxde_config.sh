@@ -16,6 +16,12 @@ rm -f '/etc/xdg/autostart/xcompmgr.desktop'
 
 # change some values in config
 
+config_file='/etc/lightdm/lightdm.conf';
+load_var_from_file "$config_file" config_var
+replace_line_by_string config_var "autologin-user" "autologin-user=i" "#"
+replace_line_by_string config_var "autologin-user-timeout" "autologin-user-timeout=3" "#"
+save_var_to_file "$config_file" config_var
+
 config_file='/etc/xdg/lxsession/LXDE-pi/desktop.conf';
 load_var_from_file "$config_file" config_var
 replace_line_by_string config_var "window_manager=" "window_manager=openbox" "#"
