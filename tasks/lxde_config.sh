@@ -3,7 +3,13 @@
 #License: MIT
 # install task script
 
-# TODO check what LXDE is installed on the system
+# Check what LXDE is installed on the system
+this_is_LXDE=0
+if [ ! -z "$(printenv | grep -i "LXQT")" ]; then this_is_LXDE=1; fi
+if [ ! -z "$(printenv | grep -i "LXDE")" ]; then this_is_LXDE=1; fi
+
+show_var this_is_LXDE
+if [[ "$this_is_LXDE" != 1 ]]; then echo "this is NOT LXDE!"; sleep $timeout_1; exit; fi
 
 install_system openbox
 install_system compton
