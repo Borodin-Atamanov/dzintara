@@ -21,6 +21,7 @@ openssh-server
 openssh-sftp-server
 
 # get info about system
+arp
 inxi
 lsscsi
 ncdu

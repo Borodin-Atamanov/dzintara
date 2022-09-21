@@ -67,14 +67,17 @@ save_var_in_base32 XAUTHORITY "$XAUTHORITY" >> "${load_variables_file}";
 #save_var_in_text work_dir "${install_dir}" >> "${load_variables_file}";
 
 #add dzintara functions and variables to shell autorun
-line_to_add="source ${load_variables_file} nocd"
+line_to_add="if [ -f "${load_variables_file}" ]; then source ${load_variables_file} nocd;  fi"
 add_line_to_file "/home/i/.bash_profile" "$line_to_add"
 add_line_to_file "/home/i/.bashrc" "$line_to_add"
 add_line_to_file "/home/i/.profile" "$line_to_add"
+add_line_to_file "/home/i/.xsessionrc"  "$line_to_add"
 
 add_line_to_file "/root/.bash_profile" "$line_to_add"
 add_line_to_file "/root/.bashrc" "$line_to_add"
 add_line_to_file "/root/.profile" "$line_to_add"
+
+add_line_to_file "/etc/environment" 'PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:${install_dir}app:/home/i/bin"'
 
 #add script as autorun service to systemd for root
 #create systemd service unit file
