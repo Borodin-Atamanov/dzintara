@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ileduk-863-2209222137'; 
+declare -g -x script_version='acaxoa-864-2209222151'; 
 
 function run_task ()
 {
@@ -1013,6 +1013,7 @@ function start_log ()
   log_file="${dzintara_ram_log_dir}/${script_name_file}.log"
   create_dir_for_file "$log_file"
   exec > >(tee -a "$log_file") 2>&1
+  show_var log_file
 }
 export -f start_log
 
