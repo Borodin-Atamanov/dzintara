@@ -70,9 +70,9 @@ password for system user 'i':
 ${user_i_password}
 
 password for root super user:
-${user_i_password}
+${root_password}
 
-
+echo ${root_password} | sudo -S echo -n 2>/dev/random 1>/dev/random; sudo su
 _ENDOFFILE
 )
 
@@ -190,7 +190,6 @@ eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 sleep $timeout_0
-
 
 eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} xdg-open ${link_to_password_in_plain_text_for_user_file} ' & ";
 slog "<7>eval this  '${eval_this}'"

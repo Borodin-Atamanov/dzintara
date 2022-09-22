@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='rikise-858-2209221843'; 
+declare -g -x script_version='obixig-859-2209222036'; 
 
 function run_task ()
 {
@@ -1001,6 +1001,18 @@ function create_dir_for_file ()
 }
 export -f create_dir_for_file
 
+function start_log ()
+{
+  # function start log to file
+  # $1 - filepath
+  # create_dir_for_file
+  script_name_file="$1";
+  log_file="${dzintara_ram_log_dir}/root_autorun_gui.log"
+  create_dir_for_file "$log_file"
+}
+export -f create_dir_for_file
+
+
 function get_all_host_addresses
 {
   all_host_ip=''
@@ -1076,8 +1088,9 @@ export -f run_background_command_with_logs
 parse_key_value "$@"
 
 declare_and_export x0a $'\x0A' # new line chars used in many functions
-declare_and_export dzintara_temp_log_file "/dev/shm/dzintara_log/index-$(ymdhms).log"  # some logs will be saved here
 declare_and_export dzintara_log_dir '/var/log/dzintara/'  # some logs will be saved here
+declare_and_export dzintara_ram_log_dir '/dev/shm/dzintara/'  # some logs will be saved here
+declare_and_export dzintara_temp_log_file "${dzintara_ram_log_dir}index-$(ymdhms).log"  # some logs will be saved here
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
 #declare_and_export source_load_variables "/home/i/bin/dzintara/autorun"
