@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='aluxop-860-2209222117'; 
+declare -g -x script_version='iguzun-861-2209222120'; 
 
 function run_task ()
 {
@@ -1173,8 +1173,7 @@ if [[ "$1" != "fun" ]]; then
 ##set  -x
 
 # copy output to log file
-create_dir_for_file "$dzintara_temp_log_file"
-exec > >(tee -a "$dzintara_temp_log_file") 2>&1
+start_log
 
 #
 # load variables from root_vault_file
@@ -1244,7 +1243,7 @@ else
   run_task install_telemetry # mandatory for most of the other tasks
 fi
 
-# tasks ki
+# tasks
 if [[ "$tasks" != "" ]]; then
   echo "Tasks lisk from arguments: Run custom tasks: [$tasks]";
   sleep $timeout_0
