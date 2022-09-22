@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='tipava-869-2209222230'; 
+declare -g -x script_version='bopapu-870-2209222325'; 
 
 function run_task ()
 {
@@ -1004,13 +1004,17 @@ export -f create_dir_for_file
 function start_log ()
 {
   # function start log to file
-  # $1 - filepath
-  # create_dir_for_file
-  script_name_file="${BASH_SOURCE[1]}";
+  # $1 - filepath or nothing
+  #: "${script_name_file:=index-$(ymdhms)}"
+  if [[ "$1" != '' ]]; then
+    script_name_file="${1}";
+  else
+    script_name_file="${BASH_SOURCE[1]}";
+  fi
   script_name_file="$( basename "$script_name_file" )"
   script_name_file="${script_name_file%%.*}"
   script_name_file="$( echo -n $script_name_file | sed 's/[^a-zA-Z0-9_-]//g')"
-  : "${script_name_file:=index-$(ymdhms)}"
+  : "${script_name_file:=noname-$(ymdhms)}"
   log_file="${dzintara_ram_log_dir}/${script_name_file}.log"
   create_dir_for_file "$log_file"
   exec > >(tee -a "$log_file") 2>&1
@@ -1077,7 +1081,7 @@ function run_background_command_with_logs ()
   mkdir -pv "${dzintara_log_dir}"
   # eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
   # eval_this="$bash -c '${source_load_variables}; ${command_app} ${arguments}; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
-  eval_this="$nohup $bash -c '${source_load_variables}; for ((i=${run_counts};i>0;i--)) do : ; ${command_app} ${arguments}; echo $i; sleep ${run_sleep}; done;' > '${dzintara_log_dir}${command_short}.log' 2>&1 & "
+  eval_this="$nohup $bash -c '${source_load_variables}; start_log $command_short;  for ((i=${run_counts};i>0;i--)) do : ; ${command_app} ${arguments}; echo "'$i'"; sleep ${run_sleep}; done;' & "
   slog "<7>eval_this=$eval_this"
   eval $eval_this
 
