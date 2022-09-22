@@ -4,6 +4,7 @@ x11-utils
 x11-apps
 xorg-x11-fonts
 numlockx
+wmctrl
 xdotool
 xbindkeys
 xcalib
