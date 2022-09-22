@@ -15,6 +15,8 @@ $source_load_variables;
 
 declare -x -g service_name='dzintara.pipes_autorun';   #for slog systemd logs
 
+start_log
+
 #start plus root script
 user_id="$(id)"
 whoami="$(whoami)"

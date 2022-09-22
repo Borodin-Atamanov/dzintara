@@ -30,6 +30,8 @@ $source_load_variables;
 
 declare -x -g service_name='dzintara.root_autorun';   #for slog systemd logs
 
+start_log
+
 #path to scripts, what we will start
 user_autorun="${work_dir_autorun}user_autorun.sh"
 root_autorun_plus="${work_dir_autorun}root_autorun_plus.sh"

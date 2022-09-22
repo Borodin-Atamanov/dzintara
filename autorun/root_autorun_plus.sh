@@ -8,6 +8,8 @@
 #declare_and_export work_dir "/home/i/bin/dzible/"
 declare -x -g service_name='dzible.root_autorun_plus';   #for slog systemd logs
 
+start_log
+
 #access control disabled, clients can connect from any host
 # xhost +
 

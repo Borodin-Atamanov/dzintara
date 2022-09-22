@@ -13,7 +13,9 @@ declare -g -x work_dir_autorun="${work_dir}autorun/";
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-declare -x -g service_name='dzintara.x11vnc';   #for slog systemd logs
+start_log
+
+declare -x -g service_name='dzintara.swap';   #for slog systemd logs
 
 #start plus root script
 declare_and_export fullpath_bash "$( get_command_fullpath bash )";

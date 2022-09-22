@@ -8,6 +8,8 @@ source "/home/i/bin/dzintara/autorun/load_variables.sh"
 declare_and_export work_dir "/home/i/bin/dzintara/"
 declare -x -g service_name='dzintara.user_autorun';   #for slog systemd logs
 
+start_log
+
 #access control disabled, clients can connect from any host
 # xhost +
 

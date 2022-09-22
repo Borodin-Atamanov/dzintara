@@ -18,6 +18,8 @@ x2_variables="$( export | grep -F 'X' )"
 source "/home/i/bin/dzintara/autorun/load_variables.sh"
 declare -x -g service_name='dzintara.user_autorun_gui';   #for slog systemd logs
 
+start_log
+
 # export XDG-variables to file, and other scripts will use it (some of XDG variables needed to run gui apps)
 ${ipc_dir_xdg_var_file}
 save_var_to_file "${ipc_dir_xdg_var_file}" x2_variables
