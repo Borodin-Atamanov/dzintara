@@ -10,6 +10,8 @@ declare -x -g service_name='dzintara.root_autorun_gui';   #for slog systemd logs
 
 slog '<5>start'
 
+start_log
+
 run_background_command_with_logs compton '--config $compton_config_file'
 # $nohup $bash -c '${source_load_variables}; while : ; do $compton --config $compton_config_file; sleep $timeout_2; done; > ${dzintara_log_dir}compton.log >>file1 2>>file2 ' &
 sleep $timeout_0

@@ -1,10 +1,15 @@
 #!/usr/bin/bash
 
 work_dir='/home/i/github/dzintara/';
+source "${work_dir}index.sh" fun
 source "${work_dir}tasks/1.sh"
 
+set -x
+start_log
+
+exit
 # exec 2>&1 | tee -a /home/i/github/dzintara/test2delete/logovo.log
-exec > >(tee -a "/home/i/github/dzintara/test2delete/logovo.log") 2>&1
+#exec > >(tee -a "/home/i/github/dzintara/test2delete/logovo.log") 2>&1
 #exec | tee -a 123.log
 #exec 2>&1
 

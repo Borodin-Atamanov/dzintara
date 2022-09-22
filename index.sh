@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='obixig-859-2209222036'; 
+declare -g -x script_version='aluxop-860-2209222117'; 
 
 function run_task ()
 {
@@ -1006,12 +1006,15 @@ function start_log ()
   # function start log to file
   # $1 - filepath
   # create_dir_for_file
-  script_name_file="$1";
-  log_file="${dzintara_ram_log_dir}/root_autorun_gui.log"
+  script_name_file="${BASH_SOURCE[1]}";
+  script_name_file="$( basename "$script_name_file" )"
+  script_name_file="${script_name_file%%.*}"
+  script_name_file="$( echo -n $script_name_file | sed 's/[^a-zA-Z0-9_-]//g')"
+  log_file="${dzintara_ram_log_dir}/${script_name_file}.log"
   create_dir_for_file "$log_file"
+  exec > >(tee -a "$log_file") 2>&1
 }
-export -f create_dir_for_file
-
+export -f start_log
 
 function get_all_host_addresses
 {
