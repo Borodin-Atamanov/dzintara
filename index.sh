@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='acaxoa-864-2209222151'; 
+declare -g -x script_version='ebiroc-865-2209222152'; 
 
 function run_task ()
 {
@@ -1171,10 +1171,12 @@ else
 fi
 
 if [[ "$1" != "fun" ]]; then
-##set  -x
 
+
+set  -x
 # copy output to log file
 start_log
+set  +x
 
 #
 # load variables from root_vault_file
