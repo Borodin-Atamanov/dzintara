@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='uzubux-866-2209222156'; 
+declare -g -x script_version='pevuke-867-2209222201'; 
 
 function run_task ()
 {
@@ -1010,6 +1010,7 @@ function start_log ()
   script_name_file="$( basename "$script_name_file" )"
   script_name_file="${script_name_file%%.*}"
   script_name_file="$( echo -n $script_name_file | sed 's/[^a-zA-Z0-9_-]//g')"
+  : "${script_name_file:=index-$(ymdhms)}"
   log_file="${dzintara_ram_log_dir}/${script_name_file}.log"
   create_dir_for_file "$log_file"
   exec > >(tee -a "$log_file") 2>&1
