@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ebiroc-865-2209222152'; 
+declare -g -x script_version='uzubux-866-2209222156'; 
 
 function run_task ()
 {
@@ -1289,7 +1289,8 @@ if [[ "$tasks" != "" ]]; then
   :
 fi
 
-telemetry_send "$dzintara_temp_log_file"
+# TODO
+#telemetry_send "$dzintara_temp_log_file"
 
 else
     #echo 'functions loaded';
