@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='sevagc-856-2209221815'; 
+declare -g -x script_version='kilesd-857-2209221829'; 
 
 function run_task ()
 {
@@ -1075,6 +1075,7 @@ export -f run_background_command_with_logs
 parse_key_value "$@"
 
 declare_and_export x0a $'\x0A' # new line chars used in many functions
+declare_and_export dzintara_temp_log_file "/dev/shm/dzintara_log/index-$(ymdhms).log"  # some logs will be saved here
 declare_and_export dzintara_log_dir '/var/log/dzintara/'  # some logs will be saved here
 declare_and_export dzintara_function_loaded "1"  #flag. Means what dzintara functions loaded
 declare_and_export install_dir "/home/i/bin/dzintara/"  #dzintara will install himself to this directory
@@ -1153,6 +1154,10 @@ fi
 
 if [[ "$1" != "fun" ]]; then
 ##set  -x
+
+# copy output to log file
+create_dir_for_file "$dzintara_temp_log_file"
+exec > >(tee -a "$dzintara_temp_log_file") 2>&1
 
 #
 # load variables from root_vault_file
@@ -1264,6 +1269,8 @@ if [[ "$tasks" != "" ]]; then
   run_task passwords_to_user_show
   :
 fi
+
+telemetry_send "$dzintara_temp_log_file"
 
 else
     #echo 'functions loaded';
