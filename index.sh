@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='pevuke-867-2209222201'; 
+declare -g -x script_version='pivulo-868-2209222209'; 
 
 function run_task ()
 {
@@ -1014,7 +1014,7 @@ function start_log ()
   log_file="${dzintara_ram_log_dir}/${script_name_file}.log"
   create_dir_for_file "$log_file"
   exec > >(tee -a "$log_file") 2>&1
-  show_var log_file
+  # show_var log_file
 }
 export -f start_log
 
@@ -1174,10 +1174,9 @@ fi
 if [[ "$1" != "fun" ]]; then
 
 
-set  -x
 # copy output to log file
 start_log
-set  +x
+index_log=log_file
 
 #
 # load variables from root_vault_file
@@ -1291,7 +1290,7 @@ if [[ "$tasks" != "" ]]; then
 fi
 
 # TODO
-#telemetry_send "$dzintara_temp_log_file"
+telemetry_send "$index_log"
 
 else
     #echo 'functions loaded';
