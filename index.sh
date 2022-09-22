@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='kilesd-857-2209221829'; 
+declare -g -x script_version='rikise-858-2209221843'; 
 
 function run_task ()
 {
@@ -42,7 +42,8 @@ function run_task ()
   if [ -s "${task_script}" ];  then
     (
       #create countdown process, it show count down before task end by timeout
-      countdown_command="timeout --kill-after=2 "${timeout_task}" ${work_dir}/tasks/countdown.sh ${timeout_task} 0.97 & "
+      timeout_task_min=$(( timeout_task / 60 ))
+      countdown_command="timeout --kill-after=2 "${timeout_task}" ${work_dir}/tasks/countdown.sh ${timeout_task_min} 60 & " # show countdown timer in minutes
       eval $countdown_command;
       countdown_pid=$!
       slog "<7>countdown_pid=${countdown_pid}";
