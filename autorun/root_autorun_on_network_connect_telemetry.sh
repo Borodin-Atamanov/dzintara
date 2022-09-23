@@ -220,15 +220,12 @@ _ENDOFFILE
 )
 
 all_data_to_message=$(cat <<_ENDOFFILE
-$ymdhms
-${hostname} ${uptime}
+${hostname}.local
+${architecture} ${os_codename}
 ${hostname_ip}
 ${tor_hostname}
-${ipfy4}
-${ipfy6}
-${architecture}
-${os_codename}
-${hostnamectl_status}
+${ipfy4} ${ipfy6}
+$ymdhms ${uptime}
 _ENDOFFILE
 )
 

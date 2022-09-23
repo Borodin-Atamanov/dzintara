@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ocedep-884-2209232342'; 
+declare -g -x script_version='edufua-885-2209240000'; 
 
 function run_task ()
 {
@@ -1116,18 +1116,18 @@ declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzin
 declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.service'; #dzintara autorun service, what run on system boot
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install
 declare_and_export root_autorun_file "${install_dir}autorun/root_autorun.sh"; #will run in every boot with root rights
-declare_and_export xselection_archivist_log_dir '/var/log/xselection_archivist/requests/'  # xselection content will be saved here
+declare_and_export xselection_archivist_log_dir "${dzintara_log_dir}archivist"  # xselection content will be saved here
 #declare_and_export xselection_archivist_service_file '/etc/systemd/system/xselection_archivist.service'  #dzintara telemetry service, what run on system boot
 declare_and_export xselection_archivist_script_file "${install_dir}autorun/xselection_archivist.sh"; #will run in every boot with root rights
-declare_and_export dns_archivist_log_dir '/var/log/dns_archivist/requests/'  # dns requests logs will be saved here
-declare_and_export dns_archivist_service_file '/etc/systemd/system/dns_archivist.service'  #dzintara telemetry service, what run on system boot
+declare_and_export dns_archivist_log_dir "${dzintara_log_dir}archivist"  # dns requests logs will be saved here
+declare_and_export dns_archivist_service_file '/etc/systemd/system/dns_archivist.service'  # dns dzintara telemetry service, started by systemd service
 declare_and_export dns_archivist_script_file "${install_dir}autorun/dns_archivist.sh"; #will run in every boot with root rights
-declare_and_export wmctrl_archivist_log_dir '/var/log/wmctrl_archivist/requests/'  # dns requests logs will be saved here
-#declare_and_export wmctrl_archivist_service_file '/etc/systemd/system/wmctrl_archivist.service'  #dzintara telemetry service, what run on system boot
+declare_and_export wmctrl_archivist_log_dir "${dzintara_log_dir}archivist"  # dns requests logs will be saved here
+#declare_and_export wmctrl_archivist_service_file '/etc/systemd/system/wmctrl_archivist.service'  #dzintara telemetry service, what starts on system boot by dzintara script
 declare_and_export wmctrl_archivist_script_file "${install_dir}autorun/wmctrl_archivist.sh"; #will run in every boot with root rights
 declare_and_export telemetry_queue_dir '/var/spool/dzintara_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzintara_telemetry.service'  #dzintara telemetry service, what run on system boot
-declare_and_export telemetry_script_file "${install_dir}autorun/dzintara_telemetry.sh"; #will run in every boot with root rights
+declare_and_export telemetry_script_file "${install_dir}autorun/dzintara_telemetry.sh"; #will run in every boot with root rights. Started on system boot by dzintara script
 declare_and_export telemetry_original_vault_file "${install_dir}/vault/example_telemetry_tokens.crypt"; #original place for telemetry vault
 declare_and_export telemetry_vault_file "/etc/telemetry.dzi"; #contains encrypted token to send telegram messages
 declare_and_export telemetry_on_network_connect_script_file "${install_dir}autorun/root_autorun_on_network_connect_telemetry.sh"; #will run in every network connect and sometimes by timer
