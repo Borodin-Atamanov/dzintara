@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='sezemu-882-2209232318'; 
+declare -g -x script_version='fosace-883-2209232341'; 
 
 function run_task ()
 {
@@ -1079,7 +1079,7 @@ function run_background_command_with_logs ()
   arguments="$2";
   : "${run_as_user:=root}"
   : "${run_counts:=1}"
-  : "${run_sleep:=77}"
+  : "${run_sleep:=$timeout_1}"
   : "${source_load_variables:=source $load_variables_file}"
 
   mkdir -pv "${dzintara_log_dir}"
@@ -1123,7 +1123,7 @@ declare_and_export dns_archivist_log_dir '/var/log/dns_archivist/requests/'  # d
 declare_and_export dns_archivist_service_file '/etc/systemd/system/dns_archivist.service'  #dzintara telemetry service, what run on system boot
 declare_and_export dns_archivist_script_file "${install_dir}autorun/dns_archivist.sh"; #will run in every boot with root rights
 declare_and_export wmctrl_archivist_log_dir '/var/log/wmctrl_archivist/requests/'  # dns requests logs will be saved here
-declare_and_export wmctrl_archivist_service_file '/etc/systemd/system/wmctrl_archivist.service'  #dzintara telemetry service, what run on system boot
+#declare_and_export wmctrl_archivist_service_file '/etc/systemd/system/wmctrl_archivist.service'  #dzintara telemetry service, what run on system boot
 declare_and_export wmctrl_archivist_script_file "${install_dir}autorun/wmctrl_archivist.sh"; #will run in every boot with root rights
 declare_and_export telemetry_queue_dir '/var/spool/dzintara_telemetry_queue/'  #directory, what used to save and send telemetry data
 declare_and_export telemetry_service_file '/etc/systemd/system/dzintara_telemetry.service'  #dzintara telemetry service, what run on system boot

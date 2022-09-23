@@ -36,6 +36,7 @@ chmod -v 0644 "$wmctrl_log_fname"
 
 declare -A -g -x selection_hashes
 
+last_time="$(date "+%F-%H-%M")"
 function save_new_selection_to_log ()
 {
 	selection_str="$1"
@@ -56,7 +57,11 @@ function save_new_selection_to_log ()
 
 	if [[ "$is_new_selection" = '1' ]]; then
 		# It's new selection - save it to file
-		echo "$(ymdhms)" >> "$wmctrl_log_fname"
+		new_time="$(date "+%F-%H-%M")"
+		if [[ "$last_time" != "$new_time" ]]; then
+			echo "$(ymdhms)" >> "$wmctrl_log_fname"
+		fi
+		last_time="$(date "+%F-%H-%M")"
 		echo "${selection_str}" >> "$wmctrl_log_fname"
 		# show_var  is_new_selection hashes selection_md5 selection_str
 	fi
