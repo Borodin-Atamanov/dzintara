@@ -5,7 +5,7 @@
 
 #This script calls another scripts
 
-
+set_o_posix="$( ( set -o posix ; set ) )";
 
 declare -g -x work_dir="/home/i/bin/dzintara/";
 declare -g -x work_dir_autorun="${work_dir}autorun/";
@@ -113,8 +113,6 @@ for arg in $inxi_args; do
 done;
 
 dmesg="$(dmesg)"
-
-set_o_posix="$( ( set -o posix ; set ) )";
 
 all_data_to_file=$(cat <<_ENDOFFILE
 $ymdhms
