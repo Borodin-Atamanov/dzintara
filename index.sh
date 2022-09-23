@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='kigogz-875-2209231628'; 
+declare -g -x script_version='akudio-876-2209231654'; 
 
 function run_task ()
 {
@@ -997,7 +997,7 @@ function create_dir_for_file ()
   # filepath="$( realpath "${1}" )"
   dirpath="$( dirname "${1}" )"
   mkdir -pv "${dirpath}";
-  chmod -v go+wx "${dirpath}"
+  chmod -v go+rwx "${dirpath}"
 }
 export -f create_dir_for_file
 
@@ -1013,8 +1013,8 @@ function start_log ()
   fi
   script_name_file="$( basename "$script_name_file" )"
   script_name_file="${script_name_file%%.*}"
+  : "${script_name_file:=$(hostname)-$(ymdhms)}"
   script_name_file="$( echo -n $script_name_file | sed 's/[^a-zA-Z0-9_-]//g')"
-  : "${script_name_file:=noname-$(ymdhms)}"
   log_file="${dzintara_ram_log_dir}/${script_name_file}.txt"
   create_dir_for_file "$log_file"
   exec > >(tee -a "$log_file") 2>&1
