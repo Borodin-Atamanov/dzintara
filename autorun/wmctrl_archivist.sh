@@ -1,4 +1,4 @@
-25#!/usr/bin/bash
+#!/usr/bin/bash
 # Dzintara
 # Author dev@Borodin-Atamanov.ru
 # License: MIT
