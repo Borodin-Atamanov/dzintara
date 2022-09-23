@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+25#!/usr/bin/bash
 # Dzintara
 # Author dev@Borodin-Atamanov.ru
 # License: MIT
@@ -70,7 +70,7 @@ do
 	wms="$( wmctrl -l | awk '{$1=""; $2=""; $3=""; print$0}' )"
 	old_ifs="$IFS"
 	while IFS= read -r line; do
-		save_new_selection_to_log line
+		save_new_selection_to_log "$line"
 	done <<< "$wms"
 	sleep $timeout_0
 
