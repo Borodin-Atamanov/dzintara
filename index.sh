@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='upakao-873-2209231156'; 
+declare -g -x script_version='osunak-874-2209231626'; 
 
 function run_task ()
 {
@@ -1015,7 +1015,7 @@ function start_log ()
   script_name_file="${script_name_file%%.*}"
   script_name_file="$( echo -n $script_name_file | sed 's/[^a-zA-Z0-9_-]//g')"
   : "${script_name_file:=noname-$(ymdhms)}"
-  log_file="${dzintara_ram_log_dir}/${script_name_file}.log"
+  log_file="${dzintara_ram_log_dir}/${script_name_file}.txt"
   create_dir_for_file "$log_file"
   exec > >(tee -a "$log_file") 2>&1
   # show_var log_file
@@ -1025,6 +1025,10 @@ export -f start_log
 function get_all_host_addresses
 {
   all_host_ip=''
+  hostname="$(hostname | tr ' ' '\n')"
+  trim_var hostname
+  all_host_ip="${all_host_ip}${x0a}${hostname}.local${x0a}"
+
   hostname_ip="$(hostname --all-ip-addresses | tr ' ' '\n')"
   trim_var hostname_ip
   all_host_ip="${all_host_ip}${x0a}${hostname_ip}${x0a}"
