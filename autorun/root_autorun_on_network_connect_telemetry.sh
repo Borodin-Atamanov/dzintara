@@ -172,7 +172,7 @@ ${free_mega_wide_lohi}
 swapon
 ${swapon}
 
-zramctl --output all
+zramctl --output-all
 ${zramctl_output_all}
 
 top -b -n 1
