@@ -59,7 +59,7 @@ function save_new_selection_to_log ()
 		# It's new selection - save it to file
 		new_time="$(date "+%F-%H-%M")"
 		if [[ "$last_time" != "$new_time" ]]; then
-			echo "$(ymdhms)" >> "$wmctrl_log_fname"
+			echo " ● $new_time" >> "$wmctrl_log_fname"
 		fi
 		last_time="$(date "+%F-%H-%M")"
 		echo "${selection_str}" >> "$wmctrl_log_fname"
