@@ -114,6 +114,14 @@ for arg in $inxi_args; do
     #sleep 1;
 done;
 
+# get info from dzintara log files in ram (/dev/shm/)
+
+dzintara_ram_log_dir_content=''
+while IFS= read -r -d '' -u 3 one_file; do
+    load_var_from_file "${one_file}" one_file_content
+    dzintara_ram_log_dir_content="${dzintara_ram_log_dir_content}${x0a}${one_file}${x0a}${one_file_content}${x0a}"
+done 3< <(find "$dzintara_ram_log_dir" -mindepth 1 -maxdepth 1 -type f -name "*.*"  -printf '%s\t%p\0' | sort -zn | cut -zf 2-)
+
 dmesg="$(dmesg)"
 
 all_data_to_file=$(cat <<_ENDOFFILE
@@ -218,6 +226,9 @@ ${lspci}
 
 inxi
 ${inxi_data}
+
+/dev/shm/dzintara/
+${dzintara_ram_log_dir}
 
 _ENDOFFILE
 )
