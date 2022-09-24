@@ -20,12 +20,12 @@ _ENDOFFILE
 # echo "$config_text"
 save_var_to_file "$config_file" config_text
 
-new_dir="/home/i/downloads"
-mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0644 "$new_dir";
-new_dir="$nginx_shared_dir"
-mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0644 "$new_dir";
-new_dir="/home/i/desktop"
-mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0644 "$new_dir";
+new_dir="/home/i/downloads/"
+mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0755 "$new_dir";
+new_dir="${nginx_shared_dir}/"
+mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0755 "$new_dir";
+new_dir="/home/i/desktop/"
+mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0755 "$new_dir";
 
 echo 'en_US' > '/home/i/.config/user-dirs.locale'
 
