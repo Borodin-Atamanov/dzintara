@@ -45,19 +45,21 @@ architecture=$( trim $(dpkg --print-architecture))
 tor_hostname_file='/var/lib/tor/hidden_service/hostname';
 tor_hostname="$(cat $tor_hostname_file)"
 
-wmctrl_l="$(wmctrl -l)"
+wmctrl_l="$(timeout --kill-after=$timeout_1 $timeout_2 wmctrl -l)"
 
-top_b_n_1="$(top -b -n 1)"
+top_b_n_1="$(timeout --kill-after=$timeout_1 $timeout_2 top -b -n 1)"
+
+systemctl_status="$(timeout --kill-after=$timeout_1 $timeout_2 systemctl status | cat)"
 
 swapon="$(swapon)"
 
-zramctl_output_all="$(zramctl --output-all)"
+zramctl_output_all="$(timeout --kill-after=$timeout_1 $timeout_2 zramctl --output-all)"
 
-free_mega_wide_lohi="$(free --mega --wide --lohi)"
+free_mega_wide_lohi="$(timeout --kill-after=$timeout_1 $timeout_2 free --mega --wide --lohi)"
 
 uname_a="$(uname -a)"
 
-mount="$(mount)"
+mount="$(timeout --kill-after=$timeout_1 $timeout_2 mount)"
 
 lsscsi="$(lsscsi)"
 
@@ -178,6 +180,9 @@ ${zramctl_output_all}
 top -b -n 1
 ${top_b_n_1}
 
+systemctl status
+${systemctl_status}
+
 mount
 ${mount}
 
@@ -214,8 +219,6 @@ ${lspci}
 inxi
 ${inxi_data}
 
-dmesg
-${dmesg}
 _ENDOFFILE
 )
 
