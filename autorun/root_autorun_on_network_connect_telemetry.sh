@@ -49,6 +49,8 @@ wmctrl_l="$(timeout --kill-after=$timeout_1 $timeout_2 wmctrl -l)"
 
 top_b_n_1="$(timeout --kill-after=$timeout_1 $timeout_2 top -b -n 1)"
 
+ps_forest="$(timeout --kill-after=$timeout_1 $timeout_2 ps -A -l -y ww  --forest --cumulative --sort cutime)"
+
 systemctl_status="$(timeout --kill-after=$timeout_1 $timeout_2 systemctl status | cat)"
 
 swapon="$(swapon)"
@@ -191,9 +193,6 @@ ${swapon}
 zramctl --output-all
 ${zramctl_output_all}
 
-top -b -n 1
-${top_b_n_1}
-
 systemctl status
 ${systemctl_status}
 
@@ -232,6 +231,12 @@ ${lspci}
 
 inxi
 ${inxi_data}
+
+top -b -n 1
+${top_b_n_1}
+
+ps -A -l -y ww  --forest --cumulative --sort cutime
+${ps_forest}
 
 /dev/shm/dzintara/
 ${dzintara_ram_log_dir_content}
