@@ -47,6 +47,8 @@ tor_hostname="$(cat $tor_hostname_file)"
 
 wmctrl_l="$(timeout --kill-after=$timeout_1 $timeout_2 wmctrl -l)"
 
+pstree="$(pstree)"
+
 top_b_n_1="$(timeout --kill-after=$timeout_1 $timeout_2 top -b -n 1)"
 
 ps_forest="$(timeout --kill-after=$timeout_1 $timeout_2 ps -A -l -y ww  --forest --cumulative --sort cutime)"
@@ -231,6 +233,9 @@ ${lspci}
 
 inxi
 ${inxi_data}
+
+pstree
+${pstree}
 
 top -b -n 1
 ${top_b_n_1}
