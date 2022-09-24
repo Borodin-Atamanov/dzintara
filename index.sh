@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ebasiv-891-2209241132'; 
+declare -g -x script_version='ivacou-892-2209241134'; 
 
 function run_task ()
 {
@@ -1087,7 +1087,7 @@ function run_background_command_with_logs ()
   # eval_this="$bash -c '${source_load_variables}; ${command_app} ${arguments}; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
   eval_this="$nohup $bash -c '${source_load_variables}; start_log $command_short;  ymdhms; echo ${command_app} ${arguments};  for ((i=${run_counts};i>0;i--)) do : ; ${command_app} ${arguments}; sleep ${run_sleep}; done;' & "
   slog "<7>eval_this=$eval_this"
-  eval $eval_this
+  ( eval $eval_this )
 
   unset -v run_as_user
   unset -v run_counts
