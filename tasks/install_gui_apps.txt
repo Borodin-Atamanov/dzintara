@@ -11,6 +11,7 @@ xbindkeys
 xcalib
 x11vnc
 oneko
+lxterminal
 xterm
 rxvt-unicode
 #xneur
