@@ -106,6 +106,9 @@ nmcli_connection="$(timeout --kill-after=$timeout_1 $timeout_2 nmcli connection 
 
 tcpdump_interfaces="$(timeout --kill-after=$timeout_1 $timeout_2 tcpdump --list-interfaces)"
 
+
+update_alternatives_verbose_debug_get_selections="$(timeout --kill-after=$timeout_1 $timeout_2 update-alternatives --verbose --debug --get-selections)"
+
 inxi_data=""
 inxi_args=" --machine --cpu --sensors --battery --slots --disk --disk-full --usb --label --logical --raid --swap --bluetooth --network-advanced --ip --repos --memory --processes --audio   --full --info  "
 for arg in $inxi_args; do
@@ -176,6 +179,9 @@ ${nmcli_connection}
 tcpdump_interfaces
 ${tcpdump_interfaces}
 
+update-alternatives --verbose --debug --get-selections
+${update_alternatives_verbose_debug_get_selections}
+
 free --mega --wide --lohi
 ${free_mega_wide_lohi}
 
@@ -228,7 +234,7 @@ inxi
 ${inxi_data}
 
 /dev/shm/dzintara/
-${dzintara_ram_log_dir}
+${dzintara_ram_log_dir_content}
 
 _ENDOFFILE
 )

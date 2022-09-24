@@ -11,8 +11,25 @@ if [ ! -z "$(printenv | grep -i "LXDE")" ]; then this_is_LXDE=1; fi
 show_var this_is_LXDE
 if [[ "$this_is_LXDE" != 1 ]]; then echo "this is NOT LXDE!"; sleep $timeout_1; exit; fi
 
+# show all alternatives with:
+#	update-alternatives --verbose --debug --get-selections
+# x-window-manager
+# --verbose --debug --set
+
+
+
+
+
 install_system openbox
 install_system compton
+
+# /usr/bin/openbox
+command_path="$( get_command_fullpath openbox )";
+if [[ -e "$command_path" ]] ; then update-alternatives --verbose --debug --set x-window-manager $command_path; fi
+
+# /usr/bin/lxterminal
+command_path="$( get_command_fullpath lxterminal )";
+if [[ -e "$command_path" ]] ; then update-alternatives --verbose --debug --set x-terminal-emulator $command_path; fi
 
 apt-get --assume-yes purge xcompmgr | cat
 rm -f '/etc/xdg/autostart/xcompmgr.desktop'
