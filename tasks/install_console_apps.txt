@@ -29,6 +29,7 @@ ncdu
 htop
 nload
 nmon
+net-tools
 traceroute
 whois
 

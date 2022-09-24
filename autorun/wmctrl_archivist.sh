@@ -20,7 +20,7 @@ declare -g -x work_dir_autorun="${work_dir}autorun/";
 source_load_variables="source ${work_dir_autorun}load_variables.sh";
 $source_load_variables;
 
-start_log
+# start_log
 
 declare -x -g service_name='wmctrl archivist dzintara';   #for slog systemd logs
 slog "<5>start wmctrl archivist dzintara. It will log selection content."

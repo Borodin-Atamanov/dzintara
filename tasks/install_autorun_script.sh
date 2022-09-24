@@ -112,25 +112,25 @@ sleep $timeout_0
 # xkeyboard_autorun_timer_file
 
 #create systemd service unit file
-service_unit=$(cat <<_ENDOFFILE
-[Unit]
-Description=dzintara xkeyboard autorun service
-[Service]
-ExecStart=${xkeyboard_autorun_script_file}
-Restart=always
-[Install]
-WantedBy=multi-user.target
-_ENDOFFILE
-)
+# service_unit=$(cat <<_ENDOFFILE
+# [Unit]
+# Description=dzintara xkeyboard autorun service
+# [Service]
+# ExecStart=${xkeyboard_autorun_script_file}
+# Restart=always
+# [Install]
+# WantedBy=multi-user.target
+# _ENDOFFILE
+# )
 
-show_var service_unit
-echo "$service_unit" > "${xkeyboard_autorun_service_file}";
+#show_var service_unit
+#echo "$service_unit" > "${xkeyboard_autorun_service_file}";
 
-systemctl daemon-reload
+#systemctl daemon-reload
 #systemctl restart dzintara_xkeyboard_autorun| cat
-systemctl enable dzintara_xkeyboard_autorun | cat
-systemctl status dzintara_xkeyboard_autorun | cat
-sleep $timeout_0
+#systemctl enable dzintara_xkeyboard_autorun | cat
+#systemctl status dzintara_xkeyboard_autorun | cat
+#sleep $timeout_0
 
 
 #create systemd service unit file
