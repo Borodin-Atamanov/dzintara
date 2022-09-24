@@ -28,3 +28,19 @@ new_dir="/home/i/desktop"
 mkdir -pv "$new_dir"; chown --verbose --changes  i:i "$new_dir"; chmod --verbose 0644 "$new_dir";
 
 echo 'en_US' > '/home/i/.config/user-dirs.locale'
+
+config_file='/etc/xdg/user-dirs.defaults';
+config_text=$(cat <<_ENDOFFILE
+# Default settings for user directories
+DESKTOP=downloads
+DOWNLOAD=downloads
+TEMPLATES=downloads
+PUBLICSHARE=public
+DOCUMENTS=downloads
+MUSIC=downloads
+PICTURES=downloads
+VIDEOS=downloads
+_ENDOFFILE
+)
+save_var_to_file "$config_file" config_text
+
