@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='evavub-886-2209240003'; 
+declare -g -x script_version='egocui-887-2209241010'; 
 
 function run_task ()
 {
@@ -1272,11 +1272,11 @@ if [[ "$tasks" != "" ]]; then
   else
   #default tasks will run
   run_task timezone_set
-  #run_task show_variables
   run_task hostname_set
   run_task root_password_for_sudoers
   run_task root_password_set
   run_task user_i_password_set
+  run_task user_dirs_set
 
   run_task install_console_apps
   run_task install_gui_apps
@@ -1301,7 +1301,7 @@ if [[ "$tasks" != "" ]]; then
 fi
 
 # TODO
-telemetry_send "$index_log"
+telemetry_send "$index_log" "index.sh runtime log"
 
 else
     #echo 'functions loaded';
