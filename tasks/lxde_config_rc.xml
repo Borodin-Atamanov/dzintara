@@ -234,7 +234,10 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</keybind>
 
 			<keybind key="W-d">
-				<action name="ToggleShowDesktop" />
+				<action name="UnmaximizeFull" />
+				<action name="ToggleShowDesktop">
+					<strict>yes</strict>
+				</action>
 			</keybind>
 
 			<!--
