@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='datufm-906-2209251839'; 
+declare -g -x script_version='nacive-907-2209252213'; 
 
 function run_task ()
 {
