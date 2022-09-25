@@ -35,11 +35,16 @@ nproc_int="$( $nproc )" # get CPUs numbers
 #Get total RAM size:
 ram_size_in_kb=$(awk '/MemTotal/ {print $2}' /proc/meminfo);
 show_var ram_size_in_kb
+
+# calculate file swap size
 #swap_from_ram_size=$(awkcalc "${ram_size_in_kb}*${swap_max_ram_percents} / 100");
 show_var swap_max_ram_percents
-swap_from_ram_size=$(( ram_size_in_kb * swap_max_ram_percents / 100 ))
+swap_from_ram_size=$(( ram_size_in_kb * swap_max_ram_percents / 100 + 4*1024*1024 ))
 show_var swap_from_ram_size
 #echo "mem_size_in_kb = ${mem_size_in_kb}"
+
+
+# calculate zram size
 zram_from_ram_size=$(( ram_size_in_kb * zram_in_ram_percents / 100 ))
 show_var zram_from_ram_size
 zram_per_core_in_bytes=$(( zram_from_ram_size * 1024 / nproc_int))
