@@ -30,10 +30,10 @@ declare_and_export fullpath_nohup "$( get_command_fullpath nohup )";
 #HOME
 #"${preffix}_${computer}_vnc_password"
 
-#vnc_password=$( get_var "${root_vault_preffix}vnc_password" )
-#show_var vnc_password
-#x11vnc -storepasswd "$vnc_password" /root/.vnc/passwd
-#x11vnc -storepasswd "$vnc_password" '/root/.vnc/passwd'
+vnc_password=$( get_var "${root_vault_preffix}vnc_password" )
+show_var vnc_password
+# x11vnc -storepasswd "$vnc_password" /root/.vnc/passwd
+x11vnc -storepasswd "$vnc_password" '/root/.vnc/passwd'
 
 # source /home/i/bin/dzintara/autorun/load_variables.sh;
 x11vnc_start_command="x11vnc -6 -reopen -scale 0.5 -shared -forever -loop7777 -users i -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 2 -passwdfile /root/.vnc/passwd ";

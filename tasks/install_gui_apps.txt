@@ -20,6 +20,9 @@ gxkb
 # https://github.com/jceb/dex
 dex
 
+# draw on screen
+gromit-mpx
+
 # image viewer
 nomacs
 
