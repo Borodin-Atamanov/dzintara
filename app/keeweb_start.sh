@@ -34,7 +34,7 @@ if [ -x "$(command -v "$command")" ]; then
     echo "ok: $command"; sleep 1; exit;
 fi
 
-command="chrome"
+command="google-chrome"
 if [ -x "$(command -v "$command")" ]; then
     $command "$url"
     echo "ok: $command"; sleep 1; exit;
