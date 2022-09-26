@@ -27,6 +27,7 @@ gromit-mpx
 # image viewer
 nomacs
 
-#telegram-desktop
+telegram-desktop
 
-#firefox-esr
+firefox-esr
+falkon

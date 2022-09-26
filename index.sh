@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='venufx-912-2209262100'; 
+declare -g -x script_version='sezufa-913-2209262319'; 
 
 function run_task ()
 {
@@ -240,11 +240,13 @@ function get_command_fullpath ()
   local command="${1}";
   command=$(trim "$command");
   local fullpath_maybe=$(type -p "$command");
+  exit_status=$?
   fullpath_maybe=$(trim "$fullpath_maybe");
   if [[ "${fullpath_maybe}" = "" ]] ; then
     fullpath_maybe="$command";
   fi;
   echo -n "${fullpath_maybe}";
+  return $exit_status
 }
 export -f get_command_fullpath
 
