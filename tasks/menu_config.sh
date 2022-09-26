@@ -4,24 +4,11 @@
 
 # adds some icons to system menu
 
-menu_datadir='/usr/share/'
-menu_sysconfdir='/etc/xdg/'
 desktop_dir="/usr/share/applications/"
 directories_dir="/usr/share/desktop-directories/"
 
-config_text=$(cat <<_ENDOFFILE
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Exec=timeout 5 xmessage 'Dzintara'
-Icon=dzintara
-Name=Dzintara
-_ENDOFFILE
-)
-# echo "$config_text"
-config_file_desktop="${desktop_dir}dzintara-test.desktop";
-save_var_to_file "$config_file_desktop" config_text
 
+# Dzintara's submenu in system menu
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
@@ -34,7 +21,20 @@ _ENDOFFILE
 config_file_dir="${directories_dir}dzintara-test.directory";
 save_var_to_file "$config_file_dir" config_text
 
-xdg-desktop-menu install "$config_file_dir" "$config_file_desktop"
+# user's entry to start some code
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/cvt_xrandr_1280x1024_60.sh
+Icon=dzintara
+Name=1280x1024@60Hz
+_ENDOFFILE
+)
+# echo "$config_text"
+desktop_entry_file="${desktop_dir}dzintara-set-1280x1024_60.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 # config_file="${menu_sysconfdir}/menus/dzintara.menu";
 # config_text=$(cat <<_ENDOFFILE
