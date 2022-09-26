@@ -32,3 +32,5 @@ telegram-desktop
 qutebrowser
 falkon
 firefox-esr
+
+keepassxc
