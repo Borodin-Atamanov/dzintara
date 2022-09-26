@@ -4,57 +4,57 @@
 
 # adds some icons to system menu
 
-set -x
 menu_datadir='/usr/share/'
 menu_sysconfdir='/etc/xdg/'
+desktop_dir="/usr/share/applications/"
+directories_dir="/usr/share/desktop-directories/"
 
-config_file="${menu_datadir}applications/dzintara_test.desktop";
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
 Exec=timeout 5 xmessage 'Dzintara'
-Icon=Dzintara
+Icon=dzintara
 Name=Dzintara
 _ENDOFFILE
 )
 # echo "$config_text"
-save_var_to_file "$config_file" config_text
+config_file_desktop="${desktop_dir}dzintara-test.desktop";
+save_var_to_file "$config_file_desktop" config_text
 
-
-
-config_file="${menu_datadir}desktop-directories/dzintara_test.directory";
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
-Icon=Dzintara
+Icon=dzintara
 Name=Dzintara
 Type=Directory
 _ENDOFFILE
 )
 # echo "$config_text"
-save_var_to_file "$config_file" config_text
+config_file_dir="${directories_dir}dzintara-test.directory";
+save_var_to_file "$config_file_dir" config_text
 
+xdg-desktop-menu install "$config_file_dir" "$config_file_desktop"
 
-config_file="${menu_sysconfdir}/menus/dzintara.menu";
-config_text=$(cat <<_ENDOFFILE
-<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
-"http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
-<Menu>
-	<Name>Applications</Name>
-	<Menu>
-	<Name>Dzintara</Name>
-	<Directory>dzintara_test.directory</Directory>
-	<Include>
-		<Filename>dzintara_test.desktop</Filename>
-		<Filename>dzintara_test.desktop</Filename>
-	</Include>
-</Menu>
-_ENDOFFILE
-)
-# echo "$config_text"
-create_dir_for_file "$config_file"
-save_var_to_file "$config_file" config_text
+# config_file="${menu_sysconfdir}/menus/dzintara.menu";
+# config_text=$(cat <<_ENDOFFILE
+# <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+# "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+# <Menu>
+# 	<Name>Applications</Name>
+# 	<Menu>
+# 	<Name>Dzintara</Name>
+# 	<Directory>dzintara_test.directory</Directory>
+# 	<Include>
+# 		<Filename>dzintara_test.desktop</Filename>
+# 		<Filename>dzintara_test.desktop</Filename>
+# 	</Include>
+# </Menu>
+# _ENDOFFILE
+# )
+# # echo "$config_text"
+# #create_dir_for_file "$config_file"
+# #save_var_to_file "$config_file" config_text
 
 exit
 this_is_LXDE=0
@@ -68,9 +68,6 @@ if [[ "$this_is_LXDE" != 1 ]]; then echo "this is NOT LXDE!"; sleep $timeout_1; 
 #	update-alternatives --verbose --debug --get-selections
 # x-window-manager
 # --verbose --debug --set
-
-
-
 
 install_system openbox
 install_system compton
