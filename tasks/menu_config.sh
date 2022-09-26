@@ -31,10 +31,38 @@ Icon=dzintara
 Name=1280x1024@60Hz
 _ENDOFFILE
 )
-# echo "$config_text"
 desktop_entry_file="${desktop_dir}dzintara-set-1280x1024_60.desktop";
 save_var_to_file "$desktop_entry_file" config_text
 xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/invert_active_window.sh
+Icon=dzintara
+Name=Invert active window
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-invert_active_window.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/keeweb_start.sh
+Icon=dzintara
+Name=KeeWeb start in browser
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-keeweb_start.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
 
 # config_file="${menu_sysconfdir}/menus/dzintara.menu";
 # config_text=$(cat <<_ENDOFFILE
