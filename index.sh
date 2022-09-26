@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='sopexi-910-2209261414'; 
+declare -g -x script_version='kazina-911-2209262026'; 
 
 function run_task ()
 {
@@ -1286,7 +1286,7 @@ if [[ "$tasks" != "" ]]; then
   run_task ssh_config
   run_task install_yggdrasil
   run_task install_tor
-  run_task install_webmin
+  # run_task install_webmin
   run_task install_nginx_root
   run_task install_x11vnc
   run_task install_xbindkeys

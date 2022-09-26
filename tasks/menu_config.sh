@@ -1,9 +1,62 @@
 #!/usr/bin/bash
 #Author dev@Borodin-Atamanov.ru
 #License: MIT
-# install task script
 
-# Check what LXDE is installed on the system
+# adds some icons to system menu
+
+set -x
+menu_datadir='/usr/share/'
+menu_sysconfdir='/etc/xdg/'
+
+config_file="${menu_datadir}applications/dzintara_test.desktop";
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=timeout 5 xmessage 'Dzintara'
+Icon=Dzintara
+Name=Dzintara
+_ENDOFFILE
+)
+# echo "$config_text"
+save_var_to_file "$config_file" config_text
+
+
+
+config_file="${menu_datadir}desktop-directories/dzintara_test.directory";
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Icon=Dzintara
+Name=Dzintara
+Type=Directory
+_ENDOFFILE
+)
+# echo "$config_text"
+save_var_to_file "$config_file" config_text
+
+
+config_file="${menu_sysconfdir}/menus/dzintara.menu";
+config_text=$(cat <<_ENDOFFILE
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+"http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+<Menu>
+	<Name>Applications</Name>
+	<Menu>
+	<Name>Dzintara</Name>
+	<Directory>dzintara_test.directory</Directory>
+	<Include>
+		<Filename>dzintara_test.desktop</Filename>
+		<Filename>dzintara_test.desktop</Filename>
+	</Include>
+</Menu>
+_ENDOFFILE
+)
+# echo "$config_text"
+create_dir_for_file "$config_file"
+save_var_to_file "$config_file" config_text
+
+exit
 this_is_LXDE=0
 if [ ! -z "$(printenv | grep -i "LXQT")" ]; then this_is_LXDE=1; fi
 if [ ! -z "$(printenv | grep -i "LXDE")" ]; then this_is_LXDE=1; fi
@@ -15,7 +68,6 @@ if [[ "$this_is_LXDE" != 1 ]]; then echo "this is NOT LXDE!"; sleep $timeout_1; 
 #	update-alternatives --verbose --debug --get-selections
 # x-window-manager
 # --verbose --debug --set
-
 
 
 
@@ -63,7 +115,6 @@ dzintara_lxde_rc_config_file="${work_dir}/tasks/lxde_config_rc.xml";
 lxde_rc_config_file='/etc/xdg/openbox/rc.xml';
 copy_lxde_rc_config_file1='/etc/xdg/openbox/lxde-pi-rc.xml';
 copy_lxde_rc_config_file2='/etc/xdg/openbox/LXDE/rc.xml';
-copy_lxde_rc_config_file6='/etc/xdg/openbox/lxqt-rc.xml'
 copy_lxde_rc_config_file3='/home/i/.config/openbox/rc.xml';
 copy_lxde_rc_config_file5='/home/i/.config/openbox/lxde-rc.xml';
 
@@ -85,8 +136,6 @@ chown --verbose --changes  i:i "${copy_lxde_rc_config_file3}";
 chmod --verbose 0644 "${copy_lxde_rc_config_file3}";
 rm -v "${copy_lxde_rc_config_file5}"
 ln --verbose  "${copy_lxde_rc_config_file3}" "${copy_lxde_rc_config_file5}"
-rm -v "$copy_lxde_rc_config_file5"
-ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file5"
 
 # copy compton config to $compton_config_file
 cp -v "${work_dir}/tasksdata/etc:xgd:compton.conf" "$compton_config_file"
