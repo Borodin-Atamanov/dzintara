@@ -29,5 +29,6 @@ nomacs
 
 telegram-desktop
 
-firefox-esr
+qutebrowser
 falkon
+firefox-esr
