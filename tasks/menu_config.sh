@@ -77,6 +77,20 @@ xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 
 
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=xdg-open "https://bdsx.notion.site/77a3c04a4edb4463874152c534c6189a"
+Icon=dzintara
+Name=Browser setup instructions
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-browser_setup_instructions.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
