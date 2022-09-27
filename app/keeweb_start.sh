@@ -12,7 +12,7 @@ url="https://app.keeweb.info/?from=dzintara"
 
 command="qutebrowser"
 if [ -x "$(command -v "$command")" ]; then
-    $command--override-restore  --target window  "$url"
+    $command --override-restore  --target window  "$url"
     echo "ok: $command"; sleep 1; exit;
 fi
 
