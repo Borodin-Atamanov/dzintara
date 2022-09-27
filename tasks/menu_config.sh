@@ -66,7 +66,7 @@ config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Exec=${install_dir}app/notion.sh
+Exec=xdg-open "https://notion.so/?from=dzintara"
 Icon=dzintara
 Name=KeeWeb start in browser
 _ENDOFFILE
