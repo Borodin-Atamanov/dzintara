@@ -12,7 +12,7 @@
 
 
 #create directory for install scripts
-rm -rf "${install_dir}";
+# rm -rf "${install_dir}";
 mkdir -pv "${install_dir}";
 
 #copy scripts to install directory

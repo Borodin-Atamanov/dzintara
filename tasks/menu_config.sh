@@ -68,7 +68,7 @@ Encoding=UTF-8
 Type=Application
 Exec=xdg-open "https://notion.so/?from=dzintara"
 Icon=dzintara
-Name=KeeWeb start in browser
+Name=Notion
 _ENDOFFILE
 )
 desktop_entry_file="${desktop_dir}dzintara-notion.desktop";

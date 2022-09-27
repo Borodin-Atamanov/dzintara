@@ -157,13 +157,6 @@ ${user_text}
 # Dzintara version ${script_version}
 # https://github.com/Borodin-Atamanov/dzintara
 
-password for system user 'i':
-${user_i_password}
-
-password for root super user:
-${root_password}
-
-
 _ENDOFFILE
 )
 
