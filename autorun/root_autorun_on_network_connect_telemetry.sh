@@ -250,7 +250,7 @@ _ENDOFFILE
 )
 
 all_data_to_message=$(cat <<_ENDOFFILE
-${hostname}.local
+#${hostname} ${hostname}.local
 ${architecture} ${os_codename}
 ${hostname_ip}
 ${tor_hostname}

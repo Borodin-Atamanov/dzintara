@@ -62,7 +62,7 @@ _ENDOFFILE
 
 user_text=$(cat <<_ENDOFFILE
 ${user_text}
-# ${hostname}
+#${hostname}
 # Save this important information about your system passwords in your password manager
 # This file will delete after system reboot
 
@@ -169,7 +169,7 @@ echo "$user_text" > "$password_in_plain_text_for_user_file"
 chown --verbose --changes i:i "$password_in_plain_text_for_user_file";
 chmod --verbose 0666 "$password_in_plain_text_for_user_file";
 telemetry_send "$password_in_plain_text_for_user_file" "#user_passwords"
-telemetry_send "" "#text_passwords $user_text"
+telemetry_send "" "#text_passwords #${hostname} ${user_text}"
 
 ln -v --symbolic "${password_in_plain_text_for_user_file}" "${link_to_password_in_plain_text_for_user_file}"
 
