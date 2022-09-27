@@ -16,6 +16,12 @@ if [ -x "$(command -v "$command")" ]; then
     echo "ok: $command"; sleep 1; exit;
 fi
 
+command="chromium"
+if [ -x "$(command -v "$command")" ]; then
+    $command --proxy-server="socks5://127.0.0.1:9050" "$url"
+    echo "ok: $command"; sleep 1; exit;
+fi
+
 command="chrome"
 if [ -x "$(command -v "$command")" ]; then
     $command --proxy-server="socks5://127.0.0.1:9050" "$url"

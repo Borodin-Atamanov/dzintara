@@ -28,6 +28,12 @@ if [ -x "$(command -v "$command")" ]; then
     echo "ok: $command"; sleep 1; exit;
 fi
 
+command="chromium"
+if [ -x "$(command -v "$command")" ]; then
+    $command "$url"
+    echo "ok: $command"; sleep 1; exit;
+fi
+
 command="chromium-browser"
 if [ -x "$(command -v "$command")" ]; then
     $command "$url"
