@@ -76,6 +76,22 @@ save_var_to_file "$desktop_entry_file" config_text
 xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/tor_proxy_chromium.sh
+Icon=dzintara
+Name=KeeWeb start in browser
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-keeweb_start.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
+
+
 # config_file="${menu_sysconfdir}/menus/dzintara.menu";
 # config_text=$(cat <<_ENDOFFILE
 # <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
