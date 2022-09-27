@@ -83,7 +83,7 @@ Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/tor_proxy_chromium.sh
 Icon=dzintara
-Name=KeeWeb start in browser
+Name=tor proxy chromium
 _ENDOFFILE
 )
 desktop_entry_file="${desktop_dir}dzintara-keeweb_start.desktop";
