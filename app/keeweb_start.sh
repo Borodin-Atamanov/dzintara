@@ -10,6 +10,14 @@ source "/home/i/bin/dzintara/autorun/load_variables.sh" nocd
 
 url="https://app.keeweb.info/?from=dzintara"
 
+# chromium-browser --noerrdialogs --disable-translate --no-first-run --fast --fast-start --disable-infobars --disable-features=TranslateUI --password-store=none "https://app.keeweb.info/?from=dzintara"
+
+command="epiphany-browser"
+if [ -x "$(command -v "$command")" ]; then
+    $command  "$url"
+    echo "ok: $command"; sleep 1; exit;
+fi
+
 command="qutebrowser"
 if [ -x "$(command -v "$command")" ]; then
     $command --override-restore  --target window  "$url"

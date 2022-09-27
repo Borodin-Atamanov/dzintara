@@ -13,8 +13,8 @@ xcalib
 x11vnc
 oneko
 lxterminal
-xterm
-rxvt-unicode
+#xterm
+#rxvt-unicode
 #xneur
 #keyboard layout indicator
 gxkb
@@ -29,8 +29,9 @@ nomacs
 
 telegram-desktop
 
-qutebrowser
-falkon
-firefox-esr
+#qutebrowser
+#falkon
+#firefox-esr
+epiphany-browser
 
 keepassxc
