@@ -100,7 +100,7 @@ Icon=dzintara
 Name=tor proxy chromium
 _ENDOFFILE
 )
-desktop_entry_file="${desktop_dir}dzintara-keeweb_start.desktop";
+desktop_entry_file="${desktop_dir}dzintara-tor_proxy_chromium.desktop";
 save_var_to_file "$desktop_entry_file" config_text
 xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
