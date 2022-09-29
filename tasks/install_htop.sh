@@ -11,10 +11,10 @@
 # fi
 install_system htop
 
-$config_source='${work_dir}/tasksdata/root:.config:htop:htoprc'
+config_source="${work_dir}tasksdata/root:.config:htop:htoprc"
 
-$config_target1='/home/i/.config/htop/htoprc'
-$config_target2='/root/.config/htop/htoprc'
+config_target1='/home/i/.config/htop/htoprc'
+config_target2='/root/.config/htop/htoprc'
 
 rm -v "$config_target1"
 rm -v "$config_target2"
@@ -24,4 +24,6 @@ cp -v "$config_source" "$config_target1"
 ln --verbose  "$config_target1" "$config_target2"
 chown --verbose --changes  i:i "$config_target1";
 chmod --verbose 0644 "$config_target1";
+
+# timeout --kill-after=5 3 htop | cat
 

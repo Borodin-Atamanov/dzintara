@@ -15,4 +15,8 @@ cd "${temp_dir}";
 
 rsync --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable  --info=progress2 --progress --stats --itemize-changes "${temp_dir}/" "${chromium_config_dir}/"  | tr -d '\n'
 
+find "${chromium_config_dir}/" -type d -exec chmod -v 0777 {} \;
+find "${chromium_config_dir}/" -type f -exec chmod -v 0640 {} \;
+
+
 exit
