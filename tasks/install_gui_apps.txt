@@ -24,6 +24,9 @@ dex
 # draw on screen
 gromit-mpx
 
+# emoji for console
+fonts-emojione
+
 # image viewer
 nomacs
 

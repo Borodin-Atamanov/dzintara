@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='tupagi-935-2209271846'; 
+declare -g -x script_version='senodc-936-2209291736'; 
 
 function run_task ()
 {
@@ -1294,6 +1294,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_xbindkeys
   run_task lxde_config
   run_task menu_config
+  run_task install_htop
   # run_task install_xneur
 
   #run_task add_screen_resolution_with_cvt_xrandr
