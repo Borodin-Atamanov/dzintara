@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='mifomi-940-2209291822'; 
+declare -g -x script_version='xekubu-941-2209292048'; 
 
 function run_task ()
 {
@@ -1298,6 +1298,7 @@ if [[ "$tasks" != "" ]]; then
   run_task menu_config
   run_task install_htop
   run_task chromium_setup
+  run_task pcmanfm_setup
   # run_task install_xneur
 
   #run_task add_screen_resolution_with_cvt_xrandr

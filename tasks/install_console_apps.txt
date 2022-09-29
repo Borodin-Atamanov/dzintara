@@ -37,6 +37,7 @@ whois
 exfat-fuse
 fdupes
 mc
+nnn
 
 # get info about media file
 mediainfo
