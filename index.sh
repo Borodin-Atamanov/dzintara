@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='senodc-936-2209291736'; 
+declare -g -x script_version='imoxoo-937-2209291748'; 
 
 function run_task ()
 {
@@ -1114,6 +1114,8 @@ declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
 #declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
 declare_and_export service_name 'dzintara';   #for slog systemd logs
 declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzintara.git';
+declare_and_export chromium_config_github_url 'https://github.com/Borodin-Atamanov/chromium-default-settings.git'; # download chromium config from here
+declare_and_export chromium_config_dir '/home/i/.config/chromium/'; # copy config  files here
 #TODO add ssh port to config
 declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.service'; #dzintara autorun service, what run on system boot
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install
