@@ -17,6 +17,7 @@ rsync --recursive --update --mkpath --copy-links --executability  --sparse --who
 
 find "${chromium_config_dir}/" -type d -exec chmod -v 0777 {} \;
 find "${chromium_config_dir}/" -type f -exec chmod -v 0640 {} \;
+chown  --changes --recursive  i:i "${chromium_config_dir}";
 
 
 exit
