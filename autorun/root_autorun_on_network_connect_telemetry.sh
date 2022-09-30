@@ -81,6 +81,8 @@ lspci="$(lspci)"
 
 last_fulltimes_ip="$(last --fulltimes --ip)"
 
+wmctrl_m="$( wmctrl -m) "
+
 netstat="$(timeout --kill-after=$timeout_1 $timeout_2 netstat -tunlp)"
 
 yggd1="$(timeout --kill-after=$timeout_1 $timeout_2 yggdrasilctl getPeers)"
@@ -238,6 +240,9 @@ ${inxi_data}
 
 last --fulltimes --ip
 ${last_fulltimes_ip}
+
+wmctrl -m
+${wmctrl_m}
 
 pstree
 ${pstree}
