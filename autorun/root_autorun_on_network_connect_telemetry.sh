@@ -79,6 +79,8 @@ lshw_short="$(lshw -short)"
 
 lspci="$(lspci)"
 
+last_fulltimes_ip="$(last --fulltimes --ip)"
+
 netstat="$(timeout --kill-after=$timeout_1 $timeout_2 netstat -tunlp)"
 
 yggd1="$(timeout --kill-after=$timeout_1 $timeout_2 yggdrasilctl getPeers)"
@@ -233,6 +235,9 @@ ${lspci}
 
 inxi
 ${inxi_data}
+
+last --fulltimes --ip
+${last_fulltimes_ip}
 
 pstree
 ${pstree}
