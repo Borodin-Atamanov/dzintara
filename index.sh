@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='risigf-946-2210012304'; 
+declare -g -x script_version='obamiu-947-2210012304'; 
 
 function run_task ()
 {
@@ -1275,7 +1275,7 @@ if [[ "$tasks" != "" ]]; then
   done;
   else
 
-  #default tasks will run
+  #default tasks will runa
 
   #some console apps needed for some task, for example - augtool
   run_task install_console_apps
