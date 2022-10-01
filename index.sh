@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='akaveu-945-2209302140'; 
+declare -g -x script_version='risigf-946-2210012304'; 
 
 function run_task ()
 {
@@ -1274,16 +1274,18 @@ if [[ "$tasks" != "" ]]; then
     run_task $this_task_with_args
   done;
   else
+
   #default tasks will run
+
+  #some console apps needed for some task, for example - augtool
+  run_task install_console_apps
+  run_task install_gui_apps
   run_task timezone_set
   run_task hostname_set
   run_task root_password_for_sudoers
   run_task root_password_set
   run_task user_i_password_set
   run_task user_dirs_set
-
-  run_task install_console_apps
-  run_task install_gui_apps
 
   run_task systemd_resolved_dns_config
   run_task sshd_config
@@ -1293,7 +1295,7 @@ if [[ "$tasks" != "" ]]; then
   # run_task install_webmin
   run_task install_nginx_root
   run_task install_x11vnc
-  run_task install_xbindkeys
+  # run_task install_xbindkeys
   run_task lxde_config
   run_task menu_config
   run_task install_htop
