@@ -72,7 +72,7 @@ ${user_i_password}
 password for root super user:
 ${root_password}
 
-echo ${root_password} | sudo -S echo -n 2>/dev/random 1>/dev/random; sudo su
+echo -n "${root_password}" | xsel --clipboard --input; sudo su
 _ENDOFFILE
 )
 

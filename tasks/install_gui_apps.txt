@@ -36,5 +36,7 @@ telegram-desktop
 #falkon
 #firefox-esr
 epiphany-browser
+#chromium-browser
+chromium
 
 keepassxc

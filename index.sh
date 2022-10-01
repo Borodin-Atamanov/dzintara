@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='obamiu-947-2210012304'; 
+declare -g -x script_version='tapuvo-948-2210020021'; 
 
 function run_task ()
 {
@@ -1171,7 +1171,7 @@ declare_and_export timeout_2 77 #timeout for operations like update config files
 declare_and_export timeout_3 777 #timeout for operations like task
 declare_and_export timeout_4 7777 #timeout for operations like recompiling something
 declare_and_export timeout_5 77777 #timeout for long operations
-declare_and_export timeout_task $(echo -n "$timeout_3") #maximum life time for every task
+declare_and_export timeout_task $(echo -n "$timeout_4") #maximum life time for every task
 declare_and_export timeout_augtool $(echo -n "$timeout_2") #maximum life time for every task
 declare_and_export task_pid_file "${work_dir}/task.pid"; #last task pid
 #declare -x -g timeout_task="$timeout_4";  #timeout for tasks
