@@ -56,9 +56,19 @@ load_var_from_file "$config_file" config_var
 replace_line_by_string config_var "window_manager=" "window_manager=openbox" "#"
 save_var_to_file "$config_file" config_var
 
+
+config_file='/etc/xdg/lxsession/LXDE/desktop.conf';
+load_var_from_file "$config_file" config_var
+replace_line_by_string config_var "window_manager=" "window_manager=openbox-lxde" ""
+replace_line_by_string config_var "sNet/ThemeName=" "sNet/ThemeName=Adwaita-dark"
+replace_line_by_string config_var "sNet/IconThemeName=" "sNet/IconThemeName=nuoveXT2"
+replace_line_by_string config_var "iGtk/CursorThemeSize=" "iGtk/CursorThemeSize=72"
+replace_line_by_string config_var "sGtk/CursorThemeName=" "sGtk/CursorThemeName=DMZ-White"
+save_var_to_file "$config_file" config_var
+
 # http://openbox.org/wiki/Help:Actions
 
-dzintara_lxde_rc_config_file="${work_dir}/tasks/lxde_config_rc.xml";
+dzintara_lxde_rc_config_file="${work_dir}/tasksdata/home:i:.config:openbox:rc.xml";
 
 lxde_rc_config_file='/etc/xdg/openbox/rc.xml';
 copy_lxde_rc_config_file1='/etc/xdg/openbox/lxde-pi-rc.xml';

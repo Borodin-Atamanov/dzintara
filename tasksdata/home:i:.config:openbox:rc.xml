@@ -193,11 +193,18 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 			</action>
 		</keybind>
 
-			<keybind key="W-C-i">
-				<action name="Execute">
-					<command>xcalib -i -a</command>
-				</action>
-			</keybind>
+		<keybind key="W-S-i">
+			<action name="Execute">
+				<command>xcalib -i -a</command>
+			</action>
+		</keybind>
+
+
+		<keybind key="W-f">
+			<action name="Execute">
+				<command>pcmanfm --no-desktop</command>
+			</action>
+		</keybind>
 
 			<chainQuitKey>C-g</chainQuitKey>
 
@@ -471,14 +478,14 @@ Copy the file to $HOME/.config/openbox/ instead. -->
 					<command>x-terminal-emulator</command>
 				</action>
 			</keybind>
-			<!--keybindings for LXPanel -->
-			<!--		<keybind key="Super_L"><action name="Execute"><command>lxpanelctl menu</command></action></keybind>-->
-			<!--
 			<keybind key="A-F2">
 			<action name="Execute">
 			<command>lxpanelctl run</command>
 			</action>
 			</keybind>
+			<!--keybindings for LXPanel -->
+			<!--		<keybind key="Super_L"><action name="Execute"><command>lxpanelctl menu</command></action></keybind>-->
+			<!--
 			<keybind key="C-Escape">
 			<action name="Execute">
 			<command>lxpanelctl menu</command>
