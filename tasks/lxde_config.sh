@@ -122,7 +122,7 @@ to_file="/home/i/.config/gtk-3.0/settings.ini"
 cp -v --remove-destination "$from_file"  "$to_file"
 chown --verbose --changes  i:i "$to_file";
 chmod --verbose 0644 "$to_file";
-a
+
 from_file="${work_dir}/tasksdata/home:i:.config:.gtkrc-2.0.mine"
 to_file="/home/i/.config/.gtkrc-2.0.mine"
 cp -v --remove-destination "$from_file"  "$to_file"
