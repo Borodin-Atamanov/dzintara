@@ -71,9 +71,6 @@ config_file='/home/i/.config/lxpanel/LXDE/panels/panel';
 load_var_from_file "$config_file" config_var
 replace_line_by_string config_var "edge=" "edge=top"
 replace_line_by_string config_var "transparent=" "transparent=1"
-replace_line_by_string config_var "sNet/IconThemeName=" "sNet/IconThemeName=nuoveXT2"
-replace_line_by_string config_var "iGtk/CursorThemeSize=" "iGtk/CursorThemeSize=72"
-replace_line_by_string config_var "sGtk/CursorThemeName=" "sGtk/CursorThemeName=DMZ-White"
 save_var_to_file "$config_file" config_var
 
 # http://openbox.org/wiki/Help:Actions
