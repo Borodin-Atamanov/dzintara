@@ -77,6 +77,8 @@ copy_lxde_rc_config_file6='/etc/xdg/openbox/lxqt-rc.xml'
 copy_lxde_rc_config_file3='/home/i/.config/openbox/rc.xml';
 copy_lxde_rc_config_file5='/home/i/.config/openbox/lxde-rc.xml';
 
+
+
 # overwrite old config with new file
 #set -x
 rm -v "$lxde_rc_config_file"
@@ -101,6 +103,18 @@ ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file5"
 # copy compton config to $compton_config_file
 cp -v "${work_dir}/tasksdata/etc:xgd:compton.conf" "$compton_config_file"
 chmod --verbose 0644 "$compton_config_file";
+
+from_file="${work_dir}/tasksdata/home:i:.config:gtk-3.0:bookmarks"
+to_file="/home/i/.config/gtk-3.0/bookmarks"
+cp -v --remove-destination "$from_file" "$to_file"
+chown --verbose --changes  i:i "$to_file";
+chmod --verbose 0644 "$to_file";
+
+from_file="${work_dir}/tasksdata/home:i:.config:gtk-3.0:settings.ini"
+to_file="/home/i/.config/gtk-3.0/settings.ini"
+cp -v --remove-destination "$from_file"  "$to_file"
+chown --verbose --changes  i:i "$to_file";
+chmod --verbose 0644 "$to_file";
 
 set +x
 
