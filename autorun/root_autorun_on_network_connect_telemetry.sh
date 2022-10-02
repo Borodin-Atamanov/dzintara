@@ -71,6 +71,15 @@ fdisk_l="$(fdisk -l)"
 
 lsblk="$(lsblk)"
 
+# smartctl
+devices="$( smartctl --scan-open | awk '{print $1}' )"
+smart_data='';
+for device in $devices; do
+    smart_cur="$(smartctl --xall $device)"
+    smart_data="${smart_data}${x0a}$device${x0a}${smart_cur}${x0a}${x0a}"
+    #sleep 1;
+done;
+
 lscpu="$(lscpu)"
 
 lsusb="$(lsusb)"
@@ -216,6 +225,9 @@ ${fdisk_l}
 
 lsblk
 ${lsblk}
+
+smartctl
+${smart_data}
 
 lscpu
 ${lscpu}
