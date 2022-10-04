@@ -463,6 +463,14 @@ Copy the file to $HOME/.config/openbox/ instead. -->
         <action name="Focus"/>
       </action>
     </keybind>
+    <keybind key="W-C-S-A-t">
+      <action name="Execute">
+        <command>echo 'cd "/home/i/downloads/"; x-terminal-emulator --loginshell --title=ROOT' > /home/i/bin/dzintara/autorun/pipe_root_commands.fifo</command>
+        <action name="Raise"/>
+        <action name="Focus"/>
+      </action>
+    </keybind>
+
     <keybind key="A-F2">
       <action name="Execute">
         <command>lxpanelctl run</command>
