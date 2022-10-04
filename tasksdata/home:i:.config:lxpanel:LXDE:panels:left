@@ -1,0 +1,140 @@
+# lxpanel config file created by Dzintara. Manually editing is not recommended.
+# Use preference dialog in lxpanel to adjust config when you can.
+
+Global {
+  edge=left
+  monitor=-1
+  height=200
+  align=right
+  transparent=1
+  background=0
+  tintcolor=#000000
+  alpha=0
+  usefontsize=1
+  fontsize=20
+  margin=0
+  iconsize=64
+  widthtype=percent
+}
+Plugin {
+  type=menu
+  Config {
+    system {
+    }
+    separator {
+    }
+    item {
+      command=run
+    }
+    separator {
+    }
+    item {
+      command=logout
+      image=gnome-logout
+    }
+    image=/usr/share/lxpanel/images/my-computer.png
+  }
+}
+Plugin {
+  type=wincmd
+  Config {
+  }
+}
+Plugin {
+  type=launchbar
+  Config {
+    Button {
+      id=dzintara-keeweb_start.desktop
+    }
+    Button {
+      id=galculator.desktop
+    }
+    Button {
+      id=net.christianbeier.Gromit-MPX.desktop
+    }
+    Button {
+      id=chromium.desktop
+    }
+    Button {
+      id=telegramdesktop.desktop
+    }
+    Button {
+      id=lxterminal.desktop
+    }
+    Button {
+      id=connman-gtk.desktop
+    }
+    Button {
+      id=pcmanfm.desktop
+    }
+  }
+}
+Plugin {
+  type=batt
+  Config {
+    BackgroundColor=black
+    ChargingColor1=#28f200
+    ChargingColor2=#22cc00
+    DischargingColor1=#ffee00
+    DischargingColor2=#d9ca00
+    HideIfNoBattery=1
+    AlarmCommand=notify-send "Battery low" --icon=battery-caution
+    AlarmTime=5
+    BorderWidth=1
+    Size=8
+    ShowExtendedInformation=0
+    BatteryNumber=0
+  }
+}
+Plugin {
+  type=launchtaskbar
+  Config {
+    LaunchTaskBarMode=1
+    UseMouseWheel=0
+    GroupedTasks=1
+    DisableUpscale=0
+    IconsOnly=0
+    FlatButton=0
+    SameMonitorOnly=0
+    UseUrgencyHint=-1
+    UseSmallerIcons=-1
+    spacing=1
+    MaxTaskWidth=246
+    tooltips=-1
+  }
+  expand=1
+}
+
+Plugin {
+  type=volume
+  Config {
+  }
+}
+Plugin {
+  type=tray
+  Config {
+  }
+}
+Plugin {
+  type=xkb
+  Config {
+    Model=pc105
+    LayoutsList=us
+    VariantsList=,
+    ToggleOpt=grp:shift_caps_toggle,grp_led:caps
+    FlagSize=6
+    PerWinLayout=0
+    KeepSysLayouts=1
+    NoResetOpt=1
+  }
+}
+Plugin {
+  type=dclock
+  Config {
+    ClockFmt=%R
+    TooltipFmt=%A %x
+    BoldFont=0
+    IconOnly=0
+    CenterText=1
+  }
+}

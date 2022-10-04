@@ -73,8 +73,9 @@ replace_line_by_string config_var "edge=" "edge=top"
 replace_line_by_string config_var "transparent=" "transparent=1"
 save_var_to_file "$config_file" config_var
 
-# http://openbox.org/wiki/Help:Actions
+# home:i:.config:pcmanfm:default:pcmanfm.conf
 
+# http://openbox.org/wiki/Help:Actions
 dzintara_lxde_rc_config_file="${work_dir}/tasksdata/home:i:.config:openbox:rc.xml";
 
 lxde_rc_config_file='/etc/xdg/openbox/rc.xml';
