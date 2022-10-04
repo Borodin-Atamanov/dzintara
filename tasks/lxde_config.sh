@@ -80,7 +80,7 @@ write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '
 
 # copy compton config to $compton_config_file
 target_owner_and_group="root:i"
-write_config "etc:xgd:compton.conf"
+write_config "etc:xdg:compton.conf"
 
 write_config "home:i:.config:pcmanfm:default:pcmanfm.conf"
 write_config "home:i:.config:pcmanfm:LXDE:desktop-items-0.conf"
