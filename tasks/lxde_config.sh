@@ -82,6 +82,7 @@ write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '
 target_owner_and_group="root:i"
 write_config "etc:xdg:compton.conf"
 
+write_config "home:i:.Xresources"
 write_config "home:i:.config:pcmanfm:default:pcmanfm.conf"
 write_config "home:i:.config:pcmanfm:LXDE:desktop-items-0.conf"
 write_config "home:i:.config:pcmanfm-qt:lxqt:settings.conf"
@@ -92,6 +93,7 @@ write_config "home:i:.config:gtk-3.0:bookmarks"
 write_config "home:i:.config:gtk-3.0:settings.ini"
 write_config "home:i:.config:.gtkrc-2.0.mine"
 write_config "home:i:.gtkrc-2.0"
+
 
 systemctl status display-manager | cat
 sleep $timeout_0
