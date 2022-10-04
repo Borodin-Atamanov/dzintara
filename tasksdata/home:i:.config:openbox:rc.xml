@@ -899,6 +899,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     <application class="*">
       <!-- no decor to all window by default -->
       <decor>no</decor>
+      <focus>yes</focus>
     </application>
     <application name="panel">
       <skip_taskbar>yes</skip_taskbar>
