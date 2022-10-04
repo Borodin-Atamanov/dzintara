@@ -17,7 +17,7 @@ time ( \
     #change version in file
     load_var_from_file "index.sh" index_sh_code
     git_commits_counter="$(git rev-list --all --count)"
-    git_commits_counter=$(( git_commits_counter + 584 ))
+    git_commits_counter=$(( git_commits_counter + 0 ))
     script_version="$(random_str 5)$(random_str 1)-${git_commits_counter}-$(date "+%y%m%d%H%M")";
     script_version_code_preffix='declare -g -x script_version=';
     script_version_code="${script_version_code_preffix}'${script_version}'; ";
