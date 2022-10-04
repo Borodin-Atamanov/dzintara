@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='abogei-959-2210042051'; 
+declare -g -x script_version='loduss-960-2210042304'; 
 
 function run_task ()
 {
@@ -1100,6 +1100,61 @@ function run_background_command_with_logs ()
 }
 export -f run_background_command_with_logs
 
+function write_config ()
+{
+  # $1 - name of source config file in taskdata dir
+  # function get target filename from source filename
+  # Writes file to target filepath
+  # source dir
+  : "${source_dir:=${work_dir}/tasksdata/}"
+  # target owner and group
+  : "${target_owner_and_group:=i:i}"
+  # target rights
+  : "${target_rights:=0644}"
+
+  source_file="${source_dir}$1"
+  # replace ":" to "/"
+  target_file="/${1}"; # add start slash - in source filename encoded target full path and filename
+  search_and_replace_hex target_file 3A 2f
+  show_var source_file target_file
+  # is file not exists?
+  # [[ -e "${source_file}" ]] && echo "exists" || echo "not exists"
+  if [[ -e "$source_file" ]] ; then
+    # echo "Config file ${source_file} exists"
+    # copy source to target with overwrite
+    cp -vf "$source_file" "$target_file"
+    chown --verbose --changes "$target_owner_and_group" "$target_file";
+    chmod --verbose --changes "$target_rights" "$target_file";
+
+    if [[ -e "$target_file" ]] ; then
+      shift 1
+      # loop over all other arguments: create hard links to files
+      for target_hard_link in "$@"
+      do
+        # echo "target_hard_link=[$target_hard_link]"
+        rm --verbose --force "$target_hard_link"
+        ln --no-target-directory --verbose --force "$target_file" "$target_hard_link"
+        # try to create symbolic link (if hard link did not created)
+        ln --no-target-directory --verbose --symbolic "$target_file" "$target_hard_link" &2> /dev/null
+        chown --verbose --changes "$target_owner_and_group" "$target_hard_link";
+        chmod --verbose --changes "$target_rights" "$target_hard_link";
+      done
+    else
+      echo "Fatal error! Config file ${target_file} not exists after copy! Very weird!"
+      exit_code=1
+    fi
+  else
+    echo "Fatal error! Config file ${source_file} not exists!"
+    exit_code=1
+  fi
+  # reset default values
+  unset -v source_dir
+  unset -v target_rights
+  unset -v target_owner_and_group
+  return $exit_code
+}
+export -f write_config
+
 parse_key_value "$@"
 
 declare_and_export x0a $'\x0A' # new line chars used in many functions
@@ -1163,7 +1218,7 @@ declare_and_export zram_algo 'zstd' # zram algorithm to compress RAM all support
 declare_and_export webmin_port '37137'  # webmin opened port for administration
 declare_and_export tor_hostname_file '/var/lib/tor/hidden_service/hostname'  # file where tor save hostname for this host
 declare_and_export password_in_plain_text_for_user_file '/dev/shm/passwords_${hostname}_in_plain_text_for_user.txt' # text file with passwords for user in RAM.
-declare_and_export compton_config_file '/etc/xdg/compton.conf'
+#declare_and_export compton_config_file '/etc/xdg/compton.conf'
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations

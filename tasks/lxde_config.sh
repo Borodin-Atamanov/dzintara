@@ -3,6 +3,7 @@
 #License: MIT
 # install task script
 
+
 # Check what LXDE is installed on the system
 this_is_LXDE=0
 if [ ! -z "$(printenv | grep -i "LXQT")" ]; then this_is_LXDE=1; fi
@@ -73,79 +74,24 @@ replace_line_by_string config_var "edge=" "edge=top"
 replace_line_by_string config_var "transparent=" "transparent=1"
 save_var_to_file "$config_file" config_var
 
-# home:i:.config:pcmanfm:default:pcmanfm.conf
-
 # http://openbox.org/wiki/Help:Actions
-dzintara_lxde_rc_config_file="${work_dir}/tasksdata/home:i:.config:openbox:rc.xml";
-
-lxde_rc_config_file='/etc/xdg/openbox/rc.xml';
-copy_lxde_rc_config_file1='/etc/xdg/openbox/lxde-pi-rc.xml';
-copy_lxde_rc_config_file2='/etc/xdg/openbox/LXDE/rc.xml';
-copy_lxde_rc_config_file6='/etc/xdg/openbox/lxqt-rc.xml'
-copy_lxde_rc_config_file3='/home/i/.config/openbox/rc.xml';
-copy_lxde_rc_config_file5='/home/i/.config/openbox/lxde-rc.xml';
-
-
-
-# overwrite old config with new file
-#set -x
-rm -v "$lxde_rc_config_file"
-cp -v "$dzintara_lxde_rc_config_file" "$lxde_rc_config_file"
-# set permissions
-chmod --verbose 0644 "$lxde_rc_config_file";
-# create HARD links to this file with overwrite original files
-rm -v "$copy_lxde_rc_config_file1"
-ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file1"
-rm -v "$copy_lxde_rc_config_file2"
-ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file2"
-rm -v "$copy_lxde_rc_config_file3"
-create_dir_for_file "$copy_lxde_rc_config_file3"
-ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file3"
-chown --verbose --changes  i:i "${copy_lxde_rc_config_file3}";
-chmod --verbose 0644 "${copy_lxde_rc_config_file3}";
-rm -v "${copy_lxde_rc_config_file5}"
-ln --verbose  "${copy_lxde_rc_config_file3}" "${copy_lxde_rc_config_file5}"
-rm -v "$copy_lxde_rc_config_file5"
-ln --verbose  "$lxde_rc_config_file" "$copy_lxde_rc_config_file5"
+# overwrite old config with new file and create hard links for other arguments
+write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '/etc/xdg/openbox/LXDE/rc.xml' '/etc/xdg/openbox/lxqt-rc.xml' '/home/i/.config/openbox/lxde-rc.xml'
 
 # copy compton config to $compton_config_file
-cp -v "${work_dir}/tasksdata/etc:xgd:compton.conf" "$compton_config_file"
-chmod --verbose 0644 "$compton_config_file";
+target_owner_and_group="root:i"
+write_config "etc:xgd:compton.conf"
 
-from_file="${work_dir}/tasksdata/home:i:.config:gtk-3.0:bookmarks"
-to_file="/home/i/.config/gtk-3.0/bookmarks"
-cp -v --remove-destination "$from_file" "$to_file"
-chown --verbose --changes  i:i "$to_file";
-chmod --verbose 0644 "$to_file";
-
-from_file="${work_dir}/tasksdata/home:i:.config:gtk-3.0:settings.ini"
-to_file="/home/i/.config/gtk-3.0/settings.ini"
-cp -v --remove-destination "$from_file"  "$to_file"
-chown --verbose --changes  i:i "$to_file";
-chmod --verbose 0644 "$to_file";
-
-from_file="${work_dir}/tasksdata/home:i:.config:.gtkrc-2.0.mine"
-to_file="/home/i/.config/.gtkrc-2.0.mine"
-cp -v --remove-destination "$from_file"  "$to_file"
-chown --verbose --changes  i:i "$to_file";
-chmod --verbose 0644 "$to_file";
-
-set +x
+write_config "home:i:.config:pcmanfm:default:pcmanfm.conf"
+write_config "home:i:.config:pcmanfm:LXDE:desktop-items-0.conf"
+write_config "home:i:.config:pcmanfm-qt:lxqt:settings.conf"
+write_config "home:i:.config:libfm:libfm.conf"
+write_config "home:i:.config:lxpanel:LXDE:panels:left"
+write_config "home:i:.config:lxsession:LXDE:desktop.conf"
+write_config "home:i:.config:gtk-3.0:bookmarks"
+write_config "home:i:.config:gtk-3.0:settings.ini"
+write_config "home:i:.config:.gtkrc-2.0.mine"
+write_config "home:i:.gtkrc-2.0"
 
 systemctl status display-manager | cat
 sleep $timeout_0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
