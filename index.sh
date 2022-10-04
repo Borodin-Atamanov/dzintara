@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='okugeu-966-2210050035'; 
+declare -g -x script_version='boxegn-967-2210050039'; 
 
 function run_task ()
 {
@@ -1116,7 +1116,7 @@ function write_config ()
   # replace ":" to "/"
   target_file="/${1}"; # add start slash - in source filename encoded target full path and filename
   search_and_replace_hex target_file 3A 2f
-  show_var source_file target_file
+  # show_var source_file target_file
   # is file not exists?
   # [[ -e "${source_file}" ]] && echo "exists" || echo "not exists"
   if [[ -e "$source_file" ]] ; then
@@ -1218,7 +1218,7 @@ declare_and_export zram_algo 'zstd' # zram algorithm to compress RAM all support
 declare_and_export webmin_port '37137'  # webmin opened port for administration
 declare_and_export tor_hostname_file '/var/lib/tor/hidden_service/hostname'  # file where tor save hostname for this host
 declare_and_export password_in_plain_text_for_user_file '/dev/shm/passwords_${hostname}_in_plain_text_for_user.txt' # text file with passwords for user in RAM.
-declare_and_export compton_config_file '/etc/xdg/compton.conf' # is tis var use somewhere in dzinara? 
+declare_and_export compton_config_file '/etc/xdg/compton.conf' # is tis var use somewhere in dzinara?
 
 declare_and_export timeout_0 0.7 #timeout for fastest operations
 declare_and_export timeout_1 7 #timeout for fast operations

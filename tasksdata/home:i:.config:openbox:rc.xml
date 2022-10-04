@@ -459,16 +459,16 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     <keybind key="W-t">
       <action name="Execute">
         <command>/bin/bash -c /home/i/bin/dzintara/app/terminal_start.sh</command>
-        <action name="Raise"/>
-        <action name="Focus"/>
       </action>
+      <action name="Raise"/>
+      <action name="Focus"/>
     </keybind>
     <keybind key="W-C-S-A-t">
       <action name="Execute">
         <command>echo 'cd "/home/i/downloads/"; x-terminal-emulator --loginshell --title=ROOT' > /home/i/bin/dzintara/autorun/pipe_root_commands.fifo</command>
-        <action name="Raise"/>
-        <action name="Focus"/>
       </action>
+      <action name="Raise"/>
+      <action name="Focus"/>
     </keybind>
 
     <keybind key="A-F2">
