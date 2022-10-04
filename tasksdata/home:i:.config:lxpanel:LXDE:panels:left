@@ -59,13 +59,13 @@ Plugin {
       id=telegramdesktop.desktop
     }
     Button {
-      id=lxterminal.desktop
+      id=dzintara-terminal_start.desktop
     }
     Button {
       id=connman-gtk.desktop
     }
     Button {
-      id=pcmanfm.desktop
+      id=dzintara-pcmanfm_start.desktop
     }
   }
 }
@@ -96,7 +96,7 @@ Plugin {
     IconsOnly=0
     FlatButton=0
     SameMonitorOnly=0
-    UseUrgencyHint=-1
+    UseUrgencyHint=0
     UseSmallerIcons=-1
     spacing=1
     MaxTaskWidth=246
@@ -119,9 +119,9 @@ Plugin {
   type=xkb
   Config {
     Model=pc105
-    LayoutsList=us
+    LayoutsList=us,ru
     VariantsList=,
-    ToggleOpt=grp:shift_caps_toggle,grp_led:caps
+    ToggleOpt=grp:shift_caps_switch,grp_led:caps
     FlagSize=6
     PerWinLayout=0
     KeepSysLayouts=1
