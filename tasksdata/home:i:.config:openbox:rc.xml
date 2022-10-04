@@ -197,9 +197,23 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </keybind>
     <keybind key="W-f">
       <action name="Execute">
-        <command>pcmanfm --no-desktop --new-win "/home/i/downloads/"</command>
+        <command>/bin/bash -c /home/i/bin/dzintara/app/pcmanfm_start.sh</command>
+        <action name="Raise"/>
+        <action name="Focus"/>
       </action>
     </keybind>
+
+    <keybind key="W-Prior">
+      <action name="Execute">
+        <command>xdotool click 4</command>
+      </action>
+    </keybind>
+    <keybind key="W-Next">
+      <action name="Execute">
+        <command>xdotool click 5</command>
+      </action>
+    </keybind>
+
     <chainQuitKey>C-g</chainQuitKey>
     <!-- Use zero on numpad also -->
     <keybind key="W-0 W-KP_Insert">
@@ -444,8 +458,9 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </keybind>
     <keybind key="W-t">
       <action name="Execute">
-        <command>x-terminal-emulator</command>
+        <command>/bin/bash -c /home/i/bin/dzintara/app/terminal_start.sh</command>
         <action name="Raise"/>
+        <action name="Focus"/>
       </action>
     </keybind>
     <keybind key="A-F2">

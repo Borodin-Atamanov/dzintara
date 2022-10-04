@@ -105,6 +105,32 @@ save_var_to_file "$desktop_entry_file" config_text
 xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/pcmanfm_start.sh
+Icon=dzintara
+Name=pcmanfm start
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-pcmanfm_start.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/terminal_start.sh
+Icon=dzintara
+Name=Console terminal
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-terminal_start.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 # config_file="${menu_sysconfdir}/menus/dzintara.menu";
 # config_text=$(cat <<_ENDOFFILE
@@ -127,14 +153,3 @@ xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 # #save_var_to_file "$config_file" config_text
 
 exit
-
-
-
-
-
-
-
-
-
-
-
