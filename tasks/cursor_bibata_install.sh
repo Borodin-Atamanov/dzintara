@@ -11,7 +11,7 @@ temp_file="/tmp/bibata.tar.gz"
 temp_dir="/tmp/bibata/"
 cursors_install_dir="/usr/share/icons/"
 rm -v "$temp_file"
-wget --tries=17 --output-document="$temp_file" --continue --timeout=31 --wait=63 --retry-on-host-error --no-check-certificate "$bibata_cursor_download_url"
+wget --output-document="$temp_file" --continue  --retry-on-host-error --no-check-certificate "$bibata_cursor_download_url"
 
 if ! [[ -s "$temp_file" ]] ; then
   echo "Fatal error! Config file ${temp_file} not exists after download"
