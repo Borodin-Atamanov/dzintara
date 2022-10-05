@@ -3,6 +3,7 @@
 #License: MIT
 
 # adds some icons to system menu
+# icons from www.flaticon.com and from other sites
 
 desktop_dir="/usr/share/applications/"
 directories_dir="/usr/share/desktop-directories/"
@@ -11,7 +12,7 @@ directories_dir="/usr/share/desktop-directories/"
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
-Icon=dzintara
+Icon=${install_dir}/app/icons/dzintara.png
 Name=Dzintara
 Type=Directory
 _ENDOFFILE
@@ -26,7 +27,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/cvt_xrandr_1280x1024_60.sh
-Icon=dzintara
+Icon=${install_dir}/app/icons/cvt_xrandr_1280x1024_60.png
 Name=1280x1024@60Hz
 _ENDOFFILE
 )
@@ -39,7 +40,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/invert_active_window.sh
-Icon=dzintara
+Icon=${install_dir}/app/icons/invert_active_window.png
 Name=Invert active window
 _ENDOFFILE
 )
@@ -53,7 +54,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/keeweb_start.sh
-Icon=dzintara
+Icon=${install_dir}/app/icons/keeweb_start.png
 Name=KeeWeb start in browser
 _ENDOFFILE
 )
@@ -67,7 +68,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=xdg-open "https://notion.so/?from=dzintara"
-Icon=dzintara
+Icon=${install_dir}/app/icons/notion.png
 Name=Notion
 _ENDOFFILE
 )
@@ -83,7 +84,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=xdg-open "https://bdsx.notion.site/77a3c04a4edb4463874152c534c6189a"
-Icon=dzintara
+Icon=${install_dir}/app/icons/instruction.png
 Name=Browser setup instructions
 _ENDOFFILE
 )
@@ -96,7 +97,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/tor_proxy_chromium.sh
-Icon=dzintara
+Icon=${install_dir}/app/icons/tor_proxy_chromium.png
 Name=tor proxy chromium
 _ENDOFFILE
 )
@@ -110,7 +111,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/pcmanfm_start.sh
-Icon=dzintara
+Icon=${install_dir}/app/icons/pcmanfm_start.png
 Name=pcmanfm start
 _ENDOFFILE
 )
@@ -124,7 +125,7 @@ config_text=$(cat <<_ENDOFFILE
 Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/terminal_start.sh
-Icon=dzintara
+Icon=${install_dir}/app/icons/terminal_start.png
 Name=Console terminal
 _ENDOFFILE
 )
