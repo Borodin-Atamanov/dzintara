@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='nevadz-973-2210050241'; 
+declare -g -x script_version='loline-974-2210051430'; 
 
 function run_task ()
 {
@@ -1169,6 +1169,10 @@ declare_and_export crypted_vault_file 'vault/1.crypt' #path for vault
 #declare_and_export master_password_file '/home/i/bin/dzintara/master_password.txt' #path to file with password to decrypt vault file
 declare_and_export service_name 'dzintara';   #for slog systemd logs
 declare_and_export dzintara_github_url 'https://github.com/Borodin-Atamanov/dzintara.git';
+declare_and_export bibata_cursor_download_url 'https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.0/Bibata.tar.gz'; # download cursor from here
+#declare_and_export bibata_cursor_download_url 'https://github.com/ful1e5/Bibata_Cursor_Rainbow/releases/download/v1.1.2/Bibata-Rainbow-Modern.tar.gz'; # download cursor from here
+#declare_and_export bibata_cursor_download_url 'https://github.com/ful1e5/Bibata_Cursor_Rainbow/releases/download/v1.1.2/Bibata-Rainbow-Original.tar.gz'; # download cursor from here
+
 declare_and_export chromium_config_github_url 'https://github.com/Borodin-Atamanov/chromium-default-settings.git'; # download chromium config from here
 declare_and_export chromium_config_dir '/home/i/.config/chromium/'; # copy config  files here
 #TODO add ssh port to config
@@ -1351,6 +1355,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_nginx_root
   run_task install_x11vnc
   # run_task install_xbindkeys
+  run_task cursor_bibata_install
   run_task lxde_config
   run_task menu_config
   run_task install_htop

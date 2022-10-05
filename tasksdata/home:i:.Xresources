@@ -1,3 +1,5 @@
 ! Xft settings
 
 Xft.dpi: 192
+Xcursor.theme: Bibata-Modern-Amber
+Xcursor.size: 96
