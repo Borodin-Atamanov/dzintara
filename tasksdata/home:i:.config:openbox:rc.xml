@@ -462,12 +462,6 @@ Copy the file to $HOME/.config/openbox/ instead. -->
       </action>
       <action name="Raise"/>
       <action name="Focus"/>
-      <action name="ResizeRelative">
-        <top>-3</top>
-        <bottom>-3</bottom>
-        <right>-3</right>
-        <left>-3</left>
-      </action>
     </keybind>
     <keybind key="C-S-A-t">
       <action name="Execute">
