@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ivacoa-980-2210060655'; 
+declare -g -x script_version='felagd-981-2210061143'; 
 
 function run_task ()
 {
@@ -40,7 +40,7 @@ function run_task ()
   #if user press CTRL+C - we will exit from task with exit code 87
   #trap dzintara_task_terminator SIGINT
   if [ -s "${task_script}" ];  then
-    (
+    time (
       #create countdown process, it show count down before task end by timeout
       timeout_task_min=$(( timeout_task / 60 ))
       countdown_command="timeout --kill-after=2 "${timeout_task}" ${work_dir}/tasks/countdown.sh ${timeout_task_min} 60 & " # show countdown timer in minutes

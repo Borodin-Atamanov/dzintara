@@ -896,12 +896,16 @@ Copy the file to $HOME/.config/openbox/ instead. -->
       <focus>yes</focus>
     </application>
     <application name="panel">
+      <!--
       <skip_taskbar>yes</skip_taskbar>
+      -->
       <layer>above</layer>
     </application>
+    <!--
     <application name="panel" type="dock">
       <layer>below</layer>
     </application>
+    -->
     <!--
 			# this is an example with comments through out. use these to make your
 			# own rules, but without the comments of course.

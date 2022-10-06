@@ -1,0 +1,83 @@
+# lxpanel <profile> config file. Manually editing is not recommended.
+# Use preference dialog in lxpanel to adjust config when you can.
+
+Global {
+  edge=bottom
+  monitor=-1
+  height=128
+  widthtype=request
+  width=800
+  iconsize=128
+  transparent=1
+  background=0
+  tintcolor=#000000
+  alpha=0
+  usefontsize=1
+  fontsize=20
+  setpartialstrut=0
+  autohide=1
+  setdocktype=1
+  heightwhenhidden=10
+}
+Plugin {
+  type=launchtaskbar
+  Config {
+    Button {
+      id=chromium.desktop
+    }
+    Button {
+      id=telegramdesktop.desktop
+    }
+    Button {
+      id=dzintara-terminal_start.desktop
+    }
+    Button {
+      id=dzintara-pcmanfm_start.desktop
+    }
+    Button {
+      id=dzintara-tor_proxy_chromium.desktop
+    }
+    Button {
+      id=firefox-esr.desktop
+    }
+    Button {
+      id=galculator.desktop
+    }
+    Button {
+      id=mousepad.desktop
+    }
+    Button {
+      id=connman-gtk.desktop
+    }
+    UseMouseWheel=0
+    UseUrgencyHint=0
+    GroupedTasks=1
+    MaxTaskWidth=129
+    UseSmallerIcons=-1
+    DisableUpscale=0
+    SameMonitorOnly=0
+    IconsOnly=-1
+    tooltips=0
+  }
+}
+Plugin {
+  type=netstat
+  Config {
+  }
+}
+Plugin {
+  type=xkb
+  Config {
+    FlagSize=6
+  }
+}
+Plugin {
+  type=dclock
+  Config {
+    ClockFmt=%R
+    TooltipFmt=%A %x
+    BoldFont=0
+    IconOnly=0
+    CenterText=0
+  }
+}
