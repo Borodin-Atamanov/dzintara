@@ -91,9 +91,7 @@ write_config "home:i:.config:lxpanel:LXDE:panels:left"
 write_config "home:i:.config:lxsession:LXDE:desktop.conf"
 write_config "home:i:.config:gtk-3.0:bookmarks"
 write_config "home:i:.config:gtk-3.0:settings.ini"
-write_config "home:i:.config:.gtkrc-2.0.mine"
-write_config "home:i:.gtkrc-2.0"
-
+write_config "home:i:.gtkrc-2.0" '/home/i/.config/.gtkrc-2.0.mine' # if this produce troubles - just change hard link to file copy
 
 systemctl status display-manager | cat
 sleep $timeout_0
