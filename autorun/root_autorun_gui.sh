@@ -40,9 +40,10 @@ run_counts="$timeout_5"
 run_background_command_with_logs gxkb
 echo -e "\n\n"
 
-run_counts=2
-run_sleep="$timeout_2"
-run_background_command_with_logs setxkbmap " -layout 'us,ru' -option '' -option 'grp:shift_caps_switch' -option 'grp_led:scroll' -option 'grp_led:caps' -option 'compose:sclk' "
+run_counts=777
+run_sleep="$timeout_1"
+# TODO how to use compose key? -option 'compose:sclk'
+run_background_command_with_logs setxkbmap " -layout 'us,ru' -option '' -option 'grp:shift_caps_switch' -option 'grp_led:scroll' -option 'grp_led:caps'  "
 echo -e "\n\n"
 
 run_counts="$timeout_2"
