@@ -63,7 +63,7 @@ load_var_from_file "$config_file" config_var
 replace_line_by_string config_var "window_manager=" "window_manager=openbox-lxde" ""
 replace_line_by_string config_var "sNet/ThemeName=" "sNet/ThemeName=Adwaita-dark"
 replace_line_by_string config_var "sNet/IconThemeName=" "sNet/IconThemeName=nuoveXT2"
-replace_line_by_string config_var "iGtk/CursorThemeSize=" "iGtk/CursorThemeSize=72"
+replace_line_by_string config_var "iGtk/CursorThemeSize=" "iGtk/CursorThemeSize=96"
 replace_line_by_string config_var "sGtk/CursorThemeName=" "sGtk/CursorThemeName=DMZ-White"
 save_var_to_file "$config_file" config_var
 
@@ -79,9 +79,6 @@ save_var_to_file "$config_file" config_var
 write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '/etc/xdg/openbox/LXDE/rc.xml' '/etc/xdg/openbox/lxqt-rc.xml' '/home/i/.config/openbox/lxde-rc.xml'
 
 # copy compton config to $compton_config_file
-target_owner_and_group="root:i"
-write_config "etc:xdg:compton.conf"
-
 write_config "home:i:.Xresources"
 write_config "home:i:.config:pcmanfm:default:pcmanfm.conf"
 write_config "home:i:.config:pcmanfm:LXDE:desktop-items-0.conf"
@@ -92,6 +89,9 @@ write_config "home:i:.config:lxsession:LXDE:desktop.conf"
 write_config "home:i:.config:gtk-3.0:bookmarks"
 write_config "home:i:.config:gtk-3.0:settings.ini"
 write_config "home:i:.gtkrc-2.0" '/home/i/.config/.gtkrc-2.0.mine' # if this produce troubles - just change hard link to file copy
+
+target_owner_and_group="root:i" # this variable used only on next function call
+write_config "etc:xdg:compton.conf"
 
 systemctl status display-manager | cat
 sleep $timeout_0
