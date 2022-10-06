@@ -20,7 +20,7 @@ lxterminal
 gxkb
 # https://github.com/jceb/dex
 dex
-unclutter
+
 
 # draw on screen
 gromit-mpx

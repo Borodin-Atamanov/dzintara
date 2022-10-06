@@ -126,6 +126,7 @@ Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/terminal_start.sh
 Icon=${install_dir}/app/icons/terminal_start.png
+Icon=lxterminal
 Name=Console terminal
 _ENDOFFILE
 )
