@@ -58,11 +58,6 @@ run_sleep="$timeout_2"
 run_background_command_with_logs x11vnc " -6 -reopen -scale 0.75 -shared -forever -loop7777 -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 1 -rfbauth /root/.vnc/passwd "
 echo -e "\n\n"
 
-XDG_SESSION_TYPE=x11
-run_counts="1"
-run_background_command_with_logs gtk-launch dzintara-plank_start
-echo -e "\n\n"
-
 # run_sleep="$timeout_2"
 # run_background_command_with_logs unclutter " -idle 17 "
 # echo -e "\n\n"

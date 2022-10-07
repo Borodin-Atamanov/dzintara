@@ -14,6 +14,7 @@
 #create directory for install scripts
 # rm -rf "${install_dir}";
 mkdir -pv "${install_dir}";
+rm -fv "${load_variables_file}";
 
 #copy scripts to install directory
 #cp --dereference --update --verbose --recursive --strip-trailing-slashes "${work_dir}" --target-directory="${install_dir}";

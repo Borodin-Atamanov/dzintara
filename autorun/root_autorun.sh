@@ -30,6 +30,8 @@ $source_load_variables;
 
 declare -x -g service_name='dzintara.root_autorun';   #for slog systemd logs
 
+echo "$(ymdhms)" >> /dev/shm/autorun.start
+
 start_log
 
 #path to scripts, what we will start
@@ -87,7 +89,7 @@ eval_this="su --login i --shell='${fullpath_bash}' --command='${source_load_vari
 slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 
-sleep $timeout_1
+sleep $timeout_0
 
 slog "<7>start root GUI script ${root_autorun_gui}";
 #eval_this='su --login i --shell="${fullpath_bash}" --command="source /home/i/bin/dzintara/autorun/load_variables.sh;  rxvt -e /home/i/bin/dzintara/autorun/user_autorun_gui.sh & " ';

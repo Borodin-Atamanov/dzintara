@@ -19,6 +19,9 @@ cd "$working_dir"
 declare -x XDG_SESSION_TYPE=x11
 nohup gtk-launch plank &
 
+sleep 3
+exit;
+
 # dconf dump /net/launchpad/plank/docks/ > /path/where/to/save/plank/docks.ini
 # And then one may want to reload the saved settings:
 # cat /path/where/saved/plank/docks.ini | dconf load /net/launchpad/plank/docks/

@@ -42,6 +42,11 @@ xset led 3;
 
 #nohup telegram-desktop &
 
+XDG_SESSION_TYPE=x11
+run_counts="1"
+run_background_command_with_logs gtk-launch dzintara-plank_start
+echo -e "\n\n"
+
 random_wait
 
 #run_task show_script_subversion
@@ -59,4 +64,3 @@ random_wait
 #read
 
 slog "<5>finish $0"
-
