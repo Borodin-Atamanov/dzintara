@@ -80,6 +80,8 @@ write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '
 
 # copy compton config to $compton_config_file
 write_config "home:i:.Xresources"
+# command to read this binary file:  dconf dump /
+write_config "home:i:.config:dconf:user"
 write_config "home:i:.config:pcmanfm:default:pcmanfm.conf"
 write_config "home:i:.config:pcmanfm:LXDE:desktop-items-0.conf"
 write_config "home:i:.config:pcmanfm-qt:lxqt:settings.conf"
@@ -90,6 +92,7 @@ write_config "home:i:.config:lxsession:LXDE:desktop.conf"
 write_config "home:i:.config:gtk-3.0:bookmarks"
 write_config "home:i:.config:gtk-3.0:settings.ini"
 write_config "home:i:.gtkrc-2.0" '/home/i/.config/.gtkrc-2.0.mine' # if this produce troubles - just change hard link to file copy
+write_config "home:i:.config:mimeapps.list"
 
 target_owner_and_group="root:i" # this variable used only on next function call
 write_config "etc:xdg:compton.conf"
