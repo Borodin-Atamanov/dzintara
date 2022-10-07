@@ -18,11 +18,14 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='zagidx-986-2210071511'; 
+declare -g -x script_version='anikoo-987-2210071520'; 
 
 function run_task ()
 {
   declare -g -x task_name="${1}";
+  ${task_num:=0}
+  declare -g -x task_num="$((task_num + 1))";
+
   shift 1
   #function will send other arguments to executed task as parameters
   #add arguments to task
@@ -34,9 +37,9 @@ function run_task ()
     task_script="${work_dir}/tasks/${task_name}.sh";
   fi
 
-  echo "████ task ${task_name} ${arguments}████ ${script_version}";
+  echo "████ task ${task_num} ${task_name} ${arguments}████ ${script_version}";
   slog "<6>run_task ${task_name} ${arguments}";
-  slog "<7>$(show_var task_script) $(show_var task_name) $(show_var arguments)";
+  slog "<7>$(show_var task_script) $(show_var task_name) $(show_var arguments) $(show_var task_num)";
   #if user press CTRL+C - we will exit from task with exit code 87
   #trap dzintara_task_terminator SIGINT
   if [ -s "${task_script}" ];  then
@@ -59,7 +62,7 @@ function run_task ()
     #kill counter process
     #kill -9 $countdown_pid;
     #killall --verbose "countdown.sh";
-    echo -e "----------------------------------------------------------------------- task ${task_name} ${arguments} ended  ${script_version} \n\n\n";
+    echo -e "----------------------------------------------------------------------- task ${task_num} ${task_name} ${arguments} ended  ${script_version} \n\n\n";
   else
     slog "<4>no task_script file ${task_script}! 🤷‍":
   fi
