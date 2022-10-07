@@ -18,12 +18,12 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='acinui-988-2210071532'; 
+declare -g -x script_version='cumuce-989-2210071559'; 
 
 function run_task ()
 {
   declare -g -x task_name="${1}";
-  ${task_num:=0}
+  : ${task_num:="0"}
   declare -g -x task_num="$((task_num + 1))";
 
   shift 1

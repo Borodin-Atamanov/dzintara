@@ -126,7 +126,7 @@ Encoding=UTF-8
 Type=Application
 Exec=${install_dir}app/plank_settings.sh
 Icon=plank
-Name=pcmanfm start
+Name=plank settings
 _ENDOFFILE
 )
 desktop_entry_file="${desktop_dir}dzintara-plank_settings.desktop";

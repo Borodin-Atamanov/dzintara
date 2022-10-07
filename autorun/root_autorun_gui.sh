@@ -14,6 +14,12 @@ start_log
 
 echo -e "\n\n"
 
+# try to run compositor as daemon
+run_counts="1"
+run_background_command_with_logs picom '--daemon --config $compton_config_file'
+echo -e "\n\n"
+
+# run compositor if it fails
 run_counts="$timeout_5"
 run_sleep="$timeout_0"
 run_background_command_with_logs picom '--config $compton_config_file'
