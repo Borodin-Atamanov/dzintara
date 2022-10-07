@@ -148,6 +148,21 @@ save_var_to_file "$desktop_entry_file" config_text
 xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/caps_lock.sh
+Icon=fon-ts
+Name=caps_lock
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-caps_lock.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
+
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
