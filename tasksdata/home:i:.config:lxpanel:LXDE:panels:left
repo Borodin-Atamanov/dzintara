@@ -115,17 +115,23 @@ Plugin {
   Config {
   }
 }
+# Plugin {
+#   type=xkb
+#   Config {
+#     Model=pc105
+#     LayoutsList=us,ru
+#     VariantsList=,
+#     ToggleOpt=grp:shift_caps_switch,grp_led:caps
+#     FlagSize=6
+#     PerWinLayout=0
+#     KeepSysLayouts=1
+#     NoResetOpt=1
+#   }
+# }
 Plugin {
   type=xkb
   Config {
-    Model=pc105
-    LayoutsList=us,ru
-    VariantsList=,
-    ToggleOpt=grp:shift_caps_switch,grp_led:caps
     FlagSize=6
-    PerWinLayout=0
-    KeepSysLayouts=1
-    NoResetOpt=1
   }
 }
 Plugin {

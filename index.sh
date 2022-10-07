@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='ladorc-990-2210071603'; 
+declare -g -x script_version='barofu-991-2210071620'; 
 
 function run_task ()
 {
@@ -1158,6 +1158,7 @@ function write_config ()
 }
 export -f write_config
 
+# add all script agruments like "key"="value" to variables
 parse_key_value "$@"
 
 declare_and_export x0a $'\x0A' # new line chars used in many functions
