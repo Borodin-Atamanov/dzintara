@@ -17,7 +17,8 @@ cd "$working_dir"
 # x-terminal-emulator --working-directory="$working_dir" --loginshell --title="$working_dir"
 
 declare -x XDG_SESSION_TYPE=x11
-plank
+# plank
+gtk-launch plank
 
 # dconf dump /net/launchpad/plank/docks/ > /path/where/to/save/plank/docks.ini
 # And then one may want to reload the saved settings:
