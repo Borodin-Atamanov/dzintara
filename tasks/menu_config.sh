@@ -134,6 +134,19 @@ save_var_to_file "$desktop_entry_file" config_text
 xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
 
 
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=${install_dir}app/plank_start.sh
+Icon=plank
+Name=Plank
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-plank_start.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
 
 config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]

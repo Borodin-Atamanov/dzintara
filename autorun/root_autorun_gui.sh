@@ -21,7 +21,7 @@ echo -e "\n\n"
 
 # run compositor if it fails
 run_counts="$timeout_5"
-run_sleep="$timeout_0"
+run_sleep="$timeout_1"
 run_background_command_with_logs picom '--config $compton_config_file'
 echo -e "\n\n"
 
@@ -58,10 +58,10 @@ run_sleep="$timeout_2"
 run_background_command_with_logs x11vnc " -6 -reopen -scale 0.75 -shared -forever -loop7777 -capslock -clear_all -fixscreen V=111,C=121,X=137 -ping 1 -rfbauth /root/.vnc/passwd "
 echo -e "\n\n"
 
-run_counts="$timeout_1"
-run_sleep="$timeout_2"
+run_counts="$timeout_2"
+run_sleep="$timeout_1"
 XDG_SESSION_TYPE=x11
-run_background_command_with_logs plank "--verbose --debug"
+run_background_command_with_logs ${work_dir}/autorun/plank_start.sh
 echo -e "\n\n"
 
 # run_sleep="$timeout_2"
