@@ -18,12 +18,12 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='cumuce-989-2210071559'; 
+declare -g -x script_version='ladorc-990-2210071603'; 
 
 function run_task ()
 {
   declare -g -x task_name="${1}";
-  : ${task_num:="0"}
+  # : ${task_num:="0"}
   declare -g -x task_num="$((task_num + 1))";
 
   shift 1
@@ -1359,7 +1359,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_nginx_root
   run_task install_x11vnc
   # run_task install_xbindkeys
-  run_task cursor_bibata_install
+  #run_task cursor_bibata_install
   run_task lxde_config
   run_task menu_config
   run_task install_htop
