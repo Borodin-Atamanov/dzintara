@@ -80,8 +80,13 @@ write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '
 
 # copy compton config to $compton_config_file
 write_config "home:i:.Xresources"
-# command to read this binary file:  dconf dump /
+
 write_config "home:i:.config:dconf:user"
+# command to read this ^ binary file:  dconf dump /
+# dconf dump /net/launchpad/plank/docks/ > /path/where/to/save/plank/docks.ini
+# And then one may want to reload the saved settings:
+# cat /path/where/saved/plank/docks.ini | dconf load /net/launchpad/plank/docks/
+
 write_config "home:i:.config:pcmanfm:default:pcmanfm.conf"
 write_config "home:i:.config:pcmanfm:LXDE:desktop-items-0.conf"
 write_config "home:i:.config:pcmanfm-qt:lxqt:settings.conf"
