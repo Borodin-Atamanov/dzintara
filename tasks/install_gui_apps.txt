@@ -20,7 +20,9 @@ lxterminal
 gxkb
 # https://github.com/jceb/dex
 dex
-
+xscreensaver-data-extra 
+xscreensaver-gl-extra
+unicode-screensaver
 
 # draw on screen
 gromit-mpx
