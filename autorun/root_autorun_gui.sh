@@ -60,7 +60,8 @@ echo -e "\n\n"
 
 run_counts="$timeout_1"
 run_sleep="$timeout_2"
-run_background_command_with_logs plank "--preferences --verbose --debug"
+XDG_SESSION_TYPE=x11
+run_background_command_with_logs plank "--verbose --debug"
 echo -e "\n\n"
 
 # run_sleep="$timeout_2"
