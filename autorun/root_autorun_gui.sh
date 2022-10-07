@@ -15,7 +15,7 @@ start_log
 echo -e "\n\n"
 
 run_counts="$timeout_5"
-run_background_command_with_logs compton '--config $compton_config_file'
+run_background_command_with_logs picom '--config $compton_config_file'
 echo -e "\n\n"
 
 run_counts="$timeout_5"

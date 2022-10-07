@@ -8,6 +8,7 @@
 this_is_LXDE=0
 if [ ! -z "$(printenv | grep -i "LXQT")" ]; then this_is_LXDE=1; fi
 if [ ! -z "$(printenv | grep -i "LXDE")" ]; then this_is_LXDE=1; fi
+# https://wiki.archlinux.org/title/LXDE
 
 show_var this_is_LXDE
 if [[ "$this_is_LXDE" != 1 ]]; then echo "this is NOT LXDE!"; sleep $timeout_1; exit; fi
@@ -20,9 +21,8 @@ if [[ "$this_is_LXDE" != 1 ]]; then echo "this is NOT LXDE!"; sleep $timeout_1; 
 
 
 
-
 install_system openbox
-install_system compton
+install_system picom
 
 # /usr/bin/openbox
 command_path="$( get_command_fullpath openbox )";
@@ -93,9 +93,9 @@ write_config "home:i:.config:gtk-3.0:bookmarks"
 write_config "home:i:.config:gtk-3.0:settings.ini"
 write_config "home:i:.gtkrc-2.0" '/home/i/.config/.gtkrc-2.0.mine' # if this produce troubles - just change hard link to file copy
 write_config "home:i:.config:mimeapps.list"
+write_config "home:i:.config:picom-compton.conf"
+# target_owner_and_group="root:i" # this variable used only on next function call
 
-target_owner_and_group="root:i" # this variable used only on next function call
-write_config "etc:xdg:compton.conf"
 
 systemctl status display-manager | cat
 sleep $timeout_0
