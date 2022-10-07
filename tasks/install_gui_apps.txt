@@ -31,6 +31,8 @@ fonts-emojione
 # image viewer
 nomacs
 
+plank
+
 telegram-desktop
 
 #qutebrowser

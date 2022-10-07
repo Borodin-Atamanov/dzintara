@@ -124,6 +124,21 @@ config_text=$(cat <<_ENDOFFILE
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
+Exec=${install_dir}app/plank_settings.sh
+Icon=plank
+Name=pcmanfm start
+_ENDOFFILE
+)
+desktop_entry_file="${desktop_dir}dzintara-plank_settings.desktop";
+save_var_to_file "$desktop_entry_file" config_text
+xdg-desktop-menu install "$config_file_dir" "$desktop_entry_file"
+
+
+
+config_text=$(cat <<_ENDOFFILE
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
 Exec=${install_dir}app/terminal_start.sh
 Icon=${install_dir}/app/icons/terminal_start.png
 Icon=lxterminal

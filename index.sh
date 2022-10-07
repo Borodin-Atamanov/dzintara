@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='nenonu-985-2210071337'; 
+declare -g -x script_version='zagidx-986-2210071511'; 
 
 function run_task ()
 {
@@ -547,7 +547,7 @@ function install_system ()
     timeout --kill-after=77 $timeout_task dpkg --configure -a | cat;
     timeout --kill-after=77 $timeout_task apt-get --yes update | cat;
     timeout --kill-after=77 $timeout_task apt-get --yes autoremove | cat;
-    touch "$tfile";
+    # touch "$tfile";
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
   fi;
