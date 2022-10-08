@@ -31,8 +31,7 @@ app_install_dir="/usr/local/bin/"
 
 # TODO if x86_64 download AppImage https://imagemagick.org/archive/binaries/magick
 
-if [[ "$architecture" == 'amd64']]; then
-  :
+if [[ "$architecture" == 'amd64' ]]; then
   # download appimage
   download_url='https://imagemagick.org/archive/binaries/magick'
   wget --output-document="${app_install_dir}/magick" --retry-on-host-error --no-check-certificate "$download_url"
@@ -49,7 +48,6 @@ exit
 
 # compile from source code
 install_system build-essential
-
 
 download_url='https://github.com/ImageMagick/ImageMagick.git'
 
