@@ -1,0 +1,11 @@
+# KEYBOARD CONFIGURATION FILE created by Dzintara
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL=""
+XKBLAYOUT="us,ru"
+XKBVARIANT=""
+XKBOPTIONS="grp:shift_caps_switch,grp_led:caps,grp_led:scroll"
+
+BACKSPACE="guess"
+

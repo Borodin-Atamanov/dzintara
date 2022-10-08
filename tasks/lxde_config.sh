@@ -78,8 +78,11 @@ save_var_to_file "$config_file" config_var
 # overwrite old config with new file and create hard links for other arguments
 write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '/etc/xdg/openbox/LXDE/rc.xml' '/etc/xdg/openbox/lxqt-rc.xml' '/home/i/.config/openbox/lxde-rc.xml'
 
-# copy compton config to $compton_config_file
 write_config "home:i:.Xresources"
+write_config "etc:default:keyboard"
+write_config "etc:X11:xorg.conf.d:00-keyboard.conf"
+
+write_config "home:i:.config:gromit-mpx.ini"
 
 write_config "home:i:.config:dconf:user"
 # command to read this ^ binary file:  dconf dump /
