@@ -189,3 +189,7 @@ slog "<7>eval this  '${eval_this}'"
 eval "${eval_this}";
 sleep $timeout_0
 
+eval_this="su --login i --shell='${bash}' --command='${source_load_variables};  ${nohup} gxmessage -file  ${link_to_password_in_plain_text_for_user_file} ' & ";
+slog "<7>eval this  '${eval_this}'"
+eval "${eval_this}";
+sleep $timeout_0

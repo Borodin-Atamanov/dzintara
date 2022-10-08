@@ -8,9 +8,13 @@ wmctrl
 xsel
 xdotool
 xdg-utils
+# add some keyboard shortcuts
 xbindkeys
+# invert screen colors
 xcalib
+# vnc server
 x11vnc
+# toy on screen
 oneko
 lxterminal
 #xterm
@@ -20,9 +24,13 @@ lxterminal
 gxkb
 # https://github.com/jceb/dex
 dex
-xscreensaver-data-extra 
+xscreensaver-data-extra
 xscreensaver-gl-extra
 unicode-screensaver
+# SCReenshOT
+scrot
+# show messages on Xorg screen
+gxmessage
 
 # draw on screen
 gromit-mpx
@@ -33,13 +41,14 @@ fonts-emojione
 # image viewer
 nomacs
 
+# dock
 plank
 
 telegram-desktop
 
 #qutebrowser
 #falkon
-#firefox-esr
+firefox-esr
 epiphany-browser
 #chromium-browser
 chromium
