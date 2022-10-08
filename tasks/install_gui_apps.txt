@@ -54,3 +54,14 @@ epiphany-browser
 chromium
 
 keepassxc
+
+deluge 
+deluged
+deluge-common
+deluge-gtk
+deluge-web
+deluge-console
+
+mpv
+vlc
+

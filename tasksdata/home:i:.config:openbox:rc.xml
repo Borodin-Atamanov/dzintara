@@ -464,10 +464,9 @@ Copy the file to $HOME/.config/openbox/ instead. -->
       <action name="Focus"/>
     </keybind>
 
-
     <keybind key="C-S-A-t">
       <action name="Execute">
-        <command>echo '/bin/bash -c lxterminal --working-directory="/root/" --loginshell --title="ROOT"' > /home/i/bin/dzintara/autorun/pipe_root_commands.fifo</command>
+        <command>bash -c 'echo "nohup sudo lxterminal "$'\x26'  > /home/i/bin/dzintara/autorun/pipe_root_commands.fifo'</command>
       </action>
       <action name="Raise"/>
       <action name="Focus"/>

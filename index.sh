@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='adabub-1005-2210081310'; 
+declare -g -x script_version='vozusk-1006-2210082339'; 
 
 function run_task ()
 {
@@ -1366,9 +1366,12 @@ if [[ "$tasks" != "" ]]; then
   #run_task cursor_bibata_install
   run_task lxde_config
   run_task menu_config
-  run_task install_htop
   run_task pcmanfm_setup
+  run_task install_imagemagick
+  run_task install_htop
   run_task chromium_setup
+  run_task firefox_setup
+  run_task install_imagemagick
   # run_task install_xneur
 
   #run_task add_screen_resolution_with_cvt_xrandr
