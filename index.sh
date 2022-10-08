@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='utolai-1000-2210071937'; 
+declare -g -x script_version='fugadi-1001-2210081159'; 
 
 function run_task ()
 {
@@ -1090,7 +1090,8 @@ function run_background_command_with_logs ()
   mkdir -pv "${dzintara_log_dir}"
   # eval_this="$bash -c '${source_load_variables}; while : ; do ${command_app} ${arguments}; sleep ${run_sleep}; done; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
   # eval_this="$bash -c '${source_load_variables}; ${command_app} ${arguments}; >${dzintara_log_dir}${command_short}1.log 2>${dzintara_log_dir}${command_short}2.log ' & "
-  eval_this="$nohup $bash -c '${source_load_variables}; start_log $command_short;  date '+%F-%H-%M-%S'; echo ${command_app} ${arguments};  for ((i=${run_counts};i>0;i--)) do : ; ${command_app} ${arguments}; sleep ${run_sleep}; ${source_load_variables};  done;' & "
+  # TODO check what process is already running before run new instance
+  eval_this="$nohup $bash -c '${source_load_variables}; start_log $command_short;  date '+%F-%H-%M-%S'; echo ${command_app} ${arguments};  for ((i=${run_counts};i>0;i--)) do : ; ${command_app} ${arguments}; pgrep ${command_short}; sleep ${run_sleep}; ${source_load_variables};  done;' & "
   slog "<7>eval_this=$eval_this"
   ( eval $eval_this )
 
@@ -1177,8 +1178,10 @@ declare_and_export bibata_cursor_download_url 'https://github.com/ful1e5/Bibata_
 #declare_and_export bibata_cursor_download_url 'https://github.com/ful1e5/Bibata_Cursor_Rainbow/releases/download/v1.1.2/Bibata-Rainbow-Modern.tar.gz'; # download cursor from here
 #declare_and_export bibata_cursor_download_url 'https://github.com/ful1e5/Bibata_Cursor_Rainbow/releases/download/v1.1.2/Bibata-Rainbow-Original.tar.gz'; # download cursor from here
 
-declare_and_export chromium_config_github_url 'https://github.com/Borodin-Atamanov/chromium-default-settings.git'; # download chromium config from here
-declare_and_export chromium_config_dir '/home/i/.config/chromium/'; # copy config  files here
+declare_and_export chromium_config_github_url 'https://github.com/Borodin-Atamanov/chromium-default-settings.git'; # download config from here
+declare_and_export chromium_config_dir '/home/i/.config/chromium/'; # copy config files here
+declare_and_export firefox_config_github_url 'https://github.com/Borodin-Atamanov/firefox-default-settings.git'; # download config from here
+declare_and_export firefox_config_dir '/home/i/.mozilla/firefox/'; # copy config files here
 #TODO add ssh port to config
 declare_and_export root_autorun_service_file '/etc/systemd/system/dzintara.service'; #dzintara autorun service, what run on system boot
 declare_and_export load_variables_file "${install_dir}autorun/load_variables.sh"; #variables in this file load in every dzintara-script after system install

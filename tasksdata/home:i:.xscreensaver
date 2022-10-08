@@ -1,0 +1,300 @@
+# XScreenSaver Preferences File
+# Written by xscreensaver-demo 5.45 for i on Sat Oct  8 00:23:04 2022.
+# https://www.jwz.org/xscreensaver/
+
+timeout:	0:10:00
+cycle:		0:10:00
+lock:		False
+lockTimeout:	0:00:00
+passwdTimeout:	0:00:30
+visualID:	default
+installColormap:    True
+verbose:	False
+timestamp:	True
+splash:		True
+splashDuration:	0:00:05
+demoCommand:	xscreensaver-demo
+prefsCommand:
+nice:		10
+memoryLimit:	0
+fade:		True
+unfade:		False
+fadeSeconds:	0:00:03
+fadeTicks:	20
+captureStderr:	True
+ignoreUninstalledPrograms:False
+font:		*-medium-r-*-140-*-m-*
+dpmsEnabled:	True
+dpmsQuickOff:	False
+dpmsStandby:	1:59:00
+dpmsSuspend:	2:00:00
+dpmsOff:	4:00:00
+grabDesktopImages:  False
+grabVideoFrames:    False
+chooseRandomImages: False
+imageDirectory:
+
+mode:		random
+selected:	-1
+
+textMode:	url
+textLiteral:	XScreenSaver
+textFile:
+textProgram:	fortune
+textURL:	https://planet.debian.org/rss20.xml
+
+programs:								      \
+  Best: 				maze -root				    \n\
+  Best: 				superquadrics -root			    \n\
+  Best: 				attraction -root			    \n\
+  Best: 				blitspin -root				    \n\
+  Best: 				greynetic -root				    \n\
+  Best: 				helix -root				    \n\
+  Best: 				hopalong -root				    \n\
+  Best: 				imsmap -root				    \n\
+  Best: 				noseguy -root				    \n\
+  Best: 				pyro -root				    \n\
+  Best: 				qix -root				    \n\
+  Best: 				rocks -root				    \n\
+  Best: 				rorschach -root				    \n\
+  Best: 				decayscreen -root			    \n\
+  Best: 				flame -root				    \n\
+  Best: 			halo -root				    \n\
+  Best: 				slidescreen -root			    \n\
+  Best: 				pedal -root				    \n\
+  Best: 				bouboule -root				    \n\
+  Best: 				braid -root				    \n\
+  Best: 				coral -root				    \n\
+  Best: 				deco -root -smooth-colors -golden-ratio	      \
+				  -fps					    \n\
+  Best: 				drift -root				    \n\
+  Best: 				fadeplot -root				    \n\
+  Best: 				galaxy -root				    \n\
+  Best: 				goop -root				    \n\
+  Best: 			grav -root				    \n\
+  Best: 				ifs -root				    \n\
+  Best: 				unicode -root				    \n\
+  Best: 				jigsaw -root				    \n\
+  Best: 				julia -root				    \n\
+  Best: 				kaleidescope -root			    \n\
+  Best: 				moebius -root				    \n\
+  Best: 				moire -root				    \n\
+  Best: 				morph3d -root				    \n\
+  Best: 				mountain -root				    \n\
+  Best: 				munch -root				    \n\
+  Best: 				penrose -root				    \n\
+  Best: 				pipes -root				    \n\
+  Best: 				rd-bomb -root				    \n\
+  Best: 				rubik -root				    \n\
+  Best: 				sierpinski -root			    \n\
+  Best: 				slip -root				    \n\
+  Best: 				sproingies -root			    \n\
+  Best: 				starfish -root				    \n\
+  Best: 				strange -root				    \n\
+  Best: 				swirl -root				    \n\
+  Best: 				triangle -root				    \n\
+  Best: 				xjack -root				    \n\
+  Best: 				xlyap -root				    \n\
+  Best: 				atlantis -root				    \n\
+  Best: 				bsod -root				    \n\
+  Best: 				bubble3d -root				    \n\
+  Best: 				cage -root				    \n\
+  Best: 				crystal -root				    \n\
+  Best: 				cynosure -root				    \n\
+  Best: 				discrete -root				    \n\
+  Best: 				distort -root				    \n\
+  Best: 				epicycle -root				    \n\
+  Best: 				flow -root				    \n\
+  Best: 			glplanet -root				    \n\
+  Best: 				interference -root			    \n\
+  Best: 				kumppa -root				    \n\
+  Best: 				lament -root				    \n\
+  Best: 				moire2 -root				    \n\
+  Best: 				sonar -root				    \n\
+  Best: 				stairs -root				    \n\
+  Best: 				truchet -root				    \n\
+  Best: 				vidwhacker -root			    \n\
+  Best: 				blaster -root				    \n\
+  Best: 				bumps -root				    \n\
+  Best: 				ccurve -root				    \n\
+  Best: 				compass -root				    \n\
+  Best: 			deluxe -root				    \n\
+  Best: 				demon -root				    \n\
+  Best: 				extrusion -root				    \n\
+  Best: 				loop -root				    \n\
+  Best: 				penetrate -root				    \n\
+  Best: 				petri -root				    \n\
+  Best: 				phosphor -root				    \n\
+  Best: 				pulsar -root				    \n\
+  Best: 				ripples -root				    \n\
+  Best: 				shadebobs -root				    \n\
+  Best: 				sierpinski3d -root			    \n\
+  Best: 				spotlight -root				    \n\
+  Best: 				squiral -root				    \n\
+  Best: 				wander -root				    \n\
+  Best: 				webcollage -root			    \n\
+  Best: 				xflame -root				    \n\
+  Best: 				xmatrix -root				    \n\
+  Best: 				gflux -root				    \n\
+  Best: 				nerverot -root				    \n\
+  Best: 				xrayswarm -root				    \n\
+  Best: 				xspirograph -root			    \n\
+  Best: 				circuit -root				    \n\
+  Best: 				dangerball -root			    \n\
+  Best: 				engine -root				    \n\
+  Best: 				flipscreen3d -root			    \n\
+  Best: 				gltext -root				    \n\
+  Best: 				menger -root				    \n\
+  Best: 				molecule -root				    \n\
+  Best: 				rotzoomer -root				    \n\
+  Best: 				scooter -root				    \n\
+  Best: 				speedmine -root				    \n\
+  Best: 				starwars -root				    \n\
+  Best: 				stonerview -root			    \n\
+  Best: 				vermiculate -root			    \n\
+  Best: 				whirlwindwarp -root			    \n\
+  Best: 				zoom -root				    \n\
+  Best: 				anemone -root				    \n\
+  Best: 				apollonian -root			    \n\
+  Best: 			 boxed -root				    \n\
+  Best: 			cubenetic -root				    \n\
+  Best: 				endgame -root				    \n\
+  Best: 				euler2d -root -count 5000		    \n\
+  Best: 				fluidballs -root			    \n\
+  Best: 				flurry -root				    \n\
+  Best: 				glblur -root				    \n\
+  Best: 				glsnake -root				    \n\
+  Best: 			halftone -root				    \n\
+  Best: 				juggler3d -root				    \n\
+  Best: 				lavalite -root				    \n\
+  Best: 				polyominoes -root			    \n\
+  Best: 				queens -root				    \n\
+  Best: 				sballs -root				    \n\
+  Best: 				spheremonics -root			    \n\
+  Best: 				thornbird -root				    \n\
+  Best: 				twang -root				    \n\
+  Best: 			antspotlight -root			    \n\
+  Best: 				apple2 -root				    \n\
+  Best: 				atunnel -root				    \n\
+  Best: 				barcode -root				    \n\
+  Best: 				blinkbox -root				    \n\
+  Best: 			blocktube -root -delay 0		    \n\
+  Best: 				bouncingcow -root -count 7 -fps		    \n\
+  Best: 				cloudlife -root				    \n\
+  Best: 				cubestorm -root				    \n\
+  Best: 				eruption -root				    \n\
+  Best: 				flipflop -root				    \n\
+  Best: 				flyingtoasters -root			    \n\
+  Best: 				fontglide -root				    \n\
+  Best: 				gleidescope -root			    \n\
+  Best: 				glknots -root				    \n\
+  Best: 				glmatrix -root				    \n\
+  Best: 				glslideshow -root			    \n\
+  Best: 				hypertorus -root			    \n\
+  Best: 				jigglypuff -root			    \n\
+  Best: 				metaballs -root				    \n\
+  Best: 				mirrorblob -root			    \n\
+  Best: 				piecewise -root				    \n\
+  Best: 				polytopes -root				    \n\
+  Best: 				pong -root				    \n\
+  Best: 				popsquares -root			    \n\
+  Best: 				surfaces -root				    \n\
+  Best: 				xanalogtv -root				    \n\
+  Best: 				abstractile -root			    \n\
+  Best: 				anemotaxis -root			    \n\
+  Best: 				antinspect -root			    \n\
+  Best: 				fireworkx -root				    \n\
+  Best: 				fuzzyflakes -root			    \n\
+  Best: 				interaggregate -root			    \n\
+  Best: 				intermomentary -root			    \n\
+  Best: 				memscroller -root			    \n\
+  Best: 				noof -root				    \n\
+  Best: 				pacman -root				    \n\
+  Best: 				pinion -root				    \n\
+  Best: 				polyhedra -root				    \n\
+  Best: 				providence -root			    \n\
+  Best: 				substrate -root				    \n\
+  Best: 				wormhole -root				    \n\
+  Best: 				antmaze -root				    \n\
+  Best: 				boing -root				    \n\
+  Best: 				boxfit -root				    \n\
+  Best: 				carousel -root				    \n\
+  Best: 				celtic -root				    \n\
+  Best: 			crackberg -root				    \n\
+  Best: 				cube21 -root				    \n\
+  Best: 				fiberlamp -root				    \n\
+  Best: 				fliptext -root				    \n\
+  Best: 				glhanoi -root				    \n\
+  Best: 				tangram -root				    \n\
+  Best: 				timetunnel -root			    \n\
+  Best: 				glschool -root				    \n\
+  Best: 				topblock -root				    \n\
+  Best: 				cubicgrid -root				    \n\
+  Best: 				cwaves -root				    \n\
+  Best: 				gears -root				    \n\
+  Best: 				glcells -root				    \n\
+  Best: 				lockward -root				    \n\
+  Best: 				m6502 -root				    \n\
+  Best: 				moebiusgears -root			    \n\
+  Best: 				voronoi -root				    \n\
+  Best: 				hypnowheel -root			    \n\
+  Best: 				klein -root				    \n\
+  Best: 				lcdscrub -root				    \n\
+  Best: 				photopile -root				    \n\
+  Best: 				skytentacles -root			    \n\
+  Best: 				rubikblocks -root			    \n\
+  Best: 				companioncube -root			    \n\
+  Best: 				hilbert -root				    \n\
+  Best: 				tronbit -root				    \n\
+  Best: 				geodesic -root				    \n\
+  Best: 				hexadrop -root				    \n\
+  Best: 				kaleidocycle -root			    \n\
+  Best: 				quasicrystal -root			    \n\
+  Best: 				unknownpleasures -root			    \n\
+  Best: 				binaryring -root			    \n\
+  Best: 				cityflow -root				    \n\
+  Best: 				geodesicgears -root			    \n\
+  Best: 				projectiveplane -root			    \n\
+  Best: 				romanboy -root				    \n\
+  Best: 				tessellimage -root			    \n\
+  Best: 				winduprobot -root			    \n\
+  Best: 				splitflap -root				    \n\
+  Best: 				cubestack -root				    \n\
+  Best: 				cubetwist -root				    \n\
+  Best: 				discoball -root				    \n\
+  Best: 				dymaxionmap -root			    \n\
+  Best: 				energystream -root			    \n\
+  Best: 				hexstrut -root				    \n\
+  Best: 				hydrostat -root				    \n\
+  Best: 				raverhoop -root				    \n\
+  Best: 				splodesic -root				    \n\
+  Best: 				unicrud -root				    \n\
+  Best: 				esper -root				    \n\
+  Best: 				vigilance -root				    \n\
+  Best: 				crumbler -root				    \n\
+  Best: 				filmleader -root			    \n\
+  Best: 				glitchpeg -root				    \n\
+  Best: 			handsy -root				    \n\
+  Best: 				maze3d -root				    \n\
+  Best: 				peepers -root				    \n\
+  Best: 				razzledazzle -root			    \n\
+  Best: 				vfeedback -root				    \n\
+  Best: 				deepstars -root				    \n\
+  Best: 			gravitywell -root			    \n\
+  Best: 				beats -root				    \n\
+  Best: 				covid19 -root				    \n\
+  Best: 				etruscanvenus -root			    \n\
+  Best: 				gibson -root				    \n\
+  Best: 				headroom -root				    \n\
+  Best: 				sphereeversion -root			    \n\
+
+
+pointerPollTime:    0:00:05
+pointerHysteresis:  10
+windowCreationTimeout:0:00:30
+initialDelay:	0:00:00
+GetViewPortIsFullOfLies:False
+procInterrupts:	True
+xinputExtensionDev: False
+overlayStderr:	True
+authWarningSlack:   20
