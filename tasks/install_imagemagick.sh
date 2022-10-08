@@ -28,18 +28,16 @@ fi
 
 app_install_dir="/usr/local/bin/"
 
-
 # TODO if x86_64 download AppImage https://imagemagick.org/archive/binaries/magick
 
 if [[ "$architecture" == 'amd64' ]]; then
   # download appimage
   download_url='https://imagemagick.org/archive/binaries/magick'
-  wget --output-document="${app_install_dir}/magick" --retry-on-host-error --no-check-certificate "$download_url"
-  chmod -v 0444 {} "${app_install_dir}/magick"
+  wget --output-document="${app_install_dir}/magick" --retry-on-host-error --no-check-certificate "$download_url" | cat
+  chmod -v 0444 "${app_install_dir}/magick"
   # chown  --changes --recursive  root:root  "${app_install_dir}/magick"
 else
-  :
-  # download from repository
+  # download from repository (outdated version)
   install_system imagemagick
 fi;
 
