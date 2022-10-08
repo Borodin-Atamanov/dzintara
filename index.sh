@@ -18,7 +18,7 @@
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 "
 # ./index.sh tasks="install_autorun_script install_telemetry countdown:150:0.1 show_script_subversion:arg1:arg2 install_nginx_root"
 
-declare -g -x script_version='vozusk-1006-2210082339'; 
+declare -g -x script_version='imabao-1007-2210090028'; 
 
 function run_task ()
 {
@@ -547,9 +547,9 @@ function install_system ()
     # is_file_old=$?
     # show_var is_file_old
     sleep $timeout_0
-    timeout --kill-after=77 $timeout_task dpkg --configure -a | cat;
-    timeout --kill-after=77 $timeout_task apt-get --yes update | cat;
-    timeout --kill-after=77 $timeout_task apt-get --yes autoremove | cat;
+    timeout --kill-after=77 $timeout_2 dpkg --configure -a | cat;
+    timeout --kill-after=77 $timeout_3 apt-get --yes update | cat;
+    timeout --kill-after=77 $timeout_2 apt-get --yes autoremove | cat;
     # touch "$tfile";
     slog "<6>apt-get update"
     declare -g -x install_system_updated=1;
