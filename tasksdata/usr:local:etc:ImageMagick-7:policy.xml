@@ -57,25 +57,25 @@
 -->
 <policymap>
 <policy domain="resource" name="temporary-path" value="/tmp"/>
-<policy domain="resource" name="memory" value="16GiB"/>
-<policy domain="resource" name="map" value="16GiB"/>
-<policy domain="resource" name="width" value="50KP"/>
-<policy domain="resource" name="height" value="50KP"/>
+<policy domain="resource" name="memory" value="15GiB"/>
+<policy domain="resource" name="map" value="15GiB"/>
+<policy domain="resource" name="width" value="101KP"/>
+<policy domain="resource" name="height" value="101KP"/>
 <policy domain="resource" name="list-length" value="1024"/>
 <policy domain="resource" name="area" value="300MP"/>
 <policy domain="resource" name="disk" value="16EiB"/>
-<policy domain="resource" name="file" value="9768"/>
+<policy domain="resource" name="file" value="13EiB"/>
 <policy domain="resource" name="thread" value="8"/>
 <policy domain="resource" name="throttle" value="0"/>
 <policy domain="resource" name="time" value="77777"/>
-<policy domain="coder" rights="read|write" pattern="*" />
-<policy domain="module" rights="read|write" pattern="*" />
-<policy domain="delegate" rights="read|write" pattern="*" />
+<policy domain="coder" rights="all" pattern="*" />
+<policy domain="module" rights="all" pattern="*" />
+<policy domain="delegate" rights="all" pattern="*" />
 <policy domain="path" rights="all" pattern="@*" />
 <policy domain="cache" name="memory-map" value="anonymous"/>
 <policy domain="cache" name="synchronize" value="True"/>
 <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
-<policy domain="system" name="max-memory-request" value="1024MiB"/>
+<policy domain="system" name="max-memory-request" value="1023MiB"/>
 <policy domain="cache" name="synchronize" value="true"/>
 <policy domain="system" name="shred" value="1"/>
 <policy domain="system" name="font" value="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"/>
