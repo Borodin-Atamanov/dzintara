@@ -41,9 +41,6 @@ else
   install_system imagemagick
 fi;
 
-
-exit
-
 # compile from source code
 install_system build-essential
 
@@ -65,8 +62,9 @@ if $exit_code ; then
 else
   # https://imagemagick.org/script/advanced-linux-installation.php
   # https://askubuntu.com/questions/1042436/how-to-install-delegate-libraries-for-image-magick-7-0-7
+  apt-get build-dep imagemagick
   ./configure
-  make
+  make -j 4
   ./configure --with-modules
   make install
   ldconfig /usr/local/lib

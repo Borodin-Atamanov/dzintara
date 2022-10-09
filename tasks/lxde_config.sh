@@ -84,6 +84,7 @@ write_config "etc:X11:xorg.conf.d:00-keyboard.conf"
 
 write_config "home:i:.config:gromit-mpx.ini"
 write_config "home:i:.config:mpv:mpv.conf"
+write_config "home:i:.config:galculator:galculator.conf"
 
 write_config "home:i:.config:dconf:user"
 # command to read this ^ binary file:  dconf dump /
