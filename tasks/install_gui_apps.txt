@@ -31,6 +31,7 @@ unicode-screensaver
 scrot
 # show messages on Xorg screen
 gxmessage
+dconf-editor
 
 # draw on screen
 gromit-mpx

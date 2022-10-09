@@ -79,6 +79,7 @@ save_var_to_file "$config_file" config_var
 write_config "home:i:.config:openbox:rc.xml" '/etc/xdg/openbox/lxde-pi-rc.xml' '/etc/xdg/openbox/LXDE/rc.xml' '/etc/xdg/openbox/lxqt-rc.xml' '/home/i/.config/openbox/lxde-rc.xml'
 
 write_config "home:i:.Xresources"
+write_config "etc:systemd:logind.conf"
 write_config "etc:default:keyboard"
 write_config "etc:X11:xorg.conf.d:00-keyboard.conf"
 

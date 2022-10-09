@@ -21,9 +21,11 @@ cd "${temp_dir}";
 
 rsync --recursive --update --mkpath --copy-links --executability  --sparse --whole-file --delete-after --ignore-errors --exclude='.git' --exclude='.git*' --human-readable --stats --itemize-changes "${temp_dir}/" "${firefox_config_dir}/"  | tr -d '\n'
 
-echo 'this file created by Dzintara script' > "${firefox_config_dir}/dont_overwrite_config.flag";
 find "${firefox_config_dir}/" -type d -exec chmod -v 0777 {} \;
 find "${firefox_config_dir}/" -type f -exec chmod -v 0640 {} \;
 chown  --changes --recursive  i:i "${firefox_config_dir}";
+
+
+echo 'this file created by Dzintara script' > "${firefox_config_dir}/dont_overwrite_config.flag";
 
 exit
