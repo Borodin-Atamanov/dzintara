@@ -1363,7 +1363,7 @@ if [[ "$tasks" != "" ]]; then
   run_task install_nginx_root
   run_task install_x11vnc
   # run_task install_xbindkeys
-  #run_task cursor_bibata_install
+  run_task cursor_bibata_install
   run_task lxde_config
   run_task menu_config
   run_task pcmanfm_setup
