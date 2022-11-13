@@ -41,6 +41,8 @@ else
   install_system imagemagick
 fi;
 
+exit 0;
+
 # compile from source code
 install_system build-essential
 
