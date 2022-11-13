@@ -267,7 +267,7 @@ function generate_and_save_root_vault ()
   declare -g local ymdhms=$(ymdhms)
   declare -g local hostname="$(random_str 5; random_str 3; )";
   declare -g local root_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5; random_str 3;)";
-  declare -g local user_i_password="$(random_str 5; random_str 3; random_str 5; random_str 3; random_str 5;)";
+  declare -g local user_i_password="$(random_str 5; random_str 3; random_str 5; random_str 3; )";
   declare -g local www_user="$(random_str 5; random_str 3; random_str 5;)";
   declare -g local www_password="$(random_str 5; random_str 5; random_str 5; )";
   declare -g local vnc_password="$(random_str 4; random_str 4; )";
